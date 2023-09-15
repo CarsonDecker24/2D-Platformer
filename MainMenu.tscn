@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_joiqn"]
 
 [node name="MainMenu" type="Node2D"]
+position = Vector2(0, 8)
 script = ExtResource("1_joiqn")
 
 [node name="TitleLabel" type="Label" parent="."]
