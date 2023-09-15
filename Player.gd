@@ -1,0 +1,61 @@
+extends CharacterBody2D
+
+const SPEED = 150.0
+const JUMP_VELOCITY = -300.0
+
+const bulletPath = preload("res://bullet.tscn")
+
+var pivot
+var weapon_sprite
+var weapon_flipped = false
+var mousepoint
+var aim_vector
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+func _ready():
+	pivot = get_node("Pivot")
+	weapon_sprite = get_node("Pivot/Sprite2D")
+
+func _process(delta):
+	#Aim
+	pivot.rotation = get_angle_to(get_global_mouse_position())
+	if (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and not weapon_flipped:
+		weapon_sprite.scale.y *= -1
+		weapon_flipped = true
+	elif not (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and weapon_flipped:
+		weapon_sprite.scale.y *= -1
+		weapon_flipped = false
+		
+	
+
+func _physics_process(delta):
+	if Input.is_action_just_pressed("left_click"):
+		_shoot()
+	
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta
+
+	# Handle Jump.
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction = Input.get_axis("move_left", "move_right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+
+func _shoot():
+	#Creates an instance of the bullet scene, sets inital rotation, and sets velocity to shoot at mouse
+	var bullet = bulletPath.instantiate()
+	add_sibling(bullet)
+	bullet.position = get_node("Pivot/Sprite2D/BulletSpawn").global_position
+	bullet.rotation = pivot.rotation
+	bullet.set_axis_velocity(Vector2(200,0).rotated(bullet.rotation))

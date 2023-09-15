@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://dblot7f26i2w"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
+[ext_resource type="Texture2D" uid="uid://cvjurk0lvn4xb" path="res://Assets/monochrome_tilemap_transparent_packed.png" id="2_p0y1i"]
+[ext_resource type="Texture2D" uid="uid://dewofdup5nkhs" path="res://Assets/weapon.png" id="3_lo0dl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twp05"]
+atlas = ExtResource("2_p0y1i")
+region = Rect2(0, 192, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twp05")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bcb6m"]
+radius = 4.0
+height = 10.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(78, 66)
+script = ExtResource("1_fhlp4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_u6u7g")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_bcb6m")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(37, 0)
+zoom = Vector2(4, 4)
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+position = Vector2(11, 0)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("3_lo0dl")
+
+[node name="BulletSpawn" type="Node2D" parent="Pivot/Sprite2D"]
+position = Vector2(1.14286, -0.571426)
+scale = Vector2(0.571429, 0.571429)
