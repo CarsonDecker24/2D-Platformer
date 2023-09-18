@@ -11,6 +11,8 @@ var weapon_flipped = false
 var mousepoint
 var aim_vector
 
+var max_fall_speed = -1
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -33,10 +35,6 @@ func _process(delta):
 func _physics_process(delta):
 	if Input.is_action_just_pressed("left_click"):
 		_shoot()
-	
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -49,7 +47,20 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+	
+	# Add the gravity.
+	if not is_on_floor() and not (is_on_wall_only() and direction != 0):
+		velocity.y += gravity * delta
+		
+	if is_on_wall_only() and direction != 0:
+		velocity.y += 1000 * delta
+		max_fall_speed = 30
+	else:
+		max_fall_speed = 1000
+	
+	if velocity.y > max_fall_speed:
+		velocity.y = max_fall_speed
+	
 	move_and_slide()
 
 func _shoot():

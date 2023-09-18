@@ -28,6 +28,7 @@ position = Vector2(78, 66)
 script = ExtResource("1_fhlp4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
 animation = &"Idle"
@@ -39,9 +40,12 @@ shape = SubResource("CapsuleShape2D_bcb6m")
 position = Vector2(37, 0)
 zoom = Vector2(4, 4)
 
+[node name="Reload" type="Timer" parent="."]
+
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+texture_filter = 1
 position = Vector2(11, 0)
 scale = Vector2(1.75, 1.75)
 texture = ExtResource("3_lo0dl")
