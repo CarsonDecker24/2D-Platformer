@@ -64,7 +64,8 @@ func _physics_process(delta):
 	
 	if wall_sliding and Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-		velocity.x = 1000 * facing * -1
+		velocity.x = 100
+		#have an amount of time before you can start moving again after
 	
 	if velocity.y > max_fall_speed:
 		velocity.y = max_fall_speed
