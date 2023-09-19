@@ -1,27 +1,106 @@
-[gd_scene load_steps=7 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=25 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
-[ext_resource type="Texture2D" uid="uid://cvjurk0lvn4xb" path="res://Assets/monochrome_tilemap_transparent_packed.png" id="2_p0y1i"]
+[ext_resource type="Texture2D" uid="uid://bk8djhif3kuf2" path="res://Assets/player sprites/walk windup/walk_windup00.png" id="2_2evn1"]
+[ext_resource type="Script" path="res://AnimatedSprite2D.gd" id="3_14dt8"]
+[ext_resource type="Texture2D" uid="uid://dhx4yasyxys56" path="res://Assets/player sprites/walk windup/New folder/shifted00.png" id="3_gqjp2"]
 [ext_resource type="Texture2D" uid="uid://dewofdup5nkhs" path="res://Assets/weapon.png" id="3_lo0dl"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_twp05"]
-atlas = ExtResource("2_p0y1i")
-region = Rect2(0, 192, 16, 16)
+[ext_resource type="Texture2D" uid="uid://k78oe0y342cl" path="res://Assets/player sprites/walk windup/New folder/shifted01.png" id="4_osyik"]
+[ext_resource type="Texture2D" uid="uid://cwis3rulnlk3f" path="res://Assets/player sprites/walk windup/New folder/shifted02.png" id="5_idhw7"]
+[ext_resource type="Texture2D" uid="uid://dq5ekr25dorvq" path="res://Assets/player sprites/walk windup/New folder/shifted03.png" id="6_ui81n"]
+[ext_resource type="Texture2D" uid="uid://dwga37oyarj0j" path="res://Assets/player sprites/walk windup/New folder/shifted04.png" id="7_gyvnl"]
+[ext_resource type="Texture2D" uid="uid://4sq2ts4ftx2v" path="res://Assets/player sprites/walk windup/New folder/shifted05.png" id="8_r8rs0"]
+[ext_resource type="Texture2D" uid="uid://coysbbhbgbw6i" path="res://Assets/player sprites/walk windup/New folder/shifted06.png" id="9_86m83"]
+[ext_resource type="Texture2D" uid="uid://d3h8dg53kpg1c" path="res://Assets/player sprites/walk windup/New folder/shifted07.png" id="10_ajncn"]
+[ext_resource type="Texture2D" uid="uid://btadyphokhlws" path="res://Assets/player sprites/walk windup/New folder/shifted08.png" id="11_7ag7a"]
+[ext_resource type="Texture2D" uid="uid://dcj0m8tdvj6cx" path="res://Assets/player sprites/walk windup/New folder/shifted09.png" id="12_80wgp"]
+[ext_resource type="Texture2D" uid="uid://cr1nd7vef5cwq" path="res://Assets/player sprites/walk/walk loop0.png" id="12_nq7vs"]
+[ext_resource type="Texture2D" uid="uid://bkf0dascf8g6r" path="res://Assets/player sprites/walk/walk loop1.png" id="13_racfi"]
+[ext_resource type="Texture2D" uid="uid://c04tookf8tmge" path="res://Assets/player sprites/walk/walk loop2.png" id="14_hiwtm"]
+[ext_resource type="Texture2D" uid="uid://2m4svpd1nvsu" path="res://Assets/player sprites/walk/walk loop3.png" id="15_uljn7"]
+[ext_resource type="Texture2D" uid="uid://cttoiqq1j2o7v" path="res://Assets/player sprites/walk/walk loop4.png" id="16_eypip"]
+[ext_resource type="Texture2D" uid="uid://ccrm22pdxrnv7" path="res://Assets/player sprites/walk/walk loop5.png" id="17_hmjwk"]
+[ext_resource type="Texture2D" uid="uid://42sfacdgian7" path="res://Assets/player sprites/walk/walk loop6.png" id="18_rnjup"]
+[ext_resource type="Texture2D" uid="uid://de2v6ahixvqkt" path="res://Assets/player sprites/walk/walk loop7.png" id="19_6f1k5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_twp05")
+"texture": ExtResource("2_2evn1")
 }],
 "loop": true,
-"name": &"Idle",
-"speed": 5.0
+"name": &"idle",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gqjp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_osyik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_idhw7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ui81n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gyvnl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_r8rs0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_86m83")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ajncn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7ag7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_80wgp")
+}],
+"loop": false,
+"name": &"walk windup",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_nq7vs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_racfi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hiwtm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_uljn7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_eypip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_hmjwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_rnjup")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_6f1k5")
+}],
+"loop": false,
+"name": &"walking",
+"speed": 30.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bcb6m"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_upuir"]
 radius = 4.0
-height = 10.0
+height = 24.0
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(78, 66)
@@ -29,12 +108,19 @@ script = ExtResource("1_fhlp4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -3)
+position = Vector2(1, -7)
+scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"Idle"
+animation = &"walk windup"
+frame_progress = 1.0
+script = ExtResource("3_14dt8")
+
+[node name="animation timer" type="Timer" parent="AnimatedSprite2D"]
+autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_bcb6m")
+position = Vector2(-1, -7)
+shape = SubResource("CapsuleShape2D_upuir")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(37, 0)
@@ -43,6 +129,7 @@ zoom = Vector2(4, 4)
 [node name="Reload" type="Timer" parent="."]
 
 [node name="Pivot" type="Node2D" parent="."]
+position = Vector2(-2, -11)
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 texture_filter = 1
@@ -53,3 +140,5 @@ texture = ExtResource("3_lo0dl")
 [node name="BulletSpawn" type="Node2D" parent="Pivot/Sprite2D"]
 position = Vector2(1.14286, -0.571426)
 scale = Vector2(0.571429, 0.571429)
+
+[connection signal="timeout" from="AnimatedSprite2D/animation timer" to="AnimatedSprite2D" method="_on_animation_timer_timeout"]
