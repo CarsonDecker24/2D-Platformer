@@ -1,19 +1,18 @@
-[gd_scene load_steps=25 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=24 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bk8djhif3kuf2" path="res://Assets/player sprites/walk windup/walk_windup00.png" id="2_2evn1"]
 [ext_resource type="Script" path="res://AnimatedSprite2D.gd" id="3_14dt8"]
-[ext_resource type="Texture2D" uid="uid://dhx4yasyxys56" path="res://Assets/player sprites/walk windup/New folder/shifted00.png" id="3_gqjp2"]
 [ext_resource type="Texture2D" uid="uid://dewofdup5nkhs" path="res://Assets/weapon.png" id="3_lo0dl"]
-[ext_resource type="Texture2D" uid="uid://k78oe0y342cl" path="res://Assets/player sprites/walk windup/New folder/shifted01.png" id="4_osyik"]
-[ext_resource type="Texture2D" uid="uid://cwis3rulnlk3f" path="res://Assets/player sprites/walk windup/New folder/shifted02.png" id="5_idhw7"]
-[ext_resource type="Texture2D" uid="uid://dq5ekr25dorvq" path="res://Assets/player sprites/walk windup/New folder/shifted03.png" id="6_ui81n"]
-[ext_resource type="Texture2D" uid="uid://dwga37oyarj0j" path="res://Assets/player sprites/walk windup/New folder/shifted04.png" id="7_gyvnl"]
-[ext_resource type="Texture2D" uid="uid://4sq2ts4ftx2v" path="res://Assets/player sprites/walk windup/New folder/shifted05.png" id="8_r8rs0"]
-[ext_resource type="Texture2D" uid="uid://coysbbhbgbw6i" path="res://Assets/player sprites/walk windup/New folder/shifted06.png" id="9_86m83"]
-[ext_resource type="Texture2D" uid="uid://d3h8dg53kpg1c" path="res://Assets/player sprites/walk windup/New folder/shifted07.png" id="10_ajncn"]
-[ext_resource type="Texture2D" uid="uid://btadyphokhlws" path="res://Assets/player sprites/walk windup/New folder/shifted08.png" id="11_7ag7a"]
-[ext_resource type="Texture2D" uid="uid://dcj0m8tdvj6cx" path="res://Assets/player sprites/walk windup/New folder/shifted09.png" id="12_80wgp"]
+[ext_resource type="Texture2D" uid="uid://rtoqqqrjq8xo" path="res://Assets/player sprites/walk windup/walk_windup01.png" id="3_sf63o"]
+[ext_resource type="Texture2D" uid="uid://bg8ok13342cq2" path="res://Assets/player sprites/walk windup/walk_windup02.png" id="4_uisu7"]
+[ext_resource type="Texture2D" uid="uid://m2tarvh1qm8a" path="res://Assets/player sprites/walk windup/walk_windup03.png" id="5_rteob"]
+[ext_resource type="Texture2D" uid="uid://ccjjgarmb42vd" path="res://Assets/player sprites/walk windup/walk_windup04.png" id="6_frqne"]
+[ext_resource type="Texture2D" uid="uid://btqsg3rkyilbi" path="res://Assets/player sprites/walk windup/walk_windup05.png" id="7_bcxdb"]
+[ext_resource type="Texture2D" uid="uid://b6mt8qnfu6eo6" path="res://Assets/player sprites/walk windup/walk_windup06.png" id="8_50sub"]
+[ext_resource type="Texture2D" uid="uid://r876kwy0sddx" path="res://Assets/player sprites/walk windup/walk_windup07.png" id="9_b5702"]
+[ext_resource type="Texture2D" uid="uid://45h52p3qpxmu" path="res://Assets/player sprites/walk windup/walk_windup08.png" id="10_w03rk"]
+[ext_resource type="Texture2D" uid="uid://dvc3givml7o8g" path="res://Assets/player sprites/walk windup/walk_windup09.png" id="11_lp2t7"]
 [ext_resource type="Texture2D" uid="uid://cr1nd7vef5cwq" path="res://Assets/player sprites/walk/walk loop0.png" id="12_nq7vs"]
 [ext_resource type="Texture2D" uid="uid://bkf0dascf8g6r" path="res://Assets/player sprites/walk/walk loop1.png" id="13_racfi"]
 [ext_resource type="Texture2D" uid="uid://c04tookf8tmge" path="res://Assets/player sprites/walk/walk loop2.png" id="14_hiwtm"]
@@ -35,34 +34,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_gqjp2")
+"texture": ExtResource("2_2evn1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_osyik")
+"texture": ExtResource("3_sf63o")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_idhw7")
+"texture": ExtResource("4_uisu7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_ui81n")
+"texture": ExtResource("5_rteob")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_gyvnl")
+"texture": ExtResource("6_frqne")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_r8rs0")
+"texture": ExtResource("7_bcxdb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_86m83")
+"texture": ExtResource("8_50sub")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_ajncn")
+"texture": ExtResource("9_b5702")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_7ag7a")
+"texture": ExtResource("10_w03rk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_80wgp")
+"texture": ExtResource("11_lp2t7")
 }],
 "loop": false,
 "name": &"walk windup",
@@ -99,8 +98,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_upuir"]
-radius = 4.0
-height = 24.0
+radius = 6.0
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(78, 66)
@@ -115,11 +113,11 @@ animation = &"walk windup"
 frame_progress = 1.0
 script = ExtResource("3_14dt8")
 
-[node name="animation timer" type="Timer" parent="AnimatedSprite2D"]
+[node name="AnimationTimer" type="Timer" parent="AnimatedSprite2D"]
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -7)
+position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_upuir")
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -141,4 +139,4 @@ texture = ExtResource("3_lo0dl")
 position = Vector2(1.14286, -0.571426)
 scale = Vector2(0.571429, 0.571429)
 
-[connection signal="timeout" from="AnimatedSprite2D/animation timer" to="AnimatedSprite2D" method="_on_animation_timer_timeout"]
+[connection signal="timeout" from="AnimatedSprite2D/AnimationTimer" to="AnimatedSprite2D" method="_on_animation_timer_timeout"]

@@ -10,6 +10,11 @@ var curPlay
 func _process(delta):
 	if Input.is_action_just_pressed("move_right"):
 		play("walk windup")
+		curPlay="walk windup"
+	if curPlay == "walk windup" and is_playing()== false and Input.is_action_pressed("move_right"):
+		play("walking")
+	if Input.is_action_just_released("move_right"):
+		curPlay = "nah"
 	pass
 
 

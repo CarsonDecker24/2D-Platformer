@@ -43,8 +43,9 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("move_left", "move_right")
-	if direction and activemovespeed<200 and activemovespeed>-200:
+	if direction and activemovespeed<100 and activemovespeed>-100:
 		acceleration = direction * SPEED/10
+		
 	activemovespeed=acceleration + activemovespeed
 	if acceleration>0:acceleration= acceleration -SPEED/20
 	if acceleration<0: acceleration = acceleration + SPEED/20
@@ -71,7 +72,7 @@ func _physics_process(delta):
 	
 	if wall_sliding and Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-		velocity.x = 200 
+		activemovespeed = -direction*SPEED/2
 		#have an amount of time before you can start moving again after
 	
 	if velocity.y > max_fall_speed:
