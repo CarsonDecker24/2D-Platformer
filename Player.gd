@@ -53,7 +53,7 @@ func _physics_process(delta):
 	if activemovespeed>0: activemovespeed=activemovespeed-SPEED/20
 	
 	velocity.x=activemovespeed
-	print(activemovespeed)
+	#print(activemovespeed)
 	
 	if direction != 0:
 		facing = direction

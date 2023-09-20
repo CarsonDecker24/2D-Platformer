@@ -4,20 +4,46 @@ extends AnimatedSprite2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-var curPlay 
-
+var current = "idle"
+var frameHolder=0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("move_right"):
-		play("walk windup")
-		curPlay="walk windup"
-	if curPlay == "walk windup" and is_playing()== false and Input.is_action_pressed("move_right"):
-		play("walking")
-	if Input.is_action_just_released("move_right"):
-		curPlay = "nah"
+	
+	
+	if Input.is_action_just_pressed("move_right") and current == "idle":
+		current = "windupRightWalk"
+		play("windupRightWalk")
+		#set up timer to track the current frame from 0
+		
+	if current == "windupRightWalk":
+			if Input.is_action_just_released("move_right"):
+				current = "unwindRightWalk"
+				frameHolder=frame
+				play_backwards("windupRightWalk")
+				set_frame_and_progress((9-frame),0.00)
+				$AnimationTimer.start
+			elif Input.is_action_pressed("move_right") and is_playing()==false:
+				play("walkingRight")
+				current = "walkingRight"
+			elif Input.is_action_just_pressed("move_left"):
+				#play("skidGoingRight")
+				current = "skidGoingRight"
+	
+	if current == "walkingRight" :
+		if Input.is_action_just_released("move_right"):
+			play("unwindRightWalk")
+			current = "unwindRightWalk"
+		elif Input.is_action_just_pressed("shift"):
+			#play windupRightRun
+			#current = "windupRightRun"
+			print("play run windup")
+	
+	if current == "unwindRightWalk" and is_playing()==false:
+			play("idle")
+			current = "idle"
 	pass
 
 
 func _on_animation_timer_timeout():
-	print("timeout")
+	
 	pass # Replace with function body.
