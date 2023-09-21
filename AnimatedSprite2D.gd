@@ -28,27 +28,37 @@ func _process(delta):
 				current = "walkingRight"
 			elif Input.is_action_just_pressed("move_left"):
 				#play("skidGoingRight")
-				current = "skidGoingRight"
+				current = "skidRight"
 	
 	#walkingright
 	elif current == "walkingRight" :
-		if Input.is_action_just_released("move_right"):
+		if Input.is_action_just_pressed("move_left"):
+			current= "skidRight"
+			play("skidRight")
+		elif Input.is_action_just_released("move_right"):
 			play("unwindRightWalk")
 			current = "unwindRightWalk"
 		elif Input.is_action_just_pressed("shift"):
 			#play windupRightRun
 			#current = "windupRightRun"
 			print("play run windup")
-	
+		
+		
 	#walkingright to idle, aka unwinding
-	elif current == "unwindRightWalk" and is_playing()==false:
+	elif (current == "unwindRightWalk" or current=="skidTransmissionRight") and is_playing()==false:
 			play("idle")
 			current = "idle"
-			
-			
-			
-			
 	
+	elif current=="skidRight":
+		if get_parent().activemovespeed!=0:
+			play("skidingRight")
+			
+		else:
+			play("skidTransmissionRight")
+			current="skidTransmissionRight"
+		
+	
+	print(current)
 	pass
 
 
