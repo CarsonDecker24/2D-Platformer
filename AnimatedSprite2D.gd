@@ -9,13 +9,14 @@ var frameHolder=0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	
+	#idle state
 	if Input.is_action_just_pressed("move_right") and current == "idle":
 		current = "windupRightWalk"
 		play("windupRightWalk")
 		#set up timer to track the current frame from 0
 		
-	if current == "windupRightWalk":
+	#inbetween idle and walking, aka windup
+	elif current == "windupRightWalk":
 			if Input.is_action_just_released("move_right"):
 				current = "unwindRightWalk"
 				frameHolder=frame
@@ -29,7 +30,8 @@ func _process(delta):
 				#play("skidGoingRight")
 				current = "skidGoingRight"
 	
-	if current == "walkingRight" :
+	#walkingright
+	elif current == "walkingRight" :
 		if Input.is_action_just_released("move_right"):
 			play("unwindRightWalk")
 			current = "unwindRightWalk"
@@ -38,9 +40,15 @@ func _process(delta):
 			#current = "windupRightRun"
 			print("play run windup")
 	
-	if current == "unwindRightWalk" and is_playing()==false:
+	#walkingright to idle, aka unwinding
+	elif current == "unwindRightWalk" and is_playing()==false:
 			play("idle")
 			current = "idle"
+			
+			
+			
+			
+	
 	pass
 
 
