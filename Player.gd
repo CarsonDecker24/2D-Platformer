@@ -44,13 +44,14 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction and activemovespeed<100 and activemovespeed>-100:
-		acceleration = direction * SPEED/10
+		acceleration = direction * 30
 		
-	activemovespeed=acceleration + activemovespeed
-	if acceleration>0:acceleration= acceleration -SPEED/20
-	if acceleration<0: acceleration = acceleration + SPEED/20
-	if activemovespeed<0: activemovespeed=activemovespeed+SPEED/20
-	if activemovespeed>0: activemovespeed=activemovespeed-SPEED/20
+		activemovespeed=acceleration + activemovespeed
+	if acceleration>0:acceleration= acceleration -10
+	if acceleration<0: acceleration = acceleration +10
+	if activemovespeed<0: activemovespeed=activemovespeed+10
+	if activemovespeed>0: activemovespeed=activemovespeed-10
+
 	
 	velocity.x=activemovespeed
 	#print(activemovespeed)
