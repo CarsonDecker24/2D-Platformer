@@ -113,7 +113,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turnIdle",
-"speed": 60.0
+"speed": 70.0
 }, {
 "frames": [{
 "duration": 1.0,

@@ -77,7 +77,7 @@ func _facingRight():
 			current= "skidRight"
 			play("skidRight")
 		elif not Input.is_action_pressed("move_right"):
-			play("windupRightWalk")
+			play("unwindRightWalk")
 			current = "windupRightWalk"
 		elif Input.is_action_just_pressed("shift"):
 			#play windupRightRun
@@ -134,7 +134,7 @@ func _facingLeft():
 			current= "skidRight"
 			play("skidRight")
 		elif not Input.is_action_pressed("move_left"):
-			play("windupRightWalk")
+			play("unwindRightWalk")
 			current = "windupRightWalk"
 		elif Input.is_action_just_pressed("shift"):
 			#play windupRightRun
