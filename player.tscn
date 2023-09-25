@@ -251,13 +251,13 @@ position = Vector2(-2, -7)
 shape = SubResource("CapsuleShape2D_upuir")
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(37, 0)
+position = Vector2(4, -7)
 zoom = Vector2(4, 4)
 
 [node name="Reload" type="Timer" parent="."]
 
 [node name="Pivot" type="Node2D" parent="."]
-position = Vector2(-2, -11)
+position = Vector2(5, -12)
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 texture_filter = 1

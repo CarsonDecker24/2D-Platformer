@@ -90,7 +90,7 @@ func _jump():
 	velocity.y = JUMP_VELOCITY
 	
 	#CREATE VARIABLE HEIGHT JUMP
-
+	print(get_parent().velocity.y)
 func _wallslide(delta):
 	#Apply wall slide physics
 	velocity.y += 1000 * delta
