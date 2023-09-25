@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
-const ACCEL = 1.0
-const FRICTION = 1.0
+const ACCEL = 25.0
+const FRICTION = 25.0
 
 const bulletPath = preload("res://bullet.tscn")
 
@@ -24,8 +24,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	pivot = get_node("Pivot")
 	weapon_sprite = get_node("Pivot/Sprite2D")
+	direction = 0
 
 func _process(delta):
+	# Get the input direction and handle the movement/deceleration.
 	direction = Input.get_axis("move_left", "move_right")
 	
 	_aim()
@@ -34,32 +36,18 @@ func _process(delta):
 		_shoot()
 
 func _physics_process(delta):
+	#Lateral Movement
+	if direction != 0:
+		_accelerate(direction)
+	else:
+		_friction()
 	
-
-	# Handle Jump.
+	#Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		_jump()
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	direction = Input.get_axis("move_left", "move_right")
 	
-	if direction and activemovespeed<100 and activemovespeed>-100:
-		acceleration = direction * SPEED/10
-	
-	activemovespeed=acceleration + activemovespeed
-	if acceleration>0:acceleration= acceleration -SPEED/20
-	if acceleration<0: acceleration = acceleration + SPEED/20
-	if activemovespeed<0: activemovespeed=activemovespeed+SPEED/20
-	if activemovespeed>0: activemovespeed=activemovespeed-SPEED/20
-	
-	velocity.x=activemovespeed
-	
-	if direction != 0:
-		facing = direction
-	
-	# Add the gravity.
-	if not is_on_floor() and not (is_on_wall_only() and direction != 0):
+	# Add the gravity if not on floor & the player isn't wall sliding
+	if not is_on_floor() and not wall_sliding:
 		_gravity(delta)
 		
 	if is_on_wall_only() and direction != 0:
@@ -77,11 +65,21 @@ func _physics_process(delta):
 
 func _accelerate(dir):
 	#Accelerate in whatever direction the player is wanting to move.
-	velocity = velocity.move_toward(SPEED * dir, ACCEL)
+	#velocity = velocity.move_toward(Vector2(SPEED * dir, velocity.y), ACCEL)
+	if (velocity.x + ACCEL * dir) < -SPEED or (velocity.x + ACCEL * dir) > SPEED:
+		velocity.x = SPEED * dir
+	else:
+		velocity.x += ACCEL * dir
 
 func _friction():
 	#Add friction to the player
-	velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
+	#velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
+	if (velocity.x > 0 and (velocity.x - FRICTION) < 0) or (velocity.x < 0 and (velocity.x + FRICTION) > 0):
+		velocity.x = 0
+	elif velocity.x > 0:
+		velocity.x -= FRICTION
+	elif velocity.x < 0:
+		velocity.x += FRICTION
 
 func _gravity(delta):
 	#Apply gravity
@@ -102,7 +100,7 @@ func _wallslide(delta):
 func _walljump():
 	#Wall jump
 	velocity.y = JUMP_VELOCITY
-	activemovespeed = -direction*SPEED/2
+	velocity.x = -direction*SPEED/2
 
 func _aim():
 	#Aim toward mouse position
