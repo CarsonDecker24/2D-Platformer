@@ -42,7 +42,7 @@ func _process(delta):
 	if Input.is_action_pressed("left_click"):
 		aim_timer += delta
 		print(aim_timer)
-		if aim_timer > .1:
+		if aim_timer > .2:
 			aiming = true
 	
 	#Shoot function
@@ -106,7 +106,7 @@ func _jump():
 	velocity.y = JUMP_VELOCITY
 	
 	#CREATE VARIABLE HEIGHT JUMP
-	print(get_parent().velocity.y)
+	#print(get_parent().velocity.y)
 
 func _wallslide(delta):
 	#Apply wall slide physics
@@ -123,6 +123,7 @@ func _aim():
 	#If holding shoot, start aiming toward the mouse
 	if aiming:
 		#Aim toward mouse position
+		#CHANGE THIS, NEEDS TO AIM FROM PIVOT NOT THE PLAYER'S CENTERa
 		pivot.rotation = get_angle_to(get_global_mouse_position())
 		
 		#Flip sprite to always be facing upward
