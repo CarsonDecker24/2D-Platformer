@@ -14,10 +14,12 @@ var weapon_flipped = false
 var mousepoint
 var aim_vector
 var wall_sliding = false
-var facing = 1
+var facing = -1
 var max_fall_speed = -1
-var acceleration = 0
 var activemovespeed = 0
+var aiming = false
+var aim_timer = 0
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -30,10 +32,24 @@ func _process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	direction = Input.get_axis("move_left", "move_right")
 	
+	#Variable for which direction the player is facing
+	if direction != 0:
+		facing = direction
+	
+	#Aim functions
 	_aim()
 	
-	if Input.is_action_just_pressed("left_click"):
+	if Input.is_action_pressed("left_click"):
+		aim_timer += delta
+		print(aim_timer)
+		if aim_timer > .1:
+			aiming = true
+	
+	#Shoot function
+	if Input.is_action_just_released("left_click"):
 		_shoot()
+		aiming = false
+		aim_timer = 0
 
 func _physics_process(delta):
 	#Lateral Movement
@@ -91,6 +107,7 @@ func _jump():
 	
 	#CREATE VARIABLE HEIGHT JUMP
 	print(get_parent().velocity.y)
+
 func _wallslide(delta):
 	#Apply wall slide physics
 	velocity.y += 1000 * delta
@@ -103,16 +120,32 @@ func _walljump():
 	velocity.x = -direction*SPEED/2
 
 func _aim():
-	#Aim toward mouse position
-	pivot.rotation = get_angle_to(get_global_mouse_position())
-	
-	#Flip sprite to always be facing upward
-	if (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and not weapon_flipped:
-		weapon_sprite.scale.y *= -1
-		weapon_flipped = true
-	elif not (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and weapon_flipped:
-		weapon_sprite.scale.y *= -1
-		weapon_flipped = false
+	#If holding shoot, start aiming toward the mouse
+	if aiming:
+		#Aim toward mouse position
+		pivot.rotation = get_angle_to(get_global_mouse_position())
+		
+		#Flip sprite to always be facing upward
+		if (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and not weapon_flipped:
+			weapon_sprite.scale.y *= -1
+			weapon_flipped = true
+		elif not (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and weapon_flipped:
+			weapon_sprite.scale.y *= -1
+			weapon_flipped = false
+	else:
+		#if not aiming, just point straight in the direction
+		if facing == 1 and weapon_flipped:
+			pivot.rotation_degrees = 0
+			weapon_sprite.scale.y *= -1
+			weapon_flipped = false
+		elif facing == -1 and not weapon_flipped:
+			pivot.rotation_degrees = 180
+			weapon_sprite.scale.y *= -1
+			weapon_flipped = true
+		elif facing == 1:
+			pivot.rotation_degrees = 0
+		elif facing == -1:
+			pivot.rotation_degrees = 180
 
 func _shoot():
 	#Creates an instance of the bullet scene, sets inital rotation, and sets velocity to shoot at mouse
