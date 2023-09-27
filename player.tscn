@@ -1,11 +1,10 @@
-[gd_scene load_steps=50 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=60 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
 [ext_resource type="Script" path="res://AnimatedSprite2D.gd" id="3_14dt8"]
 [ext_resource type="Texture2D" uid="uid://bie3x74xe3nbf" path="res://Assets/player sprites/walkRight/walkRight0.png" id="3_gxe6m"]
 [ext_resource type="Texture2D" uid="uid://bw45dtcuo4gvs" path="res://Assets/player sprites/skidRight/sprite skid0.png" id="3_kc08g"]
-[ext_resource type="Texture2D" uid="uid://dewofdup5nkhs" path="res://Assets/weapon.png" id="3_lo0dl"]
 [ext_resource type="Texture2D" uid="uid://ds70y1gcucix1" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk0.png" id="3_wvr7d"]
 [ext_resource type="Texture2D" uid="uid://blow1t1o217y4" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk1.png" id="4_hsekd"]
 [ext_resource type="Texture2D" uid="uid://b31fe2aq4pl4e" path="res://Assets/player sprites/walkRight/walkRight1.png" id="4_rws1l"]
@@ -47,6 +46,15 @@
 [ext_resource type="Texture2D" uid="uid://b6b2fio31mkqn" path="res://Assets/player sprites/windupRightWalk/windupRightW08.png" id="19_j50x8"]
 [ext_resource type="Texture2D" uid="uid://0q7bhmuehib4" path="res://Assets/player sprites/turnIdle/flipped again7.png" id="19_qx7gr"]
 [ext_resource type="Texture2D" uid="uid://bqa2syt7wbrlr" path="res://Assets/player sprites/windupRightWalk/windupRightW09.png" id="20_obmkk"]
+[ext_resource type="Texture2D" uid="uid://b5ossokt31g8s" path="res://Assets/player sprites/arms n bows/holding arm/arm 0.png" id="47_jon8e"]
+[ext_resource type="Texture2D" uid="uid://c1kxqfy4rcksp" path="res://Assets/player sprites/arms n bows/holding arm/arm 1.png" id="48_0epx1"]
+[ext_resource type="Texture2D" uid="uid://xrrr37tot80e" path="res://Assets/player sprites/arms n bows/holding arm/arm 2.png" id="49_mgsur"]
+[ext_resource type="Texture2D" uid="uid://c6l7va5eoonin" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm0.png" id="50_xwr50"]
+[ext_resource type="Texture2D" uid="uid://ccbjdcqbsccm4" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm1.png" id="51_t1chu"]
+[ext_resource type="Texture2D" uid="uid://dtqeptmdgg6lx" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm2.png" id="52_jhmcq"]
+[ext_resource type="Texture2D" uid="uid://ba3n0xxy4x6k3" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm3.png" id="53_cu28b"]
+[ext_resource type="Texture2D" uid="uid://beumjhgbivrwm" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm4.png" id="54_dd160"]
+[ext_resource type="Texture2D" uid="uid://c5pifmqjo5ugr" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm5.png" id="55_w1wif"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
@@ -113,7 +121,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turnIdle",
-"speed": 60.0
+"speed": 100.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -230,41 +238,107 @@ animations = [{
 radius = 6.0
 height = 26.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ko50"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_jon8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_0epx1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_mgsur")
+}],
+"loop": true,
+"name": &"charge_holding",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_jon8e")
+}],
+"loop": true,
+"name": &"hold_holding",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bc5os"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("50_xwr50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_t1chu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_jhmcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_cu28b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_dd160")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_w1wif")
+}],
+"loop": true,
+"name": &"charge_pulling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("50_xwr50")
+}],
+"loop": true,
+"name": &"hold_pulling",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(78, 66)
+z_index = -1
+position = Vector2(81, 62)
 script = ExtResource("1_fhlp4")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="PlayerBodyAnimation" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(1, -7)
+position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"turnIdle"
+animation = &"windupRightWalk"
+frame = 1
 script = ExtResource("3_14dt8")
 
-[node name="AnimationTimer" type="Timer" parent="AnimatedSprite2D"]
-wait_time = 0.975
-autostart = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, -7)
+[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 4)
 shape = SubResource("CapsuleShape2D_upuir")
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(4, -7)
+position = Vector2(-3, 1)
 zoom = Vector2(4, 4)
 
 [node name="Reload" type="Timer" parent="."]
 
-[node name="Pivot" type="Node2D" parent="."]
-position = Vector2(5, -12)
+[node name="PivotHoldingArm" type="Node2D" parent="."]
+position = Vector2(-7, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-texture_filter = 1
-position = Vector2(11, 0)
-scale = Vector2(1.75, 1.75)
-texture = ExtResource("3_lo0dl")
+[node name="HoldingArmAnimation" type="AnimatedSprite2D" parent="PivotHoldingArm"]
+light_mask = 0
+visibility_layer = 2
+position = Vector2(7.5, 1)
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_8ko50")
+animation = &"hold_holding"
 
-[node name="BulletSpawn" type="Node2D" parent="Pivot/Sprite2D"]
-position = Vector2(1.14286, -0.571426)
-scale = Vector2(0.571429, 0.571429)
+[node name="BulletSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
+position = Vector2(13, -0.999996)
+scale = Vector2(1, 1)
+
+[node name="PivotPullingArm" type="Node" parent="."]
+
+[node name="PivotPullingArm" type="AnimatedSprite2D" parent="PivotPullingArm"]
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_bc5os")
+animation = &"charge_pulling"

@@ -1,16 +1,20 @@
 extends AnimatedSprite2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 var current = "idle"
 var frameHolder=0
 var facing = "right"
 var fallTest= 0.00
+var animationTimer= 0 
+var holdingArm
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	holdingArm = get_node("PivotHoldingArm")
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	animationTimer += delta
 	
 	#IDLE STATE=====================================================================================
 	if current == "idle":
@@ -19,28 +23,33 @@ func _process(delta):
 		if Input.is_action_pressed("move_left") and facing == "left":
 			current = "windupRightWalk"
 			play("windupRightWalk")
+			animationTimer=0
 		
 		#if they are FACING RIGHT and start to MOVE RIGHT===========================================
 		elif Input.is_action_pressed("move_right") and facing == "right":
 			current = "windupRightWalk"
 			play("windupRightWalk")
+			animationTimer=0
 		
 		#if they are FACING LEFT and start to MOVE RIGHT===========================================
 		elif Input.is_action_pressed("move_right") and facing=="left":
 			_quickturn()
 			play("turnIdle")
 			current="playThenWind"
+			animationTimer=0
 		
 		#if they are FACING RIGHT and start to MOVE LEFT============================================
 		elif Input.is_action_pressed("move_left") and facing=="right":
 			_quickturn()
 			play("turnIdle")
 			current = "playThenWind"
+			animationTimer=0
 		
 		#if they JUMP
 		elif Input.is_action_pressed("jump"):
 			current = "jumpIdleRight"
 			play("jumpIdleRight")
+			animationTimer=0
 			
 	
 	
@@ -97,6 +106,9 @@ func _facingRight():
 	#WINDUP TO THE WALK STATE ======================================================================
 	if current == "windupRightWalk":
 		
+		
+		
+		
 		#if the PLAYER stops MOVING RIGHT before the RIGHT WALK CYCLE plays=========================
 		if not Input.is_action_pressed("move_right"):
 			current = "playThenIdle"
@@ -120,6 +132,7 @@ func _facingRight():
 			frameHolder=frame
 			play_backwards("windupRightWalk")
 			set_frame_and_progress(frame,0.00)
+
 	
 	
 	#if the player is walking right=================================================================
