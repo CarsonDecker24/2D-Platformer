@@ -93,6 +93,8 @@ func _quickturn():
 		if facing=="right":
 			flip_h=true
 			facing="left"
+			
+			
 		
 		#if they are FACING LEFT, then TURN RIGHT
 		elif facing=="left":
