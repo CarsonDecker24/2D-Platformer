@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5uajw2l6cw05"]
 
-[ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="1_8g8rv"]
 [ext_resource type="Script" path="res://bullet.gd" id="1_y0f3i"]
+[ext_resource type="Texture2D" uid="uid://bywku1sq1ghd8" path="res://Assets/player sprites/arrow.png" id="2_mrid7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msghs"]
 size = Vector2(2.50001, 2.49999)
@@ -19,6 +19,7 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_msghs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(3.76158e-37, 5.96046e-08)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("1_8g8rv")
+texture_filter = 1
+position = Vector2(2, 2.11758e-22)
+scale = Vector2(0.089375, 0.078125)
+texture = ExtResource("2_mrid7")
