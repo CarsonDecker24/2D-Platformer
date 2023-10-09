@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=61 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -49,6 +49,7 @@
 [ext_resource type="Texture2D" uid="uid://b5ossokt31g8s" path="res://Assets/player sprites/arms n bows/holding arm/arm 0.png" id="47_jon8e"]
 [ext_resource type="Texture2D" uid="uid://c1kxqfy4rcksp" path="res://Assets/player sprites/arms n bows/holding arm/arm 1.png" id="48_0epx1"]
 [ext_resource type="Texture2D" uid="uid://xrrr37tot80e" path="res://Assets/player sprites/arms n bows/holding arm/arm 2.png" id="49_mgsur"]
+[ext_resource type="Texture2D" uid="uid://bqi3nu8nap0fc" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite0.png" id="50_78cjf"]
 [ext_resource type="Texture2D" uid="uid://c6l7va5eoonin" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm0.png" id="50_xwr50"]
 [ext_resource type="Texture2D" uid="uid://ccbjdcqbsccm4" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm1.png" id="51_t1chu"]
 [ext_resource type="Texture2D" uid="uid://dtqeptmdgg6lx" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm2.png" id="52_jhmcq"]
@@ -256,7 +257,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("47_jon8e")
+"texture": ExtResource("50_78cjf")
 }],
 "loop": true,
 "name": &"hold_holding",
@@ -334,7 +335,6 @@ animation = &"hold_holding"
 
 [node name="BulletSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(13, -0.999996)
-scale = Vector2(1, 1)
 
 [node name="PivotPullingArm" type="Node" parent="."]
 

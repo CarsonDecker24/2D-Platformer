@@ -26,4 +26,3 @@ scale = Vector2(0.089375, 0.078125)
 texture = ExtResource("2_mrid7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="input_event" from="." to="." method="_on_input_event"]
