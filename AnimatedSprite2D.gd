@@ -8,7 +8,7 @@ var animationTimer= 0
 var holdingArm
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	holdingArm = get_node("PivotHoldingArm")
+	#holdingArm = get_node("PivotHoldingArm")
 	pass # Replace with function body.
 
 
