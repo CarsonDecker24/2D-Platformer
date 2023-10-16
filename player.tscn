@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=67 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -49,16 +49,19 @@
 [ext_resource type="Texture2D" uid="uid://b6b2fio31mkqn" path="res://Assets/player sprites/windupRightWalk/windupRightW08.png" id="19_j50x8"]
 [ext_resource type="Texture2D" uid="uid://0q7bhmuehib4" path="res://Assets/player sprites/turnIdle/flipped again7.png" id="19_qx7gr"]
 [ext_resource type="Texture2D" uid="uid://bqa2syt7wbrlr" path="res://Assets/player sprites/windupRightWalk/windupRightW09.png" id="20_obmkk"]
-[ext_resource type="Texture2D" uid="uid://b5ossokt31g8s" path="res://Assets/player sprites/arms n bows/holding arm/arm 0.png" id="47_jon8e"]
-[ext_resource type="Texture2D" uid="uid://c1kxqfy4rcksp" path="res://Assets/player sprites/arms n bows/holding arm/arm 1.png" id="48_0epx1"]
-[ext_resource type="Texture2D" uid="uid://xrrr37tot80e" path="res://Assets/player sprites/arms n bows/holding arm/arm 2.png" id="49_mgsur"]
 [ext_resource type="Texture2D" uid="uid://bqi3nu8nap0fc" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite0.png" id="50_78cjf"]
 [ext_resource type="Texture2D" uid="uid://c6l7va5eoonin" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm0.png" id="50_xwr50"]
+[ext_resource type="Texture2D" uid="uid://dfwowx0xl58jo" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite1.png" id="51_fj8co"]
 [ext_resource type="Texture2D" uid="uid://ccbjdcqbsccm4" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm1.png" id="51_t1chu"]
+[ext_resource type="Texture2D" uid="uid://d3wvybuqmc8ww" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite2.png" id="52_dt75y"]
 [ext_resource type="Texture2D" uid="uid://dtqeptmdgg6lx" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm2.png" id="52_jhmcq"]
 [ext_resource type="Texture2D" uid="uid://ba3n0xxy4x6k3" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm3.png" id="53_cu28b"]
+[ext_resource type="Texture2D" uid="uid://dnbsvquu448b3" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite3.png" id="53_u6d5f"]
 [ext_resource type="Texture2D" uid="uid://beumjhgbivrwm" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm4.png" id="54_dd160"]
+[ext_resource type="Texture2D" uid="uid://fkdjox7p1p3w" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite4.png" id="54_o5oh6"]
+[ext_resource type="Texture2D" uid="uid://dixliao6aosxh" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite5.png" id="55_5urxs"]
 [ext_resource type="Texture2D" uid="uid://c5pifmqjo5ugr" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm5.png" id="55_w1wif"]
+[ext_resource type="Script" path="res://HoldingArmAnimation.gd" id="56_nsjpx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
@@ -265,25 +268,54 @@ height = 26.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("47_jon8e")
+"texture": ExtResource("50_78cjf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("48_0epx1")
+"texture": ExtResource("51_fj8co")
 }, {
 "duration": 1.0,
-"texture": ExtResource("49_mgsur")
+"texture": ExtResource("52_dt75y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_u6d5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_o5oh6")
 }],
-"loop": true,
-"name": &"charge_holding",
-"speed": 5.0
+"loop": false,
+"name": &"bow_aim",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_5urxs")
+}],
+"loop": false,
+"name": &"bow_idle",
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("50_78cjf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_fj8co")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_dt75y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_u6d5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_o5oh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_5urxs")
 }],
-"loop": true,
-"name": &"hold_holding",
-"speed": 5.0
+"loop": false,
+"name": &"bow_quickfire",
+"speed": 30.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bc5os"]
@@ -352,7 +384,8 @@ visibility_layer = 2
 position = Vector2(7.5, 1)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_8ko50")
-animation = &"hold_holding"
+animation = &"bow_aim"
+script = ExtResource("56_nsjpx")
 
 [node name="BulletSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(13, -0.999996)

@@ -28,6 +28,7 @@ var fire_cooldown = FIRECOOLDOWN
 var fire_state = "not"
 var drawing = false
 
+@onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -164,10 +165,15 @@ func _aim(delta):
 		if not (fire_state == "quick" or fire_state == "fireWhenReady"):
 			fire_cooldown = FIRECOOLDOWN
 			charge_timer = DEFAULTARROWSPEED
-		
+	
+	if Input.is_action_just_pressed("right_click"):
+		fire_state = "aim"
+		animPlayer._shootAnim(fire_state)
 
 func _shoot_check(delta):
 	#if the bow isnt being drawn and you press fire, then quick fire. (if the or condition is met you dont have to keep pressing fire)
+	animPlayer._shootAnim(fire_state)
+	print(fire_state)
 	if (fire_cooldown == FIRECOOLDOWN and Input.is_action_just_pressed("left_click")) or fire_state == "quick":
 		fire_state= "quick"
 		
@@ -205,6 +211,7 @@ func _shoot():
 	bullet.position = get_node("PivotHoldingArm/HoldingArmAnimation/BulletSpawn").global_position
 	bullet.rotation = pivot.rotation
 	bullet.set_axis_velocity(Vector2(200*charge_timer,0).rotated(bullet.rotation))
+	
 	
 	#Resets the firestate and the cooldown timer
 	

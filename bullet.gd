@@ -14,7 +14,7 @@ func _process(delta):
 		og_y_position = global_position.y
 	vertical_change = og_y_position-global_position.y
 	
-	print(compared_to_previous)
+	#print(compared_to_previous)
 	pass
 
 func _on_body_entered(body):

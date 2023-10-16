@@ -6,6 +6,9 @@ var facing = "right"
 var fallTest= 0.00
 var animationTimer= 0 
 var holdingArm
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#holdingArm = get_node("PivotHoldingArm")
@@ -150,7 +153,8 @@ func _facingRight():
 		elif Input.is_action_just_pressed("shift"):
 			#play windupRightRun
 			#current = "windupRightRun"
-			print("play run windup")
+			print("windup")
+		
 	
 	if current == "skidThenIdle":
 		if Input.is_action_pressed("move_left"):
@@ -190,7 +194,6 @@ func _facingLeft():
 				frameHolder=frame
 				play_backwards("windupRightWalk")
 				set_frame_and_progress((frame),0.00)
-				print(frame)
 			elif Input.is_action_pressed("move_left") and is_playing()==false:
 				play("walkingRight")
 				current = "walkingRight"
@@ -215,7 +218,7 @@ func _facingLeft():
 		elif Input.is_action_just_pressed("shift"):
 			#play windupRightRun
 			#current = "windupRightRun"
-			print("play run windup")
+			print("windup run")
 	if current == "skidThenIdle":
 		if Input.is_action_pressed("move_right"):
 			play("turnLeftSkid")
