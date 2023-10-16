@@ -376,7 +376,7 @@ zoom = Vector2(4, 4)
 [node name="Reload" type="Timer" parent="."]
 
 [node name="PivotHoldingArm" type="Node2D" parent="."]
-position = Vector2(-7, 0)
+position = Vector2(-5, 0)
 
 [node name="HoldingArmAnimation" type="AnimatedSprite2D" parent="PivotHoldingArm"]
 light_mask = 0

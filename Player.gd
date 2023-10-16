@@ -166,9 +166,10 @@ func _aim(delta):
 			fire_cooldown = FIRECOOLDOWN
 			charge_timer = DEFAULTARROWSPEED
 	
-	if Input.is_action_just_pressed("right_click"):
+	if Input.is_action_pressed("right_click"):
 		fire_state = "aim"
 		animPlayer._shootAnim(fire_state)
+	
 
 func _shoot_check(delta):
 	#if the bow isnt being drawn and you press fire, then quick fire. (if the or condition is met you dont have to keep pressing fire)

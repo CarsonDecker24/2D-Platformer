@@ -7,7 +7,7 @@ var fallTest= 0.00
 var animationTimer= 0 
 var holdingArm
 
-
+@onready var holdingArmNode = get_node("PivotHoldingArm")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
