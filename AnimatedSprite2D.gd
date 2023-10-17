@@ -7,7 +7,7 @@ var fallTest= 0.00
 var animationTimer= 0 
 var holdingArm
 
-@onready var holdingArmNode = get_node("PivotHoldingArm")
+#@onready var holdingArmNode = get_node("PivotHoldingArm")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -71,7 +71,7 @@ func _process(delta):
 			play("slowFallRight")
 		
 		#reset the fallTest variable
-		fallTest=global_position.y
+		fallTest = global_position.y
 	
 	
 	#FALLING STATE================================================================================
@@ -80,10 +80,10 @@ func _process(delta):
 		#if the PLAYER IS ON THE FLOOR, go back to the IDLE STATE
 		if get_parent().is_on_floor()==true:
 			play("idle")
-			current="idle"
+			current = "idle"
 
 	#there are specific  functions for whether or not the player is facing left or right===========
-	if facing=="right":
+	if facing == "right":
 		_facingRight()
 	else:
 		_facingLeft()
@@ -93,16 +93,16 @@ func _process(delta):
 func _quickturn():
 	
 	#if they are FACING RIGHT, then TURN LEFT
-		if facing=="right":
-			flip_h=true
-			facing="left"
+		if facing == "right":
+			flip_h = true
+			facing = "left"
 			
 			
 		
 		#if they are FACING LEFT, then TURN RIGHT
-		elif facing=="left":
-			flip_h=false
-			facing="right"
+		elif facing == "left":
+			flip_h = false
+			facing = "right"
 
 
 #this function runs when the PLAYER is FACING RIGHT
@@ -117,7 +117,7 @@ func _facingRight():
 		#if the PLAYER stops MOVING RIGHT before the RIGHT WALK CYCLE plays=========================
 		if not Input.is_action_pressed("move_right"):
 			current = "playThenIdle"
-			frameHolder=frame
+			frameHolder = frame
 			play_backwards("windupRightWalk")
 			set_frame_and_progress(frame,0.00)
 		
@@ -132,9 +132,9 @@ func _facingRight():
 			current = "skidRight"
 		
 		#if the PLAYER stops MOVING before the WALKING CYCLE starts================================
-		elif is_playing()==false and not Input.is_action_pressed("move_right"):
+		elif is_playing() == false and not Input.is_action_pressed("move_right"):
 			current = "playThenIdle"
-			frameHolder=frame
+			frameHolder = frame
 			play_backwards("windupRightWalk")
 			set_frame_and_progress(frame,0.00)
 
@@ -165,12 +165,12 @@ func _facingRight():
 			play("idle")
 	
 	#if the player is stopping during the starting to walk animation===============================
-	elif current=="playThenIdle" and is_playing()==false:
+	elif current == "playThenIdle" and is_playing()==false:
 			play("idle")
 			current = "idle"
 	
 	#if the player is skidding to the right========================================================
-	elif current=="skidRight":
+	elif current == "skidRight":
 		if get_parent().activemovespeed>0:
 			play("skidingRight")
 		elif get_parent().activemovespeed<=0:
@@ -179,7 +179,7 @@ func _facingRight():
 		
 	
 	elif current == "turnLeftSkid":
-		if is_playing()==false:
+		if is_playing() == false:
 			_quickturn()
 			play("walkingRight")
 			current="walkingRight"
@@ -210,7 +210,7 @@ func _facingLeft():
 	#if the player is walking right=====================================================
 	elif current == "walkingRight" :
 		if Input.is_action_just_pressed("move_right"):
-			current= "skidRight"
+			current = "skidRight"
 			play("skidRight")
 		elif not Input.is_action_pressed("move_left"):
 			play("unwindRightWalk")
@@ -223,18 +223,18 @@ func _facingLeft():
 		if Input.is_action_pressed("move_right"):
 			play("turnLeftSkid")
 			current = "turnLeftSkid"
-		elif is_playing()==false:
+		elif is_playing() == false:
 			current = "idle"
 			play("idle")
 	
 	
 	#if the player is stopping during the starting to walk animation=========================================
-	elif current=="playThenIdle" and is_playing()==false:
+	elif current == "playThenIdle" and is_playing()==false:
 			play("idle")
 			current = "idle"
 	
 	#if the player is skidding to the right=====================================================
-	elif current=="skidRight":
+	elif current == "skidRight":
 		if get_parent().activemovespeed<0:
 			play("skidingRight")
 		elif get_parent().activemovespeed>=0:
@@ -243,9 +243,7 @@ func _facingLeft():
 		
 	
 	elif current == "turnLeftSkid":
-		if is_playing()==false:
+		if is_playing() == false:
 			_quickturn()
 			play("walkingRight")
 			current="walkingRight"
-
-

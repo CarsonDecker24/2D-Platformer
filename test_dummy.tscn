@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2kvnctkapc7y"]
+
+[ext_resource type="Script" path="res://test_dummy.gd" id="1_1c4ne"]
+[ext_resource type="Texture2D" uid="uid://b56yndi0263bk" path="res://Assets/player sprites/slow fall frame.png" id="1_dhu62"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n2n5x"]
+radius = 5.0
+height = 40.0
+
+[node name="TestDummy" type="CharacterBody2D" groups=["Enemy"]]
+position = Vector2(13, 13)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_1c4ne")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8.50001, -12.375)
+scale = Vector2(0.0739645, 0.0713592)
+texture = ExtResource("1_dhu62")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-13, -14)
+shape = SubResource("CapsuleShape2D_n2n5x")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-13, -14)
+shape = SubResource("CapsuleShape2D_n2n5x")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

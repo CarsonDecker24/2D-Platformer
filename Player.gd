@@ -174,7 +174,7 @@ func _aim(delta):
 func _shoot_check(delta):
 	#if the bow isnt being drawn and you press fire, then quick fire. (if the or condition is met you dont have to keep pressing fire)
 	animPlayer._shootAnim(fire_state)
-	print(fire_state)
+	#print(fire_state)
 	if (fire_cooldown == FIRECOOLDOWN and Input.is_action_just_pressed("left_click")) or fire_state == "quick":
 		fire_state= "quick"
 		
