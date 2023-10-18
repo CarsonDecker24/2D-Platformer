@@ -27,8 +27,11 @@ var charge_timer = 0
 var fire_cooldown = FIRECOOLDOWN
 var fire_state = "not"
 var drawing = false
+var arrow_hud_slot = 1
+var arrow_hud_scroll_direction =1
 
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
+@onready var arrowHud = get_node("Camera/SelectedArrowHud")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -52,6 +55,9 @@ func _process(delta):
 	
 	#Shooting functions
 	_shoot_check(delta)
+	
+	#Changing Arrows
+	_arrow_hud()
 
 
 func _physics_process(delta):
@@ -159,7 +165,8 @@ func _aim(delta):
 		elif facing == 1:
 			pivot.rotation_degrees = -6
 		elif facing == -1:
-			pivot.rotation_degrees = 186
+			pivot.rotation_degrees = 183
+		
 		
 		#unless the bow is being quick fired, reset the bows chargetimer and fire cooldown
 		if not (fire_state == "quick" or fire_state == "fireWhenReady"):
@@ -169,7 +176,6 @@ func _aim(delta):
 	if Input.is_action_pressed("right_click"):
 		fire_state = "aim"
 		animPlayer._shootAnim(fire_state)
-	
 
 func _shoot_check(delta):
 	#if the bow isnt being drawn and you press fire, then quick fire. (if the or condition is met you dont have to keep pressing fire)
@@ -188,8 +194,7 @@ func _shoot_check(delta):
 			fire_cooldown=FIRECOOLDOWN
 			fire_state="not"
 	
-	#if the fire cooldown hasnt ended, and the player tries to fire again while aiming.
-	#this is in a different catagory because the bow is being aimed here.
+	
 	elif (fire_cooldown >0 and Input.is_action_pressed("right_click") and Input.is_action_just_pressed("left_click")) or fire_state=="fireWhenReady":
 		fire_state="fireWhenReady"
 		
@@ -215,5 +220,28 @@ func _shoot():
 	
 	
 	#Resets the firestate and the cooldown timer
-	
 
+func _arrow_hud():
+	if Input.is_action_just_pressed("mouse_wheel_up"):
+		arrow_hud_slot+=arrow_hud_scroll_direction
+		if arrow_hud_slot>=4:
+			arrow_hud_slot=1
+	elif Input.is_action_just_pressed("mouse_wheel_down"):
+		arrow_hud_slot-=arrow_hud_scroll_direction
+		if arrow_hud_slot<=0:
+			arrow_hud_slot=1
+	
+	elif Input.is_action_just_pressed("num_1"):
+		arrow_hud_slot=1
+	elif Input.is_action_just_pressed("num_2"):
+		arrow_hud_slot=2
+	elif Input.is_action_just_pressed("num_3"):
+		arrow_hud_slot=3
+	
+	if arrow_hud_slot == 1:
+		arrowHud.play("slot_1")
+	if arrow_hud_slot == 2:
+		arrowHud.play("slot_2")
+	if arrow_hud_slot== 3:
+		arrowHud.play("slot_3")
+	

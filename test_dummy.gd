@@ -16,3 +16,9 @@ func _lower_health(hp_reduction: int):
 
 func _is_dead():
 	return is_dead
+
+func _func_on_body_entered():
+	print("youch")
+
+func _on_body_entered(body):
+	print(body)
