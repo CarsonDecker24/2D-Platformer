@@ -431,7 +431,7 @@ visibility_layer = 2
 position = Vector2(7.5, 1)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_8ko50")
-animation = &"bow_idle"
+animation = &"bow_aim"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
