@@ -434,7 +434,7 @@ sprite_frames = SubResource("SpriteFrames_8ko50")
 animation = &"bow_aim"
 script = ExtResource("56_nsjpx")
 
-[node name="BulletSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
+[node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(13, -0.999996)
 
 [node name="PivotPullingArm" type="Node" parent="."]

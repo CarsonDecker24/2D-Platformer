@@ -5,7 +5,7 @@ const JUMP_VELOCITY = -300.0
 const ACCEL = 25.0
 const FRICTION = 25.0
 const DEFAULTARROWSPEED = 1.1
-const bulletPath = preload("res://bullet.tscn")
+const arrowPath = preload("res://arrow.tscn")
 const FIRECOOLDOWN = .2
 
 
@@ -211,12 +211,12 @@ func _shoot_check(delta):
 		_shoot()
 
 func _shoot():
-	#Creates an instance of the bullet scene, sets inital rotation, and sets velocity to shoot at mouse
-	var bullet = bulletPath.instantiate()
-	add_sibling(bullet)
-	bullet.position = get_node("PivotHoldingArm/HoldingArmAnimation/BulletSpawn").global_position
-	bullet.rotation = pivot.rotation
-	bullet.set_axis_velocity(Vector2(200*charge_timer,0).rotated(bullet.rotation))
+	#Creates an instance of the arrow scene, sets inital rotation, and sets velocity to shoot at mouse
+	var arrow = arrowPath.instantiate()
+	add_sibling(arrow)
+	arrow.position = get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
+	arrow.rotation = pivot.rotation
+	arrow.set_axis_velocity(Vector2(200*charge_timer,0).rotated(arrow.rotation))
 	if Input.is_action_pressed("right_click"):
 		fire_state = "aim"
 	else: fire_state = "not"
