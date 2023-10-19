@@ -27,4 +27,4 @@ func _shootAnim(fire_state):
 	if unaimCheck==true and is_playing()==false:
 		play("bow_idle")
 		unaimCheck=false
-	#print(fire_state)
+	print(fire_state)

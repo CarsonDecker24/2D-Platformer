@@ -203,11 +203,13 @@ func _shoot_check(delta):
 			_shoot()
 			fire_cooldown=FIRECOOLDOWN*2
 			fire_state="not"
-	if Input.is_action_just_released("right_click") and not (fire_state=="fireWhenReady" or fire_state=="quick") and fire_state=="aim":
-			fire_state="not"
+	if Input.is_action_just_released("right_click") and fire_state=="aim" and not (fire_state=="fireWhenReady" or fire_state=="quick") :
+			fire_state="unAim"
 			animPlayer._shootAnim(fire_state)
 			fire_cooldown=FIRECOOLDOWN
 	
+	if get_node("PivotHoldingArm/HoldingArmAnimation").unaimCheck==true:
+		fire_state="not"
 	
 	#if the shooting cooldown is over, and you fire, then shoot.
 	elif fire_cooldown<=0 and Input.is_action_just_pressed("left_click"):
