@@ -217,7 +217,9 @@ func _shoot():
 	bullet.position = get_node("PivotHoldingArm/HoldingArmAnimation/BulletSpawn").global_position
 	bullet.rotation = pivot.rotation
 	bullet.set_axis_velocity(Vector2(200*charge_timer,0).rotated(bullet.rotation))
-	
+	if Input.is_action_pressed("right_click"):
+		fire_state = "aim"
+	else: fire_state = "not"
 	
 	#Resets the firestate and the cooldown timer
 
@@ -229,7 +231,7 @@ func _arrow_hud():
 	elif Input.is_action_just_pressed("mouse_wheel_down"):
 		arrow_hud_slot-=arrow_hud_scroll_direction
 		if arrow_hud_slot<=0:
-			arrow_hud_slot=1
+			arrow_hud_slot=3
 	
 	elif Input.is_action_just_pressed("num_1"):
 		arrow_hud_slot=1
