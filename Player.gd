@@ -29,6 +29,7 @@ var fire_state = "not"
 var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
+var slots = ["Normal", "Fire", "Vine"]
 
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
@@ -220,6 +221,7 @@ func _shoot_check(delta):
 func _shoot():
 	#Creates an instance of the arrow scene, sets inital rotation, and sets velocity to shoot at mouse
 	var arrow = arrowPath.instantiate()
+	arrow._initialize_arrow(slots[arrow_hud_slot - 1])
 	add_sibling(arrow)
 	arrow.position = get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
 	arrow.rotation = pivot.rotation

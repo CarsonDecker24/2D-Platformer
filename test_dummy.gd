@@ -14,6 +14,16 @@ func _lower_health(hp_reduction: int):
 		is_dead = true
 		queue_free()
 
+#Deal damage, requires arrow type
+func _damage(type: String, damage: int):
+	if type == "Fire":
+		hp -= damage
+	print("Remaining HP: " + str(hp))
+	if (hp <= 0):
+		print("Died!")
+		is_dead = true
+		queue_free()
+
 func _is_dead():
 	return is_dead
 

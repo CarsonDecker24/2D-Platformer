@@ -9,6 +9,10 @@ var has_been_attached = false
 var on_enemy = false
 var current_attached_body: Node
 var offset = Vector2(0,0)
+var type: String
+
+func _initialize_arrow(arrowType: String):
+	type = arrowType
 
 func _process(delta): 
 	#Make arrow dip down after firing
@@ -31,7 +35,7 @@ func _on_body_entered(body):
 		print("Hit Ground")
 	if body.is_in_group("Enemy"):
 		print("Hit Enemy")
-		body._lower_health(1)
+		body._damage(type, 1)
 		current_attached_body = body
 		on_enemy = true
 	if test:
