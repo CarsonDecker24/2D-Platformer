@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 var alreadyAiming =false
-var reset=false
+var alreadyUnAiming=false
+var testVar = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,7 +13,9 @@ func _process(delta):
 func _shootAnim(fire_state):
 	if fire_state == "not":
 		play("bow_idle")
+		alreadyUnAiming=false
 		alreadyAiming= false
+		testVar=false
 	if fire_state == "fireWhenReady":
 		play("bow_aim")
 	if fire_state == "quick":
@@ -21,14 +24,16 @@ func _shootAnim(fire_state):
 		play("bow_aim")
 		alreadyAiming = true
 		
-	if fire_state=="unAim":
+	if fire_state=="unAim" and alreadyUnAiming==false:
 		play_backwards("bow_aim")
+		alreadyUnAiming=true
 		
-		
-	if fire_state=="unAim" and is_playing()==false:
-		alreadyAiming=false
+	if alreadyUnAiming==true and is_playing()==false:
 		play("bow_idle")
-		reset=true
+		alreadyUnAiming=false
+		testVar=true
 	
 	
-	print(is_playing())
+	
+	print(fire_state)
+	#print(is_playing())
