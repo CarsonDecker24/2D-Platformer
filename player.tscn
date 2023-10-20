@@ -328,7 +328,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("55_5urxs")
+"texture": ExtResource("50_78cjf")
 }],
 "loop": false,
 "name": &"bow_idle",
