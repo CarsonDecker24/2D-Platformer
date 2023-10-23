@@ -127,7 +127,7 @@ func _wallslide(delta):
 func _walljump():
 	#Wall jump
 	velocity.y = JUMP_VELOCITY
-	velocity.x = -direction*SPEED/2
+	velocity.x = -direction*SPEED
 
 func _aim(delta):
 	

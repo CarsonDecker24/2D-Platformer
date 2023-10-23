@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=82 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -11,14 +11,17 @@
 [ext_resource type="Texture2D" uid="uid://b31fe2aq4pl4e" path="res://Assets/player sprites/walkRight/walkRight1.png" id="4_rws1l"]
 [ext_resource type="Texture2D" uid="uid://ch3pv3dub8s1w" path="res://Assets/player sprites/jump sprites/jumping1.png" id="4_tycoe"]
 [ext_resource type="Texture2D" uid="uid://dxi006vi0pk0g" path="res://Assets/player sprites/skidRight/sprite skid1.png" id="4_v0pw0"]
+[ext_resource type="Texture2D" uid="uid://dtvuwxrswn1op" path="res://Assets/player sprites/walkJumpRight/sprite_0.png" id="5_8clwu"]
 [ext_resource type="Texture2D" uid="uid://cbicrkabur4s2" path="res://Assets/player sprites/skidRight/sprite skid2.png" id="5_a6gcb"]
 [ext_resource type="Texture2D" uid="uid://b3pxad86yp5e" path="res://Assets/player sprites/walkRight/walkRight2.png" id="5_dluha"]
 [ext_resource type="Texture2D" uid="uid://tr3t4ygi54nq" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk2.png" id="5_qcrkh"]
+[ext_resource type="Texture2D" uid="uid://b480yk5e75uit" path="res://Assets/player sprites/walkJumpRight/sprite_1.png" id="6_5cf53"]
 [ext_resource type="Texture2D" uid="uid://c2u3qmxbxcstl" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk3.png" id="6_7ihpc"]
 [ext_resource type="Texture2D" uid="uid://cwvvh2un2uo2d" path="res://Assets/player sprites/skidRight/sprite skid3.png" id="6_17q7j"]
 [ext_resource type="Texture2D" uid="uid://dvdoo7k2hholh" path="res://Assets/player sprites/walkRight/walkRight3.png" id="6_us1ey"]
 [ext_resource type="Texture2D" uid="uid://c8ok0fodwadse" path="res://Assets/player sprites/walkRight/walkRight4.png" id="7_7uk0q"]
 [ext_resource type="Texture2D" uid="uid://b4gs1b8mjdvwg" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk4.png" id="7_86fh3"]
+[ext_resource type="Texture2D" uid="uid://6kean53m8lsm" path="res://Assets/player sprites/walkJumpRight/sprite_2.png" id="7_gm5no"]
 [ext_resource type="Texture2D" uid="uid://luad0lqxvssg" path="res://Assets/player sprites/skiddingRight/sprite skid3.png" id="7_io7qw"]
 [ext_resource type="Texture2D" uid="uid://by5f34oibm0l7" path="res://Assets/player sprites/skiddingRight/sprite skid4.png" id="8_7c5xq"]
 [ext_resource type="Texture2D" uid="uid://bp3wf0wi5nvmn" path="res://Assets/player sprites/walkRight/walkRight5.png" id="8_48irv"]
@@ -49,6 +52,12 @@
 [ext_resource type="Texture2D" uid="uid://b6b2fio31mkqn" path="res://Assets/player sprites/windupRightWalk/windupRightW08.png" id="19_j50x8"]
 [ext_resource type="Texture2D" uid="uid://0q7bhmuehib4" path="res://Assets/player sprites/turnIdle/flipped again7.png" id="19_qx7gr"]
 [ext_resource type="Texture2D" uid="uid://bqa2syt7wbrlr" path="res://Assets/player sprites/windupRightWalk/windupRightW09.png" id="20_obmkk"]
+[ext_resource type="Texture2D" uid="uid://bwcjmrues24bs" path="res://Assets/player sprites/walkJumpRight/sprite_3.png" id="34_kdvhe"]
+[ext_resource type="Texture2D" uid="uid://clw38g7pxyjnc" path="res://Assets/player sprites/walkJumpRight/sprite_4.png" id="35_6718t"]
+[ext_resource type="Texture2D" uid="uid://im4t16flfiwc" path="res://Assets/player sprites/walkJumpRight/sprite_5.png" id="36_85fnf"]
+[ext_resource type="Texture2D" uid="uid://bxjpn8na8fp6k" path="res://Assets/player sprites/walkJumpRight/sprite_6.png" id="37_ult6n"]
+[ext_resource type="Texture2D" uid="uid://bl03qr8o5367" path="res://Assets/player sprites/wall_drag/sprite_0.png" id="46_bjsil"]
+[ext_resource type="Texture2D" uid="uid://bw8bhxkb6s07c" path="res://Assets/player sprites/wall_drag/sprite_1.png" id="47_lkv0v"]
 [ext_resource type="Texture2D" uid="uid://bqi3nu8nap0fc" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite0.png" id="50_78cjf"]
 [ext_resource type="Texture2D" uid="uid://c6jsn4ttrs6ri" path="res://Assets/hud sprites/arrowSelectHud-2.png.png" id="50_tt0ad"]
 [ext_resource type="Texture2D" uid="uid://c6l7va5eoonin" path="res://Assets/player sprites/arms n bows/pulling arm/pulling arm0.png" id="50_xwr50"]
@@ -88,6 +97,20 @@ animations = [{
 "loop": false,
 "name": &"jumpIdleRight",
 "speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8clwu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5cf53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gm5no")
+}],
+"loop": false,
+"name": &"jumpWalkRightUp",
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -198,7 +221,24 @@ animations = [{
 }],
 "loop": false,
 "name": &"unwindRightWalk",
-"speed": 30.0
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_kdvhe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_6718t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_85fnf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_ult6n")
+}],
+"loop": false,
+"name": &"walkRightFall",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -228,6 +268,28 @@ animations = [{
 "loop": true,
 "name": &"walkingRight",
 "speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_bjsil")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_lkv0v")
+}],
+"loop": false,
+"name": &"wallDrag",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_5cf53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gm5no")
+}],
+"loop": false,
+"name": &"wallJump",
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -402,10 +464,11 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"jumpIdleRight"
+animation = &"wallJump"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-6, 4)
 shape = SubResource("CapsuleShape2D_upuir")
 

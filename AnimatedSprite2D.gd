@@ -17,7 +17,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	animationTimer += delta
+	
+	print(current)
 	
 	#IDLE STATE=====================================================================================
 	if current == "idle":
@@ -26,33 +27,32 @@ func _process(delta):
 		if Input.is_action_pressed("move_left") and facing == "left":
 			current = "windupRightWalk"
 			play("windupRightWalk")
-			animationTimer=0
+		
 		
 		#if they are FACING RIGHT and start to MOVE RIGHT===========================================
 		elif Input.is_action_pressed("move_right") and facing == "right":
 			current = "windupRightWalk"
 			play("windupRightWalk")
-			animationTimer=0
+			
 		
 		#if they are FACING LEFT and start to MOVE RIGHT===========================================
 		elif Input.is_action_pressed("move_right") and facing=="left":
 			_quickturn()
 			play("turnIdle")
 			current="playThenWind"
-			animationTimer=0
+			
 		
 		#if they are FACING RIGHT and start to MOVE LEFT============================================
 		elif Input.is_action_pressed("move_left") and facing=="right":
 			_quickturn()
 			play("turnIdle")
 			current = "playThenWind"
-			animationTimer=0
+	
 		
 		#if they JUMP
 		elif Input.is_action_pressed("jump"):
 			current = "jumpIdleRight"
 			play("jumpIdleRight")
-			animationTimer=0
 			
 	
 	
@@ -61,6 +61,24 @@ func _process(delta):
 		current="windupRightWalk"
 		play("windupRightWalk")
 	
+		
+	if fallTest-global_position.y<0 and not fallTest-global_position.y<-10:
+		if current == "jumpIdleRight":
+			current = "fallslowRight" 
+			play("slowFallRight")
+		if current=="walkRightJump":
+			current = "fallRight"
+			play("walkRightFall")
+			print("should")
+	
+	if get_parent().wall_sliding==true and not (Input.is_action_pressed("move_right") and Input.is_action_pressed("move_left")):
+		if (Input.is_action_pressed("move_left") and facing == "right") or (Input.is_action_pressed("move_right") and facing == "left"):
+			_quickturn()
+		play("wallDrag")
+		
+		if get_parent().wall_sliding==true and Input.is_action_just_pressed("jump"):
+			play("wallJump")
+			_quickturn()
 	
 	#JUMPING UP STATE==============================================================================
 	if current == "jumpIdleRight":
@@ -72,6 +90,7 @@ func _process(delta):
 		
 		#reset the fallTest variable
 		fallTest = global_position.y
+		
 	
 	
 	#FALLING STATE================================================================================
@@ -81,13 +100,19 @@ func _process(delta):
 		if get_parent().is_on_floor()==true:
 			play("idle")
 			current = "idle"
-
+	#FALLING+WALKING STATE========================================================================
+	if current =="fallRight" and get_parent().is_on_floor()==true :
+		play("walkingRight")
+		current="walkingRight"
+	
+	
+	
 	#there are specific  functions for whether or not the player is facing left or right===========
 	if facing == "right":
 		_facingRight()
 	else:
 		_facingLeft()
-
+	fallTest = global_position.y
 
 #this function FLIPS the PLAYER====================================================================
 func _quickturn():
@@ -110,8 +135,6 @@ func _facingRight():
 	
 	#WINDUP TO THE WALK STATE ======================================================================
 	if current == "windupRightWalk":
-		
-		
 		
 		
 		#if the PLAYER stops MOVING RIGHT before the RIGHT WALK CYCLE plays=========================
@@ -137,13 +160,15 @@ func _facingRight():
 			frameHolder = frame
 			play_backwards("windupRightWalk")
 			set_frame_and_progress(frame,0.00)
-
+		
+		if Input.is_action_just_pressed("jump"):
+			current="walkRightJump"
+			play("jumpWalkRightUp")
+			fallTest = global_position.y
 	
 	
 	#if the player is walking right=================================================================
 	elif current == "walkingRight":
-		
-		
 		if Input.is_action_just_pressed("move_left"):
 			current= "skidRight"
 			play("skidRight")
@@ -154,6 +179,9 @@ func _facingRight():
 			#play windupRightRun
 			#current = "windupRightRun"
 			print("windup")
+		if Input.is_action_just_pressed("jump"):
+			current="walkRightJump"
+			play("jumpWalkRightUp")
 		
 	
 	if current == "skidThenIdle":
@@ -205,7 +233,10 @@ func _facingLeft():
 				frameHolder=frame
 				play_backwards("windupRightWalk")
 				set_frame_and_progress((frame),0.00)
-				
+			if Input.is_action_just_pressed("jump"):
+				current="walkRightJump"
+				play("jumpWalkRightUp")
+			
 	
 	#if the player is walking right=====================================================
 	elif current == "walkingRight" :
@@ -219,6 +250,11 @@ func _facingLeft():
 			#play windupRightRun
 			#current = "windupRightRun"
 			print("windup run")
+		if Input.is_action_just_pressed("jump"):
+			current="walkRightJump"
+			play("jumpWalkRightUp")
+	
+	
 	if current == "skidThenIdle":
 		if Input.is_action_pressed("move_right"):
 			play("turnLeftSkid")
