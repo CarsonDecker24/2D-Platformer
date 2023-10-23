@@ -23,10 +23,6 @@ func _shootAnim(fire_state):
 	if fire_state== "aim" and alreadyAiming == false:
 		play("bow_aim")
 		alreadyAiming = true
-	
-	
-		
-	
 	if fire_state=="unAim" and alreadyUnAiming==false:
 		play_backwards("bow_aim")
 		alreadyUnAiming=true
@@ -37,5 +33,8 @@ func _shootAnim(fire_state):
 		testVar=true
 
 func _justShot():
+	stop()
 	alreadyAiming = false
+	
+	
 

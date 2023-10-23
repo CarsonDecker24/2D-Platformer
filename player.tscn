@@ -372,13 +372,13 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("50_78cjf")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("51_fj8co")
 }, {
-"duration": 1.0,
+"duration": 1.25,
 "texture": ExtResource("52_dt75y")
 }, {
-"duration": 1.0,
+"duration": 1.25,
 "texture": ExtResource("53_u6d5f")
 }, {
 "duration": 1.0,
