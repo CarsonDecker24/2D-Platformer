@@ -23,13 +23,14 @@ var facing = 1
 var max_fall_speed = -1
 var activemovespeed = 0
 var aiming = false
-var charge_ammount = 0
+var charge_amount = 0
 var fire_cooldown = FIRECOOLDOWN
 var fire_state = "not"
 var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
 var slots = ["Normal", "Fire", "Vine"]
+var arrow_count = 0
 
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
@@ -140,9 +141,9 @@ func _aim(delta):
 		#which would need to decrease if aiming draws the bow anyways.
 		fire_cooldown-=delta
 		
-		#charge_ammount is the charge level of the bow
-		if charge_ammount<2.1 and fire_cooldown<=0:
-			charge_ammount += delta*1.2
+		#charge_amount is the charge level of the bow
+		if charge_amount<2.1 and fire_cooldown<=0:
+			charge_amount += delta*1.2
 		
 		#Flip sprite to always be facing upward
 		if (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and not weapon_flipped:
@@ -172,14 +173,14 @@ func _aim(delta):
 		#unless the bow is being quick fired, reset the bows chargetimer and fire cooldown
 		if not (fire_state == "quick" or fire_state == "fireWhenReady"):
 			fire_cooldown = FIRECOOLDOWN
-			charge_ammount = DEFAULTARROWSPEED
+			charge_amount = DEFAULTARROWSPEED
 	
 	if Input.is_action_pressed("right_click"):
 		
 		fire_state = "aim"
 		animPlayer._shootAnim(fire_state)
 	
-	print(charge_ammount)
+	print(charge_amount)
 
 func _shoot_check(delta):
 	#if the bow isnt being drawn and you press fire, then quick fire. (if the or condition is met you dont have to keep pressing fire)
@@ -193,7 +194,7 @@ func _shoot_check(delta):
 		
 		#fire
 		if fire_cooldown <=0:
-			charge_ammount=1
+			charge_amount=1
 			_shoot()
 			fire_cooldown=FIRECOOLDOWN
 			fire_state="not"
@@ -224,15 +225,16 @@ func _shoot_check(delta):
 func _shoot():
 	#Creates an instance of the arrow scene, sets inital rotation, and sets velocity to shoot at mouse
 	var arrow = arrowPath.instantiate()
-	arrow._initialize_arrow(slots[arrow_hud_slot - 1])
+	arrow._initialize_arrow(slots[arrow_hud_slot - 1], arrow_count, self)
+	arrow_count += 1
 	add_sibling(arrow)
 	arrow.position = get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
 	arrow.rotation = pivot.rotation
-	arrow.set_axis_velocity(Vector2(200*charge_ammount,0).rotated(arrow.rotation))
+	arrow.set_axis_velocity(Vector2(200*charge_amount,0).rotated(arrow.rotation))
 	if Input.is_action_pressed("right_click"):
 		fire_state = "aim"
 	else: fire_state = "not"
-	charge_ammount=DEFAULTARROWSPEED
+	charge_amount=DEFAULTARROWSPEED
 	if not fire_state=="quick":
 		fire_state = "aim"
 		animPlayer._shootAnim(fire_state)
@@ -262,4 +264,3 @@ func _arrow_hud():
 		arrowHud.play("slot_2")
 	if arrow_hud_slot== 3:
 		arrowHud.play("slot_3")
-	

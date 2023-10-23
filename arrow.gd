@@ -10,9 +10,13 @@ var on_enemy = false
 var current_attached_body: Node
 var offset = Vector2(0,0)
 var type: String
+var id: int
+var player: Node
 
-func _initialize_arrow(arrowType: String):
+func _initialize_arrow(arrowType: String, arrowID: int, playerNode: Node):
 	type = arrowType
+	id = arrowID
+	player = playerNode
 
 func _process(delta): 
 	#Make arrow dip down after firing
@@ -29,6 +33,9 @@ func _process(delta):
 			_detach()
 		else:
 			_keep_attached(current_attached_body)
+	
+	if player.arrow_count - id > 20:
+		queue_free()
 
 func _on_body_entered(body):
 	if body.is_in_group("Ground"):
