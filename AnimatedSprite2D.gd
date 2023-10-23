@@ -18,7 +18,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	print(current)
+	
 	
 	#IDLE STATE=====================================================================================
 	if current == "idle":
@@ -69,7 +69,7 @@ func _process(delta):
 		if current=="walkRightJump":
 			current = "fallRight"
 			play("walkRightFall")
-			print("should")
+			
 	
 	if get_parent().wall_sliding==true and not (Input.is_action_pressed("move_right") and Input.is_action_pressed("move_left")):
 		if (Input.is_action_pressed("move_left") and facing == "right") or (Input.is_action_pressed("move_right") and facing == "left"):
@@ -175,10 +175,7 @@ func _facingRight():
 		elif not Input.is_action_pressed("move_right"):
 			play("unwindRightWalk")
 			current = "skidThenIdle" 
-		elif Input.is_action_just_pressed("shift"):
-			#play windupRightRun
-			#current = "windupRightRun"
-			print("windup")
+			
 		if Input.is_action_just_pressed("jump"):
 			current="walkRightJump"
 			play("jumpWalkRightUp")
@@ -211,7 +208,9 @@ func _facingRight():
 			_quickturn()
 			play("walkingRight")
 			current="walkingRight"
-			
+		if Input.is_action_just_pressed("jump"):
+				current="walkRightJump"
+				play("jumpWalkRightUp")
 	
 	
 
@@ -246,10 +245,6 @@ func _facingLeft():
 		elif not Input.is_action_pressed("move_left"):
 			play("unwindRightWalk")
 			current = "skidThenIdle" 
-		elif Input.is_action_just_pressed("shift"):
-			#play windupRightRun
-			#current = "windupRightRun"
-			print("windup run")
 		if Input.is_action_just_pressed("jump"):
 			current="walkRightJump"
 			play("jumpWalkRightUp")
@@ -262,6 +257,9 @@ func _facingLeft():
 		elif is_playing() == false:
 			current = "idle"
 			play("idle")
+		if Input.is_action_just_pressed("jump"):
+				current="walkRightJump"
+				play("jumpWalkRightUp")
 	
 	
 	#if the player is stopping during the starting to walk animation=========================================
@@ -283,3 +281,6 @@ func _facingLeft():
 			_quickturn()
 			play("walkingRight")
 			current="walkingRight"
+		if Input.is_action_just_pressed("jump"):
+				current="walkRightJump"
+				play("jumpWalkRightUp")

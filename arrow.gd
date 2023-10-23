@@ -42,6 +42,7 @@ func _on_body_entered(body):
 		linear_velocity.x=0
 		linear_velocity.y=0
 		gravity_scale = 0
+		
 		sleeping= true
 		#lock_rotation = true
 		test=false

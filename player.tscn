@@ -175,7 +175,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turnIdle",
-"speed": 100.0
+"speed": 120.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -221,7 +221,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"unwindRightWalk",
-"speed": 15.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -278,7 +278,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"wallDrag",
-"speed": 20.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -386,7 +386,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bow_aim",
-"speed": 30.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -464,7 +464,7 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"wallJump"
+animation = &"unwindRightWalk"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]

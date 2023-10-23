@@ -35,8 +35,7 @@ func _shootAnim(fire_state):
 		play("bow_idle")
 		alreadyUnAiming=false
 		testVar=true
-	
-	
-	
-	
-	#print(is_playing())
+
+func _justShot():
+	alreadyAiming = false
+
