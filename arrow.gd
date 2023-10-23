@@ -12,11 +12,21 @@ var offset = Vector2(0,0)
 var type: String
 var id: int
 var player: Node
+var charge
+var angle
+const arrowPath = preload("res://arrow.tscn")
 
-func _initialize_arrow(arrowType: String, arrowID: int, playerNode: Node):
+func _initialize_arrow(arrowType: String, arrowID: int, chargeAmount, arrowAngle, playerNode: Node):
 	type = arrowType
 	id = arrowID
+	charge = chargeAmount
+	angle = arrowAngle
 	player = playerNode
+
+func _ready():
+	if type == "Multi":
+		_multi_arrow(5)
+		_multi_arrow(-5)
 
 func _process(delta): 
 	#Make arrow dip down after firing
@@ -72,3 +82,12 @@ func _keep_attached(body):
 
 func _detach():
 	queue_free()
+
+func _multi_arrow(offset_angle):
+	var arrow = arrowPath.instantiate()
+	arrow._initialize_arrow("MultiChild", player.arrow_count, charge, angle + offset_angle, player)
+	player.arrow_count += 1
+	add_sibling(arrow)
+	arrow.position = player.get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
+	arrow.rotation_degrees = angle + offset_angle
+	arrow.set_axis_velocity(Vector2(200*charge,0).rotated(arrow.rotation))
