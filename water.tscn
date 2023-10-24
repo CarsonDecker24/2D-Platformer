@@ -1,6 +1,76 @@
-[gd_scene load_steps=2 format=3 uid="uid://5cidhigmdn0w"]
+[gd_scene load_steps=12 format=3 uid="uid://5cidhigmdn0w"]
 
 [ext_resource type="Script" path="res://Water.gd" id="1_4tyur"]
+[ext_resource type="Texture2D" uid="uid://c028jh28c3tpu" path="res://Assets/waterfall/water.png" id="2_7hpf5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rle2i"]
+atlas = ExtResource("2_7hpf5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a51qy"]
+atlas = ExtResource("2_7hpf5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywvyw"]
+atlas = ExtResource("2_7hpf5")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x3vt"]
+atlas = ExtResource("2_7hpf5")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qb2s3"]
+atlas = ExtResource("2_7hpf5")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktv1k"]
+atlas = ExtResource("2_7hpf5")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot51m"]
+atlas = ExtResource("2_7hpf5")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bvg4"]
+atlas = ExtResource("2_7hpf5")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yocae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rle2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a51qy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywvyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3x3vt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qb2s3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktv1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot51m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bvg4")
+}],
+"loop": false,
+"name": &"new_animation_1",
+"speed": 0.0
+}]
 
 [node name="Water" type="Node2D"]
 script = ExtResource("1_4tyur")
@@ -8,3 +78,8 @@ script = ExtResource("1_4tyur")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_yocae")
+animation = &"new_animation_1"
