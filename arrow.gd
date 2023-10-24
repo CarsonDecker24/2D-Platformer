@@ -91,3 +91,6 @@ func _multi_arrow(offset_angle):
 	arrow.position = player.get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
 	arrow.rotation_degrees = angle + offset_angle
 	arrow.set_axis_velocity(Vector2(200*charge,0).rotated(arrow.rotation))
+
+func _ice_arrow():
+	#Change sprite to ice arrow

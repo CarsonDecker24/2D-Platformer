@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=80 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -32,7 +32,6 @@
 [ext_resource type="Texture2D" uid="uid://rqus61is0o2t" path="res://Assets/player sprites/windupRightWalk/windupRightW00.png" id="11_ugani"]
 [ext_resource type="Texture2D" uid="uid://cdc7m2vff8nj8" path="res://Assets/player sprites/windupRightWalk/windupRightW01.png" id="12_1mify"]
 [ext_resource type="Texture2D" uid="uid://g2uk5kqarcd5" path="res://Assets/player sprites/turnLeftWalk/turningLeftWalk0.png" id="12_conal"]
-[ext_resource type="Texture2D" uid="uid://dh7s0i4584h5h" path="res://Assets/player sprites/turnIdle/flipped again0.png" id="12_sxcsv"]
 [ext_resource type="Texture2D" uid="uid://bjaoomlmig2ag" path="res://Assets/player sprites/turnLeftWalk/turningLeftWalk1.png" id="13_5ipky"]
 [ext_resource type="Texture2D" uid="uid://c517qe0r0l8sl" path="res://Assets/player sprites/windupRightWalk/windupRightW02.png" id="13_n8var"]
 [ext_resource type="Texture2D" uid="uid://kqh0wxgy1v1v" path="res://Assets/player sprites/turnIdle/flipped again1.png" id="13_qsm1q"]
@@ -50,7 +49,6 @@
 [ext_resource type="Texture2D" uid="uid://cjeq02kihg6uc" path="res://Assets/player sprites/windupRightWalk/windupRightW07.png" id="18_c5v4d"]
 [ext_resource type="Texture2D" uid="uid://cyqqq3jswkm4t" path="res://Assets/player sprites/turnIdle/flipped again6.png" id="18_pfne1"]
 [ext_resource type="Texture2D" uid="uid://b6b2fio31mkqn" path="res://Assets/player sprites/windupRightWalk/windupRightW08.png" id="19_j50x8"]
-[ext_resource type="Texture2D" uid="uid://0q7bhmuehib4" path="res://Assets/player sprites/turnIdle/flipped again7.png" id="19_qx7gr"]
 [ext_resource type="Texture2D" uid="uid://bqa2syt7wbrlr" path="res://Assets/player sprites/windupRightWalk/windupRightW09.png" id="20_obmkk"]
 [ext_resource type="Texture2D" uid="uid://bwcjmrues24bs" path="res://Assets/player sprites/walkJumpRight/sprite_3.png" id="34_kdvhe"]
 [ext_resource type="Texture2D" uid="uid://clw38g7pxyjnc" path="res://Assets/player sprites/walkJumpRight/sprite_4.png" id="35_6718t"]
@@ -150,9 +148,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("12_sxcsv")
-}, {
-"duration": 1.0,
 "texture": ExtResource("13_qsm1q")
 }, {
 "duration": 1.0,
@@ -169,9 +164,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("18_pfne1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_qx7gr")
 }],
 "loop": false,
 "name": &"turnIdle",
@@ -464,7 +456,7 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"unwindRightWalk"
+animation = &"turnIdle"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
