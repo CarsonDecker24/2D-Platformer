@@ -94,3 +94,4 @@ func _multi_arrow(offset_angle):
 
 func _ice_arrow():
 	#Change sprite to ice arrow
+	pass

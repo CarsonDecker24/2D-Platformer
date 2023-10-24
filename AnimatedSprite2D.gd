@@ -45,9 +45,14 @@ func _process(delta):
 			play("jumpIdleRight")
 	
 	#USED TO FINISH THE CURRENT ANIMATION, THEN START WALKING=======================================
-	elif current== "playThenWind" and is_playing()==false:
-		current="windupRightWalk"
-		play("windupRightWalk")
+	elif current== "playThenWind":
+		if is_playing()==false:
+			current="windupRightWalk"
+			play("windupRightWalk")
+		if Input.is_action_just_pressed("jump"):
+			_quickturn()
+			current="walkRightJump"
+			play("jumpWalkRightUp")
 	
 	#this runs when the player is FALLING, basically at the HEIGHT OF THEIR JUMP====================
 	if fallTest-global_position.y<0 and not fallTest-global_position.y<-10:
@@ -191,6 +196,7 @@ func _facingRight():
 			play("walkingRight")
 			current="walkingRight"
 		if Input.is_action_just_pressed("jump"):
+				_quickturn()
 				current="walkRightJump"
 				play("jumpWalkRightUp")
 	
@@ -264,5 +270,6 @@ func _facingLeft():
 			play("walkingRight")
 			current="walkingRight"
 		if Input.is_action_just_pressed("jump"):
+				_quickturn()
 				current="walkRightJump"
 				play("jumpWalkRightUp")

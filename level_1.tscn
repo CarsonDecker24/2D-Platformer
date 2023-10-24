@@ -1235,7 +1235,7 @@ layer_0/tile_data = PackedInt32Array(393220, 720896, 5, 393221, 720896, 5, 39322
 
 [node name="Player" parent="." instance=ExtResource("3_410nd")]
 texture_filter = 1
-position = Vector2(85, 82)
+position = Vector2(96, 78)
 
 [node name="TestDummy" parent="." instance=ExtResource("4_kqark")]
 position = Vector2(249, 92)
