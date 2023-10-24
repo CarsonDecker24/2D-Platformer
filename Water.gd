@@ -9,3 +9,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_body_entered(body):
+	if body.has_group("Arrow"):
+		if body.type == "Ice":
+			get_node("StaticBody2D/CollisionShape2D").disabled = false
