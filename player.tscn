@@ -316,7 +316,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"windupRightWalk",
-"speed": 50.0
+"speed": 60.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_upuir"]
@@ -456,7 +456,7 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"turnIdle"
+animation = &"windupRightWalk"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]

@@ -30,7 +30,8 @@ var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
 var slots = ["Normal", "Multi", "Ice"]
-var arrow_count = 0
+var arrow_count=0
+var wallJumpNerf = 0
 
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
@@ -87,13 +88,21 @@ func _physics_process(delta):
 	
 	if velocity.y > max_fall_speed: velocity.y = max_fall_speed
 	
+	
+	if wallJumpNerf>0:
+		wallJumpNerf-=delta
+	
 	move_and_slide()
+	
+	
 
 func _accelerate(dir):
 	#Accelerate in whatever direction the player is wanting to move.
 	#velocity = velocity.move_toward(Vector2(SPEED * dir, velocity.y), ACCEL)
 	if (velocity.x + ACCEL * dir) < -SPEED or (velocity.x + ACCEL * dir) > SPEED:
 		velocity.x = SPEED * dir
+	elif wallJumpNerf>0:
+		velocity.x += (ACCEL-15) * dir
 	else:
 		velocity.x += ACCEL * dir
 
@@ -110,6 +119,7 @@ func _friction():
 func _gravity(delta):
 	#Apply gravity
 	velocity.y += gravity * delta
+	
 
 func _jump():
 	#Jump
@@ -121,13 +131,14 @@ func _jump():
 func _wallslide(delta):
 	#Apply wall slide physics
 	velocity.y += 1000 * delta
-	max_fall_speed = 30
+	max_fall_speed = 50
 	wall_sliding = true
 
 func _walljump():
 	#Wall jump
-	velocity.y = JUMP_VELOCITY
-	velocity.x = -direction*SPEED
+	velocity.y = JUMP_VELOCITY*.85
+	velocity.x += -direction*SPEED*1.2
+	wallJumpNerf=.55
 
 func _aim(delta):
 	
@@ -260,3 +271,5 @@ func _arrow_hud():
 		arrowHud.play("slot_2")
 	if arrow_hud_slot== 3:
 		arrowHud.play("slot_3")
+func has_group(test):
+	return
