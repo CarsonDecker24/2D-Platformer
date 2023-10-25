@@ -1242,4 +1242,4 @@ position = Vector2(96, 78)
 position = Vector2(249, 92)
 
 [node name="Water" parent="." instance=ExtResource("5_tlohi")]
-position = Vector2(353, 56)
+position = Vector2(353, -103)

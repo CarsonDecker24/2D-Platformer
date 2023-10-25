@@ -7,7 +7,7 @@
 size = Vector2(16, 4)
 
 [node name="RegularArrow" type="RigidBody2D" groups=["Arrow"]]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 2
 gravity_scale = 0.1
 custom_integrator = true
