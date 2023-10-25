@@ -12,6 +12,7 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	if body.has_group("Arrow"):
-		if body.type == "Ice":
-			get_node("StaticBody2D/CollisionShape2D").disabled = false
+	#if body.has_group("Arrow"):
+	#	if body.type == "Ice":
+	#		get_node("StaticBody2D/CollisionShape2D").disabled = false
+	print("this hella broken, dog")

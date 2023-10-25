@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c028jh28c3tpu" path="res://Assets/waterfall/water.png" id="2_7hpf5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ttgx"]
-size = Vector2(5.5, 32)
+size = Vector2(6, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rle2i"]
 atlas = ExtResource("2_7hpf5")
@@ -54,7 +54,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_3x3vt")
 }],
 "loop": true,
-"name": &"default",
+"name": &"flow",
 "speed": 16.0
 }, {
 "frames": [{
@@ -71,7 +71,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_5bvg4")
 }],
 "loop": false,
-"name": &"new_animation_1",
+"name": &"frozen",
 "speed": 0.0
 }]
 
@@ -81,18 +81,62 @@ script = ExtResource("1_4tyur")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_6ttgx")
-disabled = true
 
 [node name="Area2D" type="Area2D" parent="StaticBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
+position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_6ttgx")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="p1" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(13, 0)
+position = Vector2(16, 0)
 sprite_frames = SubResource("SpriteFrames_yocae")
-animation = &"new_animation_1"
+animation = &"flow"
+autoplay = "flow"
+
+[node name="p2" type="AnimatedSprite2D" parent="p1"]
+texture_filter = 1
+position = Vector2(0, 32)
+sprite_frames = SubResource("SpriteFrames_yocae")
+animation = &"flow"
+autoplay = "flow"
+
+[node name="p3" type="AnimatedSprite2D" parent="p1/p2"]
+texture_filter = 1
+position = Vector2(0, 32)
+sprite_frames = SubResource("SpriteFrames_yocae")
+animation = &"flow"
+autoplay = "flow"
+
+[node name="p4" type="AnimatedSprite2D" parent="p1/p2/p3"]
+texture_filter = 1
+position = Vector2(0, 32)
+sprite_frames = SubResource("SpriteFrames_yocae")
+animation = &"flow"
+autoplay = "flow"
+
+[node name="p5" type="AnimatedSprite2D" parent="p1/p2/p3/p4"]
+texture_filter = 1
+position = Vector2(0, 32)
+sprite_frames = SubResource("SpriteFrames_yocae")
+animation = &"flow"
+autoplay = "flow"
+
+[node name="p6" type="AnimatedSprite2D" parent="p1/p2/p3/p4/p5"]
+texture_filter = 1
+position = Vector2(0, 32)
+sprite_frames = SubResource("SpriteFrames_yocae")
+animation = &"flow"
+autoplay = "flow"
+
+[node name="p7" type="AnimatedSprite2D" parent="p1/p2/p3/p4/p5/p6"]
+texture_filter = 1
+position = Vector2(0, 32)
+sprite_frames = SubResource("SpriteFrames_yocae")
+animation = &"flow"
+autoplay = "flow"
 
 [connection signal="body_entered" from="StaticBody2D/Area2D" to="." method="_on_body_entered"]
