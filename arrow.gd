@@ -58,7 +58,7 @@ func _on_body_entered(body):
 	if test:
 		linear_velocity.x=0
 		linear_velocity.y=0
-		gravity_scale = 0
+		gravity_scale = 0.1
 		
 		sleeping= true
 		#lock_rotation = true
@@ -70,7 +70,7 @@ func _attach_to(body):
 	position.y = body.position.y - offset.y
 	linear_velocity.x=0
 	linear_velocity.y=0
-	gravity_scale = 0
+	gravity_scale = 0.1
 	sleeping= true
 	#lock_rotation = true
 	test = false

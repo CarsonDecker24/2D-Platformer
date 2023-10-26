@@ -55,7 +55,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"flow_rock",
-"speed": 5.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -108,7 +108,7 @@ shape = SubResource("RectangleShape2D_6ttgx")
 texture_filter = 1
 position = Vector2(16, 0)
 sprite_frames = SubResource("SpriteFrames_yocae")
-animation = &"frozen_rock"
+animation = &"flow_rock"
 autoplay = "flow_rock"
 
 [node name="p2" type="AnimatedSprite2D" parent="p1"]

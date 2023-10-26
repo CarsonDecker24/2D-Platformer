@@ -187,7 +187,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"turnLeftSkid",
-"speed": 25.0
+"speed": 35.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -213,7 +213,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"unwindRightWalk",
-"speed": 30.0
+"speed": 45.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -456,7 +456,7 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"windupRightWalk"
+animation = &"unwindRightWalk"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
