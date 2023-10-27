@@ -138,7 +138,7 @@ func _walljump():
 	#Wall jump
 	velocity.y = JUMP_VELOCITY*.85
 	velocity.x += -direction*SPEED*1.2
-	wallJumpNerf=.6
+	wallJumpNerf=.6 
 
 func _aim(delta):
 	

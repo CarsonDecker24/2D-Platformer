@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmatwath7f8sm"]
+[gd_scene load_steps=8 format=3 uid="uid://dmatwath7f8sm"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_cj6ue"]
 [ext_resource type="Texture2D" uid="uid://cvjurk0lvn4xb" path="res://Assets/monochrome_tilemap_transparent_packed.png" id="2_n4ifg"]
@@ -1223,39 +1223,6 @@ physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_vdj2w")
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fsov3"]
-animations = [{
-"frames": [],
-"loop": false,
-"name": &"idle",
-"speed": 0.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"walking",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"walking angle down",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"walking angle level",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"walking angle up",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"walking angle upward",
-"speed": 5.0
-}]
-
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_cj6ue")
 
@@ -1273,10 +1240,6 @@ position = Vector2(96, 78)
 
 [node name="TestDummy" parent="." instance=ExtResource("4_kqark")]
 position = Vector2(249, 92)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TestDummy"]
-sprite_frames = SubResource("SpriteFrames_fsov3")
-animation = &"idle"
 
 [node name="Water" parent="." instance=ExtResource("5_tlohi")]
 position = Vector2(353, -103)

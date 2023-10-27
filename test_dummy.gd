@@ -2,9 +2,13 @@ extends CharacterBody2D
 
 var hp = 5
 var is_dead = false
+var player_angle
 
 func _physics_process(delta):
 	move_and_slide()
+
+func _process(delta):
+	pass
 
 func _lower_health(hp_reduction: int):
 	hp -= hp_reduction
