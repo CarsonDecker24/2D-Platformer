@@ -406,7 +406,7 @@ animations = [{
 "speed": 30.0
 }]
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = -1
 position = Vector2(81, 62)
 script = ExtResource("1_fhlp4")

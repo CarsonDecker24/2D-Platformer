@@ -41,7 +41,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	pivot = get_node("PivotHoldingArm")
-	pivot2 = get_node("PivotPullingArm")
 	weapon_sprite = get_node("PivotHoldingArm/HoldingArmAnimation")
 	direction = 0
 

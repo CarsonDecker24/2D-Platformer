@@ -1239,7 +1239,7 @@ texture_filter = 1
 position = Vector2(96, 78)
 
 [node name="TestDummy" parent="." instance=ExtResource("4_kqark")]
-position = Vector2(249, 92)
+position = Vector2(200, -80)
 
 [node name="Water" parent="." instance=ExtResource("5_tlohi")]
 position = Vector2(353, -103)

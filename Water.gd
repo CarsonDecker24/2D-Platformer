@@ -4,6 +4,7 @@ var frameHolder
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("StaticBody2D/CollisionShape2D").set_deferred("disabled", true)
+	
 	pass # Replace with function body.
 
 
