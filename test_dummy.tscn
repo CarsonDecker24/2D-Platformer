@@ -1,8 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://d2kvnctkapc7y"]
+[gd_scene load_steps=26 format=3 uid="uid://d2kvnctkapc7y"]
 
 [ext_resource type="Script" path="res://test_dummy.gd" id="1_1c4ne"]
 [ext_resource type="Texture2D" uid="uid://clyg48xtd3ssi" path="res://Assets/enemy sprites/basic/enemy walk and aim.png" id="2_814ig"]
-[ext_resource type="Script" path="res://RayMid.gd" id="3_1siup"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n2n5x"]
 radius = 6.0
@@ -211,7 +210,6 @@ offset = Vector2(0, 0.9)
 [node name="RayMid" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
 target_position = Vector2(210, -1.25)
-script = ExtResource("3_1siup")
 
 [node name="RayMidDown" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
