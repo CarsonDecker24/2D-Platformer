@@ -108,8 +108,9 @@ func _damage(type: String, damage: int):
 func _is_dead():
 	return is_dead
 
-func _func_on_body_entered():
-	print("youch")
+func _get_angle_to_player():
+	if player != null:
+		return rad_to_deg(global_position.angle_to_point(player.global_position))
 
 func _check_rays():
 	if get_node("RayMid").get_collider() and not get_node("RayMid").get_collider() == null and get_node("RayMid").get_collider().is_in_group("Player"):

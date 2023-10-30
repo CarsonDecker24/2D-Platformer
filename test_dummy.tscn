@@ -204,7 +204,7 @@ shape = SubResource("CapsuleShape2D_n2n5x")
 [node name="dummyPlayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_r0jwq")
-animation = &"walking"
+animation = &"walking upward"
 offset = Vector2(0, 0.9)
 
 [node name="RayMid" type="RayCast2D" parent="."]
