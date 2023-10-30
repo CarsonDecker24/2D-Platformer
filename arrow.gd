@@ -65,13 +65,14 @@ func _on_body_entered(body):
 		test=false
 
 func _attach_to(body):
-	offset = Vector2(position.x + body.position.x, position.y - body.position.y)
-	position.x = body.position.x - offset.x
-	position.y = body.position.y - offset.y
+	#offset = Vector2(position.x + body.position.x, position.y - body.position.y)
+	#position.x = body.position.x - offset.x
+	#position.y = body.position.y - offset.y
+	sleeping= true
 	linear_velocity.x=0
 	linear_velocity.y=0
 	gravity_scale = 0.1
-	sleeping= true
+	#sleeping= true
 	#lock_rotation = true
 	test = false
 	is_attached = true
@@ -94,4 +95,8 @@ func _multi_arrow(offset_angle):
 
 func _ice_arrow():
 	#Change sprite to ice arrow
+	pass
+
+
+func _on_area_2d_body_entered(body):
 	pass

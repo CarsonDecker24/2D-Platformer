@@ -23,7 +23,7 @@ func _spot_player(body):
 @warning_ignore("unused_parameter")
 func _process(delta):
 	#print(player_distance)
-	
+	_check_rays()
 	
 	if player_spotted==true:
 		
@@ -97,7 +97,7 @@ func _lower_health(hp_reduction: int):
 
 #Deal damage, requires arrow type
 func _damage(type: String, damage: int):
-	if type == "Fire":
+	if type == "Ice":
 		hp -= damage
 	print("Remaining HP: " + str(hp))
 	if (hp <= 0):
@@ -111,4 +111,14 @@ func _is_dead():
 func _func_on_body_entered():
 	print("youch")
 
-
+func _check_rays():
+	if get_node("RayMid").get_collider() and not get_node("RayMid").get_collider() == null and get_node("RayMid").get_collider().is_in_group("Player"):
+		_spot_player(get_node("RayMid").get_collider())
+	if get_node("RayMidDown").get_collider() and not get_node("RayMidDown").get_collider() == null and get_node("RayMidDown").get_collider().is_in_group("Player"):
+		_spot_player(get_node("RayMidDown").get_collider())
+	if get_node("RayMidUp").get_collider() and not get_node("RayMidUp").get_collider() == null and get_node("RayMidUp").get_collider().is_in_group("Player"):
+		_spot_player(get_node("RayMidUp").get_collider())
+	if get_node("RayDown").get_collider() and not get_node("RayDown").get_collider() == null and get_node("RayDown").get_collider().is_in_group("Player"):
+		_spot_player(get_node("RayDown").get_collider())
+	if get_node("RayUp").get_collider() and not get_node("RayUp").get_collider() == null and get_node("RayUp").get_collider().is_in_group("Player"):
+		_spot_player(get_node("RayUp").get_collider())
