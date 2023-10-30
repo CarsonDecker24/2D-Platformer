@@ -100,7 +100,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -117,7 +117,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -202,13 +202,11 @@ shape = SubResource("CapsuleShape2D_n2n5x")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_n2n5x")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="dummyPlayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_r0jwq")
-animation = &"idle"
-autoplay = "idle"
+animation = &"walking"
 offset = Vector2(0, 0.9)
-metadata/_edit_lock_ = true
 
 [node name="RayMid" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
@@ -230,5 +228,3 @@ target_position = Vector2(205, -37.5)
 [node name="rayUp" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
 target_position = Vector2(182.5, -70)
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

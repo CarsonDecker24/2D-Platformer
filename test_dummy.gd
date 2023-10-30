@@ -8,9 +8,11 @@ var player_spotted = false
 var player_distance=0
 var player_side_right=true
 var animation_frame=0
+var animation_state = "idle"
 
-@onready var animator = get_node("AnimatedSprite2D")
+@onready var animator = get_node("dummyPlayer")
 
+@warning_ignore("unused_parameter")
 func _physics_process(delta):
 	move_and_slide()
 
@@ -18,6 +20,7 @@ func _spot_player(body):
 	player = body
 	player_spotted=true
 
+@warning_ignore("unused_parameter")
 func _process(delta):
 	#print(player_distance)
 	
@@ -39,18 +42,47 @@ func _process(delta):
 		
 		#this makes the dummy keep optimal distance with the player
 		if player_distance>100:
+			
 			if player_side_right==true:
 				velocity.x=60
+				if animation_state=="walking" and animator.is_playing()==false:
+					animator.play("walking")
+					animation_state=="walking"
+					print("crap")
+				else:
+					animator.play("walking")
+					animation_state=="walking"
 			else:
 				velocity.x=-60
+				animator.play("walking")
+				if animation_state=="walking" and animator.is_playing()==false:
+					animator.play("walking")
+					animation_state=="walking"
+				else:
+					animator.play("walking")
+					animation_state=="walking"
+		
 		elif player_distance<40:
 			if player_side_right==true:
 				velocity.x=-60
+				if animation_state=="walkingBack" and animator.is_playing()==false:
+					animator.play_backwards("walking")
+					animation_state=="walkingBack"
+				else:
+					animator.play_backwards("walking")
+					animation_state=="walkingBack"
 			else:
 				velocity.x=60
+				if animation_state=="walkingBack" and animator.is_playing()==false:
+					animator.play_backwards("walking")
+					animation_state=="walkingBack"
+				else:
+					animator.play_backwards("walking")
+					animation_state=="walkingBack"
 		#and if they are in the optimal distance obviously they dont need to move
 		else:
 			velocity.x=0
+			animator.play("idle")
 		
 
 
