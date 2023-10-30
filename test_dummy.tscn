@@ -226,3 +226,8 @@ target_position = Vector2(205, -37.5)
 [node name="RayUp" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
 target_position = Vector2(182.5, -70)
+
+[node name="TargetRay" type="RayCast2D" parent="."]
+position = Vector2(0, -11.25)
+enabled = false
+target_position = Vector2(0, -9.53674e-07)
