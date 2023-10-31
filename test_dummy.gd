@@ -9,6 +9,8 @@ var player_distance=0
 var player_side_right=true
 var animation_frame=0
 var animation_state = "idle"
+var sees_player = false
+var orbPath = preload("res://orb.tscn")
 
 @onready var animator = get_node("dummyPlayer")
 @onready var target_ray = get_node("TargetRay")
@@ -41,9 +43,12 @@ func _process(delta):
 		
 		#Set ray to point at target
 		if not target_ray.get_collider() == null and target_ray.get_collider().is_in_group("Player"):
-			print("Sees Player")
+			sees_player = true
 		else:
-			print("Does not see Player")
+			sees_player = false
+		
+		if sees_player:
+			_shoot_orb()
 		
 		#this flips the dummy to face the placer once the player has been spotted 
 		if player.global_position.x>global_position.x:
@@ -124,6 +129,10 @@ func _is_dead():
 func _get_angle_to_player():
 	if player != null:
 		return rad_to_deg(global_position.angle_to_point(player.global_position))
+
+func _shoot_orb():
+	var orb = orbPath.instantiate()
+	orb._setup(Vector2(100,0).rotated(_get_angle_to_player()), player)
 
 func _check_rays():
 	if get_node("RayMid").get_collider() and not get_node("RayMid").get_collider() == null and get_node("RayMid").get_collider().is_in_group("Player"):
