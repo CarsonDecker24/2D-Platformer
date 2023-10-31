@@ -10,7 +10,7 @@ var player_side_right=true
 var animation_frame=0
 var animation_state = "idle"
 var sees_player = false
-var orbPath = preload("res://orb.tscn")
+const orbPath = preload("res://orb.tscn")
 
 @onready var animator = get_node("dummyPlayer")
 @onready var target_ray = get_node("TargetRay")
@@ -47,6 +47,7 @@ func _process(delta):
 		else:
 			sees_player = false
 		
+		print(sees_player)
 		if sees_player:
 			_shoot_orb()
 		
@@ -128,11 +129,14 @@ func _is_dead():
 
 func _get_angle_to_player():
 	if player != null:
-		return rad_to_deg(global_position.angle_to_point(player.global_position))
+		return global_position.angle_to_point(player.global_position)
+	#rad_2_deg
 
 func _shoot_orb():
 	var orb = orbPath.instantiate()
-	orb._setup(Vector2(100,0).rotated(_get_angle_to_player()), player)
+	orb._setup(Vector2(5,0).rotated(_get_angle_to_player()), player)
+	add_sibling(orb)
+	orb.position = global_position
 
 func _check_rays():
 	if get_node("RayMid").get_collider() and not get_node("RayMid").get_collider() == null and get_node("RayMid").get_collider().is_in_group("Player"):
