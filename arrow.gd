@@ -27,6 +27,12 @@ func _ready():
 	if type == "Multi":
 		_multi_arrow(5)
 		_multi_arrow(-5)
+	elif type=="Ice":
+		get_node("AnimatedSprite2D").play("ice arrow")
+	elif type=="Fire":
+		get_node("AnimatedSprite2D").play("fire arrow")
+	else:
+		get_node("AnimatedSprite2D").play("default")
 
 func _process(delta): 
 	#Make arrow dip down after firing
