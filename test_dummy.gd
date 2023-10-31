@@ -21,7 +21,7 @@ func _spot_player(body):
 	if player_spotted == false:
 		player = body
 		player_spotted = true
-		get_node("TargetRay").enabled = true
+		target_ray.enabled = true
 
 @warning_ignore("unused_parameter")
 func _process(delta):
@@ -36,13 +36,14 @@ func _process(delta):
 		#this gets the angle relative to the player for aiming sake
 		_get_angle_to_player()
 		
-		target_ray.target_position = player.global_position
+		print(player.global_position)
+		target_ray.target_position = (player.global_position - target_ray.global_position) * 1000
 		
 		#Set ray to point at target
 		if not target_ray.get_collider() == null and target_ray.get_collider().is_in_group("Player"):
-			print(target_ray.get_collider())
+			print("Sees Player")
 		else:
-			print(target_ray.get_collider())
+			print("Does not see Player")
 		
 		#this flips the dummy to face the placer once the player has been spotted 
 		if player.global_position.x>global_position.x:
