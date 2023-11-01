@@ -10,10 +10,18 @@ var player_side_right=true
 var animation_frame=0
 var animation_state = "idle"
 var sees_player = false
+var shoot_cooldown=1
+var debuff_cooldown=1
+var fire_rate_mod=1
+var speed_mod=1
+const SPEED =60
+const FIRE_RATE=1
 const orbPath = preload("res://orb.tscn")
 
 @onready var animator = get_node("dummyPlayer")
 @onready var target_ray = get_node("TargetRay")
+func _ready():
+	get_node("ice_particles").set_deferred("emitting", false)
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta):
@@ -29,7 +37,12 @@ func _spot_player(body):
 func _process(delta):
 	#print(player_distance)
 	_check_rays()
-	
+	shoot_cooldown-=delta
+	debuff_cooldown-=delta
+	if debuff_cooldown<0:
+		speed_mod=1
+		fire_rate_mod=1
+		get_node("ice_particles").set_deferred("emitting", false)
 	if player_spotted==true:
 		
 		#this line gets the players distance from the dummy
@@ -48,8 +61,9 @@ func _process(delta):
 			sees_player = false
 		
 		print(sees_player)
-		if sees_player:
+		if sees_player and shoot_cooldown<0:
 			_shoot_orb()
+			shoot_cooldown=FIRE_RATE/fire_rate_mod
 		
 		#this flips the dummy to face the placer once the player has been spotted 
 		if player.global_position.x>global_position.x:
@@ -63,7 +77,7 @@ func _process(delta):
 		if player_distance>100:
 			
 			if player_side_right==true:
-				velocity.x=60
+				velocity.x=SPEED*speed_mod
 				if animation_state=="walking" and animator.is_playing()==false:
 					animator.play("walking")
 					animation_state=="walking"
@@ -72,7 +86,7 @@ func _process(delta):
 					animator.play("walking")
 					animation_state=="walking"
 			else:
-				velocity.x=-60
+				velocity.x=-SPEED*speed_mod
 				animator.play("walking")
 				if animation_state=="walking" and animator.is_playing()==false:
 					animator.play("walking")
@@ -83,7 +97,7 @@ func _process(delta):
 		
 		elif player_distance<40:
 			if player_side_right==true:
-				velocity.x=-60
+				velocity.x=-SPEED*speed_mod
 				if animation_state=="walkingBack" and animator.is_playing()==false:
 					animator.play_backwards("walking")
 					animation_state=="walkingBack"
@@ -91,7 +105,7 @@ func _process(delta):
 					animator.play_backwards("walking")
 					animation_state=="walkingBack"
 			else:
-				velocity.x=60
+				velocity.x=SPEED*speed_mod
 				if animation_state=="walkingBack" and animator.is_playing()==false:
 					animator.play_backwards("walking")
 					animation_state=="walkingBack"
@@ -118,6 +132,10 @@ func _lower_health(hp_reduction: int):
 func _damage(type: String, damage: int):
 	if type == "Ice":
 		hp -= damage
+		debuff_cooldown=3
+		speed_mod=.5
+		fire_rate_mod=.7
+		get_node("ice_particles").set_deferred("emitting", true)
 	print("Remaining HP: " + str(hp))
 	if (hp <= 0):
 		print("Died!")
@@ -134,7 +152,7 @@ func _get_angle_to_player():
 
 func _shoot_orb():
 	var orb = orbPath.instantiate()
-	orb._setup(Vector2(5,0).rotated(_get_angle_to_player()), player)
+	orb._setup(Vector2(3,0).rotated(_get_angle_to_player()), player)
 	add_sibling(orb)
 	orb.position = global_position
 
