@@ -71,4 +71,8 @@ shape = SubResource("RectangleShape2D_xik2l")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_013u8")
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(5.78271, 0.0104284)
+target_position = Vector2(-0.00704098, -0.00116467)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

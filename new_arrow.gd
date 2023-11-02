@@ -9,8 +9,10 @@ var id
 var moving = true
 const GRAVITY = 5
 var arrowPath = preload("res://new_arrow.tscn")
+@onready var ray = get_node("RayCast2D")
 var on_enemy = false
 var current_attached_body
+var collision_point
 
 func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node):
 	id = aID
@@ -43,6 +45,8 @@ func _process(delta):
 func _update_pos(delta):
 	position += vel
 	vel.y += GRAVITY * delta
+	ray.target_position = vel
+	_check_ray()
 	rotation = atan2(vel.y,vel.x)
 
 func _multi(offset_angle):
@@ -52,6 +56,12 @@ func _multi(offset_angle):
 	add_sibling(arrow)
 	arrow.position = player.get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
 	arrow.rotation_degrees = angle + deg_to_rad(offset_angle)
+
+func _check_ray():
+	if ray.get_collider() != null:
+		collision_point = ray.get_collision_point()
+		position = collision_point
+		moving = false
 
 func _on_body_entered(body):
 	if body.is_in_group("Ground"):
