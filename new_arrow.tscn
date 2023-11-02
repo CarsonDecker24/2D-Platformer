@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://4sls7e3fhkes"]
+[gd_scene load_steps=12 format=3 uid="uid://ocq3cyqkeinj"]
 
 [ext_resource type="Script" path="res://new_arrow.gd" id="1_8jrvn"]
 [ext_resource type="Texture2D" uid="uid://c05x7ke0qe0xn" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/arrow.png" id="1_t00xu"]
@@ -60,6 +60,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_xlley"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.532143, 0.726316), 1.61404, 1.61404, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [node name="Arrow" type="Area2D" groups=["Arrow"]]
 script = ExtResource("1_8jrvn")
 
@@ -74,5 +78,16 @@ sprite_frames = SubResource("SpriteFrames_013u8")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(5.78271, 0.0104284)
 target_position = Vector2(-0.00704098, -0.00116467)
+
+[node name="particles" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+texture_filter = 1
+amount = 30
+fixed_fps = 60
+spread = 180.0
+gravity = Vector2(0, -40)
+initial_velocity_max = 5.0
+scale_amount_curve = SubResource("Curve_xlley")
+color = Color(0.937255, 0.905882, 0.988235, 0.654902)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

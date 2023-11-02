@@ -13,6 +13,7 @@ var arrowPath = preload("res://new_arrow.tscn")
 var on_enemy = false
 var current_attached_body
 var collision_point
+@onready var particle = get_node("particles")
 
 func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node):
 	id = aID
@@ -27,10 +28,14 @@ func _ready():
 		_multi(5)
 		_multi(-5)
 		get_node("AnimatedSprite2D").play("default")
+		particle.gravity.y=0
+	elif type == "MultiChild":
+		particle.gravity.y=0
 	elif type=="Ice":
 		get_node("AnimatedSprite2D").play("ice arrow")
 	elif type=="Fire":
 		get_node("AnimatedSprite2D").play("fire arrow")
+		particle.gravity.y=-60
 	else:
 		get_node("AnimatedSprite2D").play("default")
 
