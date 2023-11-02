@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://4sls7e3fhkes"]
+
+[ext_resource type="Script" path="res://new_arrow.gd" id="1_8jrvn"]
+[ext_resource type="Texture2D" uid="uid://c05x7ke0qe0xn" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/arrow.png" id="1_t00xu"]
+[ext_resource type="Texture2D" uid="uid://c745411t2welh" path="res://Assets/player sprites/arms n bows/1bow varients/3fireBow/fireArrow.png" id="2_jkv8u"]
+[ext_resource type="Texture2D" uid="uid://cv8icixll6hu0" path="res://Assets/player sprites/arms n bows/1bow varients/2IceBow/ice arrow.png" id="3_vcmhk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xik2l"]
+size = Vector2(7, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elj7m"]
+atlas = ExtResource("2_jkv8u")
+region = Rect2(0, 0, 12, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvp3y"]
+atlas = ExtResource("2_jkv8u")
+region = Rect2(0, 3, 12, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7m6o"]
+atlas = ExtResource("2_jkv8u")
+region = Rect2(0, 6, 12, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmce4"]
+atlas = ExtResource("2_jkv8u")
+region = Rect2(0, 9, 12, 3)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_013u8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_t00xu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elj7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvp3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7m6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmce4")
+}],
+"loop": true,
+"name": &"fire arrow",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vcmhk")
+}],
+"loop": true,
+"name": &"ice arrow",
+"speed": 5.0
+}]
+
+[node name="Arrow" type="Area2D"]
+script = ExtResource("1_8jrvn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, -0.0026021)
+shape = SubResource("RectangleShape2D_xik2l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_013u8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
