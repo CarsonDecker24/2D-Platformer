@@ -7,7 +7,7 @@ var type: String
 var player: Node
 var id
 var moving = true
-const GRAVITY = 10
+const GRAVITY = 5
 var arrowPath = preload("res://new_arrow.tscn")
 var on_enemy = false
 var current_attached_body
@@ -35,20 +35,23 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if moving:
-		_update_pos()
+		_update_pos(delta)
+	
+	if player.arrow_count - id > 20:
+		queue_free()
 
-func _update_pos():
+func _update_pos(delta):
 	position += vel
-	vel.y -= GRAVITY
+	vel.y += GRAVITY * delta
 	rotation = atan2(vel.y,vel.x)
 
 func _multi(offset_angle):
 	var arrow = arrowPath.instantiate()
-	arrow._initialize_arrow(player.arrow_count, "MultiChild", vel.rotated(offset_angle), angle + offset_angle, player)
+	arrow._initialize_arrow(player.arrow_count, "MultiChild", vel.rotated(deg_to_rad(offset_angle)), angle + deg_to_rad(offset_angle), player)
 	player.arrow_count += 1
 	add_sibling(arrow)
 	arrow.position = player.get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
-	arrow.rotation_degrees = angle + offset_angle
+	arrow.rotation_degrees = angle + deg_to_rad(offset_angle)
 
 func _on_body_entered(body):
 	if body.is_in_group("Ground"):
