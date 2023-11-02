@@ -35,23 +35,37 @@ func _spot_player(body):
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-	#print(player_distance)
 	_check_rays()
-	shoot_cooldown-=delta
-	debuff_cooldown-=delta
+	
+	#resets general stats when debufs are over
 	if debuff_cooldown<0:
 		speed_mod=1
 		fire_rate_mod=1
 		get_node("ice_particles").set_deferred("emitting", false)
+	shoot_cooldown-=delta
+	debuff_cooldown-=delta
+	
+	#gets the distance between this enemy and the player
+	
+	
+	
+	
+	
+	
+	
 	if player_spotted==true:
-		
 		#this line gets the players distance from the dummy
 		player_distance=sqrt((player.global_position.y-global_position.y) * (player.global_position.y-global_position.y) + ((player.global_position.x-global_position.x) * (player.global_position.x-global_position.x)))
+		
+		#loose track of player
+		if player_distance>300:
+			print("over 400")
+			player_spotted=false
 		
 		#this gets the angle relative to the player for aiming sake
 		_get_angle_to_player()
 		
-		print(player.global_position)
+		#print(player.global_position)
 		target_ray.target_position = (player.global_position - target_ray.global_position) * 1000
 		
 		#Set ray to point at target
@@ -100,23 +114,26 @@ func _process(delta):
 				velocity.x=-SPEED*speed_mod
 				if animation_state=="walkingBack" and animator.is_playing()==false:
 					animator.play_backwards("walking")
-					animation_state=="walkingBack"
+					animation_state="walkingBack"
 				else:
 					animator.play_backwards("walking")
-					animation_state=="walkingBack"
+					animation_state="walkingBack"
 			else:
 				velocity.x=SPEED*speed_mod
 				if animation_state=="walkingBack" and animator.is_playing()==false:
 					animator.play_backwards("walking")
-					animation_state=="walkingBack"
+					animation_state="walkingBack"
 				else:
 					animator.play_backwards("walking")
-					animation_state=="walkingBack"
+					animation_state="walkingBack"
 		#and if they are in the optimal distance obviously they dont need to move
 		else:
 			velocity.x=0
 			animator.play("idle")
-		
+	else:
+		velocity.x=0
+		animator.play("idle")
+	
 
 
 func _lower_health(hp_reduction: int):

@@ -57,6 +57,7 @@ offsets = PackedFloat32Array(0.278008, 0.514523, 0.846473)
 colors = PackedColorArray(0.0390625, 0.5625, 0.996094, 1, 0, 1, 1, 1, 1, 1, 1, 1)
 
 [node name="Orb" type="Area2D"]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_4chui")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
