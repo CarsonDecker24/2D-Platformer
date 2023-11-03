@@ -1,5 +1,5 @@
 extends Area2D
-var speed
+var speed: Vector2
 var vel
 var player
 var homing
@@ -9,17 +9,15 @@ func _setup(s: Vector2, p: Node, isHoming):
 	player = p
 	homing = isHoming
 
-#THE HOMING IS BROKEN FIX IT
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	vel = speed.rotated(_get_angle_to_player())
+	vel = speed
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if homing:
-		vel.x = move_toward(vel.x, speed.rotated(_get_angle_to_player()).x, 3 * delta)
-		vel.y = move_toward(vel.y, speed.rotated(_get_angle_to_player()).y, 3 * delta)
+		vel.x = move_toward(vel.x, speed.rotated(_get_angle_to_player()).x, 2 * delta)
+		vel.y = move_toward(vel.y, speed.rotated(_get_angle_to_player()).y, 2 * delta)
 	position += vel
 
 func _get_angle_to_player():

@@ -168,7 +168,7 @@ func _get_angle_to_player():
 
 func _shoot_orb():
 	var orb = orbPath.instantiate()
-	orb._setup(Vector2(3,0).rotated(_get_angle_to_player()), player, false)
+	orb._setup(Vector2(3,0).rotated(_get_angle_to_player()), player, get_meta("homing"))
 	add_sibling(orb)
 	orb.position = global_position
 

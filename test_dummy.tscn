@@ -200,6 +200,7 @@ scale = Vector2(0.8, 0.8)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_1c4ne")
+metadata/homing = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n2n5x")

@@ -1747,6 +1747,7 @@ position = Vector2(96, 78)
 
 [node name="TestDummy" parent="." instance=ExtResource("4_kqark")]
 position = Vector2(-75, -80)
+metadata/homing = true
 
 [node name="Water" parent="." instance=ExtResource("5_tlohi")]
 position = Vector2(520, -96)
