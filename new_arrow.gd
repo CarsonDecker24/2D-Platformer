@@ -51,7 +51,6 @@ func _ready():
 		particle.initial_velocity_max=5
 		particle.tangential_accel_max=0
 		particle.radial_accel_max=0
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if moving:
