@@ -165,11 +165,10 @@ func _is_dead():
 func _get_angle_to_player():
 	if player != null:
 		return global_position.angle_to_point(player.global_position)
-	#rad_2_deg
 
 func _shoot_orb():
 	var orb = orbPath.instantiate()
-	orb._setup(Vector2(3,0).rotated(_get_angle_to_player()), player)
+	orb._setup(Vector2(3,0).rotated(_get_angle_to_player()), player, true)
 	add_sibling(orb)
 	orb.position = global_position
 
