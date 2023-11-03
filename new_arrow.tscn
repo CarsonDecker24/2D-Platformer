@@ -91,7 +91,7 @@ shape = SubResource("RectangleShape2D_xik2l")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_013u8")
-animation = &"ice arrow"
+animation = &"fire arrow"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(5.78271, 0.0104284)
@@ -100,7 +100,7 @@ target_position = Vector2(-0.00704098, -0.00116467)
 [node name="particles" type="CPUParticles2D" parent="."]
 show_behind_parent = true
 texture_filter = 1
-amount = 30
+amount = 40
 fixed_fps = 60
 direction = Vector2(0, 0)
 spread = 180.0
@@ -124,6 +124,6 @@ linear_accel_max = 1.0
 linear_accel_curve = SubResource("Curve_m1mhj")
 scale_amount_max = 8.9
 scale_amount_curve = SubResource("Curve_whpj4")
-color = Color(0.707031, 0.863281, 0.996094, 1)
+color = Color(1, 1, 1, 0.545098)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

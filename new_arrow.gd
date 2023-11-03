@@ -16,6 +16,7 @@ var collision_point
 @onready var particle = get_node("particles")
 @onready var diePart = get_node("diePart")
 var suicideTime=1
+var suiciding = false
 
 func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node):
 	id = aID
@@ -31,12 +32,13 @@ func _ready():
 		_multi(-5)
 		get_node("AnimatedSprite2D").play("default")
 		particle.gravity.y=0
-		Color(0.408, 0.408, 0.408, 0.8)
+		particle.color=Color(0.408, 0.408, 0.408, 0.8)
 		particle.initial_velocity_max=5
 		particle.tangential_accel_max=0
 		particle.radial_accel_max=0
 	elif type=="Ice":
 		get_node("AnimatedSprite2D").play("ice arrow")
+		particle.color=Color(0, 0.686, 0.984, 0.8)
 		particle.radial_accel_max=40
 	elif type=="Fire":
 		get_node("AnimatedSprite2D").play("fire arrow")
@@ -46,7 +48,7 @@ func _ready():
 		particle.radial_accel_max=0
 	else:
 		get_node("AnimatedSprite2D").play("default")
-		Color(0.408, 0.408, 0.408, 0.8)
+		particle.color=Color(0.408, 0.408, 0.408, 0.8)
 		particle.gravity.y=0
 		particle.initial_velocity_max=5
 		particle.tangential_accel_max=0
@@ -58,6 +60,12 @@ func _process(delta):
 	
 	if player.arrow_count - id > 20:
 		queue_free()
+	if suiciding == true:
+		if suicideTime<0:
+			queue_free()
+		suicideTime-=delta
+		if suicideTime<.95:
+			get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
 
 func _update_pos(delta):
 	position += vel
@@ -79,14 +87,23 @@ func _check_ray():
 		collision_point = ray.get_collision_point()
 		position = collision_point
 		
+		
 
 func _on_body_entered(body):
 	if body.is_in_group("Ground"):
 		moving = false
-		print("Hit Ground")
-		diePart.emitting=true
-		get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
+		if type=="Fire":
+			diePart.color=Color(1, 0.145, 0, 0.655)
+		if type=="Ice":
+			diePart.color=Color(0, 0.686, 0.984, 0.7)
+			diePart.speed_scale=2.5
+		if type=="Multi":
+			diePart.color = Color(1, 1, 1, 0.545)
 		
+		diePart.emitting=true
+		#get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
+		suiciding=true
+		get_node("particles").emitting=false
 		
 	if body.is_in_group("Enemy"):
 		print("Hit Enemy")
@@ -94,3 +111,15 @@ func _on_body_entered(body):
 		current_attached_body = body
 		on_enemy = true
 		moving = false
+		if type=="Fire":
+			diePart.color=Color(1, 0.145, 0, 0.655)
+		if type=="Ice":
+			diePart.color=Color(0, 0.686, 0.984, 0.7)
+			diePart.speed_scale=2.5
+		if type=="Multi":
+			diePart.color = Color(1, 1, 1, 0.545)
+		
+		diePart.emitting=true
+		#get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
+		suiciding=true
+		get_node("particles").emitting=false
