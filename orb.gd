@@ -32,7 +32,7 @@ func _on_area_entered(area):
 		print("Hit Player!")
 	if area.is_in_group("Ground"):
 		_die()
-
+#
 func _on_body_entered(body):
 	if body.is_in_group("Arrow"):
 		if body.type == "Multi" or body.type == "MultiChild":
