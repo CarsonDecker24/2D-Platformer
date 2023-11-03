@@ -93,6 +93,7 @@ animations = [{
 }]
 
 [node name="Water" type="Node2D"]
+z_index = -1
 position = Vector2(-1, -95)
 script = ExtResource("1_4tyur")
 
@@ -167,4 +168,5 @@ collision_mask = 7
 position = Vector2(3, 96)
 shape = SubResource("RectangleShape2D_6ttgx")
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

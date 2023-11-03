@@ -15,8 +15,9 @@ var current_attached_body
 var collision_point
 @onready var particle = get_node("particles")
 @onready var diePart = get_node("diePart")
-var suicideTime=1
-var suiciding = false
+var dyingTime=1
+var dying = false
+var hideNextFrame = false
 
 func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node):
 	id = aID
@@ -60,18 +61,23 @@ func _process(delta):
 	
 	if player.arrow_count - id > 20:
 		queue_free()
-	if suiciding == true:
-		if suicideTime<0:
+	
+	if hideNextFrame:
+		get_node("AnimatedSprite2D").visible = false
+	
+	if dying:
+		if dyingTime<0:
 			queue_free()
-		suicideTime-=delta
-		if suicideTime<.95:
+		dyingTime-=delta
+		if dyingTime<.95:
 			get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
 
 func _update_pos(delta):
 	position += vel
 	vel.y += GRAVITY * delta
 	ray.target_position = vel
-	_check_ray()
+	if not hideNextFrame:
+		_check_ray()
 	rotation = atan2(vel.y,vel.x)
 
 func _multi(offset_angle):
@@ -85,9 +91,8 @@ func _multi(offset_angle):
 func _check_ray():
 	if ray.get_collider() != null:
 		collision_point = ray.get_collision_point()
-		position = collision_point
-		
-		
+		particle.position = collision_point
+		hideNextFrame = true
 
 func _on_body_entered(body):
 	if body.is_in_group("Ground"):
@@ -102,8 +107,8 @@ func _on_body_entered(body):
 		
 		diePart.emitting=true
 		#get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
-		suiciding=true
-		get_node("particles").emitting=false
+		dying=true
+		particle.emitting=false
 		
 	if body.is_in_group("Enemy"):
 		print("Hit Enemy")
@@ -121,5 +126,5 @@ func _on_body_entered(body):
 		
 		diePart.emitting=true
 		#get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
-		suiciding=true
-		get_node("particles").emitting=false
+		dying=true
+		particle.emitting=false

@@ -69,3 +69,25 @@ func _thaw():
 	frameHolder = get_node("p1/p2/p3/p4/p5/p6/p7").frame
 	get_node("p1/p2/p3/p4/p5/p6/p7").play("flow")
 	get_node("p1/p2/p3/p4/p5/p6/p7").set_frame_and_progress(frameHolder,0.00)
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("Arrow"):
+		if area.type == "Ice":
+			get_node("StaticBody2D/CollisionShape2D").set_deferred("disabled", false)
+			print("did that")
+			_freeze()
+			area.moving = false
+			area.hideNextFrame = true
+			area.diePart.emitting=true
+			area.dying = true
+			area.particle.emitting=false
+		if area.type=="Fire":
+			get_node("StaticBody2D/CollisionShape2D").set_deferred("disabled", true)
+			print("did that")
+			_thaw()
+			area.moving = false
+			area.hideNextFrame = true
+			area.diePart.emitting=true
+			area.dying = true
+			area.particle.emitting=false
