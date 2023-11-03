@@ -14,6 +14,8 @@ var on_enemy = false
 var current_attached_body
 var collision_point
 @onready var particle = get_node("particles")
+@onready var diePart = get_node("diePart")
+var suicideTime=1
 
 func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node):
 	id = aID
@@ -29,15 +31,26 @@ func _ready():
 		_multi(-5)
 		get_node("AnimatedSprite2D").play("default")
 		particle.gravity.y=0
-	elif type == "MultiChild":
-		particle.gravity.y=0
+		Color(0.408, 0.408, 0.408, 0.8)
+		particle.initial_velocity_max=5
+		particle.tangential_accel_max=0
+		particle.radial_accel_max=0
 	elif type=="Ice":
 		get_node("AnimatedSprite2D").play("ice arrow")
+		particle.radial_accel_max=40
 	elif type=="Fire":
 		get_node("AnimatedSprite2D").play("fire arrow")
 		particle.gravity.y=-60
+		particle.color=Color(1, 0.145, 0, 0.655)
+		particle.initial_velocity_max=5
+		particle.radial_accel_max=0
 	else:
 		get_node("AnimatedSprite2D").play("default")
+		Color(0.408, 0.408, 0.408, 0.8)
+		particle.gravity.y=0
+		particle.initial_velocity_max=5
+		particle.tangential_accel_max=0
+		particle.radial_accel_max=0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -66,12 +79,16 @@ func _check_ray():
 	if ray.get_collider() != null:
 		collision_point = ray.get_collision_point()
 		position = collision_point
-		moving = false
+		
 
 func _on_body_entered(body):
 	if body.is_in_group("Ground"):
 		moving = false
 		print("Hit Ground")
+		diePart.emitting=true
+		get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
+		
+		
 	if body.is_in_group("Enemy"):
 		print("Hit Enemy")
 		body._damage(type, 1)

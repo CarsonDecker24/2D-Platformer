@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ocq3cyqkeinj"]
+[gd_scene load_steps=15 format=3 uid="uid://ocq3cyqkeinj"]
 
 [ext_resource type="Script" path="res://new_arrow.gd" id="1_8jrvn"]
 [ext_resource type="Texture2D" uid="uid://c05x7ke0qe0xn" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/arrow.png" id="1_t00xu"]
@@ -60,11 +60,28 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_65j07"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(0.55, -5), 0.0, inf, 0, 1]
+point_count = 3
+
 [sub_resource type="Curve" id="Curve_xlley"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.532143, 0.726316), 1.61404, 1.61404, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="Curve" id="Curve_m1mhj"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0.004, 0), 0.0, 0.0, 0, 0, Vector2(0.107, 50), 0.0, 0.0, 0, 0, Vector2(0.332, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_whpj4"]
+_data = [Vector2(0.339286, 0.242105), 0.0, 0.0, 0, 0, Vector2(0.807143, 0), 0.0, 0.0, 0, 0, Vector2(0.903571, 0.210526), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="Arrow" type="Area2D" groups=["Arrow"]]
+self_modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_8jrvn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -74,6 +91,7 @@ shape = SubResource("RectangleShape2D_xik2l")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_013u8")
+animation = &"ice arrow"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(5.78271, 0.0104284)
@@ -84,10 +102,28 @@ show_behind_parent = true
 texture_filter = 1
 amount = 30
 fixed_fps = 60
+direction = Vector2(0, 0)
 spread = 180.0
-gravity = Vector2(0, -40)
-initial_velocity_max = 5.0
+gravity = Vector2(0, 0)
+radial_accel_max = 100.0
+radial_accel_curve = SubResource("Curve_65j07")
+damping_max = 8.108
 scale_amount_curve = SubResource("Curve_xlley")
-color = Color(0.937255, 0.905882, 0.988235, 0.654902)
+color = Color(0, 0.686275, 0.984314, 0.8)
+
+[node name="diePart" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+one_shot = true
+speed_scale = 4.0
+fixed_fps = 60
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 5.0
+linear_accel_max = 1.0
+linear_accel_curve = SubResource("Curve_m1mhj")
+scale_amount_max = 8.9
+scale_amount_curve = SubResource("Curve_whpj4")
+color = Color(0.707031, 0.863281, 0.996094, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
