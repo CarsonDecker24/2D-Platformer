@@ -6,8 +6,11 @@ var facing = "right"
 var fallTest= 0.00
 var animationTimer= 0 
 var holdingArm
+var walkingLoop=false
+var walkframe=0
+var offSet = 0
 
-
+@onready var parent = get_parent()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
@@ -30,14 +33,16 @@ func _process(delta):
 		#if they are FACING LEFT and start to MOVE RIGHT============================================
 		elif Input.is_action_pressed("move_right") and facing=="left":
 			_quickturn()
-			play("turnIdle")
 			current="playThenWind"
+			play("turnIdle")
+			
 		
 		#if they are FACING RIGHT and start to MOVE LEFT============================================
 		elif Input.is_action_pressed("move_left") and facing=="right":
+			current = "playThenWind"
 			_quickturn()
 			play("turnIdle")
-			current = "playThenWind"
+			
 		
 		#if they JUMP ==============================================================================
 		elif Input.is_action_pressed("jump"):
@@ -68,13 +73,16 @@ func _process(delta):
 		
 		#if the PLAYER IS ON THE FLOOR, go back to the IDLE STATE
 		if get_parent().is_on_floor()==true:
-			play("idle")
 			current = "idle"
+			play("idle")
+			
+			
 	
 	#checks to see if the PLAYER has landed, AFTER JUMPING FORWARDS=================================
 	if current =="fallRight" and get_parent().is_on_floor()==true :
-		play("walkingRight")
 		current="walkingRight"
+		play("walkingRight")
+		
 	
 	#if the player is WALL SLIDING (and they arent holding left and right)==========================
 	if get_parent().wall_sliding==true and not (Input.is_action_pressed("move_right") and Input.is_action_pressed("move_left")):
@@ -111,7 +119,6 @@ func _quickturn():
 		flip_h = false
 		facing = "right"
 
-
 #this function runs when the PLAYER is FACING RIGHT
 func _facingRight():
 	
@@ -127,13 +134,13 @@ func _facingRight():
 		
 		#if the WINDUP ANIMATION is DONE, then START the WALKCYCLE==================================
 		elif Input.is_action_pressed("move_right") and is_playing()==false:
-			play("walkingRight")
 			current = "walkingRight"
+			play("walkingRight")
 		
 		#if the PLAYER starts to MOVE LEFT instead of MOVING RIGHT==================================
 		elif Input.is_action_just_pressed("move_left"):
-			play("skidGoingRight")
 			current = "skidRight"
+			play("skidGoingRight")
 		
 		#if the PLAYER stops MOVING before the WALKING CYCLE starts=================================
 		elif is_playing() == false and not Input.is_action_pressed("move_right"):
@@ -159,8 +166,9 @@ func _facingRight():
 		
 		#if the PLAYER STOPS WALKING RIGHT==========================================================
 		elif not Input.is_action_pressed("move_right"):
-			play("unwindRightWalk")
 			current = "skidThenIdle" 
+			play("unwindRightWalk")
+			
 		
 		#if they JUMP===============================================================================
 		if Input.is_action_just_pressed("jump"):
@@ -170,39 +178,42 @@ func _facingRight():
 	#if the PLAYER is SKIDDING to a HALT============================================================
 	if current == "skidThenIdle":
 		if Input.is_action_pressed("move_left"):
-			play("turnLeftSkid")
 			current = "turnLeftSkid"
+			play("turnLeftSkid")
+			
 		elif is_playing()==false:
 			current = "idle"
 			play("idle")
 	
 	#if the player is stopping during the starting to walk animation===============================
 	elif current == "playThenIdle" and is_playing()==false:
-			play("idle")
 			current = "idle"
+			play("idle")
+			
 	
 	#if the player is skidding to the right========================================================
 	elif current == "skidRight":
 		if get_parent().activemovespeed>0:
 			play("skidingRight")
 		elif get_parent().activemovespeed<=0:
-			play("turnLeftSkid")
 			current = "turnLeftSkid"
+			play("turnLeftSkid")
+			
 		
 	
 	elif current == "turnLeftSkid":
 		if is_playing() == false:
+			current="walkingRight"
 			_quickturn()
 			play("walkingRight")
-			current="walkingRight"
 		if Input.is_action_just_pressed("jump"):
 				_quickturn()
 				current="walkRightJump"
 				play("jumpWalkRightUp")
-	
-	
 
+#and this one runs when the PLAYER is FACING LEFT
 func _facingLeft():
+	
 	if current == "windupRightWalk":
 			if not Input.is_action_pressed("move_left"):
 				current = "playThenIdle"
@@ -210,11 +221,11 @@ func _facingLeft():
 				play_backwards("windupRightWalk")
 				set_frame_and_progress((frame),0.00)
 			elif Input.is_action_pressed("move_left") and is_playing()==false:
-				play("walkingRight")
 				current = "walkingRight"
+				play("walkingRight")
 			elif Input.is_action_just_pressed("move_right"):
-				play("skidGoingRight")
 				current = "skidRight"
+				play("skidGoingRight")
 			elif is_playing()==false and not Input.is_action_pressed("move_left"):
 				current = "playThenIdle"
 				frameHolder=frame
@@ -231,8 +242,8 @@ func _facingLeft():
 			current = "skidRight"
 			play("skidRight")
 		elif not Input.is_action_pressed("move_left"):
-			play("unwindRightWalk")
 			current = "skidThenIdle" 
+			play("unwindRightWalk")
 		if Input.is_action_just_pressed("jump"):
 			current="walkRightJump"
 			play("jumpWalkRightUp")
@@ -240,8 +251,8 @@ func _facingLeft():
 	
 	if current == "skidThenIdle":
 		if Input.is_action_pressed("move_right"):
-			play("turnLeftSkid")
 			current = "turnLeftSkid"
+			play("turnLeftSkid")
 		elif is_playing() == false:
 			current = "idle"
 			play("idle")
@@ -249,27 +260,93 @@ func _facingLeft():
 				current="walkRightJump"
 				play("jumpWalkRightUp")
 	
-	
 	#if the player is stopping during the starting to walk animation=========================================
 	elif current == "playThenIdle" and is_playing()==false:
-			play("idle")
 			current = "idle"
+			play("idle")
 	
 	#if the player is skidding to the right=====================================================
 	elif current == "skidRight":
 		if get_parent().activemovespeed<0:
 			play("skidingRight")
 		elif get_parent().activemovespeed>=0:
-			play("turnLeftSkid")
 			current = "turnLeftSkid"
-		
+			play("turnLeftSkid")
 	
 	elif current == "turnLeftSkid":
 		if is_playing() == false:
+			current="walkingRight"
 			_quickturn()
 			play("walkingRight")
-			current="walkingRight"
 		if Input.is_action_just_pressed("jump"):
-				_quickturn()
 				current="walkRightJump"
+				_quickturn()
 				play("jumpWalkRightUp")
+
+
+
+
+
+
+
+
+func _on_animation_changed():
+	if facing=="right":
+		if current=="idle":
+			#idle right should be -6, left should be 0.
+			parent._pivPos(-6,0)
+			walkingLoop=false
+			walkframe=0
+		if current=="windupRightWalk" or current == "unwindRightWalk":
+			parent._pivPos(-4,1)
+			walkingLoop=false
+			walkframe=0
+		if current=="walkingRight":
+			parent._pivPos(-3,0)
+			walkingLoop=true
+			walkframe=0
+	elif facing == "left":
+		if current=="idle":
+			#idle right should be -6, left should be 0.
+			parent._pivPos(-2,0)
+			walkingLoop=false
+			walkframe=0
+		if current=="windupRightWalk" or current == "unwindRightWalk":
+			parent._pivPos(-4,1)
+			walkingLoop=false
+			walkframe=0
+		if current=="walkingRight":
+			parent._pivPos(-5,0)
+			walkingLoop=true
+			walkframe=0
+
+
+func _on_frame_changed():
+	if walkingLoop==true:
+		if facing=="right":
+			if frame==0:
+				parent._pivPos(-3,0)
+			elif frame ==1:
+				parent._pivPos(-3,-1)
+			elif frame>=2 and frame<=4:
+				parent._pivPos(-3,-2)
+			elif frame==5 :
+				parent._pivPos(-3,-1)
+			elif frame==6:
+				parent._pivPos(-3,0)
+			elif frame==7:
+				parent._pivPos(-3,1)
+		else:
+			if frame==0:
+				parent._pivPos(-5,1)
+			elif frame ==1:
+				parent._pivPos(-5,0)
+			elif frame>=2 and frame<=4:
+				parent._pivPos(-5,-1)
+			elif frame==5 :
+				parent._pivPos(-5,-0)
+			elif frame==6:
+				parent._pivPos(-5,1)
+			elif frame==7:
+				parent._pivPos(-5,2)
+	pass # Replace with function body.

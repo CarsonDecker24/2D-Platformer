@@ -35,6 +35,7 @@ var wallJumpNerf = 0
 
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
+@onready var piv = get_node("PivotHoldingArm")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -273,3 +274,7 @@ func _arrow_hud():
 		arrowHud.play("slot_3")
 func has_group(test):
 	return
+
+func _pivPos(pivX,pivY):
+	piv.position.x=pivX
+	piv.position.y=pivY

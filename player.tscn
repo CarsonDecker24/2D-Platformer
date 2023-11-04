@@ -1,9 +1,8 @@
-[gd_scene load_steps=73 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=71 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
 [ext_resource type="Script" path="res://AnimatedSprite2D.gd" id="3_14dt8"]
-[ext_resource type="Texture2D" uid="uid://b2endjj7i8olg" path="res://Assets/player sprites/jump sprites/jumping0.png" id="3_gwx3a"]
 [ext_resource type="Texture2D" uid="uid://bie3x74xe3nbf" path="res://Assets/player sprites/walkRight/walkRight0.png" id="3_gxe6m"]
 [ext_resource type="Texture2D" uid="uid://bw45dtcuo4gvs" path="res://Assets/player sprites/skidRight/sprite skid0.png" id="3_kc08g"]
 [ext_resource type="Texture2D" uid="uid://ds70y1gcucix1" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk0.png" id="3_wvr7d"]
@@ -29,7 +28,6 @@
 [ext_resource type="Texture2D" uid="uid://bn3o0exnghlm1" path="res://Assets/player sprites/walkRight/walkRight6.png" id="9_hg5bj"]
 [ext_resource type="Texture2D" uid="uid://dckejqfmpp588" path="res://Assets/player sprites/walkRight/walkRight7.png" id="10_2mcxb"]
 [ext_resource type="Texture2D" uid="uid://b56yndi0263bk" path="res://Assets/player sprites/slow fall frame.png" id="11_lpnih"]
-[ext_resource type="Texture2D" uid="uid://rqus61is0o2t" path="res://Assets/player sprites/windupRightWalk/windupRightW00.png" id="11_ugani"]
 [ext_resource type="Texture2D" uid="uid://cdc7m2vff8nj8" path="res://Assets/player sprites/windupRightWalk/windupRightW01.png" id="12_1mify"]
 [ext_resource type="Texture2D" uid="uid://g2uk5kqarcd5" path="res://Assets/player sprites/turnLeftWalk/turningLeftWalk0.png" id="12_conal"]
 [ext_resource type="Texture2D" uid="uid://bjaoomlmig2ag" path="res://Assets/player sprites/turnLeftWalk/turningLeftWalk1.png" id="13_5ipky"]
@@ -80,9 +78,6 @@ animations = [{
 "speed": 30.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_gwx3a")
-}, {
 "duration": 1.0,
 "texture": ExtResource("4_tycoe")
 }],
@@ -141,10 +136,10 @@ animations = [{
 "speed": 30.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("13_qsm1q")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("14_uw01a")
 }, {
 "duration": 1.0,
@@ -153,10 +148,10 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("16_cdwgn")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("17_bstx5")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("18_pfne1")
 }],
 "loop": false,
@@ -279,9 +274,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_ugani")
-}, {
-"duration": 1.0,
 "texture": ExtResource("12_1mify")
 }, {
 "duration": 1.0,
@@ -310,7 +302,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"windupRightWalk",
-"speed": 90.0
+"speed": 70.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_upuir"]
@@ -416,7 +408,7 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"windupRightWalk"
+animation = &"idle"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
@@ -438,7 +430,7 @@ script = ExtResource("54_26wpq")
 [node name="Reload" type="Timer" parent="."]
 
 [node name="PivotHoldingArm" type="Node2D" parent="."]
-position = Vector2(-5, 0)
+position = Vector2(-6, 0)
 
 [node name="HoldingArmAnimation" type="AnimatedSprite2D" parent="PivotHoldingArm"]
 light_mask = 0
@@ -451,3 +443,6 @@ script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(13, -0.999996)
+
+[connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
+[connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
