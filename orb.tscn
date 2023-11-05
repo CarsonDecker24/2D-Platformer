@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3ls6cuslopfb"]
+[gd_scene load_steps=13 format=3 uid="uid://b3ls6cuslopfb"]
 
 [ext_resource type="Script" path="res://orb.gd" id="1_4chui"]
 [ext_resource type="Texture2D" uid="uid://beeyra21o8rah" path="res://Assets/enemy sprites/basic/orb.png" id="2_6bog8"]
@@ -49,14 +49,22 @@ _data = [Vector2(0.150735, 35.7895), 0.0, 0.0, 0, 0, Vector2(0.220588, 40), 0.0,
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_f6wxx"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.470588, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.293478, 1), 0.0, 0.0, 0, 0, Vector2(0.396739, 0.431579), -8.8772, -8.8772, 0, 0, Vector2(0.486413, 0), 0.0, 0.0, 0, 0, Vector2(0.554348, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
 
 [sub_resource type="Gradient" id="Gradient_lhhq3"]
-offsets = PackedFloat32Array(0.278008, 0.514523, 0.846473)
+offsets = PackedFloat32Array(0.0623145, 0.175074, 0.382789)
 colors = PackedColorArray(0.0390625, 0.5625, 0.996094, 1, 0, 1, 1, 1, 1, 1, 1, 1)
 
+[sub_resource type="Curve" id="Curve_u6q1m"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, -90.5263), 0.0, 0.0, 0, 0, Vector2(0.0407609, -31.5789), 0.0, 0.0, 0, 0, Vector2(0.125, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0, Vector2(0.502717, 166.316), 0.0, 0.0, 0, 0]
+point_count = 5
+
 [node name="Orb" type="Area2D"]
+z_index = 1
+z_as_relative = false
 texture_filter = 1
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_4chui")
@@ -66,22 +74,48 @@ shape = SubResource("CircleShape2D_o4m8o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(-1.90735e-06, 9.53674e-07)
 sprite_frames = SubResource("SpriteFrames_8lwon")
 autoplay = "default"
 frame_progress = 0.796683
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="ParticleTrail" type="CPUParticles2D" parent="."]
 z_index = -1
 texture_filter = 1
-amount = 50
+amount = 30
 emission_shape = 1
 emission_sphere_radius = 7.22
 direction = Vector2(100, 0)
 spread = 180.0
-gravity = Vector2(0, 0)
+gravity = Vector2(0, -1)
 initial_velocity_max = 5.0
 tangential_accel_max = 1.39
 tangential_accel_curve = SubResource("Curve_wh6b3")
+scale_amount_curve = SubResource("Curve_f6wxx")
+color = Color(0.980392, 1, 1, 1)
+color_ramp = SubResource("Gradient_lhhq3")
+hue_variation_min = -1.0
+hue_variation_max = 0.54
+
+[node name="ParticleCollide" type="CPUParticles2D" parent="."]
+z_index = 1
+texture_filter = 1
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+draw_order = 1
+emission_shape = 2
+emission_sphere_radius = 20.0
+spread = 180.0
+gravity = Vector2(0, 0)
+orbit_velocity_min = -0.3
+orbit_velocity_max = -0.3
+radial_accel_max = 35.0
+radial_accel_curve = SubResource("Curve_u6q1m")
+scale_amount_max = 6.0
 scale_amount_curve = SubResource("Curve_f6wxx")
 color = Color(0.980392, 1, 1, 1)
 color_ramp = SubResource("Gradient_lhhq3")
