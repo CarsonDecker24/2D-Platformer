@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d2kvnctkapc7y"]
+[gd_scene load_steps=32 format=3 uid="uid://d2kvnctkapc7y"]
 
 [ext_resource type="Script" path="res://test_dummy.gd" id="1_1c4ne"]
 [ext_resource type="Texture2D" uid="uid://clyg48xtd3ssi" path="res://Assets/enemy sprites/basic/enemy walk and aim.png" id="2_814ig"]
@@ -7,25 +7,25 @@
 radius = 6.0
 height = 34.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8yt3"]
+atlas = ExtResource("2_814ig")
+region = Rect2(92, 0, 23, 34)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jlvlc"]
 atlas = ExtResource("2_814ig")
 region = Rect2(0, 0, 23, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5io24"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jypvh"]
 atlas = ExtResource("2_814ig")
-region = Rect2(0, 0, 23, 34)
+region = Rect2(69, 34, 23, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q7niy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdicb"]
 atlas = ExtResource("2_814ig")
-region = Rect2(23, 0, 23, 34)
+region = Rect2(46, 68, 23, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sf78p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sfam"]
 atlas = ExtResource("2_814ig")
-region = Rect2(46, 0, 23, 34)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_miw1k"]
-atlas = ExtResource("2_814ig")
-region = Rect2(69, 0, 23, 34)
+region = Rect2(23, 102, 23, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgmbh"]
 atlas = ExtResource("2_814ig")
@@ -42,6 +42,22 @@ region = Rect2(23, 34, 23, 34)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3q3he"]
 atlas = ExtResource("2_814ig")
 region = Rect2(46, 34, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5io24"]
+atlas = ExtResource("2_814ig")
+region = Rect2(0, 0, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7niy"]
+atlas = ExtResource("2_814ig")
+region = Rect2(23, 0, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf78p"]
+atlas = ExtResource("2_814ig")
+region = Rect2(46, 0, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miw1k"]
+atlas = ExtResource("2_814ig")
+region = Rect2(69, 0, 23, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cjfpt"]
 atlas = ExtResource("2_814ig")
@@ -95,27 +111,42 @@ region = Rect2(92, 102, 23, 34)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jlvlc")
+"texture": SubResource("AtlasTexture_n8yt3")
 }],
 "loop": true,
-"name": &"idle",
-"speed": 10.0
+"name": &"idle down",
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5io24")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q7niy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sf78p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_miw1k")
+"texture": SubResource("AtlasTexture_jlvlc")
 }],
 "loop": true,
-"name": &"walking",
+"name": &"idle holster",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jypvh")
+}],
+"loop": true,
+"name": &"idle level",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdicb")
+}],
+"loop": true,
+"name": &"idle up",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sfam")
+}],
+"loop": true,
+"name": &"idle upward",
 "speed": 20.0
 }, {
 "frames": [{
@@ -133,7 +164,24 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking down",
-"speed": 5.0
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5io24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7niy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf78p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miw1k")
+}],
+"loop": true,
+"name": &"walking holster",
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -150,7 +198,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking level",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -167,7 +215,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking up",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -184,7 +232,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking upward",
-"speed": 5.0
+"speed": 20.0
 }]
 
 [sub_resource type="Curve" id="Curve_ahohc"]

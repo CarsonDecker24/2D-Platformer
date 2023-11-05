@@ -2,10 +2,10 @@ extends CharacterBody2D
 var player
 var hp = 5
 var is_dead = false
-var player_angle=0
 var personality = "neutral"
 var player_spotted = false
 var player_distance=0
+var player_angle=0
 var player_side_right=true
 var animation_frame=0
 var animation_state = "idle"
@@ -14,10 +14,11 @@ var shoot_cooldown=1
 var debuff_cooldown=1
 var fire_rate_mod=1
 var speed_mod=1
+var walking = "walking holster"
+var idle = "idle holster"
 const SPEED =60
 const FIRE_RATE=1
 const orbPath = preload("res://orb.tscn")
-
 @onready var animator = get_node("dummyPlayer")
 @onready var target_ray = get_node("TargetRay")
 func _ready():
@@ -46,12 +47,7 @@ func _process(delta):
 	debuff_cooldown-=delta
 	
 	#gets the distance between this enemy and the player
-	
-	
-	
-	
-	
-	
+
 	
 	if player_spotted==true:
 		#this line gets the players distance from the dummy
@@ -59,7 +55,7 @@ func _process(delta):
 		
 		#loose track of player
 		if player_distance>300:
-			print("over 400")
+			print("over 300")
 			player_spotted=false
 		
 		#this gets the angle relative to the player for aiming sake
@@ -88,53 +84,86 @@ func _process(delta):
 			player_side_right=false
 		
 		#this makes the dummy keep optimal distance with the player
+		#minimise this to hide animation related things
 		if player_distance>100:
 			
 			if player_side_right==true:
 				velocity.x=SPEED*speed_mod
 				if animation_state=="walking" and animator.is_playing()==false:
-					animator.play("walking")
+					animator.play(walking)
 					animation_state=="walking"
-					print("crap")
 				else:
-					animator.play("walking")
+					animator.play(walking)
 					animation_state=="walking"
 			else:
 				velocity.x=-SPEED*speed_mod
-				animator.play("walking")
+				animator.play(walking)
 				if animation_state=="walking" and animator.is_playing()==false:
-					animator.play("walking")
+					animator.play(walking)
 					animation_state=="walking"
 				else:
-					animator.play("walking")
+					animator.play(walking)
 					animation_state=="walking"
 		
 		elif player_distance<40:
 			if player_side_right==true:
 				velocity.x=-SPEED*speed_mod
 				if animation_state=="walkingBack" and animator.is_playing()==false:
-					animator.play_backwards("walking")
+					animator.play_backwards(walking)
 					animation_state="walkingBack"
 				else:
-					animator.play_backwards("walking")
+					animator.play_backwards(walking)
 					animation_state="walkingBack"
 			else:
 				velocity.x=SPEED*speed_mod
 				if animation_state=="walkingBack" and animator.is_playing()==false:
-					animator.play_backwards("walking")
+					animator.play_backwards(walking)
 					animation_state="walkingBack"
 				else:
-					animator.play_backwards("walking")
+					animator.play_backwards(walking)
 					animation_state="walkingBack"
 		#and if they are in the optimal distance obviously they dont need to move
 		else:
 			velocity.x=0
-			animator.play("idle")
+			animator.play(idle)
 	else:
 		velocity.x=0
-		animator.play("idle")
+		animator.play(idle)
+	_wizardAim()
 	
 
+func _wizardAim():
+	if player!=null and sees_player==true:
+		if player_side_right==true:
+			
+			if abs(rad_to_deg(_get_angle_to_player()))>270 and abs(rad_to_deg(_get_angle_to_player()))<330:
+				walking = "walking down"
+				idle = "idle down"
+			elif abs(rad_to_deg(_get_angle_to_player()))>330 or abs(rad_to_deg(_get_angle_to_player()))<30:
+				walking = "walking level"
+				idle = "idle level"
+			elif abs(rad_to_deg(_get_angle_to_player()))>30 and  abs(rad_to_deg(_get_angle_to_player()))<60:
+				walking = "walking up"
+				idle = "idle up" 
+			elif abs(rad_to_deg(_get_angle_to_player()))>60 and  abs(rad_to_deg(_get_angle_to_player()))<90:
+				walking = "walking upward"
+				idle = "idle upward"
+		else:
+			if abs(rad_to_deg(_get_angle_to_player()))<270 and abs(rad_to_deg(_get_angle_to_player()))>210:
+				walking = "walking down"
+				idle = "idle down"
+			elif abs(rad_to_deg(_get_angle_to_player()))<210 or abs(rad_to_deg(_get_angle_to_player()))>150:
+				walking = "walking level"
+				idle = "idle level"
+			elif abs(rad_to_deg(_get_angle_to_player()))>120 and  abs(rad_to_deg(_get_angle_to_player()))<150:
+				walking = "walking up"
+				idle = "idle up"
+			elif abs(rad_to_deg(_get_angle_to_player()))>60 and  abs(rad_to_deg(_get_angle_to_player()))<90:
+				walking = "walking upward"
+				idle = "idle upward"
+	else:
+		idle = "idle holster"
+		walking = "walking holster"
 
 func _lower_health(hp_reduction: int):
 	hp -= hp_reduction
@@ -164,7 +193,9 @@ func _is_dead():
 
 func _get_angle_to_player():
 	if player != null:
+		player_angle=global_position.angle_to_point(player.global_position)
 		return global_position.angle_to_point(player.global_position)
+		
 
 func _shoot_orb():
 	var orb = orbPath.instantiate()
