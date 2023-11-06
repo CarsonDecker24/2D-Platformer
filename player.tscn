@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=72 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -66,6 +66,7 @@
 [ext_resource type="Texture2D" uid="uid://fkdjox7p1p3w" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite4.png" id="54_o5oh6"]
 [ext_resource type="Texture2D" uid="uid://dixliao6aosxh" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite5.png" id="55_5urxs"]
 [ext_resource type="Script" path="res://HoldingArmAnimation.gd" id="56_nsjpx"]
+[ext_resource type="Texture2D" uid="uid://ctxl3i7luicfc" path="res://Assets/player sprites/grapple/grapple arrow-2.png.png" id="67_3pvfp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
@@ -444,7 +445,28 @@ animation = &"bow_aim"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
-position = Vector2(13, -0.999996)
+position = Vector2(-10, 3.8147e-06)
+
+[node name="GrappleRope" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
+z_index = -1
+z_as_relative = false
+position = Vector2(-30, -20)
+scale = Vector2(20, 20)
+
+[node name="TextureRect" type="TextureRect" parent="PivotHoldingArm/HoldingArmAnimation/GrappleRope"]
+z_as_relative = false
+texture_filter = 1
+layout_direction = 3
+offset_left = 0.800003
+offset_top = -2.0
+offset_right = 5.8
+offset_bottom = 3.0
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 3
+texture = ExtResource("67_3pvfp")
+expand_mode = 2
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]

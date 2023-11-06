@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cv8icixll6hu0" path="res://Assets/player sprites/arms n bows/1bow varients/2IceBow/ice arrow.png" id="3_vcmhk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xik2l"]
-size = Vector2(7, 3)
+size = Vector2(8, 3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elj7m"]
 atlas = ExtResource("2_jkv8u")
@@ -85,7 +85,7 @@ self_modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_8jrvn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, -0.0026021)
+position = Vector2(2, -0.0026021)
 shape = SubResource("RectangleShape2D_xik2l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

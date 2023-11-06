@@ -29,10 +29,10 @@ var fire_state = "not"
 var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
-var slots = ["Fire", "Multi", "Ice"]
+var slots = ["Grapple", "Multi", "Ice"]
 var arrow_count=0
 var wallJumpNerf = 0
-
+var GrapplePivot
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -42,6 +42,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	pivot = get_node("PivotHoldingArm")
+	GrapplePivot = get_node("PivotHoldingArm/HoldingArmAnimation/GrappleRope")
 	weapon_sprite = get_node("PivotHoldingArm/HoldingArmAnimation")
 	direction = 0
 
@@ -61,6 +62,8 @@ func _process(delta):
 	
 	#Changing Arrows
 	_arrow_hud()
+	
+	#get_node("Node2D/TextureRect").
 
 func _physics_process(delta):
 	#Lateral Movement

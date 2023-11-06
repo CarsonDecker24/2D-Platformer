@@ -18,6 +18,9 @@ var collision_point
 var dyingTime=1
 var dying = false
 var hideNextFrame = false
+var grapple = false
+var grapple_length
+var rotateToPlayer=0
 
 func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node):
 	id = aID
@@ -28,6 +31,8 @@ func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if type == "Grapple":
+		print("grap")
 	if type == "Multi":
 		_multi(5)
 		_multi(-5)
@@ -71,7 +76,12 @@ func _process(delta):
 		dyingTime-=delta
 		if dyingTime<.95:
 			get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
-
+	if type=="Grapple":
+		rotateToPlayer=get_angle_to(player.global_position)
+		grapple_length=sqrt((player.global_position.y-global_position.y) * (player.global_position.y-global_position.y) + ((player.global_position.x-global_position.x) * (player.global_position.x-global_position.x)))
+		player.get_node("PivotHoldingArm/HoldingArmAnimation/GrappleRope/TextureRect").size.x=grapple_length
+		player.get_node("PivotHoldingArm/HoldingArmAnimation/GrappleRope").rotation = get_angle_to(player.global_position
+		)
 func _update_pos(delta):
 	position += vel
 	vel.y += GRAVITY * delta
@@ -128,3 +138,5 @@ func _on_body_entered(body):
 		#get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
 		dying=true
 		particle.emitting=false
+	
+
