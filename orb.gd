@@ -3,9 +3,9 @@ var speed: Vector2
 var vel
 var player
 var homing
-var dissapear_timer = 1
+var disappear_timer = 1
 
-var marked_for_dissapear=false
+var marked_for_disappear=false
 
 func _setup(s: Vector2, p: Node, isHoming):
 	speed = s
@@ -23,15 +23,15 @@ func _process(delta):
 		vel.y = move_toward(vel.y, speed.rotated(_get_angle_to_player()).y, 2 * delta)
 	position += vel
 	
-	if marked_for_dissapear==true:
-		dissapear_timer-=delta
+	if marked_for_disappear==true:
+		disappear_timer-=delta
 		get_node("Collision").set_deferred("disabled",true)
 		
 		vel.x=0
 		vel.y=0
-		if dissapear_timer<=.8:
+		if disappear_timer<=.8:
 			get_node("AnimatedSprite2D").visible=false
-		if dissapear_timer<=0:
+		if disappear_timer<=0:
 			queue_free()
 
 func _get_angle_to_player():
@@ -59,7 +59,7 @@ func _on_body_entered(body):
 		_die()
 
 func _die():
-	marked_for_dissapear=true
+	marked_for_disappear=true
 	get_node("ParticleCollide").emitting=true
 	get_node("ParticleTrail").emitting=false
 	

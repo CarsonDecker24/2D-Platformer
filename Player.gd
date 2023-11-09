@@ -97,7 +97,8 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	
+	if Input.is_action_just_pressed("e"):
+		_dash(Vector2(100,0),1)
 
 func _accelerate(dir):
 	#Accelerate in whatever direction the player is wanting to move.
@@ -275,6 +276,10 @@ func _arrow_hud():
 		arrowHud.play("slot_2")
 	if arrow_hud_slot== 3:
 		arrowHud.play("slot_3")
+
+func _dash(dir: Vector2, power):
+	velocity += direction * power
+
 func has_group(test):
 	return
 
