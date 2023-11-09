@@ -3,12 +3,12 @@ extends CharacterBody2D
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
 const ACCEL = 25.0
-const FRICTION = 25.0
+
 const DEFAULTARROWSPEED = 1.1
 const arrowPath = preload("res://new_arrow.tscn")
 const FIRECOOLDOWN = .2
 
-
+var FRICTION = 25.0
 var direction
 var pivot
 var pivot2
@@ -33,6 +33,7 @@ var slots = ["Grapple", "Multi", "Ice"]
 var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot
+var dashTime=0
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -63,6 +64,11 @@ func _process(delta):
 	#Changing Arrows
 	_arrow_hud()
 	
+	dashTime-=delta
+	if dashTime<=0:
+		FRICTION=25
+	else:
+		FRICTION=3
 	#get_node("Node2D/TextureRect").
 
 func _physics_process(delta):
@@ -95,8 +101,8 @@ func _physics_process(delta):
 	if wallJumpNerf>0:
 		wallJumpNerf-=delta
 	
-	#if Input.is_action_just_pressed("shift"):
-		#_dash()
+	if Input.is_action_just_pressed("shift"):
+		_dash(get_local_mouse_position().normalized(),-500)
 	
 	move_and_slide()
 
@@ -279,6 +285,7 @@ func _arrow_hud():
 
 func _dash(dir: Vector2, power):
 	velocity += dir * power
+	dashTime =.2
 
 func has_group(test):
 	return
