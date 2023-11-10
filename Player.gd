@@ -34,6 +34,9 @@ var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot
 var dashTime=0
+var shiftSlot= "Air"
+var shift_use_time=1
+var shift_cooldown=1
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -65,6 +68,8 @@ func _process(delta):
 	_arrow_hud()
 	
 	dashTime-=delta
+	shift_cooldown-=delta
+	shift_use_time-=delta
 	if dashTime<=0:
 		FRICTION=25
 	else:
@@ -102,7 +107,8 @@ func _physics_process(delta):
 		wallJumpNerf-=delta
 	
 	if Input.is_action_just_pressed("shift"):
-		_dash(get_local_mouse_position().normalized(),-500)
+		if shiftSlot=="Air" and shift_cooldown<0:
+			_dash(get_local_mouse_position().normalized(),-500)
 	
 	move_and_slide()
 
@@ -286,6 +292,10 @@ func _arrow_hud():
 func _dash(dir: Vector2, power):
 	velocity += dir * power
 	dashTime =.2
+	shift_use_time=.1
+	shift_cooldown=1
+	fire_cooldown=FIRECOOLDOWN
+	animPlayer.play("4air_quickfire")
 
 func has_group(test):
 	return

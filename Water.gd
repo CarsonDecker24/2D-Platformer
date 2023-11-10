@@ -13,7 +13,7 @@ func _process(delta):
 	pass
 
 func _on_body_entered(body):
-	print("bad")
+	
 	if body.is_in_group("Arrow"):
 		if body.type == "Ice":
 			get_node("StaticBody2D/CollisionShape2D").set_deferred("disabled", false)

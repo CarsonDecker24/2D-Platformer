@@ -60,10 +60,9 @@ func _process(delta):
 	if moving:
 		_update_pos(delta)
 	
-	if player.arrow_count - id > 20:
-		queue_free()
 	
-	if hideNextFrame:
+	
+	if hideNextFrame==true:
 		get_node("AnimatedSprite2D").visible = false
 	
 	if dying:

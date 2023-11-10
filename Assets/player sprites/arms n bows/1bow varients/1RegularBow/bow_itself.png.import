@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfwowx0xl58jo"
-path="res://.godot/imported/bow sprite1.png-968ac42dc84c1c7ba7127b095e13684a.ctex"
+uid="uid://b25wf6xykhgmv"
+path="res://.godot/imported/bow_itself.png-2312776395f793b4f15eb6dfadd9ad45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite1.png"
-dest_files=["res://.godot/imported/bow sprite1.png-968ac42dc84c1c7ba7127b095e13684a.ctex"]
+source_file="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow_itself.png"
+dest_files=["res://.godot/imported/bow_itself.png-2312776395f793b4f15eb6dfadd9ad45.ctex"]
 
 [params]
 

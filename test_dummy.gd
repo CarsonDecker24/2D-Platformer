@@ -91,19 +91,19 @@ func _process(delta):
 				velocity.x=SPEED*speed_mod
 				if animation_state=="walking" and animator.is_playing()==false:
 					animator.play(walking)
-					animation_state=="walking"
+					animation_state="walking"
 				else:
 					animator.play(walking)
-					animation_state=="walking"
+					animation_state="walking"
 			else:
 				velocity.x=-SPEED*speed_mod
 				animator.play(walking)
 				if animation_state=="walking" and animator.is_playing()==false:
 					animator.play(walking)
-					animation_state=="walking"
+					animation_state="walking"
 				else:
 					animator.play(walking)
-					animation_state=="walking"
+					animation_state="walking"
 		
 		elif player_distance<40:
 			if player_side_right==true:

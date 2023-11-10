@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=85 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -54,19 +54,14 @@
 [ext_resource type="Texture2D" uid="uid://bxjpn8na8fp6k" path="res://Assets/player sprites/walkJumpRight/sprite_6.png" id="37_ult6n"]
 [ext_resource type="Texture2D" uid="uid://bl03qr8o5367" path="res://Assets/player sprites/wall_drag/sprite_0.png" id="46_bjsil"]
 [ext_resource type="Texture2D" uid="uid://bw8bhxkb6s07c" path="res://Assets/player sprites/wall_drag/sprite_1.png" id="47_lkv0v"]
-[ext_resource type="Texture2D" uid="uid://bqi3nu8nap0fc" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite0.png" id="50_78cjf"]
 [ext_resource type="Texture2D" uid="uid://c6jsn4ttrs6ri" path="res://Assets/hud sprites/arrowSelectHud-2.png.png" id="50_tt0ad"]
 [ext_resource type="Texture2D" uid="uid://dd3k2d5dhxlav" path="res://Assets/hud sprites/arrowSelectHud-3.png.png" id="51_6il2d"]
-[ext_resource type="Texture2D" uid="uid://dfwowx0xl58jo" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite1.png" id="51_fj8co"]
 [ext_resource type="Texture2D" uid="uid://c5nvb58qdvmn7" path="res://Assets/hud sprites/arrowSelectHud-4.png.png" id="52_5jn4k"]
-[ext_resource type="Texture2D" uid="uid://d3wvybuqmc8ww" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite2.png" id="52_dt75y"]
 [ext_resource type="Texture2D" uid="uid://noet8am6fpef" path="res://Assets/hud sprites/arrowSelectHud-1.png.png" id="53_qgp1g"]
-[ext_resource type="Texture2D" uid="uid://dnbsvquu448b3" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite3.png" id="53_u6d5f"]
 [ext_resource type="Script" path="res://SelectedArrowHud.gd" id="54_26wpq"]
-[ext_resource type="Texture2D" uid="uid://fkdjox7p1p3w" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite4.png" id="54_o5oh6"]
-[ext_resource type="Texture2D" uid="uid://dixliao6aosxh" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow sprite5.png" id="55_5urxs"]
 [ext_resource type="Script" path="res://HoldingArmAnimation.gd" id="56_nsjpx"]
-[ext_resource type="Texture2D" uid="uid://ctxl3i7luicfc" path="res://Assets/player sprites/grapple/grapple arrow-2.png.png" id="67_3pvfp"]
+[ext_resource type="Texture2D" uid="uid://bf4pwmwan48vw" path="res://Assets/player sprites/arms n bows/1bow varients/4AirBow/bow itself.png" id="60_hp32n"]
+[ext_resource type="Texture2D" uid="uid://b25wf6xykhgmv" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow_itself.png" id="61_gnw25"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
@@ -345,23 +340,118 @@ animations = [{
 "speed": 0.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_al3jv"]
+atlas = ExtResource("60_hp32n")
+region = Rect2(0, 0, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8iw5g"]
+atlas = ExtResource("60_hp32n")
+region = Rect2(13, 0, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lresx"]
+atlas = ExtResource("60_hp32n")
+region = Rect2(0, 12, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln7pv"]
+atlas = ExtResource("60_hp32n")
+region = Rect2(13, 12, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5rp6"]
+atlas = ExtResource("60_hp32n")
+region = Rect2(0, 24, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ieyy"]
+atlas = ExtResource("60_hp32n")
+region = Rect2(13, 24, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwade"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(0, 0, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35n2a"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(13, 0, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38h34"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(0, 12, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq2nj"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(13, 12, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd403"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(0, 24, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r255k"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(0, 0, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cc1m"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(0, 0, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbk4g"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(13, 0, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6lie"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(0, 12, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uayqg"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(13, 12, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f1tk"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(0, 24, 13, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cks2a"]
+atlas = ExtResource("61_gnw25")
+region = Rect2(13, 24, 13, 12)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_8ko50"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("50_78cjf")
-}, {
-"duration": 0.5,
-"texture": ExtResource("51_fj8co")
-}, {
-"duration": 1.25,
-"texture": ExtResource("52_dt75y")
-}, {
-"duration": 1.25,
-"texture": ExtResource("53_u6d5f")
+"texture": SubResource("AtlasTexture_al3jv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("54_o5oh6")
+"texture": SubResource("AtlasTexture_8iw5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lresx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5rp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ieyy")
+}],
+"loop": false,
+"name": &"4air_quickfire",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwade")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35n2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38h34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq2nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd403")
 }],
 "loop": false,
 "name": &"bow_aim",
@@ -369,7 +459,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("50_78cjf")
+"texture": SubResource("AtlasTexture_r255k")
 }],
 "loop": false,
 "name": &"bow_idle",
@@ -377,22 +467,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("50_78cjf")
+"texture": SubResource("AtlasTexture_8cc1m")
 }, {
 "duration": 1.0,
-"texture": ExtResource("51_fj8co")
+"texture": SubResource("AtlasTexture_xbk4g")
 }, {
 "duration": 1.0,
-"texture": ExtResource("52_dt75y")
+"texture": SubResource("AtlasTexture_t6lie")
 }, {
 "duration": 1.0,
-"texture": ExtResource("53_u6d5f")
+"texture": SubResource("AtlasTexture_uayqg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("54_o5oh6")
+"texture": SubResource("AtlasTexture_0f1tk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("55_5urxs")
+"texture": SubResource("AtlasTexture_cks2a")
 }],
 "loop": false,
 "name": &"bow_quickfire",
@@ -415,7 +505,6 @@ animation = &"idle"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-6, 4)
 shape = SubResource("CapsuleShape2D_upuir")
 
@@ -438,35 +527,14 @@ position = Vector2(-6, 0)
 [node name="HoldingArmAnimation" type="AnimatedSprite2D" parent="PivotHoldingArm"]
 light_mask = 0
 visibility_layer = 2
+texture_filter = 1
 position = Vector2(7.5, 1)
-scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_8ko50")
-animation = &"bow_aim"
+animation = &"bow_quickfire"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
-position = Vector2(-10, 3.8147e-06)
-
-[node name="GrappleRope" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
-z_index = -1
-z_as_relative = false
-position = Vector2(-30, -20)
-scale = Vector2(20, 20)
-
-[node name="TextureRect" type="TextureRect" parent="PivotHoldingArm/HoldingArmAnimation/GrappleRope"]
-z_as_relative = false
-texture_filter = 1
-layout_direction = 3
-offset_left = 0.800003
-offset_top = -2.0
-offset_right = 5.8
-offset_bottom = 3.0
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 3
-texture = ExtResource("67_3pvfp")
-expand_mode = 2
-stretch_mode = 1
-metadata/_edit_use_anchors_ = true
+position = Vector2(2.5, 1)
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
