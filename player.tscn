@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=90 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -61,7 +61,11 @@
 [ext_resource type="Script" path="res://SelectedArrowHud.gd" id="54_26wpq"]
 [ext_resource type="Script" path="res://HoldingArmAnimation.gd" id="56_nsjpx"]
 [ext_resource type="Texture2D" uid="uid://bf4pwmwan48vw" path="res://Assets/player sprites/arms n bows/1bow varients/4AirBow/bow itself.png" id="60_hp32n"]
+[ext_resource type="Texture2D" uid="uid://c2tvtkbrt1u87" path="res://Assets/hud sprites/sprite_2.png" id="60_klj1a"]
 [ext_resource type="Texture2D" uid="uid://b25wf6xykhgmv" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow_itself.png" id="61_gnw25"]
+[ext_resource type="Texture2D" uid="uid://ce6qn03w2vih" path="res://Assets/hud sprites/sprite_1.png" id="61_rm14d"]
+[ext_resource type="Texture2D" uid="uid://drjkiuqir6yka" path="res://Assets/hud sprites/sprite_3.png" id="62_grtnf"]
+[ext_resource type="Texture2D" uid="uid://cdo10nvawypkl" path="res://Assets/hud sprites/sprite_0.png" id="63_p4yf2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
@@ -340,6 +344,41 @@ animations = [{
 "speed": 0.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_k3vi4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("60_klj1a")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("61_rm14d")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("62_grtnf")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("63_p4yf2")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_al3jv"]
 atlas = ExtResource("60_hp32n")
 region = Rect2(0, 0, 13, 12)
@@ -518,6 +557,13 @@ scale = Vector2(0.015, 0.015)
 sprite_frames = SubResource("SpriteFrames_jymnt")
 animation = &"slot_3"
 script = ExtResource("54_26wpq")
+
+[node name="healthBar" type="AnimatedSprite2D" parent="Camera"]
+z_index = 2
+texture_filter = 1
+position = Vector2(-192, -110)
+sprite_frames = SubResource("SpriteFrames_k3vi4")
+animation = &"full"
 
 [node name="Reload" type="Timer" parent="."]
 
