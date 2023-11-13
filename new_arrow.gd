@@ -48,6 +48,9 @@ func _ready():
 		particle.color=Color(1, 0.145, 0, 0.655)
 		particle.initial_velocity_max=5
 		particle.radial_accel_max=0
+	elif type == "Wind":
+		_wind()
+		queue_free()
 	else:
 		get_node("AnimatedSprite2D").play("default")
 		particle.color=Color(0.408, 0.408, 0.408, 0.8)
@@ -59,8 +62,6 @@ func _ready():
 func _process(delta):
 	if moving:
 		_update_pos(delta)
-	
-	
 	
 	if hideNextFrame==true:
 		get_node("AnimatedSprite2D").visible = false
@@ -87,6 +88,9 @@ func _multi(offset_angle):
 	add_sibling(arrow)
 	arrow.position = player.get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
 	arrow.rotation_degrees = angle + deg_to_rad(offset_angle)
+
+func _wind():
+	player._dash(player.get_local_mouse_position().normalized(),-500)
 
 func _check_ray():
 	if ray.get_collider() != null:

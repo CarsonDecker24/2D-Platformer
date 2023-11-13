@@ -29,7 +29,7 @@ var fire_state = "not"
 var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
-var slots = ["Grapple", "Multi", "Ice"]
+var slots = ["Wind", "Multi", "Ice"]
 var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot
@@ -108,14 +108,14 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("shift"):
 		if shiftSlot=="Air" and shift_cooldown<0:
-			_dash(get_local_mouse_position().normalized(),-500)
+			_dash(get_local_mouse_position().normalized(),-100)
 	
 	move_and_slide()
 
 func _accelerate(dir):
 	#Accelerate in whatever direction the player is wanting to move.
 	#velocity = velocity.move_toward(Vector2(SPEED * dir, velocity.y), ACCEL)
-	if (velocity.x + ACCEL * dir) < -SPEED or (velocity.x + ACCEL * dir) > SPEED:
+	if ((velocity.x + ACCEL * dir) < -SPEED or (velocity.x + ACCEL * dir) > SPEED) and dashTime <= 0:
 		velocity.x = SPEED * dir
 	elif wallJumpNerf>0:
 		velocity.x += (ACCEL-15) * dir

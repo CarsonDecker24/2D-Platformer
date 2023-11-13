@@ -60,6 +60,7 @@ func _on_body_entered(body):
 
 func _die():
 	marked_for_disappear=true
-	get_node("ParticleCollide").emitting=true
-	get_node("ParticleTrail").emitting=false
+	if get_node("ParticleCollide") != null and get_node("ParticleTrail") != null:
+		get_node("ParticleCollide").emitting=true
+		get_node("ParticleTrail").emitting=false
 	
