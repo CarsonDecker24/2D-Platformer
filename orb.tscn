@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://beeyra21o8rah" path="res://Assets/enemy sprites/basic/orb.png" id="2_6bog8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o4m8o"]
-radius = 5.0
+radius = 3.75
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ccw50"]
 atlas = ExtResource("2_6bog8")
