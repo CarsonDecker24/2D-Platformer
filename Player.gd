@@ -38,6 +38,8 @@ var shiftSlot= "Air"
 var shift_use_time=1
 var shift_cooldown=1
 var health = 3
+var parrying = false
+var parryTime = 0
 
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
@@ -48,7 +50,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	pivot = get_node("PivotHoldingArm")
-	GrapplePivot = get_node("PivotHoldingArm/HoldingArmAnimation/GrappleRope")
+	#GrapplePivot = get_node("PivotHoldingArm/HoldingArmAnimation/GrappleRope")
 	weapon_sprite = get_node("PivotHoldingArm/HoldingArmAnimation")
 	direction = 0
 
@@ -112,6 +114,16 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("shift"):
 		if shiftSlot=="Air" and shift_cooldown<0:
 			_dash(get_local_mouse_position().normalized(),-100)
+	
+	if Input.is_action_just_pressed("e"):
+		if !parrying:
+			parrying = true
+			parryTime = .2
+	
+	if parrying:
+		parryTime -= delta
+	if parryTime <= 0:
+		parrying = false
 	
 	move_and_slide()
 

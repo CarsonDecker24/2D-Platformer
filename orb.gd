@@ -53,8 +53,15 @@ func _on_body_entered(body):
 		if body.type == "Multi" or body.type == "MultiChild":
 			_die()
 	if body.is_in_group("Player"):
+		if player.parrying:
+			print("Parried!")
+			_on_parry()
+		else:
+			player._take_damage(1)
+			print(player.health)
+			_die()
 		print("Hit Player!")
-		_die()
+		
 	if body.is_in_group("Ground"):
 		_die()
 
@@ -63,4 +70,7 @@ func _die():
 	if get_node("ParticleCollide") != null and get_node("ParticleTrail") != null:
 		get_node("ParticleCollide").emitting=true
 		get_node("ParticleTrail").emitting=false
-	
+
+func _on_parry():
+	homing = false
+	vel = speed.rotated(global_position.angle_to_point(get_global_mouse_position()))
