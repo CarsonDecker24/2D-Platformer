@@ -82,7 +82,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"airCrouched",
-"speed": 1.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -108,7 +108,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"airCrouching",
-"speed": 50.0
+"speed": 60.0
 }, {
 "frames": [{
 "duration": 1.0,
