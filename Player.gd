@@ -121,9 +121,11 @@ func _physics_process(delta):
 			parryTime = .2
 	
 	if parrying:
+		animPlayer._parry()
 		parryTime -= delta
-	if parryTime <= 0:
-		parrying = false
+		if parryTime <= 0:
+			animPlayer._unParry()
+			parrying = false
 	
 	move_and_slide()
 
