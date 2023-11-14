@@ -52,6 +52,7 @@ func _ready():
 
 func _process(delta):
 	# Get the input direction and handle the movement/deceleration.
+	
 	direction = Input.get_axis("move_left", "move_right")
 	
 	#Variable for which direction the player is facing
