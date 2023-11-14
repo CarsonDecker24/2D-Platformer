@@ -515,7 +515,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"4air_quickfire",
-"speed": 30.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -624,7 +624,9 @@ visibility_layer = 2
 texture_filter = 1
 position = Vector2(7.5, 1)
 sprite_frames = SubResource("SpriteFrames_8ko50")
-animation = &"parry"
+animation = &"4air_quickfire"
+frame = 5
+frame_progress = 1.0
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
