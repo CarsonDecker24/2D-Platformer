@@ -69,18 +69,22 @@ func _process(delta):
 			play("walkRightFall")
 	
 	if ((current == "fallslowRight" or current == "jumpIdleRight" or current == "walkRightJump" or current=="fallRight") and Input.is_action_pressed("ctrl")) or current== "airCrouching" or current == "airCrouched" or current == "unAirCrouching":
+		
 		if current =="airCrouching" and is_playing()==false:
 			play("airCrouched")
-			current == "airCrouched"
-		if current!= "fallslowRight" and current != "jumpIdleRight" and current != "walkRightJump":
+			current = "airCrouched"
+		if current!= "airCrouching" and current!= "unAirCrouching" and current != "airCrouched":
 			current = "airCrouching"
 			play("airCrouching")
 		if current=="airCrouched" and Input.is_action_just_released("ctrl"):
 			play_backwards("airCrouching")
+			set_frame_and_progress(6,0.00)
 			current == "unAirCrouching"
 		if current == "unAirCrouching" and is_playing()==false:
 			current ="fallRight"
+		if parent.is_on_floor() or parent.is_on_wall():
 			play("walkRightFall")
+			current = "fallRight"
 	
 	
 	#this CHECKS to see if the PLAYER has LANDED yet================================================

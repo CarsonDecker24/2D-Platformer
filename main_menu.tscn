@@ -6,20 +6,20 @@
 script = ExtResource("1_8bj3i")
 
 [node name="TitleLabel" type="Label" parent="."]
-offset_left = 3.0
-offset_top = 150.0
-offset_right = 1151.0
-offset_bottom = 176.0
+offset_left = -126.0
+offset_top = 200.0
+offset_right = 1022.0
+offset_bottom = 242.0
 theme_type_variation = &"HeaderLarge"
 text = "2D Platfomer
 "
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="."]
-offset_left = 495.0
-offset_top = 277.0
-offset_right = 661.0
-offset_bottom = 308.0
+offset_left = 551.0
+offset_top = 310.0
+offset_right = 717.0
+offset_bottom = 341.0
 text = "Start"
 
 [connection signal="pressed" from="Button" to="." method="_on_start_button_pressed"]
