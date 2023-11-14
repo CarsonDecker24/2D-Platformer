@@ -314,6 +314,7 @@ func _dash(dir: Vector2, power):
 
 func _take_damage(hp):
 	health -= hp
+	
 
 func has_group(test):
 	return

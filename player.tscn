@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=96 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -65,7 +65,6 @@
 [ext_resource type="Texture2D" uid="uid://dd3k2d5dhxlav" path="res://Assets/hud sprites/arrowSelectHud-3.png.png" id="51_6il2d"]
 [ext_resource type="Texture2D" uid="uid://c5nvb58qdvmn7" path="res://Assets/hud sprites/arrowSelectHud-4.png.png" id="52_5jn4k"]
 [ext_resource type="Texture2D" uid="uid://noet8am6fpef" path="res://Assets/hud sprites/arrowSelectHud-1.png.png" id="53_qgp1g"]
-[ext_resource type="Script" path="res://SelectedArrowHud.gd" id="54_26wpq"]
 [ext_resource type="Script" path="res://HoldingArmAnimation.gd" id="56_nsjpx"]
 [ext_resource type="Texture2D" uid="uid://bf4pwmwan48vw" path="res://Assets/player sprites/arms n bows/1bow varients/4AirBow/bow itself.png" id="60_hp32n"]
 [ext_resource type="Texture2D" uid="uid://c2tvtkbrt1u87" path="res://Assets/hud sprites/sprite_2.png" id="60_klj1a"]
@@ -597,7 +596,6 @@ position = Vector2(216, -113)
 scale = Vector2(0.015, 0.015)
 sprite_frames = SubResource("SpriteFrames_jymnt")
 animation = &"slot_3"
-script = ExtResource("54_26wpq")
 
 [node name="healthBar" type="AnimatedSprite2D" parent="Camera"]
 z_index = 2
