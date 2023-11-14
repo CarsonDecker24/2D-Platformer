@@ -182,6 +182,8 @@ func _damage(type: String, damage: int):
 		speed_mod=.5
 		fire_rate_mod=.7
 		get_node("ice_particles").set_deferred("emitting", true)
+	else:
+		hp -= damage
 	print("Remaining HP: " + str(hp))
 	if (hp <= 0):
 		print("Died!")

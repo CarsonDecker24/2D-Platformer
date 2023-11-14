@@ -4,6 +4,7 @@ var vel
 var player
 var homing
 var disappear_timer = 1
+var parried = false
 
 var marked_for_disappear=false
 
@@ -61,7 +62,10 @@ func _on_body_entered(body):
 			print(player.health)
 			_die()
 		print("Hit Player!")
-		
+	if body.is_in_group("Enemy"):
+		if parried:
+			body._damage("Orb", 1)
+			_die()
 	if body.is_in_group("Ground"):
 		_die()
 
@@ -74,3 +78,4 @@ func _die():
 func _on_parry():
 	homing = false
 	vel = speed.rotated(global_position.angle_to_point(get_global_mouse_position()))
+	parried = true
