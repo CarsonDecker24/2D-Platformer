@@ -37,6 +37,8 @@ var dashTime=0
 var shiftSlot= "Air"
 var shift_use_time=1
 var shift_cooldown=1
+var health = 3
+
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -297,6 +299,9 @@ func _dash(dir: Vector2, power):
 	shift_cooldown=1
 	fire_cooldown=FIRECOOLDOWN
 	animPlayer.play("4air_quickfire")
+
+func _take_damage(hp):
+	health -= hp
 
 func has_group(test):
 	return

@@ -13,7 +13,7 @@ var offSet = 0
 @onready var parent = get_parent()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(current)
+	
 	
 	
 	#IDLE STATE=====================================================================================
@@ -60,28 +60,13 @@ func _process(delta):
 			play("jumpWalkRightUp")
 	
 	#this runs when the player is FALLING, basically at the HEIGHT OF THEIR JUMP====================
-	if fallTest-global_position.y<0 and not fallTest-global_position.y<-10 and not Input.is_action_pressed("ctrl"):
+	if fallTest-global_position.y<0 and not fallTest-global_position.y<-10:
 		if current == "jumpIdleRight":
 			current = "fallslowRight" 
 			play("slowFallRight")
 		if current=="walkRightJump":
 			current = "fallRight"
 			play("walkRightFall")
-	
-	if ((current == "fallslowRight" or current == "jumpIdleRight" or current == "walkRightJump" or current=="fallRight") and Input.is_action_pressed("ctrl")) or current== "airCrouching" or current == "airCrouched" or current == "unAirCrouching":
-		if current =="airCrouching" and is_playing()==false:
-			play("airCrouched")
-			current == "airCrouched"
-		if current!= "fallslowRight" and current != "jumpIdleRight" and current != "walkRightJump":
-			current = "airCrouching"
-			play("airCrouching")
-		if current=="airCrouched" and Input.is_action_just_released("ctrl"):
-			play_backwards("airCrouching")
-			current == "unAirCrouching"
-		if current == "unAirCrouching" and is_playing()==false:
-			current ="fallRight"
-			play("walkRightFall")
-	
 	
 	#this CHECKS to see if the PLAYER has LANDED yet================================================
 	if current == "fallslowRight":
@@ -90,7 +75,8 @@ func _process(delta):
 		if get_parent().is_on_floor()==true:
 			current = "idle"
 			play("idle")
-
+			
+			
 	
 	#checks to see if the PLAYER has landed, AFTER JUMPING FORWARDS=================================
 	if current =="fallRight" and get_parent().is_on_floor()==true :
@@ -296,6 +282,13 @@ func _facingLeft():
 				current="walkRightJump"
 				_quickturn()
 				play("jumpWalkRightUp")
+
+
+
+
+
+
+
 
 func _on_animation_changed():
 	if facing=="right":
