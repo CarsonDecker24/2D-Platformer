@@ -40,7 +40,8 @@ var shift_cooldown=1
 var health = 3
 var parrying = false
 var parryTime = 0
-
+var bowTurning=true
+var swingPosition: Vector2
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -56,7 +57,6 @@ func _ready():
 
 func _process(delta):
 	# Get the input direction and handle the movement/deceleration.
-	
 	direction = Input.get_axis("move_left", "move_right")
 	
 	#Variable for which direction the player is facing
@@ -120,9 +120,9 @@ func _physics_process(delta):
 			parrying = true
 			parryTime = .2
 	
-	if parrying:
+	if parrying==true:
 		animPlayer._parry()
-		parryTime -= delta
+		parryTime -= delta*1.2
 		if parryTime <= 0:
 			animPlayer._unParry()
 			parrying = false
@@ -175,10 +175,14 @@ func _walljump():
 
 func _aim(delta):
 	
+	if parryTime>0:
+			pivot.rotation = get_angle_to(get_global_mouse_position())-parryTime*15+1
 	#If the player is aiming.
-	if Input.is_action_pressed("right_click"):
-		#Aim toward mouse position
-		pivot.rotation = get_angle_to(get_global_mouse_position())
+	elif Input.is_action_pressed("right_click"):
+		#Aim toward mouse position if the player isnt parrying
+		if parryTime<=0:
+			pivot.rotation = get_angle_to(get_global_mouse_position())
+		
 		
 		#fire cooldown is the time where the bow guy is getting ready to fire the next shot,
 		#which would need to decrease if aiming draws the bow anyways.
@@ -189,11 +193,11 @@ func _aim(delta):
 			charge_amount += delta*1.2
 		
 		#Flip sprite to always be facing upward
-		if (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and not weapon_flipped:
+		if (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and not weapon_flipped and bowTurning==true:
 			weapon_sprite.scale.y *= -1
 			weapon_flipped = true
 			
-		elif not (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and weapon_flipped:
+		elif not (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and weapon_flipped and bowTurning==true:
 			weapon_sprite.scale.y *= -1
 			weapon_flipped = false
 		

@@ -189,6 +189,8 @@ func _damage(type: String, damage: int):
 		print("Died!")
 		is_dead = true
 		queue_free()
+	
+		
 
 func _is_dead():
 	return is_dead

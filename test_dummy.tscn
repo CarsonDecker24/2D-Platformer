@@ -246,7 +246,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0.887967, 0.887967, 0.887967, 1, 1, 1, 1, 
 [node name="TestDummy" type="CharacterBody2D" groups=["Enemy"]]
 scale = Vector2(0.8, 0.8)
 collision_layer = 3
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_1c4ne")
 metadata/homing = false
 

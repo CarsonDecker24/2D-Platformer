@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=98 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -577,6 +577,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3xnx"]
+size = Vector2(12, 5)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = -1
 position = Vector2(81, 62)
@@ -624,13 +627,18 @@ visibility_layer = 2
 texture_filter = 1
 position = Vector2(7.5, 1)
 sprite_frames = SubResource("SpriteFrames_8ko50")
-animation = &"4air_quickfire"
-frame = 5
-frame_progress = 1.0
+animation = &"parry"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(2.5, 1)
+
+[node name="parryBox" type="Area2D" parent="PivotHoldingArm"]
+position = Vector2(3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PivotHoldingArm/parryBox"]
+position = Vector2(5, 1.5)
+shape = SubResource("RectangleShape2D_f3xnx")
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
