@@ -198,6 +198,7 @@ func _is_dead():
 func _get_angle_to_player():
 	if player != null:
 		player_angle=global_position.angle_to_point(player.global_position)
+		print(player_angle)
 		return global_position.angle_to_point(player.global_position)
 		
 

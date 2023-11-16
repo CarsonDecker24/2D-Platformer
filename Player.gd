@@ -40,6 +40,7 @@ var shift_cooldown=1
 var health = 3
 var parrying = false
 var parryTime = 0
+var parryCooldown = 0
 var bowTurning=true
 var swingPosition: Vector2
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
@@ -114,6 +115,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("shift"):
 		if shiftSlot=="Air" and shift_cooldown<0:
 			_dash(get_local_mouse_position().normalized(),-100)
+			get_node("Camera/shiftBar").play("refill")
 	
 	if Input.is_action_just_pressed("e"):
 		if !parrying:
