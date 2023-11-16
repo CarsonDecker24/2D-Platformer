@@ -71,9 +71,11 @@ autoplay = "default"
 frame_progress = 0.796683
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
 z_index = -1
 texture_filter = 1
-amount = 50
+amount = 25
+fixed_fps = 60
 emission_shape = 1
 emission_sphere_radius = 7.22
 direction = Vector2(100, 0)
@@ -82,6 +84,7 @@ gravity = Vector2(0, 0)
 initial_velocity_max = 5.0
 tangential_accel_max = 1.39
 tangential_accel_curve = SubResource("Curve_wh6b3")
+scale_amount_max = 1.5
 scale_amount_curve = SubResource("Curve_f6wxx")
 color = Color(0.980392, 1, 1, 1)
 color_ramp = SubResource("Gradient_lhhq3")

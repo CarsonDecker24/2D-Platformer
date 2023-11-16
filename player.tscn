@@ -633,10 +633,11 @@ script = ExtResource("56_nsjpx")
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(2.5, 1)
 
-[node name="parryBox" type="Area2D" parent="PivotHoldingArm" groups=["Bow"]]
-position = Vector2(3, 1)
+[node name="parryBox" type="Area2D" parent="." groups=["Bow"]]
+self_modulate = Color(0, 1, 1, 1)
+position = Vector2(-3, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PivotHoldingArm/parryBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="parryBox"]
 position = Vector2(8, 1)
 shape = SubResource("RectangleShape2D_f3xnx")
 

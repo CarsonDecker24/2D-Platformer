@@ -5,13 +5,16 @@ var player
 var homing
 var disappear_timer = 1
 var parried = false
+var from_facing
+var directionalFix
 
 var marked_for_disappear=false
 
-func _setup(s: Vector2, p: Node, isHoming):
+func _setup(s: Vector2, p: Node, isHoming,player_side_right):
 	speed = s
 	player = p
 	homing = isHoming
+	directionalFix=player_side_right
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,10 +23,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if homing:
-		vel.x = move_toward(vel.x, speed.rotated(_get_angle_to_player()).x, 2 * delta)
-		vel.y = move_toward(vel.y, speed.rotated(_get_angle_to_player()).y, 2 * delta)
+		if directionalFix==true:
+			vel.x = move_toward(vel.x, speed.rotated(_get_angle_to_player()).x, 2 * delta)
+			vel.y = move_toward(vel.y, speed.rotated(_get_angle_to_player()).y, 2 * delta)
+		else:
+			vel.x = move_toward(vel.x, -speed.rotated(_get_angle_to_player()).x, 2 * delta)
+			vel.y = move_toward(vel.y, -speed.rotated(_get_angle_to_player()).y, 2 * delta)
+	print()
 	position += vel
-	
+	print(_get_angle_to_player())
 	if marked_for_disappear==true:
 		disappear_timer-=delta
 		get_node("Collision").set_deferred("disabled",true)
