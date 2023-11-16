@@ -41,7 +41,6 @@ var health = 3
 var parrying = false
 var parryTime = 0
 var bowTurning=true
-var swingPosition: Vector2
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")

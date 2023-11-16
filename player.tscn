@@ -578,7 +578,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3xnx"]
-size = Vector2(12, 5)
+size = Vector2(14, 18)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = -1
@@ -637,7 +637,7 @@ position = Vector2(2.5, 1)
 position = Vector2(3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PivotHoldingArm/parryBox"]
-position = Vector2(5, 1.5)
+position = Vector2(8, 1)
 shape = SubResource("RectangleShape2D_f3xnx")
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]

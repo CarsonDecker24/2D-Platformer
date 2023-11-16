@@ -46,6 +46,7 @@ func _on_area_entered(area):
 	if area.is_in_group("Bow"):
 		if player.parrying:
 			print("Parried!")
+			parried = true
 			_on_parry()
 	if area.is_in_group("Player"):
 		print("Hit Player!")
@@ -79,4 +80,3 @@ func _on_parry():
 	homing = false
 	vel = speed.rotated(global_position.angle_to_point(get_global_mouse_position()))
 	parried = true
-	
