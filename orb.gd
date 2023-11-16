@@ -43,6 +43,10 @@ func _on_area_entered(area):
 	if area.is_in_group("Arrow"):
 		if area.type == "Multi" or area.type == "MultiChild":
 			_die()
+	if area.is_in_group("Bow"):
+		if player.parrying:
+			print("Parried!")
+			_on_parry()
 	if area.is_in_group("Player"):
 		print("Hit Player!")
 		_die()
@@ -53,14 +57,10 @@ func _on_body_entered(body):
 	if body.is_in_group("Arrow"):
 		if body.type == "Multi" or body.type == "MultiChild":
 			_die()
-	if body.is_in_group("Player"):
-		if player.parrying:
-			print("Parried!")
-			_on_parry()
-		else:
-			player._take_damage(1)
-			print(player.health)
-			_die()
+	if body.is_in_group("Player") and !parried:
+		player._take_damage(1)
+		print(player.health)
+		_die()
 		print("Hit Player!")
 	if body.is_in_group("Enemy"):
 		if parried:

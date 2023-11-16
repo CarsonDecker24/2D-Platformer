@@ -633,7 +633,7 @@ script = ExtResource("56_nsjpx")
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(2.5, 1)
 
-[node name="parryBox" type="Area2D" parent="PivotHoldingArm"]
+[node name="parryBox" type="Area2D" parent="PivotHoldingArm" groups=["Bow"]]
 position = Vector2(3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PivotHoldingArm/parryBox"]
