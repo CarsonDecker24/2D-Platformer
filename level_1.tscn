@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmatwath7f8sm"]
+[gd_scene load_steps=12 format=3 uid="uid://dmatwath7f8sm"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_cj6ue"]
 [ext_resource type="Texture2D" uid="uid://cvjurk0lvn4xb" path="res://Assets/monochrome_tilemap_transparent_packed.png" id="2_n4ifg"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dblot7f26i2w" path="res://player.tscn" id="3_410nd"]
 [ext_resource type="PackedScene" uid="uid://d2kvnctkapc7y" path="res://test_dummy.tscn" id="4_kqark"]
 [ext_resource type="PackedScene" uid="uid://5cidhigmdn0w" path="res://water.tscn" id="5_tlohi"]
+[ext_resource type="PackedScene" uid="uid://do03vpsse5s6p" path="res://rope.tscn" id="7_3j4qc"]
+[ext_resource type="PackedScene" uid="uid://b8rakefmtqf3i" path="res://oil_bottle.tscn" id="7_4jpy3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vdj2w"]
 resource_name = "Tilemap"
@@ -1751,3 +1753,9 @@ metadata/homing = true
 
 [node name="Water" parent="." instance=ExtResource("5_tlohi")]
 position = Vector2(520, -96)
+
+[node name="rope" parent="." instance=ExtResource("7_3j4qc")]
+position = Vector2(777, -54)
+
+[node name="oilBottle" parent="rope" instance=ExtResource("7_4jpy3")]
+position = Vector2(0, 15)
