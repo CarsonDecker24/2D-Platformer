@@ -226,4 +226,5 @@ func _check_rays():
 
 func _gravity(delta):
 	#Apply gravity
-	velocity.y += gravity * delta
+	#velocity.y += gravity * delta
+	pass

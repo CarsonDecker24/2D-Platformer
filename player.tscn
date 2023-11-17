@@ -1,4 +1,4 @@
-[gd_scene load_steps=158 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=154 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -61,10 +61,6 @@
 [ext_resource type="Texture2D" uid="uid://bxjpn8na8fp6k" path="res://Assets/player sprites/walkJumpRight/sprite_6.png" id="37_ult6n"]
 [ext_resource type="Texture2D" uid="uid://bl03qr8o5367" path="res://Assets/player sprites/wall_drag/sprite_0.png" id="46_bjsil"]
 [ext_resource type="Texture2D" uid="uid://bw8bhxkb6s07c" path="res://Assets/player sprites/wall_drag/sprite_1.png" id="47_lkv0v"]
-[ext_resource type="Texture2D" uid="uid://c6jsn4ttrs6ri" path="res://Assets/hud sprites/arrowSelectHud-2.png.png" id="50_tt0ad"]
-[ext_resource type="Texture2D" uid="uid://dd3k2d5dhxlav" path="res://Assets/hud sprites/arrowSelectHud-3.png.png" id="51_6il2d"]
-[ext_resource type="Texture2D" uid="uid://c5nvb58qdvmn7" path="res://Assets/hud sprites/arrowSelectHud-4.png.png" id="52_5jn4k"]
-[ext_resource type="Texture2D" uid="uid://noet8am6fpef" path="res://Assets/hud sprites/arrowSelectHud-1.png.png" id="53_qgp1g"]
 [ext_resource type="Script" path="res://HoldingArmAnimation.gd" id="56_nsjpx"]
 [ext_resource type="Texture2D" uid="uid://bf4pwmwan48vw" path="res://Assets/player sprites/arms n bows/1bow varients/4AirBow/bow itself.png" id="60_hp32n"]
 [ext_resource type="Texture2D" uid="uid://c2tvtkbrt1u87" path="res://Assets/hud sprites/sprite_2.png" id="60_klj1a"]
@@ -356,7 +352,7 @@ height = 24.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("50_tt0ad")
+"texture": null
 }],
 "loop": true,
 "name": &"slot_1",
@@ -364,7 +360,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("51_6il2d")
+"texture": null
 }],
 "loop": true,
 "name": &"slot_2",
@@ -372,7 +368,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("52_5jn4k")
+"texture": null
 }],
 "loop": true,
 "name": &"slot_3",
@@ -380,7 +376,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("53_qgp1g")
+"texture": null
 }],
 "loop": false,
 "name": &"slot_none",
@@ -1068,10 +1064,10 @@ script = ExtResource("56_nsjpx")
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(2.5, 1)
 
-[node name="parryBox" type="Area2D" parent="PivotHoldingArm" groups=["Bow"]]
-position = Vector2(3, 1)
+[node name="parryBox" type="Area2D" parent="." groups=["Bow"]]
+position = Vector2(-3, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PivotHoldingArm/parryBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="parryBox"]
 position = Vector2(7, 1)
 shape = SubResource("RectangleShape2D_f3xnx")
 

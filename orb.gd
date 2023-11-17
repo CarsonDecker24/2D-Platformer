@@ -5,13 +5,15 @@ var player
 var homing
 var disappear_timer = 1
 var parried = false
+var fixTurn
 
 var marked_for_disappear=false
 
-func _setup(s: Vector2, p: Node, isHoming):
+func _setup(s: Vector2, p: Node, isHoming,turned):
 	speed = s
 	player = p
 	homing = isHoming
+	fixTurn=turned
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,8 +22,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if homing:
-		vel.x = move_toward(vel.x, speed.rotated(_get_angle_to_player()).x, 2 * delta)
-		vel.y = move_toward(vel.y, speed.rotated(_get_angle_to_player()).y, 2 * delta)
+		if fixTurn==true:
+			vel.x = move_toward(vel.x, speed.rotated(_get_angle_to_player()).x, 3 * delta)
+			vel.y = move_toward(vel.y, speed.rotated(_get_angle_to_player()).y, 3 * delta)
+		else:
+			vel.x = move_toward(vel.x, -speed.rotated(_get_angle_to_player()).x, 3 * delta)
+			vel.y = move_toward(vel.y, -speed.rotated(_get_angle_to_player()).y, 3 * delta)
 	position += vel
 	
 	if marked_for_disappear==true:
