@@ -111,8 +111,8 @@ func _physics_process(delta):
 		wallJumpNerf-=delta
 	
 	if Input.is_action_just_pressed("shift"):
-		if shiftSlot=="Air" and shift_cooldown<0:
-			_dash(get_local_mouse_position().normalized(),-100)
+		if shiftSlot=="Air" and shift_cooldown<=0:
+			_dash(get_local_mouse_position().normalized(),-500)
 			get_node("Camera/shiftBar").play("refill")
 	
 	if Input.is_action_just_pressed("e"):
@@ -204,7 +204,15 @@ func _aim(delta):
 		elif not (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and weapon_flipped and bowTurning==true:
 			weapon_sprite.scale.y *= -1
 			weapon_flipped = false
-		
+	elif shiftSlot == "Air" and shift_use_time >= 0:
+		pivot.rotation = get_angle_to(get_global_mouse_position())
+		if (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and not weapon_flipped and bowTurning==true:
+			weapon_sprite.scale.y *= -1
+			weapon_flipped = true
+			
+		elif not (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and weapon_flipped and bowTurning==true:
+			weapon_sprite.scale.y *= -1
+			weapon_flipped = false
 	else:
 		#if not aiming, just point straight in the direction
 		if facing == 1 and weapon_flipped:
