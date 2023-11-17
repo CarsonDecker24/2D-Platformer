@@ -31,6 +31,10 @@ func _shootAnim(fire_state):
 		play("bow_idle")
 		alreadyUnAiming=false
 		testVar=true
+	if fire_state=="air-row" and parry==false:
+		play("4air_quickfire")
+	if fire_state=="air-row" and is_playing()==false:
+		play("bow_idle")
 
 func _justShot():
 	stop()
