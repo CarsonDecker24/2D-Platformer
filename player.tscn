@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=98 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -61,19 +61,15 @@
 [ext_resource type="Texture2D" uid="uid://bxjpn8na8fp6k" path="res://Assets/player sprites/walkJumpRight/sprite_6.png" id="37_ult6n"]
 [ext_resource type="Texture2D" uid="uid://bl03qr8o5367" path="res://Assets/player sprites/wall_drag/sprite_0.png" id="46_bjsil"]
 [ext_resource type="Texture2D" uid="uid://bw8bhxkb6s07c" path="res://Assets/player sprites/wall_drag/sprite_1.png" id="47_lkv0v"]
-[ext_resource type="Texture2D" uid="uid://c6jsn4ttrs6ri" path="res://Assets/hud sprites/arrowSelectHud-2.png.png" id="50_tt0ad"]
-[ext_resource type="Texture2D" uid="uid://dd3k2d5dhxlav" path="res://Assets/hud sprites/arrowSelectHud-3.png.png" id="51_6il2d"]
-[ext_resource type="Texture2D" uid="uid://c5nvb58qdvmn7" path="res://Assets/hud sprites/arrowSelectHud-4.png.png" id="52_5jn4k"]
-[ext_resource type="Texture2D" uid="uid://noet8am6fpef" path="res://Assets/hud sprites/arrowSelectHud-1.png.png" id="53_qgp1g"]
 [ext_resource type="Script" path="res://HoldingArmAnimation.gd" id="56_nsjpx"]
 [ext_resource type="Texture2D" uid="uid://bf4pwmwan48vw" path="res://Assets/player sprites/arms n bows/1bow varients/4AirBow/bow itself.png" id="60_hp32n"]
 [ext_resource type="Texture2D" uid="uid://c2tvtkbrt1u87" path="res://Assets/hud sprites/sprite_2.png" id="60_klj1a"]
 [ext_resource type="Texture2D" uid="uid://b25wf6xykhgmv" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow_itself.png" id="61_gnw25"]
 [ext_resource type="Texture2D" uid="uid://ce6qn03w2vih" path="res://Assets/hud sprites/sprite_1.png" id="61_rm14d"]
+[ext_resource type="Texture2D" uid="uid://b1ofc2utadpkb" path="res://Assets/hud sprites/arrowHudSprites.png" id="62_4cvyw"]
 [ext_resource type="Texture2D" uid="uid://drjkiuqir6yka" path="res://Assets/hud sprites/sprite_3.png" id="62_grtnf"]
 [ext_resource type="Texture2D" uid="uid://cdo10nvawypkl" path="res://Assets/hud sprites/sprite_0.png" id="63_p4yf2"]
 [ext_resource type="Texture2D" uid="uid://boq2cwpnrxv21" path="res://Assets/player sprites/arms n bows/1bow varients/5ParryBow/parry bow.png" id="72_m5wss"]
-[ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="74_oi85t"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
@@ -351,11 +347,23 @@ animations = [{
 radius = 6.0
 height = 26.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lekl"]
+atlas = ExtResource("62_4cvyw")
+region = Rect2(0, 0, 51, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uf6q"]
+atlas = ExtResource("62_4cvyw")
+region = Rect2(0, 17, 51, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elh0r"]
+atlas = ExtResource("62_4cvyw")
+region = Rect2(0, 34, 51, 17)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_jymnt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("50_tt0ad")
+"texture": SubResource("AtlasTexture_6lekl")
 }],
 "loop": true,
 "name": &"slot_1",
@@ -363,7 +371,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("51_6il2d")
+"texture": SubResource("AtlasTexture_5uf6q")
 }],
 "loop": true,
 "name": &"slot_2",
@@ -371,19 +379,11 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("52_5jn4k")
+"texture": SubResource("AtlasTexture_elh0r")
 }],
 "loop": true,
 "name": &"slot_3",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("53_qgp1g")
-}],
-"loop": false,
-"name": &"slot_none",
-"speed": 0.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k3vi4"]
@@ -605,8 +605,9 @@ position = Vector2(-3, 1)
 zoom = Vector2(4, 4)
 
 [node name="SelectedArrowHud" type="AnimatedSprite2D" parent="Camera"]
+texture_filter = 3
+texture_repeat = 3
 position = Vector2(216, -113)
-scale = Vector2(0.015, 0.015)
 sprite_frames = SubResource("SpriteFrames_jymnt")
 animation = &"slot_3"
 
@@ -642,11 +643,6 @@ position = Vector2(2, 1)
 position = Vector2(0, 3)
 rotation = -3.14159
 shape = SubResource("RectangleShape2D_f3xnx")
-
-[node name="Sprite2D" type="Sprite2D" parent="parryBox"]
-position = Vector2(0, 3)
-scale = Vector2(13.75, 34)
-texture = ExtResource("74_oi85t")
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
