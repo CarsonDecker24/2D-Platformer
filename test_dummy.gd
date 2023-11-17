@@ -22,6 +22,7 @@ var from_facing
 const orbPath = preload("res://orb.tscn")
 @onready var animator = get_node("dummyPlayer")
 @onready var target_ray = get_node("TargetRay")
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	get_node("ice_particles").set_deferred("emitting", false)
@@ -48,7 +49,8 @@ func _process(delta):
 	shoot_cooldown-=delta
 	debuff_cooldown-=delta
 	
-	#gets the distance between this enemy and the player
+	_gravity(delta)
+	
 
 	
 	if player_spotted==true:
@@ -220,3 +222,7 @@ func _check_rays():
 		_spot_player(get_node("RayDown").get_collider())
 	if get_node("RayUp").get_collider() and not get_node("RayUp").get_collider() == null and get_node("RayUp").get_collider().is_in_group("Player"):
 		_spot_player(get_node("RayUp").get_collider())
+
+func _gravity(delta):
+	#Apply gravity
+	velocity.y += gravity * delta

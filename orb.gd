@@ -29,9 +29,7 @@ func _process(delta):
 		else:
 			vel.x = move_toward(vel.x, -speed.rotated(_get_angle_to_player()).x, 2 * delta)
 			vel.y = move_toward(vel.y, -speed.rotated(_get_angle_to_player()).y, 2 * delta)
-	print()
 	position += vel
-	print(_get_angle_to_player())
 	if marked_for_disappear==true:
 		disappear_timer-=delta
 		get_node("Collision").set_deferred("disabled",true)
@@ -86,5 +84,9 @@ func _die():
 
 func _on_parry():
 	homing = false
-	vel = speed.rotated(global_position.angle_to_point(get_global_mouse_position()))
+	if directionalFix==true:
+		vel = speed.rotated(global_position.angle_to_point(get_global_mouse_position()))
+	else:
+		vel = -speed.rotated(global_position.angle_to_point(get_global_mouse_position()))
 	parried = true
+	print("parried!")

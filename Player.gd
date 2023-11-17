@@ -61,7 +61,6 @@ func _process(delta):
 	#Variable for which direction the player is facing
 	if direction != 0:
 		facing = direction
-	
 	#Aim functions
 	_aim(delta)
 	
@@ -118,7 +117,11 @@ func _physics_process(delta):
 		if !parrying:
 			parrying = true
 			parryTime = .2
-	
+			if rad_to_deg(get_angle_to(get_global_mouse_position()))> 90 or rad_to_deg(get_angle_to(get_global_mouse_position()))<-90:
+				get_node("parryBox").position.x=-13
+			else:
+				get_node("parryBox").position.x = 2
+				
 	if parrying==true:
 		animPlayer._parry()
 		parryTime -= delta*1.2
@@ -238,7 +241,7 @@ func _shoot_check(delta):
 		#fire
 		if fire_cooldown <=0:
 			charge_amount=1
-			_shoot()
+			_shoot(delta)
 			fire_cooldown=FIRECOOLDOWN
 			fire_state="not"
 	
@@ -247,7 +250,7 @@ func _shoot_check(delta):
 		
 		#fire and reset the cooldown
 		if fire_cooldown <=0:
-			_shoot()
+			_shoot(delta)
 			fire_cooldown=FIRECOOLDOWN*2
 			fire_state="not"
 	if Input.is_action_just_released("right_click") and fire_state=="aim" and not (fire_state=="fireWhenReady" or fire_state=="quick") :
@@ -263,13 +266,13 @@ func _shoot_check(delta):
 	elif fire_cooldown<=0 and Input.is_action_just_pressed("left_click"):
 		fire_cooldown=FIRECOOLDOWN*2
 		fire_state="not"
-		_shoot()
+		_shoot(delta)
 
-func _shoot():
+func _shoot(delta):
 	#Creates an instance of the arrow scene, sets inital rotation, and sets velocity to shoot at mouse
 	var arrow = arrowPath.instantiate()
 	#arrow._initialize_arrow(slots[arrow_hud_slot - 1], arrow_count, charge_amount, pivot.rotation_degrees, self)
-	arrow._initialize_arrow(arrow_count, slots[arrow_hud_slot - 1], Vector2(5*charge_amount,0).rotated(pivot.rotation), pivot.rotation, self)
+	arrow._initialize_arrow(arrow_count, slots[arrow_hud_slot - 1], Vector2(500*charge_amount*delta,0).rotated(pivot.rotation), pivot.rotation, self)
 	arrow_count += 1
 	add_sibling(arrow)
 	arrow.position = get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
@@ -318,8 +321,7 @@ func _dash(dir: Vector2, power):
 	animPlayer.play("4air_quickfire")
 
 func _take_damage(hp):
-	health -= hp
-	
+	health -= hp	
 
 func has_group(test):
 	return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=99 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -73,6 +73,7 @@
 [ext_resource type="Texture2D" uid="uid://drjkiuqir6yka" path="res://Assets/hud sprites/sprite_3.png" id="62_grtnf"]
 [ext_resource type="Texture2D" uid="uid://cdo10nvawypkl" path="res://Assets/hud sprites/sprite_0.png" id="63_p4yf2"]
 [ext_resource type="Texture2D" uid="uid://boq2cwpnrxv21" path="res://Assets/player sprites/arms n bows/1bow varients/5ParryBow/parry bow.png" id="72_m5wss"]
+[ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="74_oi85t"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
@@ -578,7 +579,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3xnx"]
-size = Vector2(14, 18)
+size = Vector2(14, 33)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = -1
@@ -631,15 +632,21 @@ animation = &"parry"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
-position = Vector2(2.5, 1)
+position = Vector2(0.5, 2)
 
 [node name="parryBox" type="Area2D" parent="." groups=["Bow"]]
 self_modulate = Color(0, 1, 1, 1)
-position = Vector2(-3, 1)
+position = Vector2(2, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="parryBox"]
-position = Vector2(8, 1)
+position = Vector2(0, 3)
+rotation = -3.14159
 shape = SubResource("RectangleShape2D_f3xnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="parryBox"]
+position = Vector2(0, 3)
+scale = Vector2(13.75, 34)
+texture = ExtResource("74_oi85t")
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
