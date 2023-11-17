@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://do03vpsse5s6p"]
+
+[ext_resource type="Script" path="res://rope.gd" id="1_5t8fe"]
+[ext_resource type="Texture2D" uid="uid://ctxl3i7luicfc" path="res://Assets/player sprites/grapple/grapple arrow-2.png.png" id="2_ge4sc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rg7ns"]
+size = Vector2(3.59139, 24.506)
+
+[node name="rope" type="Node2D" groups=["Rope"]]
+script = ExtResource("1_5t8fe")
+
+[node name="area" type="Area2D" parent="."]
+
+[node name="hitbox" type="CollisionShape2D" parent="area"]
+shape = SubResource("RectangleShape2D_rg7ns")
+
+[node name="GrappleArrow-2_png" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-9.53674e-07, -2.38419e-07)
+rotation = 1.5708
+scale = Vector2(0.937118, 0.876522)
+texture = ExtResource("2_ge4sc")
+
+[connection signal="area_entered" from="area" to="." method="_on_area_2d_area_entered"]
