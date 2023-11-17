@@ -29,7 +29,7 @@ var fire_state = "not"
 var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
-var slots = ["Wind", "Multi", "Ice"]
+var slots = ["Fire", "Multi", "Ice"]
 var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot
@@ -74,6 +74,9 @@ func _process(delta):
 	dashTime-=delta
 	shift_cooldown-=delta
 	shift_use_time-=delta
+	if shift_use_time>0:
+		animPlayer.play("4air_quickfire")
+	
 	if dashTime<=0:
 		FRICTION=25
 	else:
@@ -114,6 +117,7 @@ func _physics_process(delta):
 		if shiftSlot=="Air" and shift_cooldown<=0:
 			_dash(get_local_mouse_position().normalized(),-500)
 			get_node("Camera/shiftBar").play("refill")
+			
 	
 	if Input.is_action_just_pressed("e"):
 		if !parrying:
@@ -242,7 +246,7 @@ func _shoot_check(delta):
 	#if the bow isnt being drawn and you press fire, then quick fire. (if the or condition is met you dont have to keep pressing fire)
 	animPlayer._shootAnim(fire_state)
 	#print(fire_state)
-	if (fire_cooldown == FIRECOOLDOWN and Input.is_action_just_pressed("left_click")) or fire_state == "quick":
+	if (fire_cooldown == FIRECOOLDOWN and Input.is_action_just_pressed("left_click")) or fire_state == "quick" and not shift_use_time>0:
 		fire_state= "quick"
 		
 		#run the timer down
@@ -255,7 +259,7 @@ func _shoot_check(delta):
 			fire_cooldown=FIRECOOLDOWN
 			fire_state="not"
 	
-	elif (fire_cooldown >0 and Input.is_action_pressed("right_click") and Input.is_action_just_pressed("left_click")) or fire_state=="fireWhenReady":
+	elif (fire_cooldown >0 and Input.is_action_pressed("right_click") and Input.is_action_just_pressed("left_click")) or fire_state=="fireWhenReady" and not shift_use_time>0:
 		fire_state="fireWhenReady"
 		
 		#fire and reset the cooldown
@@ -263,12 +267,12 @@ func _shoot_check(delta):
 			_shoot(delta)
 			fire_cooldown=FIRECOOLDOWN*2
 			fire_state="not"
-	if Input.is_action_just_released("right_click") and fire_state=="aim" and not (fire_state=="fireWhenReady" or fire_state=="quick") :
+	if Input.is_action_just_released("right_click") and fire_state=="aim" and not (fire_state=="fireWhenReady" or fire_state=="quick") and not shift_use_time>0 :
 			fire_state="unAim"
 			#animPlayer._shootAnim(fire_state)
 			fire_cooldown=FIRECOOLDOWN
 	
-	if get_node("PivotHoldingArm/HoldingArmAnimation").alreadyUnAiming==false and get_node("PivotHoldingArm/HoldingArmAnimation").testVar == true:
+	if get_node("PivotHoldingArm/HoldingArmAnimation").alreadyUnAiming==false and get_node("PivotHoldingArm/HoldingArmAnimation").testVar == true and not shift_use_time>0:
 		fire_state="not"
 		
 	
@@ -325,10 +329,12 @@ func _arrow_hud():
 func _dash(dir: Vector2, power):
 	velocity += dir * power
 	dashTime =.2
-	shift_use_time=.1
+	shift_use_time=.4
 	shift_cooldown=1
 	fire_cooldown=FIRECOOLDOWN
+	
 	animPlayer.play("4air_quickfire")
+	
 
 func _take_damage(hp):
 	health -= hp	

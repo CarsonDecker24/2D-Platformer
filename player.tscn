@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=158 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -67,6 +67,7 @@
 [ext_resource type="Texture2D" uid="uid://b25wf6xykhgmv" path="res://Assets/player sprites/arms n bows/1bow varients/1RegularBow/bow_itself.png" id="61_gnw25"]
 [ext_resource type="Texture2D" uid="uid://ce6qn03w2vih" path="res://Assets/hud sprites/sprite_1.png" id="61_rm14d"]
 [ext_resource type="Texture2D" uid="uid://drjkiuqir6yka" path="res://Assets/hud sprites/sprite_3.png" id="62_grtnf"]
+[ext_resource type="Texture2D" uid="uid://c66xwjtbdrbt8" path="res://Assets/hud sprites/arrowHudSprites.png" id="62_xsr1f"]
 [ext_resource type="Texture2D" uid="uid://cdo10nvawypkl" path="res://Assets/hud sprites/sprite_0.png" id="63_p4yf2"]
 [ext_resource type="Texture2D" uid="uid://bh5roubjvtl08" path="res://Assets/hud sprites/shift refill.png" id="70_sc2ib"]
 [ext_resource type="Texture2D" uid="uid://tnlv8gmtl6lj" path="res://Assets/hud sprites/e refill.png" id="71_ry127"]
@@ -348,11 +349,23 @@ animations = [{
 radius = 6.0
 height = 24.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y0kl"]
+atlas = ExtResource("62_xsr1f")
+region = Rect2(0, 0, 51, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6exjb"]
+atlas = ExtResource("62_xsr1f")
+region = Rect2(0, 19, 51, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edeaa"]
+atlas = ExtResource("62_xsr1f")
+region = Rect2(0, 38, 51, 19)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_jymnt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_8y0kl")
 }],
 "loop": true,
 "name": &"slot_1",
@@ -360,7 +373,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_6exjb")
 }],
 "loop": true,
 "name": &"slot_2",
@@ -368,19 +381,11 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_edeaa")
 }],
 "loop": true,
 "name": &"slot_3",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": null
-}],
-"loop": false,
-"name": &"slot_none",
-"speed": 0.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k3vi4"]
@@ -931,7 +936,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"4air_quickfire",
-"speed": 3.0
+"speed": 120.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -994,7 +999,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3xnx"]
-size = Vector2(16, 8)
+size = Vector2(16, 34)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = -1
@@ -1021,10 +1026,12 @@ zoom = Vector2(4, 4)
 
 [node name="SelectedArrowHud" type="AnimatedSprite2D" parent="Camera"]
 z_index = 2
-position = Vector2(216, -113)
-scale = Vector2(0.015, 0.015)
+texture_filter = 1
+position = Vector2(207, -113)
 sprite_frames = SubResource("SpriteFrames_jymnt")
-animation = &"slot_3"
+animation = &"slot_1"
+
+[node name="Slot_1" type="Sprite2D" parent="Camera/SelectedArrowHud"]
 
 [node name="healthBar" type="AnimatedSprite2D" parent="Camera"]
 z_index = 2
@@ -1058,7 +1065,7 @@ visibility_layer = 2
 texture_filter = 1
 position = Vector2(7.5, 1)
 sprite_frames = SubResource("SpriteFrames_8ko50")
-animation = &"parry"
+animation = &"4air_quickfire"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
@@ -1068,7 +1075,7 @@ position = Vector2(2.5, 1)
 position = Vector2(-3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="parryBox"]
-position = Vector2(7, 1)
+position = Vector2(6, 2)
 shape = SubResource("RectangleShape2D_f3xnx")
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
