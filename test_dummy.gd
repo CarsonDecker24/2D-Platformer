@@ -18,9 +18,12 @@ var walking = "walking holster"
 var idle = "idle holster"
 const SPEED =60
 const FIRE_RATE=1
+var from_facing
 const orbPath = preload("res://orb.tscn")
 @onready var animator = get_node("dummyPlayer")
 @onready var target_ray = get_node("TargetRay")
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 func _ready():
 	get_node("ice_particles").set_deferred("emitting", false)
 
@@ -46,7 +49,8 @@ func _process(delta):
 	shoot_cooldown-=delta
 	debuff_cooldown-=delta
 	
-	#gets the distance between this enemy and the player
+	_gravity(delta)
+	
 
 	
 	if player_spotted==true:
@@ -72,7 +76,7 @@ func _process(delta):
 		
 		print(sees_player)
 		if sees_player and shoot_cooldown<0:
-			_shoot_orb()
+			_shoot_orb(delta)
 			shoot_cooldown=FIRE_RATE/fire_rate_mod
 		
 		#this flips the dummy to face the placer once the player has been spotted 
@@ -202,9 +206,9 @@ func _get_angle_to_player():
 		return global_position.angle_to_point(player.global_position)
 		
 
-func _shoot_orb():
+func _shoot_orb(delta):
 	var orb = orbPath.instantiate()
-	orb._setup(Vector2(3,0).rotated(_get_angle_to_player()), player, get_meta("homing"))
+	orb._setup(Vector2(200*delta,0).rotated(_get_angle_to_player()), player, get_meta("homing"),player_side_right)
 	add_sibling(orb)
 	orb.position = global_position
 
@@ -219,3 +223,7 @@ func _check_rays():
 		_spot_player(get_node("RayDown").get_collider())
 	if get_node("RayUp").get_collider() and not get_node("RayUp").get_collider() == null and get_node("RayUp").get_collider().is_in_group("Player"):
 		_spot_player(get_node("RayUp").get_collider())
+
+func _gravity(delta):
+	#Apply gravity
+	velocity.y += gravity * delta
