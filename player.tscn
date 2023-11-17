@@ -1,4 +1,4 @@
-[gd_scene load_steps=158 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=168 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -68,6 +68,7 @@
 [ext_resource type="Texture2D" uid="uid://ce6qn03w2vih" path="res://Assets/hud sprites/sprite_1.png" id="61_rm14d"]
 [ext_resource type="Texture2D" uid="uid://drjkiuqir6yka" path="res://Assets/hud sprites/sprite_3.png" id="62_grtnf"]
 [ext_resource type="Texture2D" uid="uid://c66xwjtbdrbt8" path="res://Assets/hud sprites/arrowHudSprites.png" id="62_xsr1f"]
+[ext_resource type="Texture2D" uid="uid://brqp776b50hg6" path="res://Assets/hud sprites/arrowVarientListForHud.png" id="63_b1f75"]
 [ext_resource type="Texture2D" uid="uid://cdo10nvawypkl" path="res://Assets/hud sprites/sprite_0.png" id="63_p4yf2"]
 [ext_resource type="Texture2D" uid="uid://bh5roubjvtl08" path="res://Assets/hud sprites/shift refill.png" id="70_sc2ib"]
 [ext_resource type="Texture2D" uid="uid://tnlv8gmtl6lj" path="res://Assets/hud sprites/e refill.png" id="71_ry127"]
@@ -385,6 +386,105 @@ animations = [{
 }],
 "loop": true,
 "name": &"slot_3",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_juo0s"]
+atlas = ExtResource("63_b1f75")
+region = Rect2(24, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj51n"]
+atlas = ExtResource("63_b1f75")
+region = Rect2(12, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nexcw"]
+atlas = ExtResource("63_b1f75")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edhkj"]
+atlas = ExtResource("63_b1f75")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67uf8"]
+atlas = ExtResource("63_b1f75")
+region = Rect2(24, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtdum"]
+atlas = ExtResource("63_b1f75")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6njuw"]
+atlas = ExtResource("63_b1f75")
+region = Rect2(0, 24, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2o4v"]
+atlas = ExtResource("63_b1f75")
+region = Rect2(12, 24, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c1u5q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_juo0s")
+}],
+"loop": true,
+"name": &"Accuracy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj51n")
+}],
+"loop": true,
+"name": &"Bounce",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nexcw")
+}],
+"loop": false,
+"name": &"Fire",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edhkj")
+}],
+"loop": false,
+"name": &"Ice",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67uf8")
+}],
+"loop": false,
+"name": &"Multi",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtdum")
+}],
+"loop": false,
+"name": &"Pierce",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6njuw")
+}],
+"loop": true,
+"name": &"Vines",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2o4v")
+}],
+"loop": true,
+"name": &"ghost",
 "speed": 5.0
 }]
 
@@ -936,7 +1036,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"4air_quickfire",
-"speed": 120.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1031,7 +1131,10 @@ position = Vector2(207, -113)
 sprite_frames = SubResource("SpriteFrames_jymnt")
 animation = &"slot_1"
 
-[node name="Slot_1" type="Sprite2D" parent="Camera/SelectedArrowHud"]
+[node name="Slot_1" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
+position = Vector2(-15.4691, -1.47194)
+sprite_frames = SubResource("SpriteFrames_c1u5q")
+animation = &"Bounce"
 
 [node name="healthBar" type="AnimatedSprite2D" parent="Camera"]
 z_index = 2

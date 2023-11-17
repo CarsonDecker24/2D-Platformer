@@ -76,7 +76,9 @@ func _process(delta):
 	shift_use_time-=delta
 	if shift_use_time>0:
 		animPlayer.play("4air_quickfire")
-	
+		animPlayer._shootAnim(fire_state)
+	if shift_use_time<0 and fire_state=="air-row":
+		fire_state="not"
 	if dashTime<=0:
 		FRICTION=25
 	else:
@@ -329,10 +331,10 @@ func _arrow_hud():
 func _dash(dir: Vector2, power):
 	velocity += dir * power
 	dashTime =.2
-	shift_use_time=.4
+	shift_use_time=.2
 	shift_cooldown=1
 	fire_cooldown=FIRECOOLDOWN
-	
+	fire_state="air-row"
 	animPlayer.play("4air_quickfire")
 	
 
@@ -345,3 +347,14 @@ func has_group(test):
 func _pivPos(pivX,pivY):
 	piv.position.x=pivX
 	piv.position.y=pivY
+
+func _refreshArrowHud():
+	if slots[0] == "Fire":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Fire")
+	elif slots[0] == "Ice":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Ice")
+	elif slots[0] == "Ice":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Ice")
+	
+	
+	
