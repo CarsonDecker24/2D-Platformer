@@ -291,31 +291,55 @@ func _on_animation_changed():
 			walkframe=0
 
 func _on_frame_changed():
-	if walkingLoop==true:
+	if current=="walkingRight" or current == "idle":
 		if facing=="right":
 			if frame==0:
 				parent._pivPos(-3,0)
+				parent._armPos(-5,3)
 			elif frame ==1:
-				parent._pivPos(-3,-1)
-			elif frame>=2 and frame<=4:
-				parent._pivPos(-3,-2)
-			elif frame==5 :
-				parent._pivPos(-3,-1)
+				parent._pivPos(-4,0)
+				parent._armPos(-4,4)
+			elif frame == 2:
+				parent._pivPos(-5,1)
+				parent._armPos(-3,5)
+			elif frame==3 :
+				parent._pivPos(-6,1)
+				parent._armPos(-2,4)
+			elif frame==4:
+				parent._pivPos(-7,3)
+				parent._armPos(-1,3)
+			elif frame==5:
+				parent._pivPos(-6,1)
+				parent._armPos(-2,4)
 			elif frame==6:
-				parent._pivPos(-3,0)
-			elif frame==7:
-				parent._pivPos(-3,1)
+				parent._pivPos(-5,1)
+				parent._armPos(-3,4)
+			else:
+				parent._pivPos(-4,0)
+				parent._armPos(-4,4)
 		else:
-			if frame==0:
-				parent._pivPos(-5,1)
-			elif frame ==1:
-				parent._pivPos(-5,0)
-			elif frame>=2 and frame<=4:
-				parent._pivPos(-5,-1)
-			elif frame==5 :
-				parent._pivPos(-5,-0)
+			if frame==4:
+				parent._pivPos(-1,3)
+				parent._armPos(-8,3)
+			elif frame ==5:
+				parent._pivPos(-2,2)
+				parent._armPos(-7,4)
 			elif frame==6:
+				parent._pivPos(-3,2)
+				parent._armPos(-6,5)
+			elif frame==7 :
+				parent._pivPos(-4,1)
+				parent._armPos(-5,4)
+			elif frame==0:
 				parent._pivPos(-5,1)
-			elif frame==7:
-				parent._pivPos(-5,2)
+				parent._armPos(-4,3)
+			elif frame==1:
+				parent._pivPos(-4,1)
+				parent._armPos(-5,4)
+			elif frame==2:
+				parent._pivPos(-3,2)
+				parent._armPos(-6,4)
+			elif frame==3:
+				parent._pivPos(-2,2)
+				parent._armPos(-7,4)
 	pass # Replace with function body.

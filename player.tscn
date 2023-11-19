@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=170 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -73,6 +73,8 @@
 [ext_resource type="Texture2D" uid="uid://bh5roubjvtl08" path="res://Assets/hud sprites/shift refill.png" id="70_sc2ib"]
 [ext_resource type="Texture2D" uid="uid://tnlv8gmtl6lj" path="res://Assets/hud sprites/e refill.png" id="71_ry127"]
 [ext_resource type="Texture2D" uid="uid://boq2cwpnrxv21" path="res://Assets/player sprites/arms n bows/1bow varients/5ParryBow/parry bow.png" id="72_m5wss"]
+[ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="74_qvcdd"]
+[ext_resource type="Script" path="res://armPosition.gd" id="74_xk2jf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
@@ -1036,7 +1038,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"4air_quickfire",
-"speed": 30.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1157,29 +1159,46 @@ position = Vector2(-193, -89)
 sprite_frames = SubResource("SpriteFrames_u0ohg")
 animation = &"refill"
 
-[node name="Reload" type="Timer" parent="."]
-
 [node name="PivotHoldingArm" type="Node2D" parent="."]
 position = Vector2(-6, 0)
 
 [node name="HoldingArmAnimation" type="AnimatedSprite2D" parent="PivotHoldingArm"]
 light_mask = 0
 visibility_layer = 2
-texture_filter = 1
+z_index = 1
+z_as_relative = false
+texture_filter = 5
 position = Vector2(7.5, 1)
 sprite_frames = SubResource("SpriteFrames_8ko50")
-animation = &"4air_quickfire"
+animation = &"bow_quickfire"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(2.5, 1)
 
+[node name="pullArmPosition" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
+position = Vector2(-1.5, 0)
+
 [node name="parryBox" type="Area2D" parent="." groups=["Bow"]]
 position = Vector2(-3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="parryBox"]
+visible = false
 position = Vector2(6, 2)
 shape = SubResource("RectangleShape2D_f3xnx")
 
+[node name="armPosition" type="Node2D" parent="."]
+z_index = 1
+z_as_relative = false
+position = Vector2(-2, 2)
+script = ExtResource("74_xk2jf")
+
+[node name="Sprite2D" type="Sprite2D" parent="armPosition"]
+self_modulate = Color(0.996078, 0.901961, 0, 1)
+position = Vector2(0.491562, -0.510139)
+scale = Vector2(1.98312, 2.02028)
+texture = ExtResource("74_qvcdd")
+
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
+[connection signal="frame_changed" from="PivotHoldingArm/HoldingArmAnimation" to="PivotHoldingArm/HoldingArmAnimation" method="_on_frame_changed"]

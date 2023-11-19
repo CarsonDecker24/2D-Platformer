@@ -347,7 +347,12 @@ func has_group(test):
 func _pivPos(pivX,pivY):
 	piv.position.x=pivX
 	piv.position.y=pivY
-
+	
+func _armPos(armX,armY):
+	if fire_state != "aim" and fire_state != "quick":
+		get_node("armPosition").position.x=armX
+		get_node("armPosition").position.y=armY
+	
 func _refreshArrowHud():
 	if slots[0] == "Fire":
 		get_node("Camera/SelectedArrowHud/Slot_1").play("Fire")
@@ -355,6 +360,4 @@ func _refreshArrowHud():
 		get_node("Camera/SelectedArrowHud/Slot_1").play("Ice")
 	elif slots[0] == "Ice":
 		get_node("Camera/SelectedArrowHud/Slot_1").play("Ice")
-	
-	
 	
