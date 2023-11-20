@@ -1,4 +1,4 @@
-[gd_scene load_steps=170 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=171 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://ctp3grcpfl6ms" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk5.png" id="8_bq47u"]
 [ext_resource type="Texture2D" uid="uid://bw1385i2u0yd5" path="res://Assets/player sprites/air crouch/ctrl5.png" id="8_ug7e3"]
 [ext_resource type="Texture2D" uid="uid://txkatkm2bc7h" path="res://Assets/player sprites/air crouch/ctrl6.png" id="9_04r5o"]
+[ext_resource type="Texture2D" uid="uid://0q7bhmuehib4" path="res://Assets/player sprites/turnIdle/flipped again7.png" id="10_ngeiu"]
 [ext_resource type="Texture2D" uid="uid://b56yndi0263bk" path="res://Assets/player sprites/slow fall frame.png" id="11_lpnih"]
 [ext_resource type="Texture2D" uid="uid://cdc7m2vff8nj8" path="res://Assets/player sprites/windupRightWalk/windupRightW01.png" id="12_1mify"]
 [ext_resource type="Texture2D" uid="uid://g2uk5kqarcd5" path="res://Assets/player sprites/turnLeftWalk/turningLeftWalk0.png" id="12_conal"]
@@ -115,10 +116,13 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_md6y6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ngeiu")
 }],
 "loop": false,
 "name": &"idle",
-"speed": 30.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1115,7 +1119,7 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"walkingRight"
+animation = &"idle"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]

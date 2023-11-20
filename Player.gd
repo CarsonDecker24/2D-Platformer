@@ -352,7 +352,6 @@ func _armPos(armX,armY):
 	if fire_state != "aim" and fire_state != "quick":
 		get_node("armPosition").position.x=armX
 		get_node("armPosition").position.y=armY
-	
 func _refreshArrowHud():
 	if slots[0] == "Fire":
 		get_node("Camera/SelectedArrowHud/Slot_1").play("Fire")

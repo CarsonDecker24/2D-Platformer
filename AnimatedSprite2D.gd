@@ -293,7 +293,7 @@ func _on_animation_changed():
 func _on_frame_changed():
 	if current=="walkingRight" or current == "idle":
 		if facing=="right":
-			if frame==0:
+			if frame==0 or current=="idle":
 				parent._pivPos(-3,0)
 				parent._armPos(-5,3)
 			elif frame ==1:
@@ -317,6 +317,7 @@ func _on_frame_changed():
 			else:
 				parent._pivPos(-4,0)
 				parent._armPos(-4,4)
+			
 		else:
 			if frame==4:
 				parent._pivPos(-1,3)
@@ -330,7 +331,7 @@ func _on_frame_changed():
 			elif frame==7 :
 				parent._pivPos(-4,1)
 				parent._armPos(-5,4)
-			elif frame==0:
+			elif frame==0 or current=="idle":
 				parent._pivPos(-5,1)
 				parent._armPos(-4,3)
 			elif frame==1:
@@ -342,4 +343,5 @@ func _on_frame_changed():
 			elif frame==3:
 				parent._pivPos(-2,2)
 				parent._armPos(-7,4)
+			
 	pass # Replace with function body.

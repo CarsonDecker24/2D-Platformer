@@ -69,6 +69,4 @@ func _on_frame_changed():
 			if frame==5:
 				get_node("pullArmPosition").position.x=-10
 				get_node("pullArmPosition").position.y=1
-		
-	print(get_node("pullArmPosition"))
 	pass # Replace with function body.
