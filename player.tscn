@@ -647,7 +647,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4lurb")
 }],
-"loop": true,
+"loop": false,
 "name": &"full",
 "speed": 5.0
 }, {
@@ -856,7 +856,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y31iw")
 }],
-"loop": true,
+"loop": false,
 "name": &"full",
 "speed": 5.0
 }, {
@@ -942,9 +942,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4t2xw")
 }],
-"loop": true,
+"loop": false,
 "name": &"refill",
-"speed": 20.0
+"speed": 60.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_al3jv"]
@@ -1113,6 +1113,7 @@ position = Vector2(81, 62)
 script = ExtResource("1_fhlp4")
 
 [node name="PlayerBodyAnimation" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.603922)
 visibility_layer = 2
 z_index = 2
 texture_filter = 1
@@ -1154,14 +1155,14 @@ z_index = 2
 texture_filter = 1
 position = Vector2(-194, -72)
 sprite_frames = SubResource("SpriteFrames_pcq48")
-animation = &"refill"
+animation = &"full"
 
 [node name="eBar" type="AnimatedSprite2D" parent="Camera"]
 z_index = 2
 texture_filter = 1
 position = Vector2(-193, -89)
 sprite_frames = SubResource("SpriteFrames_u0ohg")
-animation = &"refill"
+animation = &"full"
 
 [node name="PivotHoldingArm" type="Node2D" parent="."]
 position = Vector2(-6, 0)
