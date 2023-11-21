@@ -6,7 +6,7 @@ const ACCEL = 25.0
 
 const DEFAULTARROWSPEED = 1.1
 const arrowPath = preload("res://new_arrow.tscn")
-const FIRECOOLDOWN = .2
+const FIRECOOLDOWN = .4
 
 var FRICTION = 25.0
 var direction
@@ -42,6 +42,8 @@ var parrying = false
 var parryTime = 0
 var parryCooldown = 0
 var bowTurning=true
+var invincibilityFrames =0
+const INVINCIBILITYTIME = .2
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -74,6 +76,7 @@ func _process(delta):
 	dashTime-=delta
 	shift_cooldown-=delta
 	shift_use_time-=delta
+	invincibilityFrames-=delta
 	if shift_use_time>0:
 		animPlayer.play("4air_quickfire")
 		animPlayer._shootAnim(fire_state)
@@ -83,6 +86,10 @@ func _process(delta):
 		FRICTION=25
 	else:
 		FRICTION=3
+	if invincibilityFrames>0:
+		$PlayerBodyAnimation.self_modulate=Color(1, 1, 1, .8)
+	else:
+		$PlayerBodyAnimation.self_modulate=Color(1, 1, 1, 1)
 	#get_node("Node2D/TextureRect").
 
 func _physics_process(delta):
@@ -116,20 +123,21 @@ func _physics_process(delta):
 		wallJumpNerf-=delta
 	
 	if Input.is_action_just_pressed("shift"):
-		if shiftSlot=="Air" and shift_cooldown<=0:
+		if shiftSlot=="Air" and shift_cooldown<=0 and get_node("Camera/shiftBar").is_playing()==false :
 			_dash(get_local_mouse_position().normalized(),-500)
 			get_node("Camera/shiftBar").play("refill")
 			
 	
 	if Input.is_action_just_pressed("e"):
-		if !parrying:
+		if !parrying and get_node("Camera/eBar").is_playing()==false:
 			parrying = true
 			parryTime = .2
 			if rad_to_deg(get_angle_to(get_global_mouse_position()))> 90 or rad_to_deg(get_angle_to(get_global_mouse_position()))<-90:
 				get_node("parryBox").position.x=-13
 			else:
 				get_node("parryBox").position.x = 2
-				
+			get_node("Camera/eBar").play("refill")
+			
 	if parrying==true:
 		animPlayer._parry()
 		parryTime -= delta*1.2
@@ -339,7 +347,16 @@ func _dash(dir: Vector2, power):
 	
 
 func _take_damage(hp):
-	health -= hp	
+	if invincibilityFrames<0:
+		health -= hp
+		invincibilityFrames=INVINCIBILITYTIME
+		if health==2:
+			$Camera/healthBar.play("2")
+		if health==1:
+			$Camera/healthBar.play("1")
+		if health==0:
+			$Camera/healthBar.play("dead")
+	
 
 func has_group(test):
 	return
