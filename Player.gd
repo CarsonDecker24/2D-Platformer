@@ -43,6 +43,7 @@ var parryTime = 0
 var parryCooldown = 0
 var bowTurning=true
 var invincibilityFrames =0
+var oiled = false
 const INVINCIBILITYTIME = .2
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")

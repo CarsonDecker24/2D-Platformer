@@ -19,6 +19,7 @@ var idle = "idle holster"
 const SPEED =60
 const FIRE_RATE=1
 var from_facing
+var oiled = false
 const orbPath = preload("res://orb.tscn")
 @onready var animator = get_node("dummyPlayer")
 @onready var target_ray = get_node("TargetRay")
@@ -186,6 +187,9 @@ func _damage(type: String, damage: int):
 		speed_mod=.5
 		fire_rate_mod=.7
 		get_node("ice_particles").set_deferred("emitting", true)
+	elif type == "Fire":
+		hp -= damage * 3
+		oiled = false
 	else:
 		hp -= damage
 	print("Remaining HP: " + str(hp))

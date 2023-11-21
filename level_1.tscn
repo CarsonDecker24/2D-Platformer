@@ -1751,11 +1751,17 @@ position = Vector2(96, 78)
 position = Vector2(-75, -80)
 metadata/homing = true
 
+[node name="TestDummy2" parent="." instance=ExtResource("4_kqark")]
+position = Vector2(778, 33)
+scale = Vector2(0.64, 0.64)
+metadata/homing = true
+
 [node name="Water" parent="." instance=ExtResource("5_tlohi")]
 position = Vector2(520, -96)
 
 [node name="rope" parent="." instance=ExtResource("7_3j4qc")]
 position = Vector2(777, -54)
 
-[node name="oilBottle" parent="rope" instance=ExtResource("7_4jpy3")]
-position = Vector2(0, 15)
+[node name="oilBottle" parent="." instance=ExtResource("7_4jpy3")]
+position = Vector2(777, -39)
+metadata/attachment = NodePath("../rope")

@@ -12,6 +12,7 @@ height = 42.0
 
 [node name="oilBottle" type="Node2D"]
 script = ExtResource("1_v4q1n")
+metadata/attachment = NodePath("")
 
 [node name="bottleArea" type="Area2D" parent="."]
 
@@ -22,11 +23,13 @@ texture = ExtResource("1_ad1he")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottleArea"]
 shape = SubResource("CircleShape2D_pajsg")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="explosionHitbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="explosionHitbox"]
 position = Vector2(0, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_6v51n")
+disabled = true
 
 [connection signal="body_entered" from="bottleArea" to="." method="_on_bottle_area_body_entered"]
+[connection signal="body_entered" from="explosionHitbox" to="." method="_on_explosion_hitbox_body_entered"]
