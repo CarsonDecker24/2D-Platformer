@@ -21,7 +21,7 @@ func _shootAnim(fireHolder):
 		testVar=false
 	if fire_state == "fireWhenReady" and parry==false :
 		play("bow_aim")
-	if fire_state == "quick":
+	if fire_state == "quick" and parry==false:
 		play("bow_quickfire")
 	if fire_state== "aim" and alreadyAiming == false and parry==false:
 		play("bow_aim")

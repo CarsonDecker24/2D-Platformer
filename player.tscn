@@ -1141,7 +1141,17 @@ animation = &"slot_1"
 [node name="Slot_1" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
 position = Vector2(-15.4691, -1.47194)
 sprite_frames = SubResource("SpriteFrames_c1u5q")
-animation = &"Bounce"
+animation = &"ghost"
+
+[node name="Slot_2" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
+position = Vector2(1.51198, -1.48824)
+sprite_frames = SubResource("SpriteFrames_c1u5q")
+animation = &"Multi"
+
+[node name="Slot_3" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
+position = Vector2(18.4977, -1.50632)
+sprite_frames = SubResource("SpriteFrames_c1u5q")
+animation = &"Fire"
 
 [node name="healthBar" type="AnimatedSprite2D" parent="Camera"]
 z_index = 2

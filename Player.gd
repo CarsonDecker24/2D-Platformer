@@ -57,6 +57,7 @@ func _ready():
 	#GrapplePivot = get_node("PivotHoldingArm/HoldingArmAnimation/GrappleRope")
 	weapon_sprite = get_node("PivotHoldingArm/HoldingArmAnimation")
 	direction = 0
+	_refreshArrowHud()
 
 func _process(delta):
 	# Get the input direction and handle the movement/deceleration.
@@ -370,11 +371,55 @@ func _armPos(armX,armY):
 	if fire_state != "aim" and fire_state != "quick":
 		get_node("armPosition").position.x=armX
 		get_node("armPosition").position.y=armY
-func _refreshArrowHud():
-	if slots[0] == "Fire":
-		get_node("Camera/SelectedArrowHud/Slot_1").play("Fire")
-	elif slots[0] == "Ice":
-		get_node("Camera/SelectedArrowHud/Slot_1").play("Ice")
-	elif slots[0] == "Ice":
-		get_node("Camera/SelectedArrowHud/Slot_1").play("Ice")
 	
+func _refreshArrowHud():
+		if slots[0] == "Accuracy":
+			get_node("Camera/SelectedArrowHud/Slot_1").play("Accuracy")
+		elif slots[0] == "Bounce":
+			get_node("Camera/SelectedArrowHud/Slot_1").play("Bounce")
+		elif slots[0] == "Fire":
+			get_node("Camera/SelectedArrowHud/Slot_1").play("Fire")
+		elif slots[0] == "Ghost":
+			get_node("Camera/SelectedArrowHud/Slot_1").play("Ghost")
+		elif slots[0] == "Ice":
+			get_node("Camera/SelectedArrowHud/Slot_1").play("Ice")
+		elif slots[0] == "Multi":
+			get_node("Camera/SelectedArrowHud/Slot_1").play("Multi")
+		elif slots[0] == "Multi":
+			get_node("Camera/SelectedArrowHud/Slot_1").play("Multi")
+		elif slots[0] == "Pierce":
+			get_node("Camera/SelectedArrowHud/Slot_1").play("Pierce")
+		
+		if slots[1] == "Accuracy":
+			get_node("Camera/SelectedArrowHud/Slot_2").play("Accuracy")
+		elif slots[1] == "Bounce":
+			get_node("Camera/SelectedArrowHud/Slot_2").play("Bounce")
+		elif slots[1] == "Fire":
+			get_node("Camera/SelectedArrowHud/Slot_2").play("Fire")
+		elif slots[1] == "Ghost":
+			get_node("Camera/SelectedArrowHud/Slot_2").play("Ghost")
+		elif slots[1] == "Ice":
+			get_node("Camera/SelectedArrowHud/Slot_2").play("Ice")
+		elif slots[1] == "Multi":
+			get_node("Camera/SelectedArrowHud/Slot_2").play("Multi")
+		elif slots[1] == "Multi":
+			get_node("Camera/SelectedArrowHud/Slot_2").play("Multi")
+		elif slots[1] == "Pierce":
+			get_node("Camera/SelectedArrowHud/Slot_2").play("Pierce")
+			
+		if slots[2] == "Accuracy":
+			get_node("Camera/SelectedArrowHud/Slot_3").play("Accuracy")
+		elif slots[2] == "Bounce":
+			get_node("Camera/SelectedArrowHud/Slot_3").play("Bounce")
+		elif slots[2] == "Fire":
+			get_node("Camera/SelectedArrowHud/Slot_3").play("Fire")
+		elif slots[2] == "Ghost":
+			get_node("Camera/SelectedArrowHud/Slot_3").play("Ghost")
+		elif slots[2] == "Ice":
+			get_node("Camera/SelectedArrowHud/Slot_3").play("Ice")
+		elif slots[2] == "Multi":
+			get_node("Camera/SelectedArrowHud/Slot_3").play("Multi")
+		elif slots[2] == "Multi":
+			get_node("Camera/SelectedArrowHud/Slot_3").play("Multi")
+		elif slots[2] == "Pierce":
+			get_node("Camera/SelectedArrowHud/Slot_3").play("Pierce")
