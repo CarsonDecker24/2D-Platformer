@@ -135,7 +135,7 @@ func _physics_process(delta):
 			parrying = true
 			parryTime = .2
 			if rad_to_deg(get_angle_to(get_global_mouse_position()))> 90 or rad_to_deg(get_angle_to(get_global_mouse_position()))<-90:
-				get_node("parryBox").position.x=-13
+				get_node("parryBox").position.x=-16
 			else:
 				get_node("parryBox").position.x = 2
 			get_node("Camera/eBar").play("refill")
