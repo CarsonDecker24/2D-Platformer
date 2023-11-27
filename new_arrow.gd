@@ -93,7 +93,8 @@ func _check_ray():
 	if ray.get_collider() != null:
 		collision_point = ray.get_collision_point()
 		particle.position = collision_point
-		hideNextFrame = true
+		if type != "Bounce":
+			hideNextFrame = true
 
 func _on_body_entered(body):
 	if body.is_in_group("Ground") and type == "Bounce":
@@ -102,10 +103,7 @@ func _on_body_entered(body):
 			diePart.emitting=true
 			dying=true
 		else:
-			if body.position.y < position.y:
-				vel.y *= -1
-			else:
-				vel.x *= -1
+			vel.x *= -.8
 			remainingBounces -= 1
 		particle.emitting=false
 	elif body.is_in_group("Ground"):
