@@ -18,6 +18,7 @@ var collision_point
 var dyingTime=1
 var dying = false
 var hideNextFrame = false
+var remainingBounces
 
 func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node):
 	id = aID
@@ -48,9 +49,8 @@ func _ready():
 		particle.color=Color(1, 0.145, 0, 0.655)
 		particle.initial_velocity_max=5
 		particle.radial_accel_max=0
-	elif type == "Wind":
-		_wind()
-		queue_free()
+	elif type == "Bounce":
+		remainingBounces = 2
 	else:
 		get_node("AnimatedSprite2D").play("default")
 		particle.color=Color(0.408, 0.408, 0.408, 0.8)
@@ -89,9 +89,6 @@ func _multi(offset_angle):
 	arrow.position = player.get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
 	arrow.rotation_degrees = angle + deg_to_rad(offset_angle)
 
-func _wind():
-	player._dash(player.get_local_mouse_position().normalized(),-500)
-
 func _check_ray():
 	if ray.get_collider() != null:
 		collision_point = ray.get_collision_point()
@@ -99,7 +96,19 @@ func _check_ray():
 		hideNextFrame = true
 
 func _on_body_entered(body):
-	if body.is_in_group("Ground"):
+	if body.is_in_group("Ground") and type == "Bounce":
+		if remainingBounces == 0:
+			diePart.color = Color(1, 1, 1, 0.545)
+			diePart.emitting=true
+			dying=true
+		else:
+			if body.position.y < position.y:
+				vel.y *= -1
+			else:
+				vel.x *= -1
+			remainingBounces -= 1
+		particle.emitting=false
+	elif body.is_in_group("Ground"):
 		moving = false
 		if type=="Fire":
 			diePart.color=Color(1, 0.145, 0, 0.655)

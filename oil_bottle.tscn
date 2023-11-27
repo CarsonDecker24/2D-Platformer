@@ -1,10 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8rakefmtqf3i"]
+[gd_scene load_steps=6 format=3 uid="uid://b8rakefmtqf3i"]
 
-[ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="1_ad1he"]
 [ext_resource type="Script" path="res://oil_bottle.gd" id="1_v4q1n"]
+[ext_resource type="Texture2D" uid="uid://c33swicjr5glb" path="res://Assets/environmental stuff/oilLamp Smaller.png" id="2_cejbc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pajsg"]
 radius = 4.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xf58d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cejbc")
+}],
+"loop": true,
+"name": &"lamp",
+"speed": 0.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6v51n"]
 radius = 2.0
@@ -16,12 +27,14 @@ metadata/attachment = NodePath("")
 
 [node name="bottleArea" type="Area2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="bottleArea"]
-scale = Vector2(6, 6)
-texture = ExtResource("1_ad1he")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottleArea"]
 shape = SubResource("CircleShape2D_pajsg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bottleArea"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_xf58d")
+animation = &"lamp"
+autoplay = "lamp"
 
 [node name="explosionHitbox" type="Area2D" parent="."]
 

@@ -1187,6 +1187,7 @@ sprite_frames = SubResource("SpriteFrames_u0ohg")
 animation = &"full"
 
 [node name="Menu" type="AnimatedSprite2D" parent="Camera"]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lduir")
 
