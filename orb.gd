@@ -84,5 +84,6 @@ func _die():
 func _on_parry():
 	homing = false
 	vel = speed.rotated(global_position.angle_to_point(get_global_mouse_position()))
+	
 	parried = true
 	
