@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://crjpcup1yustk"]
+
+[ext_resource type="Script" path="res://electric_source.gd" id="1_u12f2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1s51t"]
+size = Vector2(16, 19)
+
+[node name="ElectricSource" type="Area2D"]
+script = ExtResource("1_u12f2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 9.5)
+shape = SubResource("RectangleShape2D_1s51t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnp45qict46s"]
+
+[ext_resource type="Script" path="res://Wire.gd" id="1_2poms"]
+
+[node name="Wire" type="AnimatedSprite2D"]
+script = ExtResource("1_2poms")
+metadata/Source = NodePath("")
