@@ -29,7 +29,7 @@ var fire_state = "not"
 var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
-var slots = ["Fire", "Bounce", "Ice"]
+var slots = ["Fire", "Electric", "Ice"]
 var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot

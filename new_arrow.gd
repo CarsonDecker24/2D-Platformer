@@ -108,6 +108,8 @@ func _on_body_entered(body):
 		particle.emitting=false
 	elif body.is_in_group("Ground"):
 		moving = false
+		if type == "Electric":
+			diePart.color = Color(1, 1, 1, 0.545)
 		if type=="Fire":
 			diePart.color=Color(1, 0.145, 0, 0.655)
 		if type=="Ice":
@@ -127,6 +129,8 @@ func _on_body_entered(body):
 		current_attached_body = body
 		on_enemy = true
 		moving = false
+		if type == "Electric":
+			diePart.color = Color(1, 1, 1, 0.545)
 		if type=="Fire":
 			diePart.color=Color(1, 0.145, 0, 0.655)
 		if type=="Ice":
@@ -140,4 +144,20 @@ func _on_body_entered(body):
 		dying=true
 		particle.emitting=false
 	
+	if body.is_in_group("ElectricSource"):
+		if type == "Electric":
+			body._turn_on()
+			diePart.color = Color(1, 1, 1, 0.545)
+		if type=="Fire":
+			diePart.color=Color(1, 0.145, 0, 0.655)
+		if type=="Ice":
+			diePart.color=Color(0, 0.686, 0.984, 0.7)
+			diePart.speed_scale=2.5
+		if type=="Multi":
+			diePart.color = Color(1, 1, 1, 0.545)
+		
+		diePart.emitting=true
+		#get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
+		dying=true
+		particle.emitting=false
 
