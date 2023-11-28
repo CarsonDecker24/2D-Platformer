@@ -32,6 +32,8 @@ shape = SubResource("CircleShape2D_pajsg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bottleArea"]
 texture_filter = 1
+position = Vector2(-2.38419e-07, 0)
+scale = Vector2(0.681818, 0.676471)
 sprite_frames = SubResource("SpriteFrames_xf58d")
 animation = &"lamp"
 autoplay = "lamp"

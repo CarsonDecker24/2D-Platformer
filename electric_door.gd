@@ -3,6 +3,7 @@ extends StaticBody2D
 var on = false
 var open = false
 var openingTimer = 0
+var playing=false
 @onready var source = get_node(get_meta("source"))
 
 # Called when the node enters the scene tree for the first time.
@@ -13,7 +14,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if source.on:
-		on = true
+		if on==false:
+			$AnimatedSprite2D.play("opening")
+			playing=true
+		if playing==true and $AnimatedSprite2D.is_playing()==false:
+			on = true
+			$AnimatedSprite2D.play("open")
 	
 	if on:
 		open = true
