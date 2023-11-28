@@ -1,4 +1,4 @@
-[gd_scene load_steps=171 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=173 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -73,6 +73,7 @@
 [ext_resource type="Texture2D" uid="uid://cdo10nvawypkl" path="res://Assets/hud sprites/sprite_0.png" id="63_p4yf2"]
 [ext_resource type="Texture2D" uid="uid://bh5roubjvtl08" path="res://Assets/hud sprites/shift refill.png" id="70_sc2ib"]
 [ext_resource type="Texture2D" uid="uid://tnlv8gmtl6lj" path="res://Assets/hud sprites/e refill.png" id="71_ry127"]
+[ext_resource type="Texture2D" uid="uid://didmnkaud58a0" path="res://Assets/New Piskel-1.png (1).png" id="71_sfaxs"]
 [ext_resource type="Texture2D" uid="uid://boq2cwpnrxv21" path="res://Assets/player sprites/arms n bows/1bow varients/5ParryBow/parry bow.png" id="72_m5wss"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="74_qvcdd"]
 [ext_resource type="Script" path="res://armPosition.gd" id="74_xk2jf"]
@@ -947,6 +948,17 @@ animations = [{
 "speed": 60.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_lduir"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("71_sfaxs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_al3jv"]
 atlas = ExtResource("60_hp32n")
 region = Rect2(0, 0, 13, 12)
@@ -1174,6 +1186,11 @@ position = Vector2(-193, -89)
 sprite_frames = SubResource("SpriteFrames_u0ohg")
 animation = &"full"
 
+[node name="Menu" type="AnimatedSprite2D" parent="Camera"]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_lduir")
+
 [node name="PivotHoldingArm" type="Node2D" parent="."]
 position = Vector2(-6, 0)
 
@@ -1198,9 +1215,13 @@ position = Vector2(-1.5, 0)
 position = Vector2(-3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="parryBox"]
-visible = false
 position = Vector2(6, 2)
 shape = SubResource("RectangleShape2D_f3xnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="parryBox"]
+position = Vector2(5.9309, 1.96999)
+scale = Vector2(16.0129, 34.1126)
+texture = ExtResource("74_qvcdd")
 
 [node name="armPosition" type="Node2D" parent="."]
 z_index = 1
