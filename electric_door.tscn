@@ -92,7 +92,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2sp7f")
 }],
-"loop": true,
+"loop": false,
 "name": &"closed",
 "speed": 5.0
 }, {
@@ -100,7 +100,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3rhmp")
 }],
-"loop": true,
+"loop": false,
 "name": &"open",
 "speed": 5.0
 }, {
@@ -159,7 +159,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7ou8m")
 }],
-"loop": true,
+"loop": false,
 "name": &"opening",
 "speed": 5.0
 }]
@@ -176,4 +176,4 @@ shape = SubResource("RectangleShape2D_gem8o")
 texture_filter = 1
 position = Vector2(13, 21)
 sprite_frames = SubResource("SpriteFrames_jd4wv")
-animation = &"opening"
+animation = &"open"

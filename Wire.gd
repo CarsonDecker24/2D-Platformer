@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
 
 var on = false
-@onready var source = get_node(get_meta("source"))
+@onready var source = get_node(get_meta("Source"))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,5 +12,7 @@ func _ready():
 func _process(delta):
 	if source.on:
 		on = true
+		get_node("wireOff/wireOn").show_behind_parent= true
 	else:
 		on = false
+		get_node("wireOff/wireOn").show_behind_parent= false

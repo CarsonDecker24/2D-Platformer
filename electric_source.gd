@@ -5,9 +5,9 @@ var turnOffTimer = 0
 
 func _process(delta):
 	if on:
-		pass
+		$AnimatedSprite2D.play("on")
 	else:
-		pass
+		$AnimatedSprite2D.play("off")
 	
 	if on and turnOffTimer <= 0:
 		turnOffTimer = 10
@@ -15,6 +15,15 @@ func _process(delta):
 		turnOffTimer -= delta
 	if on and turnOffTimer <= 0:
 		on = false
+	
 
 func _turn_on():
 	on = true
+
+
+func _on_body_entered(body):
+	print("hey")
+	if body.is_in_group("Arrow"):
+		if body.type == "Electric":
+			_turn_on()
+	pass # Replace with function body.

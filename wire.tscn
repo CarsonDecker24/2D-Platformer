@@ -1,7 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnp45qict46s"]
+[gd_scene load_steps=6 format=3 uid="uid://dnp45qict46s"]
 
 [ext_resource type="Script" path="res://Wire.gd" id="1_2poms"]
+[ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="1_gedd1"]
+[ext_resource type="Texture2D" uid="uid://bb0ukf1geog4e" path="res://Assets/environmental stuff/Wires/WireSprites2.png" id="2_stngc"]
+[ext_resource type="Texture2D" uid="uid://ci2hpdjjpfcyo" path="res://Assets/environmental stuff/Wires/WireSprites3.png" id="3_dkdu7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u380n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gedd1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Wire" type="AnimatedSprite2D"]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_u380n")
 script = ExtResource("1_2poms")
 metadata/Source = NodePath("")
+metadata/_edit_vertical_guides_ = [-15.0]
+
+[node name="wireOff" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 3
+clip_contents = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -2.5
+offset_right = 37.0
+offset_bottom = 0.5
+grow_vertical = 2
+texture = ExtResource("2_stngc")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="wireOn" type="TextureRect" parent="wireOff"]
+texture_filter = 1
+texture_repeat = 3
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -1.5
+offset_right = 35.0
+offset_bottom = 1.5
+grow_vertical = 2
+texture = ExtResource("3_dkdu7")
+expand_mode = 2
+stretch_mode = 1

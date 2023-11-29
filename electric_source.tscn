@@ -1,15 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://crjpcup1yustk"]
+[gd_scene load_steps=7 format=3 uid="uid://crjpcup1yustk"]
 
 [ext_resource type="Script" path="res://electric_source.gd" id="1_u12f2"]
+[ext_resource type="Texture2D" uid="uid://dvadnt5jonktk" path="res://Assets/environmental stuff/wireRecever.png" id="2_ed72b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1s51t"]
-size = Vector2(16, 19)
+size = Vector2(6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lfoo"]
+atlas = ExtResource("2_ed72b")
+region = Rect2(0, 0, 5, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2k4m"]
+atlas = ExtResource("2_ed72b")
+region = Rect2(5, 0, 5, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smbbv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lfoo")
+}],
+"loop": false,
+"name": &"off",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2k4m")
+}],
+"loop": false,
+"name": &"on",
+"speed": 0.0
+}]
 
 [node name="ElectricSource" type="Area2D" groups=["ElectricSource"]]
 script = ExtResource("1_u12f2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 9.5)
+position = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_1s51t")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(3, 4)
+sprite_frames = SubResource("SpriteFrames_smbbv")
+animation = &"off"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
