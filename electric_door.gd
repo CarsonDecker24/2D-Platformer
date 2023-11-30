@@ -13,7 +13,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if source.on:
+	if source != null and source.on:
 		if playing==true and $AnimatedSprite2D.is_playing()==false:
 			on = true
 			$AnimatedSprite2D.play("open")

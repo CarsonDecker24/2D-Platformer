@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dmatwath7f8sm"]
+[gd_scene load_steps=17 format=3 uid="uid://dmatwath7f8sm"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_cj6ue"]
 [ext_resource type="Texture2D" uid="uid://cvjurk0lvn4xb" path="res://Assets/monochrome_tilemap_transparent_packed.png" id="2_n4ifg"]
@@ -9,8 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://do03vpsse5s6p" path="res://rope.tscn" id="7_3j4qc"]
 [ext_resource type="PackedScene" uid="uid://b8rakefmtqf3i" path="res://oil_bottle.tscn" id="7_4jpy3"]
 [ext_resource type="PackedScene" uid="uid://crjpcup1yustk" path="res://electric_source.tscn" id="9_ce8k3"]
-[ext_resource type="PackedScene" uid="uid://dnp45qict46s" path="res://wire.tscn" id="10_d0dfs"]
+[ext_resource type="Script" path="res://Wire.gd" id="11_2jwnh"]
 [ext_resource type="PackedScene" uid="uid://bp17jxrcnna4b" path="res://electric_door.tscn" id="11_3qvqc"]
+[ext_resource type="Texture2D" uid="uid://bb0ukf1geog4e" path="res://Assets/environmental stuff/Wires/WireSprites2.png" id="12_p1pxa"]
+[ext_resource type="Texture2D" uid="uid://ci2hpdjjpfcyo" path="res://Assets/environmental stuff/Wires/WireSprites3.png" id="13_qkp3t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vdj2w"]
 resource_name = "Tilemap"
@@ -1773,11 +1775,116 @@ metadata/attachment = NodePath("../rope")
 position = Vector2(879.5, 59)
 rotation = 4.71239
 
-[node name="Wire" parent="." instance=ExtResource("10_d0dfs")]
-position = Vector2(885.8, 56.2208)
-scale = Vector2(1.25, 1)
-metadata/Source = NodePath("../ElectricSource")
-
 [node name="ElectricDoor" parent="." instance=ExtResource("11_3qvqc")]
 position = Vector2(923.082, 58.6587)
-metadata/source = NodePath("../Wire")
+metadata/source = NodePath("../ElectricSource")
+
+[node name="Wire" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(892, 60)
+rotation = 1.5708
+script = ExtResource("11_2jwnh")
+metadata/Source = NodePath("../ElectricSource")
+
+[node name="wireOff" type="TextureRect" parent="Wire"]
+texture_filter = 1
+texture_repeat = 3
+clip_contents = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -24.0
+offset_right = 2.0
+offset_bottom = -21.0
+grow_vertical = 2
+texture = ExtResource("12_p1pxa")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="wireOn" type="TextureRect" parent="Wire/wireOff"]
+texture_filter = 1
+texture_repeat = 3
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -1.5
+offset_right = 8.0
+offset_bottom = 1.5
+grow_vertical = 2
+texture = ExtResource("13_qkp3t")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="Wire2" type="Node2D" parent="."]
+position = Vector2(891, 63)
+script = ExtResource("11_2jwnh")
+metadata/Source = NodePath("../ElectricSource")
+
+[node name="wireOff" type="TextureRect" parent="Wire2"]
+texture_filter = 1
+texture_repeat = 3
+clip_contents = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 22.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 1.0
+grow_vertical = 2
+texture = ExtResource("12_p1pxa")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="wireOn" type="TextureRect" parent="Wire2/wireOff"]
+texture_filter = 1
+texture_repeat = 3
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -1.5
+offset_right = 34.0
+offset_bottom = 1.5
+grow_vertical = 2
+texture = ExtResource("13_qkp3t")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="Wire3" type="Node2D" parent="."]
+position = Vector2(863, 57)
+script = ExtResource("11_2jwnh")
+metadata/Source = NodePath("../ElectricSource")
+
+[node name="wireOff" type="TextureRect" parent="Wire3"]
+texture_filter = 1
+texture_repeat = 3
+clip_contents = true
+offset_left = 22.0
+offset_top = -3.0
+offset_right = 53.0
+texture = ExtResource("12_p1pxa")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="wireOn" type="TextureRect" parent="Wire3/wireOff"]
+texture_filter = 1
+texture_repeat = 3
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -1.5
+offset_right = 30.0
+offset_bottom = 1.5
+grow_vertical = 2
+texture = ExtResource("13_qkp3t")
+expand_mode = 2
+stretch_mode = 1
