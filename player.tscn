@@ -1219,6 +1219,7 @@ position = Vector2(6, 2)
 shape = SubResource("RectangleShape2D_f3xnx")
 
 [node name="Sprite2D" type="Sprite2D" parent="parryBox"]
+visible = false
 position = Vector2(5.9309, 1.96999)
 scale = Vector2(16.0129, 34.1126)
 texture = ExtResource("74_qvcdd")
