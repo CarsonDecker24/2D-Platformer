@@ -1775,6 +1775,14 @@ metadata/attachment = NodePath("../rope")
 position = Vector2(879.5, 59)
 rotation = 4.71239
 
+<<<<<<< HEAD
+=======
+[node name="Wire" parent="." instance=ExtResource("10_d0dfs")]
+position = Vector2(885.8, 56.3611)
+scale = Vector2(1.25, 0.719387)
+metadata/Source = NodePath("../ElectricSource")
+
+>>>>>>> 840db8e87d70fcc256205ba3c42d7f6ff9d49439
 [node name="ElectricDoor" parent="." instance=ExtResource("11_3qvqc")]
 position = Vector2(923.082, 58.6587)
 metadata/source = NodePath("../ElectricSource")
