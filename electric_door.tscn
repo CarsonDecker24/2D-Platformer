@@ -161,7 +161,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"opening",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="ElectricDoor" type="StaticBody2D"]
@@ -176,4 +176,4 @@ shape = SubResource("RectangleShape2D_gem8o")
 texture_filter = 1
 position = Vector2(13, 21)
 sprite_frames = SubResource("SpriteFrames_jd4wv")
-animation = &"open"
+animation = &"opening"

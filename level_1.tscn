@@ -1774,8 +1774,8 @@ position = Vector2(879.5, 59)
 rotation = 4.71239
 
 [node name="Wire" parent="." instance=ExtResource("10_d0dfs")]
-position = Vector2(885.8, 56.2208)
-scale = Vector2(1.25, 1)
+position = Vector2(885.8, 56.3611)
+scale = Vector2(1.25, 0.719387)
 metadata/Source = NodePath("../ElectricSource")
 
 [node name="ElectricDoor" parent="." instance=ExtResource("11_3qvqc")]

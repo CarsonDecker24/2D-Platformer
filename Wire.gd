@@ -12,7 +12,5 @@ func _ready():
 func _process(delta):
 	if source.on:
 		on = true
-		get_node("wireOff/wireOn").show_behind_parent= true
 	else:
 		on = false
-		get_node("wireOff/wireOn").show_behind_parent= false
