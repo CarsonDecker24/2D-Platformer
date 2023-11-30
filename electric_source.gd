@@ -22,8 +22,4 @@ func _turn_on():
 
 
 func _on_body_entered(body):
-	print("hey")
-	if body.is_in_group("Arrow"):
-		if body.type == "Electric":
-			_turn_on()
-	pass # Replace with function body.
+	pass

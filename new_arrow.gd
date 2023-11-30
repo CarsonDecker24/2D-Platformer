@@ -144,9 +144,14 @@ func _on_body_entered(body):
 		dying=true
 		particle.emitting=false
 	
-	if body.is_in_group("ElectricSource"):
+	
+
+
+
+func _on_area_entered(area):
+	if area.is_in_group("ElectricSource"):
 		if type == "Electric":
-			body._turn_on()
+			area._turn_on()
 			diePart.color = Color(1, 1, 1, 0.545)
 		if type=="Fire":
 			diePart.color=Color(1, 0.145, 0, 0.655)
@@ -160,8 +165,3 @@ func _on_body_entered(body):
 		#get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
 		dying=true
 		particle.emitting=false
-
-
-
-func _on_area_entered(area):
-	pass # Replace with function body.
