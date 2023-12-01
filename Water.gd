@@ -1,5 +1,8 @@
 extends Node2D
 var frameHolder
+var timerWater=0
+var TIMERWATER= .05
+var frozen=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +13,21 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if timerWater<=0 and frozen==false:
+		if frameHolder==1:
+			get_node("TextureRect").texture = load("res://Assets/environmental stuff/waterfall/wetWater0.png")
+			frameHolder+=1
+		elif frameHolder==2:
+			get_node("TextureRect").texture= load("res://Assets/environmental stuff/waterfall/wetWater1.png")
+			frameHolder+=1
+		elif frameHolder==3:
+			get_node("TextureRect").texture= load("res://Assets/environmental stuff/waterfall/wetWater2.png")
+			frameHolder+=1
+		else:
+			get_node("TextureRect").texture= load("res://Assets/environmental stuff/waterfall/wetWater3.png")
+			frameHolder=1
+		timerWater=TIMERWATER
+	timerWater-=delta
 	pass
 
 func _on_body_entered(body):
@@ -25,50 +43,22 @@ func _on_body_entered(body):
 			_thaw()
 
 func _freeze():
-	frameHolder = get_node("p1").frame
-	get_node("p1").play("frozen_rock")
-	get_node("p1").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2").frame
-	get_node("p1/p2").play("frozen")
-	get_node("p1/p2").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3").frame
-	get_node("p1/p2/p3").play("frozen")
-	get_node("p1/p2/p3").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3/p4").frame
-	get_node("p1/p2/p3/p4").play("frozen")
-	get_node("p1/p2/p3/p4").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3/p4/p5").frame
-	get_node("p1/p2/p3/p4/p5").play("frozen")
-	get_node("p1/p2/p3/p4/p5").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3/p4/p5/p6").frame
-	get_node("p1/p2/p3/p4/p5/p6").play("frozen")
-	get_node("p1/p2/p3/p4/p5/p6").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3/p4/p5/p6/p7").frame
-	get_node("p1/p2/p3/p4/p5/p6/p7").play("frozen")
-	get_node("p1/p2/p3/p4/p5/p6/p7").set_frame_and_progress(frameHolder,0.00)
+	frozen=true
+	if frameHolder==1:
+		get_node("TextureRect").texture = load("res://Assets/environmental stuff/waterfall/water_frozen0.png")
+		frameHolder+=1
+	elif frameHolder==2:
+		get_node("TextureRect").texture= load("res://Assets/environmental stuff/waterfall/water_frozen1.png")
+		frameHolder+=1
+	elif frameHolder==3:
+		get_node("TextureRect").texture= load("res://Assets/environmental stuff/waterfall/water_frozen2.png")
+		frameHolder+=1
+	else:
+		get_node("TextureRect").texture= load("res://Assets/environmental stuff/waterfall/water_frozen3.png")
+		frameHolder=1
 
 func _thaw():
-	frameHolder = get_node("p1").frame
-	get_node("p1").play("flow_rock")
-	get_node("p1").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2").frame
-	get_node("p1/p2").play("flow")
-	get_node("p1/p2").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3").frame
-	get_node("p1/p2/p3").play("flow")
-	get_node("p1/p2/p3").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3/p4").frame
-	get_node("p1/p2/p3/p4").play("flow")
-	get_node("p1/p2/p3/p4").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3/p4/p5").frame
-	get_node("p1/p2/p3/p4/p5").play("flow")
-	get_node("p1/p2/p3/p4/p5").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3/p4/p5/p6").frame
-	get_node("p1/p2/p3/p4/p5/p6").play("flow")
-	get_node("p1/p2/p3/p4/p5/p6").set_frame_and_progress(frameHolder,0.00)
-	frameHolder = get_node("p1/p2/p3/p4/p5/p6/p7").frame
-	get_node("p1/p2/p3/p4/p5/p6/p7").play("flow")
-	get_node("p1/p2/p3/p4/p5/p6/p7").set_frame_and_progress(frameHolder,0.00)
+	frozen=false
 
 
 func _on_area_2d_area_entered(area):

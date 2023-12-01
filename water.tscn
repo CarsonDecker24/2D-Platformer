@@ -1,100 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://5cidhigmdn0w"]
+[gd_scene load_steps=4 format=3 uid="uid://5cidhigmdn0w"]
 
 [ext_resource type="Script" path="res://Water.gd" id="1_4tyur"]
 [ext_resource type="Texture2D" uid="uid://devjw467k3t6v" path="res://Assets/waterfall/sprite_08.png" id="2_o87df"]
-[ext_resource type="Texture2D" uid="uid://bdmd2nlrtda3e" path="res://Assets/waterfall/sprite_09.png" id="3_knfp6"]
-[ext_resource type="Texture2D" uid="uid://ck3gi5vy0p765" path="res://Assets/waterfall/sprite_10.png" id="4_5h3j7"]
-[ext_resource type="Texture2D" uid="uid://bsak5ul24obwg" path="res://Assets/waterfall/sprite_11.png" id="5_1hder"]
-[ext_resource type="Texture2D" uid="uid://c7y2ba47oauxx" path="res://Assets/waterfall/sprite_00.png" id="6_b0fha"]
-[ext_resource type="Texture2D" uid="uid://du2aclctp5r4k" path="res://Assets/waterfall/sprite_01.png" id="7_mjhjv"]
-[ext_resource type="Texture2D" uid="uid://dgp07268eeryt" path="res://Assets/waterfall/sprite_02.png" id="8_10u0j"]
-[ext_resource type="Texture2D" uid="uid://d1ekw8dvrb51" path="res://Assets/waterfall/water four.png.png" id="9_127sl"]
-[ext_resource type="Texture2D" uid="uid://kpc45qrpsulq" path="res://Assets/waterfall/sprite_12.png" id="10_vg07l"]
-[ext_resource type="Texture2D" uid="uid://be4ysd731wvyc" path="res://Assets/waterfall/sprite_13.png" id="11_mhdgp"]
-[ext_resource type="Texture2D" uid="uid://bpjdh6gkslsh" path="res://Assets/waterfall/sprite_14.png" id="12_16y4u"]
-[ext_resource type="Texture2D" uid="uid://ch2l1jkyopg5a" path="res://Assets/waterfall/sprite_15.png" id="13_1xb0c"]
-[ext_resource type="Texture2D" uid="uid://de0yhlog1wjo5" path="res://Assets/waterfall/sprite_04.png" id="14_3gegi"]
-[ext_resource type="Texture2D" uid="uid://cmj3xc5rmjniu" path="res://Assets/waterfall/sprite_05.png" id="15_52dq3"]
-[ext_resource type="Texture2D" uid="uid://bdj7mrx1iktx7" path="res://Assets/waterfall/sprite_06.png" id="16_6kdja"]
-[ext_resource type="Texture2D" uid="uid://b57mo7j4cvm82" path="res://Assets/waterfall/sprite_07.png" id="17_pfw3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ttgx"]
 size = Vector2(5.25, 223)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yocae"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_o87df")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_knfp6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_5h3j7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_1hder")
-}],
-"loop": true,
-"name": &"flow",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_b0fha")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_mjhjv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_10u0j")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_127sl")
-}],
-"loop": true,
-"name": &"flow_rock",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_vg07l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_mhdgp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_16y4u")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_1xb0c")
-}],
-"loop": false,
-"name": &"frozen",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("14_3gegi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_52dq3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_6kdja")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_pfw3q")
-}],
-"loop": false,
-"name": &"frozen_rock",
-"speed": 0.0
-}]
-
 [node name="Water" type="Node2D"]
 z_index = -1
-position = Vector2(-1, -95)
+position = Vector2(1, -98)
 script = ExtResource("1_4tyur")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -105,69 +19,23 @@ collision_mask = 5
 position = Vector2(3, 96)
 shape = SubResource("RectangleShape2D_6ttgx")
 
-[node name="p1" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(16, 0)
-sprite_frames = SubResource("SpriteFrames_yocae")
-animation = &"flow"
-autoplay = "flow_rock"
-
-[node name="p2" type="AnimatedSprite2D" parent="p1"]
-texture_filter = 1
-position = Vector2(0, 32)
-sprite_frames = SubResource("SpriteFrames_yocae")
-animation = &"flow"
-autoplay = "flow"
-frame = 1
-
-[node name="p3" type="AnimatedSprite2D" parent="p1/p2"]
-texture_filter = 1
-position = Vector2(0, 32)
-sprite_frames = SubResource("SpriteFrames_yocae")
-animation = &"flow"
-autoplay = "flow"
-frame = 2
-
-[node name="p4" type="AnimatedSprite2D" parent="p1/p2/p3"]
-texture_filter = 1
-position = Vector2(0, 32)
-sprite_frames = SubResource("SpriteFrames_yocae")
-animation = &"flow"
-autoplay = "flow"
-frame = 3
-
-[node name="p5" type="AnimatedSprite2D" parent="p1/p2/p3/p4"]
-texture_filter = 1
-position = Vector2(0, 32)
-sprite_frames = SubResource("SpriteFrames_yocae")
-animation = &"flow"
-autoplay = "flow"
-
-[node name="p6" type="AnimatedSprite2D" parent="p1/p2/p3/p4/p5"]
-texture_filter = 1
-position = Vector2(0, 32)
-sprite_frames = SubResource("SpriteFrames_yocae")
-animation = &"flow"
-autoplay = "flow"
-frame = 1
-
-[node name="p7" type="AnimatedSprite2D" parent="p1/p2/p3/p4/p5/p6"]
-texture_filter = 1
-position = Vector2(0, 32)
-sprite_frames = SubResource("SpriteFrames_yocae")
-animation = &"flow"
-autoplay = "flow"
-frame = 2
-
 [node name="Area2D" type="Area2D" parent="."]
 disable_mode = 2
 collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(3, 96)
+position = Vector2(3, 97)
 shape = SubResource("RectangleShape2D_6ttgx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+offset_top = -16.0
+offset_right = 21.0
+offset_bottom = 208.0
+texture = ExtResource("2_o87df")
+expand_mode = 4
+stretch_mode = 1
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
