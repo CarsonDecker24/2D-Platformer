@@ -8,6 +8,9 @@ var frozen=false
 func _ready():
 	get_node("StaticBody2D/CollisionShape2D").set_deferred("disabled", true)
 	
+	if get_meta("Frozen") == true:
+		_freeze()
+	
 	pass # Replace with function body.
 
 
