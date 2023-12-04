@@ -1153,7 +1153,7 @@ animation = &"slot_1"
 [node name="Slot_1" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
 position = Vector2(-15.4691, -1.47194)
 sprite_frames = SubResource("SpriteFrames_c1u5q")
-animation = &"ghost"
+animation = &"Bounce"
 
 [node name="Slot_2" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
 position = Vector2(1.51198, -1.48824)
