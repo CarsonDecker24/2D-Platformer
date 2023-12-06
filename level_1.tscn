@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_cj6ue"]
 [ext_resource type="Texture2D" uid="uid://cvjurk0lvn4xb" path="res://Assets/monochrome_tilemap_transparent_packed.png" id="2_n4ifg"]
-[ext_resource type="Texture2D" uid="uid://tbgmjracnycj" path="res://Assets/tilesheets/cave tilesheet v1_1.png" id="3_7mu2a"]
+[ext_resource type="Texture2D" path="res://Assets/tilesheets/cave tilesheet v1_1.png" id="3_7mu2a"]
 [ext_resource type="PackedScene" uid="uid://dblot7f26i2w" path="res://player.tscn" id="3_410nd"]
 [ext_resource type="PackedScene" uid="uid://d2kvnctkapc7y" path="res://test_dummy.tscn" id="4_kqark"]
 [ext_resource type="PackedScene" uid="uid://5cidhigmdn0w" path="res://water.tscn" id="5_tlohi"]
 [ext_resource type="PackedScene" uid="uid://do03vpsse5s6p" path="res://rope.tscn" id="7_3j4qc"]
 [ext_resource type="PackedScene" uid="uid://b8rakefmtqf3i" path="res://oil_bottle.tscn" id="7_4jpy3"]
-[ext_resource type="PackedScene" uid="uid://crjpcup1yustk" path="res://electric_source.tscn" id="9_ce8k3"]
+[ext_resource type="PackedScene" path="res://electric_source.tscn" id="9_ce8k3"]
 [ext_resource type="Script" path="res://Wire.gd" id="11_2jwnh"]
-[ext_resource type="PackedScene" uid="uid://bp17jxrcnna4b" path="res://electric_door.tscn" id="11_3qvqc"]
+[ext_resource type="PackedScene" path="res://electric_door.tscn" id="11_3qvqc"]
 [ext_resource type="Texture2D" uid="uid://bb0ukf1geog4e" path="res://Assets/environmental stuff/Wires/WireSprites2.png" id="12_p1pxa"]
 [ext_resource type="Texture2D" uid="uid://ci2hpdjjpfcyo" path="res://Assets/environmental stuff/Wires/WireSprites3.png" id="13_qkp3t"]
 
