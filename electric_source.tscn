@@ -48,4 +48,4 @@ position = Vector2(3, 4)
 sprite_frames = SubResource("SpriteFrames_smbbv")
 animation = &"off"
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

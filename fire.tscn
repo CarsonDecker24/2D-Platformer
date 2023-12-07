@@ -1,0 +1,94 @@
+[gd_scene load_steps=15 format=3 uid="uid://dpnul7ws48lev"]
+
+[ext_resource type="Texture2D" uid="uid://b7s1bj4idbx5a" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron01.png" id="1_0oe60"]
+[ext_resource type="Texture2D" uid="uid://dv6kubmlgld2b" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron02.png" id="2_p8cw7"]
+[ext_resource type="Texture2D" uid="uid://djl6u2i1amhg" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron03.png" id="3_mpwvu"]
+[ext_resource type="Texture2D" uid="uid://dk0d5ixfaa4ah" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron04.png" id="4_aa45n"]
+[ext_resource type="Texture2D" uid="uid://cs4wehvcb0hyh" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron00.png" id="5_pnir2"]
+[ext_resource type="Texture2D" uid="uid://ddr0aaho6gfdp" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron05.png" id="6_jijjh"]
+[ext_resource type="Texture2D" uid="uid://bksx6glh5hgkw" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron06.png" id="7_vafho"]
+[ext_resource type="Texture2D" uid="uid://bhubqwont7eea" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron07.png" id="8_0ys2o"]
+[ext_resource type="Texture2D" uid="uid://d4jiawv7pxicg" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron08.png" id="9_3bygg"]
+[ext_resource type="Texture2D" uid="uid://dlee4oi4nsshj" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron09.png" id="10_t5pp4"]
+[ext_resource type="Texture2D" uid="uid://dvaonui2d148d" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron10.png" id="11_jlhe2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymybx"]
+size = Vector2(9.19239, 9.9231)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_enhg1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0oe60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_p8cw7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mpwvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aa45n")
+}],
+"loop": true,
+"name": &"lit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_pnir2")
+}],
+"loop": false,
+"name": &"out",
+"speed": 1.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w3d7u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_jijjh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vafho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0ys2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3bygg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_t5pp4")
+}],
+"loop": true,
+"name": &"lit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_jlhe2")
+}],
+"loop": true,
+"name": &"out",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.00198936, 0.993314)
+shape = SubResource("RectangleShape2D_ymybx")
+
+[node name="fire" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_enhg1")
+animation = &"lit"
+
+[node name="pot" type="AnimatedSprite2D" parent="fire"]
+texture_filter = 1
+position = Vector2(0, -10.8546)
+sprite_frames = SubResource("SpriteFrames_w3d7u")
+animation = &"out"

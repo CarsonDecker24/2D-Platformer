@@ -21,5 +21,11 @@ func _turn_on():
 	on = true
 
 
-func _on_body_entered(body):
-	pass
+
+
+
+func _on_area_entered(area):
+	if area.is_in_group("Arrow"):
+		if area.type == "Electricity":
+			on = true
+	pass # Replace with function body.
