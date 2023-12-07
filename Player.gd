@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 150.0
+const SPEED = 150
 const JUMP_VELOCITY = -300.0
 const ACCEL = 25.0
 
@@ -9,6 +9,7 @@ const arrowPath = preload("res://new_arrow.tscn")
 const FIRECOOLDOWN = .4
 
 var FRICTION = 25.0
+var AIR_FRICTION = 25.0
 var direction
 var pivot
 var pivot2
@@ -162,12 +163,20 @@ func _accelerate(dir):
 func _friction():
 	#Add friction to the player
 	#velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
-	if (velocity.x > 0 and (velocity.x - FRICTION) < 0) or (velocity.x < 0 and (velocity.x + FRICTION) > 0):
-		velocity.x = 0
-	elif velocity.x > 0:
-		velocity.x -= FRICTION
-	elif velocity.x < 0:
-		velocity.x += FRICTION
+	if is_on_floor():
+		if (velocity.x > 0 and (velocity.x - FRICTION) < 0) or (velocity.x < 0 and (velocity.x + FRICTION) > 0):
+			velocity.x = 0
+		elif velocity.x > 0:
+			velocity.x -= FRICTION
+		elif velocity.x < 0:
+			velocity.x += FRICTION
+	else:
+		if (velocity.x > 0 and (velocity.x - FRICTION) < 0) or (velocity.x < 0 and (velocity.x + FRICTION) > 0):
+			velocity.x = 0
+		elif velocity.x > 0:
+			velocity.x -= AIR_FRICTION
+		elif velocity.x < 0:
+			velocity.x += AIR_FRICTION
 
 func _gravity(delta):
 	#Apply gravity
