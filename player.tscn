@@ -1105,7 +1105,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bow_quickfire",
-"speed": 30.0
+"speed": 35.0
 }, {
 "frames": [{
 "duration": 1.0,

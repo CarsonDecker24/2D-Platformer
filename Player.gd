@@ -30,7 +30,7 @@ var fire_state = "not"
 var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
-var slots = ["Fire", "Electric", "Ice"]
+var slots = ["Fire", "Multi", "Ice"]
 var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot
@@ -136,7 +136,7 @@ func _physics_process(delta):
 			parrying = true
 			parryTime = .2
 			if rad_to_deg(get_angle_to(get_global_mouse_position()))> 90 or rad_to_deg(get_angle_to(get_global_mouse_position()))<-90:
-				get_node("parryBox").position.x=-16
+				get_node("parryBox").position.x=-13
 			else:
 				get_node("parryBox").position.x = 2
 			get_node("Camera/eBar").play("refill")
@@ -271,7 +271,7 @@ func _shoot_check(delta):
 		fire_state= "quick"
 		
 		#run the timer down
-		fire_cooldown-=delta
+		fire_cooldown-=delta*1.6
 		
 		#fire
 		if fire_cooldown <=0:
