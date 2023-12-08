@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpnul7ws48lev"]
+[gd_scene load_steps=18 format=3 uid="uid://dpnul7ws48lev"]
 
 [ext_resource type="Texture2D" uid="uid://b7s1bj4idbx5a" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron01.png" id="1_0oe60"]
+[ext_resource type="Script" path="res://fire.gd" id="1_4cce6"]
 [ext_resource type="Texture2D" uid="uid://dv6kubmlgld2b" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron02.png" id="2_p8cw7"]
 [ext_resource type="Texture2D" uid="uid://djl6u2i1amhg" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron03.png" id="3_mpwvu"]
 [ext_resource type="Texture2D" uid="uid://dk0d5ixfaa4ah" path="res://Assets/environmental stuff/fire and culdron/fire environment couldron04.png" id="4_aa45n"]
@@ -74,9 +75,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Curve" id="Curve_b4e3x"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 60), 0.0, 0.0, 0, 0, Vector2(1, 60), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xana3"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.238854, 1), 0.0, 0.0, 0, 0, Vector2(0.805732, 1), -4.79894e-07, -4.79894e-07, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="FireCauldron" type="Node2D"]
+script = ExtResource("1_4cce6")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 257
+collision_mask = 257
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.00198936, 0.993314)
@@ -89,6 +103,31 @@ animation = &"lit"
 
 [node name="pot" type="AnimatedSprite2D" parent="fire"]
 texture_filter = 1
-position = Vector2(0, -10.8546)
+position = Vector2(-0.0196953, -11.8845)
 sprite_frames = SubResource("SpriteFrames_w3d7u")
 animation = &"out"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+z_as_relative = false
+position = Vector2(-0.0992126, -6.84567)
+lifetime = 2.0
+emission_shape = 1
+emission_sphere_radius = 2.2
+direction = Vector2(0, -1)
+spread = 1.09
+gravity = Vector2(0, 0)
+initial_velocity_max = 1.65
+linear_accel_max = 2.0
+linear_accel_curve = SubResource("Curve_b4e3x")
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_xana3")
+color = Color(0.741176, 0.8, 1, 0.67451)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-0.0992126, -6.84567)
+target_position = Vector2(-0.111008, -151.277)
+collision_mask = 257
+collide_with_areas = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
