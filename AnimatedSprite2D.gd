@@ -343,5 +343,7 @@ func _on_frame_changed():
 			elif frame==3:
 				parent._pivPos(-2,2)
 				parent._armPos(-7,4)
-			
+		
+	
+		
 	pass # Replace with function body.

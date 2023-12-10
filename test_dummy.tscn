@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://d2kvnctkapc7y"]
+[gd_scene load_steps=33 format=3 uid="uid://d2kvnctkapc7y"]
 
 [ext_resource type="Script" path="res://test_dummy.gd" id="1_1c4ne"]
 [ext_resource type="Texture2D" uid="uid://clyg48xtd3ssi" path="res://Assets/enemy sprites/basic/enemy walk and aim.png" id="2_814ig"]
+[ext_resource type="Texture2D" uid="uid://b02dkwqbkk4jm" path="res://Assets/enemy sprites/wands/WAND-1.png" id="3_gjtvj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n2n5x"]
 radius = 6.0
@@ -260,9 +261,12 @@ shape = SubResource("CapsuleShape2D_n2n5x")
 
 [node name="dummyPlayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(5, -10)
 sprite_frames = SubResource("SpriteFrames_r0jwq")
 animation = &"walking upward"
-offset = Vector2(0, 0.9)
+frame = 1
+offset = Vector2(-5, 9.65)
+flip_h = true
 
 [node name="RayMid" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
@@ -297,3 +301,9 @@ gravity = Vector2(0, 1)
 scale_amount_curve = SubResource("Curve_ahohc")
 color = Color(0.231373, 1, 1, 1)
 color_initial_ramp = SubResource("Gradient_3ovvd")
+
+[node name="Wand" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-10, -10)
+texture = ExtResource("3_gjtvj")
+offset = Vector2(2.49953, -2.16984)

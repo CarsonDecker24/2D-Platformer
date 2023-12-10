@@ -7,7 +7,6 @@ var player_spotted = false
 var player_distance=0
 var player_angle=0
 var player_side_right=true
-var animation_frame=0
 var animation_state = "idle"
 var sees_player = false
 var shoot_cooldown=1
@@ -20,6 +19,7 @@ const SPEED =60
 const FIRE_RATE=1
 var from_facing
 var oiled = false
+var wandPos = Vector2(0,0)
 const orbPath = preload("res://orb.tscn")
 @onready var animator = get_node("dummyPlayer")
 @onready var target_ray = get_node("TargetRay")
@@ -52,7 +52,8 @@ func _process(delta):
 	
 	_gravity(delta)
 	
-
+	
+	
 	
 	if player_spotted==true:
 		#this line gets the players distance from the dummy
@@ -139,33 +140,48 @@ func _process(delta):
 
 func _wizardAim():
 	if player!=null and sees_player==true:
+		get_node("Wand").self_modulate
 		if player_side_right==true:
-			
+			get_node("Wand").flip_h=true
 			if abs(rad_to_deg(_get_angle_to_player()))>270 and abs(rad_to_deg(_get_angle_to_player()))<330:
 				walking = "walking down"
 				idle = "idle down"
+				wandPos= Vector2(7.5,1.25)
 			elif abs(rad_to_deg(_get_angle_to_player()))>330 or abs(rad_to_deg(_get_angle_to_player()))<30:
 				walking = "walking level"
 				idle = "idle level"
+				wandPos= Vector2(7.5,-1.25)
 			elif abs(rad_to_deg(_get_angle_to_player()))>30 and  abs(rad_to_deg(_get_angle_to_player()))<60:
 				walking = "walking up"
 				idle = "idle up" 
+				wandPos= Vector2(7.5,-5)
 			elif abs(rad_to_deg(_get_angle_to_player()))>60 and  abs(rad_to_deg(_get_angle_to_player()))<90:
 				walking = "walking upward"
 				idle = "idle upward"
+				wandPos= Vector2(5,-8.75)
 		else:
+			get_node("Wand").flip_h=false
 			if abs(rad_to_deg(_get_angle_to_player()))<270 and abs(rad_to_deg(_get_angle_to_player()))>210:
 				walking = "walking down"
 				idle = "idle down"
+				wandPos= Vector2(-11.25,1.25)
 			elif abs(rad_to_deg(_get_angle_to_player()))<210 or abs(rad_to_deg(_get_angle_to_player()))>150:
 				walking = "walking level"
 				idle = "idle level"
+				wandPos= Vector2(-11.25,-1.25)
 			elif abs(rad_to_deg(_get_angle_to_player()))>120 and  abs(rad_to_deg(_get_angle_to_player()))<150:
 				walking = "walking up"
 				idle = "idle up"
+				wandPos= Vector2(-11.25,-5)
 			elif abs(rad_to_deg(_get_angle_to_player()))>60 and  abs(rad_to_deg(_get_angle_to_player()))<90:
 				walking = "walking upward"
 				idle = "idle upward"
+				wandPos= Vector2(-10,-8.75)
+			if $dummyPlayer.frame==0:
+				get_node("Wand").position=Vector2(wandPos.x,wandPos.y)
+			else:
+				get_node("Wand").position=Vector2(wandPos.x,wandPos.y-1.25)
+				
 	else:
 		idle = "idle holster"
 		walking = "walking holster"
@@ -206,7 +222,7 @@ func _is_dead():
 func _get_angle_to_player():
 	if player != null:
 		player_angle=global_position.angle_to_point(player.global_position)
-		print(player_angle)
+		#print(player_angle)
 		return global_position.angle_to_point(player.global_position)
 		
 

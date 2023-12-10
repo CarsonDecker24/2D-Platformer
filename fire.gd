@@ -15,9 +15,6 @@ func _process(delta):
 			get_node("RayCast2D").get_collider()._unPowered()
 		else:
 			print("nope")
-		print(get_node("RayCast2D").get_collider())
-	
-	print(get_node("RayCast2D").get_collider())
 	pass
 
 

@@ -128,6 +128,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_tycoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tycoe")
 }],
 "loop": false,
 "name": &"jumpIdleRight",
@@ -1132,14 +1135,18 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"idle"
+animation = &"jumpIdleRight"
+frame = 1
+frame_progress = 1.0
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-6, 5)
 shape = SubResource("CapsuleShape2D_upuir")
 
 [node name="Camera" type="Camera2D" parent="."]
+visible = false
 position = Vector2(-3, 1)
 zoom = Vector2(4, 4)
 
@@ -1151,21 +1158,25 @@ sprite_frames = SubResource("SpriteFrames_jymnt")
 animation = &"slot_1"
 
 [node name="Slot_1" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
+visible = false
 position = Vector2(-15.4691, -1.47194)
 sprite_frames = SubResource("SpriteFrames_c1u5q")
 animation = &"Bounce"
 
 [node name="Slot_2" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
+visible = false
 position = Vector2(1.51198, -1.48824)
 sprite_frames = SubResource("SpriteFrames_c1u5q")
 animation = &"Multi"
 
 [node name="Slot_3" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
+visible = false
 position = Vector2(18.4977, -1.50632)
 sprite_frames = SubResource("SpriteFrames_c1u5q")
 animation = &"Fire"
 
 [node name="healthBar" type="AnimatedSprite2D" parent="Camera"]
+visible = false
 z_index = 2
 texture_filter = 1
 position = Vector2(-192, -110)
@@ -1173,6 +1184,7 @@ sprite_frames = SubResource("SpriteFrames_k3vi4")
 animation = &"full"
 
 [node name="shiftBar" type="AnimatedSprite2D" parent="Camera"]
+visible = false
 z_index = 2
 texture_filter = 1
 position = Vector2(-194, -72)
@@ -1180,6 +1192,7 @@ sprite_frames = SubResource("SpriteFrames_pcq48")
 animation = &"full"
 
 [node name="eBar" type="AnimatedSprite2D" parent="Camera"]
+visible = false
 z_index = 2
 texture_filter = 1
 position = Vector2(-193, -89)
@@ -1187,7 +1200,6 @@ sprite_frames = SubResource("SpriteFrames_u0ohg")
 animation = &"full"
 
 [node name="Menu" type="AnimatedSprite2D" parent="Camera"]
-visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lduir")
 
@@ -1206,12 +1218,14 @@ animation = &"bow_quickfire"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
+visible = false
 position = Vector2(2.5, 1)
 
 [node name="pullArmPosition" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
-position = Vector2(-1.5, 0)
+position = Vector2(-1.5, -3)
 
 [node name="parryBox" type="Area2D" parent="." groups=["Bow"]]
+visible = false
 position = Vector2(-3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="parryBox"]
@@ -1227,7 +1241,7 @@ texture = ExtResource("74_qvcdd")
 [node name="armPosition" type="Node2D" parent="."]
 z_index = 1
 z_as_relative = false
-position = Vector2(-2, 2)
+position = Vector2(-1, 1)
 script = ExtResource("74_xk2jf")
 
 [node name="Sprite2D" type="Sprite2D" parent="armPosition"]
