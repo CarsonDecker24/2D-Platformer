@@ -24,6 +24,9 @@ const orbPath = preload("res://orb.tscn")
 @onready var animator = get_node("dummyPlayer")
 @onready var target_ray = get_node("TargetRay")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var wandSpin = .3
+var WANDTIME = .3
+var bouttaShoot = false
 
 func _ready():
 	get_node("ice_particles").set_deferred("emitting", false)
@@ -42,6 +45,7 @@ func _spot_player(body):
 func _process(delta):
 	_check_rays()
 	
+	_shoot_orb(delta)
 	#resets general stats when debufs are over
 	if debuff_cooldown<0:
 		speed_mod=1
@@ -78,7 +82,7 @@ func _process(delta):
 		
 		print(sees_player)
 		if sees_player and shoot_cooldown<0:
-			_shoot_orb(delta)
+			bouttaShoot=true
 			shoot_cooldown=FIRE_RATE/fire_rate_mod
 		
 		#this flips the dummy to face the placer once the player has been spotted 
@@ -140,7 +144,7 @@ func _process(delta):
 
 func _wizardAim():
 	if player!=null and sees_player==true:
-		get_node("Wand").self_modulate
+		get_node("Wand").self_modulate=Color(1, 1, 1, 1)
 		if player_side_right==true:
 			get_node("Wand").flip_h=true
 			if abs(rad_to_deg(_get_angle_to_player()))>270 and abs(rad_to_deg(_get_angle_to_player()))<330:
@@ -177,14 +181,17 @@ func _wizardAim():
 				walking = "walking upward"
 				idle = "idle upward"
 				wandPos= Vector2(-10,-8.75)
-			if $dummyPlayer.frame==0:
-				get_node("Wand").position=Vector2(wandPos.x,wandPos.y)
-			else:
-				get_node("Wand").position=Vector2(wandPos.x,wandPos.y-1.25)
-				
 	else:
 		idle = "idle holster"
 		walking = "walking holster"
+		get_node("Wand").self_modulate=Color(1, 1, 1, 0)
+	if $dummyPlayer.frame==0:
+		get_node("Wand").position=Vector2(wandPos.x,wandPos.y)
+		print("hey")
+	else:
+		get_node("Wand").position=Vector2(wandPos.x,wandPos.y-1.25)
+		print("hoo")
+	
 
 func _lower_health(hp_reduction: int):
 	hp -= hp_reduction
@@ -213,8 +220,7 @@ func _damage(type: String, damage: int):
 		print("Died!")
 		is_dead = true
 		queue_free()
-		
-		
+
 
 func _is_dead():
 	return is_dead
@@ -227,10 +233,19 @@ func _get_angle_to_player():
 		
 
 func _shoot_orb(delta):
-	var orb = orbPath.instantiate()
-	orb._setup(Vector2(200*delta,0).rotated(_get_angle_to_player()), player, get_meta("homing"),player_side_right)
-	add_sibling(orb)
-	orb.position = global_position
+	if bouttaShoot==true and wandSpin>0:
+		wandSpin-=delta
+		get_node("Wand").rotation= (WANDTIME-wandSpin)*20
+		print("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
+	
+	if wandSpin<=0 and bouttaShoot==true:
+		var orb = orbPath.instantiate()
+		orb._setup(Vector2(200*delta,0).rotated(_get_angle_to_player()), player, get_meta("homing"),player_side_right)
+		add_sibling(orb)
+		orb.position = $Wand.global_position
+		bouttaShoot=false
+		wandSpin=WANDTIME
+	
 
 func _check_rays():
 	if get_node("RayMid").get_collider() and not get_node("RayMid").get_collider() == null and get_node("RayMid").get_collider().is_in_group("Player"):

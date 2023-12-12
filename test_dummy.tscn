@@ -303,6 +303,7 @@ color = Color(0.231373, 1, 1, 1)
 color_initial_ramp = SubResource("Gradient_3ovvd")
 
 [node name="Wand" type="Sprite2D" parent="."]
+self_modulate = Color(75.74, 1, 1, 0)
 texture_filter = 1
 position = Vector2(-10, -10)
 texture = ExtResource("3_gjtvj")
