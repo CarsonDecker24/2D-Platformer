@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://6oqatpaamjm4"]
+
+[ext_resource type="Script" path="res://electricBridge.gd" id="1_ddspl"]
+[ext_resource type="Texture2D" uid="uid://clnsosb3hadie" path="res://Assets/environmental stuff/Electric bridge.png" id="2_rbxsu"]
+[ext_resource type="Texture2D" uid="uid://c2p811v7x0inf" path="res://Assets/environmental stuff/electric bridge platform.png" id="3_w8lkd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l4gd"]
+atlas = ExtResource("2_rbxsu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1otgk"]
+atlas = ExtResource("2_rbxsu")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7hi6m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1l4gd")
+}],
+"loop": false,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1otgk")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_resgh"]
+size = Vector2(253.109, 6.85674)
+
+[node name="electricBridge" type="Node2D"]
+script = ExtResource("1_ddspl")
+metadata/source = NodePath("")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_7hi6m")
+animation = &"off"
+autoplay = "off"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(142.638, 5.57163)
+shape = SubResource("RectangleShape2D_resgh")
+
+[node name="TextureRect" type="TextureRect" parent="StaticBody2D"]
+z_index = -1
+z_as_relative = false
+texture_filter = 1
+offset_left = 16.0
+offset_top = -16.0
+offset_right = 269.0
+offset_bottom = 16.0
+texture = ExtResource("3_w8lkd")
+expand_mode = 3
+stretch_mode = 1

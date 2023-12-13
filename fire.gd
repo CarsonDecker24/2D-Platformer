@@ -1,6 +1,6 @@
 extends Node2D
 var status = "lit"
-
+var on = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -31,5 +31,6 @@ func _on_area_2d_area_entered(area):
 			$fire/pot.play("lit")
 			status="lit"
 			$CPUParticles2D.emitting = true
+			on = true
 	
 	pass # Replace with function body.

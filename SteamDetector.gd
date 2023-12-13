@@ -1,5 +1,6 @@
 extends Area2D
 var on = false
+var source
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

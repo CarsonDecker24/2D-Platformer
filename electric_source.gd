@@ -21,9 +21,6 @@ func _turn_on():
 	on = true
 
 
-
-
-
 func _on_area_entered(area):
 	if area.is_in_group("Arrow"):
 		if area.type == "Electricity":

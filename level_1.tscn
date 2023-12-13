@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dmatwath7f8sm"]
+[gd_scene load_steps=28 format=3 uid="uid://dmatwath7f8sm"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_cj6ue"]
 [ext_resource type="Texture2D" uid="uid://qdp4102uvq0o" path="res://Assets/environmental stuff/shift word.png" id="2_eivfx"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://d3qyo6dupxvoh" path="res://Assets/tilesheets/steamPower.png" id="15_7p7ow"]
 [ext_resource type="Script" path="res://SteamDetector.gd" id="15_b4rn4"]
 [ext_resource type="PackedScene" uid="uid://dpnul7ws48lev" path="res://fire.tscn" id="16_jta8k"]
+[ext_resource type="PackedScene" uid="uid://6oqatpaamjm4" path="res://electric_bridge.tscn" id="18_smkcr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vdj2w"]
 resource_name = "Tilemap"
@@ -1984,6 +1985,10 @@ animation = &"on"
 
 [node name="Node2D" parent="." instance=ExtResource("16_jta8k")]
 position = Vector2(1972.97, -387.847)
+
+[node name="electricBridge" parent="." instance=ExtResource("18_smkcr")]
+position = Vector2(2165.96, -88.0058)
+metadata/source = NodePath("../SteamDetector")
 
 [connection signal="body_entered" from="doorController" to="ElectricDoor" method="_on_door_controller_body_entered"]
 [connection signal="body_entered" from="door opener" to="ElectricDoor" method="_on_door_opener_body_entered"]

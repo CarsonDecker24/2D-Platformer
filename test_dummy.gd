@@ -187,7 +187,6 @@ func _wizardAim():
 		get_node("Wand").self_modulate=Color(1, 1, 1, 0)
 	if $dummyPlayer.frame==0:
 		get_node("Wand").position=Vector2(wandPos.x,wandPos.y)
-		print("hey")
 	else:
 		get_node("Wand").position=Vector2(wandPos.x,wandPos.y-1.25)
 		print("hoo")
@@ -236,7 +235,7 @@ func _shoot_orb(delta):
 	if bouttaShoot==true and wandSpin>0:
 		wandSpin-=delta
 		get_node("Wand").rotation= (WANDTIME-wandSpin)*20
-		print("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
+	
 	
 	if wandSpin<=0 and bouttaShoot==true:
 		var orb = orbPath.instantiate()
@@ -261,5 +260,5 @@ func _check_rays():
 
 func _gravity(delta):
 	#Apply gravity
-	#velocity.y += gravity * delta
+	velocity.y += gravity * delta
 	pass
