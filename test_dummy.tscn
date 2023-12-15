@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://d2kvnctkapc7y"]
+[gd_scene load_steps=34 format=3 uid="uid://d2kvnctkapc7y"]
 
 [ext_resource type="Script" path="res://test_dummy.gd" id="1_1c4ne"]
 [ext_resource type="Texture2D" uid="uid://clyg48xtd3ssi" path="res://Assets/enemy sprites/basic/enemy walk and aim.png" id="2_814ig"]
 [ext_resource type="Texture2D" uid="uid://b02dkwqbkk4jm" path="res://Assets/enemy sprites/wands/WAND-1.png" id="3_gjtvj"]
+[ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="3_y0yrd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n2n5x"]
 radius = 6.0
@@ -261,11 +262,10 @@ shape = SubResource("CapsuleShape2D_n2n5x")
 
 [node name="dummyPlayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(5, -10)
+position = Vector2(4.76837e-07, -11.25)
 sprite_frames = SubResource("SpriteFrames_r0jwq")
 animation = &"walking upward"
-frame = 1
-offset = Vector2(-5, 9.65)
+offset = Vector2(-4.76837e-07, 10.9)
 flip_h = true
 
 [node name="RayMid" type="RayCast2D" parent="."]
@@ -278,7 +278,8 @@ target_position = Vector2(205, 38.75)
 
 [node name="RayDown" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
-target_position = Vector2(200, 72.5)
+target_position = Vector2(182.5, 80)
+collision_mask = 3
 
 [node name="RayMidUp" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
@@ -289,6 +290,7 @@ position = Vector2(0, -11.25)
 target_position = Vector2(182.5, -70)
 
 [node name="TargetRay" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, -11.25)
 enabled = false
 target_position = Vector2(0, -9.53674e-07)
@@ -305,6 +307,9 @@ color_initial_ramp = SubResource("Gradient_3ovvd")
 [node name="Wand" type="Sprite2D" parent="."]
 self_modulate = Color(75.74, 1, 1, 0)
 texture_filter = 1
-position = Vector2(-10, -10)
+position = Vector2(-5, -8.75)
 texture = ExtResource("3_gjtvj")
-offset = Vector2(2.49953, -2.16984)
+offset = Vector2(-2.50047, -2.16984)
+
+[node name="point" type="Sprite2D" parent="."]
+texture = ExtResource("3_y0yrd")

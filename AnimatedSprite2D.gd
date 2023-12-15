@@ -9,6 +9,7 @@ var holdingArm
 var walkingLoop=false
 var walkframe=0
 var offSet = 0
+var wallSlideCheck = false
 
 @onready var parent = get_parent()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -127,14 +128,18 @@ func _on_landing_while_walking():
 
 func _on_wallslide():
 	#this TURNS THE PLAYER AROUND so they FACE against THE WALl=================================
-		if (Input.is_action_pressed("move_left") and facing == "right") or (Input.is_action_pressed("move_right") and facing == "left"):
+		if get_parent().wall_sliding==true and Input.is_action_pressed("jump"):
+			if wallSlideCheck == false:
+				play("wallJump")
+				wallSlideCheck=true
+		elif ((Input.is_action_pressed("move_left") and facing == "right") or (Input.is_action_pressed("move_right") and facing == "left")) and wallSlideCheck==true:
 			_quickturn()
-		play("wallDrag")
+		else:
+			play("wallDrag")
+			wallSlideCheck=false
 		
 		#WALL JUMP CHECK============================================================================
-		if get_parent().wall_sliding==true and Input.is_action_just_pressed("jump"):
-			play("wallJump")
-			_quickturn()
+		
 
 func _windup_walk():
 	if facing == "right":

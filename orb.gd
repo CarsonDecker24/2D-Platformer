@@ -65,7 +65,6 @@ func _on_body_entered(body):
 			_die()
 	if body.is_in_group("Player") and !parried:
 		player._take_damage(1)
-		print(player.health)
 		_die()
 		print("Hit Player!")
 	if body.is_in_group("Enemy"):
@@ -83,10 +82,12 @@ func _die():
 
 func _on_parry():
 	homing = false
-	if player.parrySideRight==true:
-		vel = speed.rotated(global_position.angle_to_point(Vector2(-global_position.x,-global_position.y)))
+	if fixTurn==true:
+		vel = speed.rotated(global_position.angle_to_point(Vector2(get_global_mouse_position().x,get_global_mouse_position().y)))
 	else:
-		vel = speed.rotated(global_position.angle_to_point(get_global_mouse_position()))
+		vel = -speed.rotated(global_position.angle_to_point(Vector2(get_global_mouse_position().x,get_global_mouse_position().y)))
+	
+	print(fixTurn)
 	
 	parried = true
 

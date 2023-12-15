@@ -1807,16 +1807,16 @@ texture_filter = 1
 position = Vector2(96, 78)
 
 [node name="TestDummy" parent="." instance=ExtResource("4_kqark")]
-position = Vector2(-75, -80)
+position = Vector2(270, -80)
 metadata/homing = true
 
 [node name="TestDummy2" parent="." instance=ExtResource("4_kqark")]
-position = Vector2(778, 33)
+position = Vector2(789.986, 188.824)
 scale = Vector2(0.64, 0.64)
 metadata/homing = true
 
 [node name="Water" parent="." instance=ExtResource("5_tlohi")]
-position = Vector2(532, -145)
+position = Vector2(645.871, -133.014)
 metadata/Frozen = false
 
 [node name="Water2" parent="." instance=ExtResource("5_tlohi")]

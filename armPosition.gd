@@ -18,11 +18,9 @@ func _process(delta):
 	if ($"../PlayerBodyAnimation".current=="jumpIdleRight" or $"../PlayerBodyAnimation".current=="walkRightJump") and not (get_parent().fire_state== "aim" or get_parent().fire_state== "quick"):
 		chargePosition.position.y = -2
 		handSpeed=14
-		print("jumping")
 	elif ($"../PlayerBodyAnimation".current=="fallRight" or $"../PlayerBodyAnimation".current=="fallslowRight") and not (get_parent().fire_state== "aim" or get_parent().fire_state== "quick"):
 			chargePosition.position.y = 1
 			handSpeed= 14
-			print("falling")
 	if (get_parent().fire_state== "aim" or get_parent().fire_state== "quick") or (not (get_parent().fire_state== "aim" or get_parent().fire_state== "quick") and ($"../PlayerBodyAnimation".current=="jumpIdleRight" or $"../PlayerBodyAnimation".current=="walkRightJump" or $"../PlayerBodyAnimation".current=="fallRight" or $"../PlayerBodyAnimation".current=="fallslowRight"))  and distance2Aim>1.15:
 		armVel.x = move_toward(armVel.x, armSpeed.rotated(get_angle_to(chargePosition.global_position)).x,handSpeed*delta)
 		armVel.y = move_toward(armVel.y, armSpeed.rotated(get_angle_to(chargePosition.global_position)).y,handSpeed*delta)

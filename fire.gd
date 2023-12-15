@@ -13,8 +13,6 @@ func _process(delta):
 			get_node("RayCast2D").get_collider()._powered()
 		elif status == "out":
 			get_node("RayCast2D").get_collider()._unPowered()
-		else:
-			print("nope")
 	pass
 
 

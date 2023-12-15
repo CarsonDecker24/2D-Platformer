@@ -321,7 +321,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"wallJump",
-"speed": 25.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1120,7 +1120,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3xnx"]
-size = Vector2(16, 34)
+size = Vector2(19, 39)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = -1
@@ -1135,13 +1135,10 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"jumpIdleRight"
-frame = 1
-frame_progress = 1.0
+animation = &"wallJump"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-6, 5)
 shape = SubResource("CapsuleShape2D_upuir")
 
@@ -1225,11 +1222,12 @@ position = Vector2(2.5, 1)
 position = Vector2(-1.5, -3)
 
 [node name="parryBox" type="Area2D" parent="." groups=["Bow"]]
-visible = false
+show_behind_parent = true
+texture_filter = 1
 position = Vector2(-3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="parryBox"]
-position = Vector2(6, 2)
+position = Vector2(7.5, 1.5)
 shape = SubResource("RectangleShape2D_f3xnx")
 
 [node name="Sprite2D" type="Sprite2D" parent="parryBox"]

@@ -201,6 +201,7 @@ func _walljump():
 	velocity.y = JUMP_VELOCITY*.85
 	velocity.x += -direction*SPEED*1.2
 	wallJumpNerf=.6 
+	get_node("PlayerBodyAnimation")._quickturn()
 
 func _aim(delta):
 	
