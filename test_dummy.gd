@@ -32,9 +32,10 @@ var groundDistance
 var ledgeTest=false
 var ledgePosition
 var distanceToLedge
-var platformCheck=false
 var jumpInstance=false
+var ledgeSeen = false
 var FRICTION = 25
+var feetPos
 
 func _ready():
 	get_node("ice_particles").set_deferred("emitting", false)
@@ -94,19 +95,23 @@ func _player_spotted():
 		#gets the point where raydown collides with the floor in this case.
 		if get_node("RayDown").get_collider() and not get_node("RayDown").get_collider() == null:
 			if get_node("RayDown").get_collision_point():
-				groundCheck=get_node("RayDown").get_collision_point()
+				groundCheck=(get_node("RayDown").get_collision_point())
+				feetPos = get_node("floorPositionNode").global_position
 			#groundCheck stores the point of RayDowns last collision
 			
-			if groundCheck[1]<-46:
+			if groundCheck[1]<feetPos.y:
 				ledgePosition=groundCheck
 			#if the collision point of RayDown is lower than the platform TestDummy is standing on, it stores that position as the position of the ledge
 			
 			if ledgePosition!=null:
-				$point.global_position=ledgePosition
+				$point.global_position=(get_node("RayDown").get_collision_point())
 			distanceToLedge=abs(global_position.x-ledgePosition.x)
 			
-			if distanceToLedge<13 and not groundCheck[1]<-46:
-				print("theres a platform!")
+			if distanceToLedge<13 and groundCheck[1]-2>feetPos.y:
+					print("there is no platform")
+					player_distance=90
+			elif distanceToLedge<13 and groundCheck[1]-2<feetPos.y:
+				
 				if jumpInstance==false and player_distance>150 and is_on_floor():
 					velocity.y=-300
 					jumpInstance=true
@@ -114,17 +119,16 @@ func _player_spotted():
 				if jumpInstance==false and player_distance<150:
 					player_distance=90
 					
-			elif distanceToLedge<13:
-				print("there is no platform")
-				platformCheck=false
-			print(groundCheck[1])
+			
+			#print(groundCheck[1])
+			#print(feetPos.y)
 		
 		if jumpInstance==true:
 			if $dummyPlayer.flip_h==false:
-				velocity.x+=300
+				velocity.x=100
 				print("changed")
 			else:
-				velocity.x-=300
+				velocity.x=-100
 				print("changed")
 		if is_on_floor()==true:
 			jumpInstance=false

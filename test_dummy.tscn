@@ -313,3 +313,6 @@ offset = Vector2(-2.50047, -2.16984)
 
 [node name="point" type="Sprite2D" parent="."]
 texture = ExtResource("3_y0yrd")
+
+[node name="floorPositionNode" type="Node2D" parent="."]
+position = Vector2(0, 18.75)
