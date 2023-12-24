@@ -1436,6 +1436,10 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_pw6d0")
 color = Color(1, 1, 1, 0.337255)
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-4, 5)
+texture_scale = 36.54
+
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
 [connection signal="frame_changed" from="PivotHoldingArm/HoldingArmAnimation" to="PivotHoldingArm/HoldingArmAnimation" method="_on_frame_changed"]

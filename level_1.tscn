@@ -1,13 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://dmatwath7f8sm"]
+[gd_scene load_steps=31 format=3 uid="uid://dmatwath7f8sm"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_cj6ue"]
+[ext_resource type="Texture2D" uid="uid://boqrayk806e7d" path="res://Assets/tilesheets/paralax gib-ver.png" id="2_a2tse"]
 [ext_resource type="Texture2D" uid="uid://qdp4102uvq0o" path="res://Assets/environmental stuff/shift word.png" id="2_eivfx"]
 [ext_resource type="Texture2D" uid="uid://cvjurk0lvn4xb" path="res://Assets/monochrome_tilemap_transparent_packed.png" id="2_n4ifg"]
 [ext_resource type="Texture2D" uid="uid://b2vicmc0hipty" path="res://Assets/tilesheets/cave tilesheet final gib.png" id="2_sn05g"]
 [ext_resource type="Texture2D" uid="uid://tbgmjracnycj" path="res://Assets/tilesheets/cave tilesheet v1_1.png" id="3_7mu2a"]
 [ext_resource type="PackedScene" uid="uid://dblot7f26i2w" path="res://player.tscn" id="3_410nd"]
-[ext_resource type="Texture2D" uid="uid://bidulwgnpi2be" path="res://Assets/tilesheets/blurred light cast level3.png" id="4_5hwd3"]
-[ext_resource type="Texture2D" uid="uid://mbsmytsxp0dm" path="res://Assets/tilesheets/paralaxFixedGib.png" id="4_fti7i"]
 [ext_resource type="PackedScene" uid="uid://d2kvnctkapc7y" path="res://test_dummy.tscn" id="4_kqark"]
 [ext_resource type="PackedScene" uid="uid://5cidhigmdn0w" path="res://water.tscn" id="5_tlohi"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="6_un1t3"]
@@ -1793,6 +1792,11 @@ sources/6 = SubResource("TileSetAtlasSource_6qlyf")
 script = ExtResource("1_cj6ue")
 metadata/_edit_horizontal_guides_ = []
 
+[node name="bg_1" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("2_a2tse")
+
 [node name="bg_2" type="Sprite2D" parent="."]
 light_mask = 0
 z_index = -1
@@ -1807,20 +1811,6 @@ z_index = -1
 position = Vector2(-0.704526, 1.67154)
 scale = Vector2(321.049, 323.482)
 texture = ExtResource("6_un1t3")
-
-[node name="PointLight2D" type="PointLight2D" parent="bg_2"]
-energy = 4.26
-shadow_enabled = true
-texture = ExtResource("4_5hwd3")
-
-[node name="bg_1" type="Sprite2D" parent="."]
-self_modulate = Color(0.682353, 1, 0.905882, 1)
-light_mask = 0
-z_as_relative = false
-texture_filter = 5
-scale = Vector2(5, 5)
-texture = ExtResource("4_fti7i")
-metadata/_edit_group_ = true
 
 [node name="Water2" parent="." instance=ExtResource("5_tlohi")]
 position = Vector2(1184, -239)

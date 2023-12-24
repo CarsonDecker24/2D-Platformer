@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ftklpiswi52d"
-path="res://.godot/imported/paralaxFixedGib - Copy.png-078db6d81caaf1627eafe7af86cf30ad.ctex"
+uid="uid://b8rbmd82pt57x"
+path="res://.godot/imported/sprite_Slice_of_8_4.png-42066933d75902da478173dab34e7cdb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesheets/paralaxFixedGib - Copy.png"
-dest_files=["res://.godot/imported/paralaxFixedGib - Copy.png-078db6d81caaf1627eafe7af86cf30ad.ctex"]
+source_file="res://Assets/tilesheets/trials and tribulations/paralaxFixedGib/sprite_Slice_of_8_4.png"
+dest_files=["res://.godot/imported/sprite_Slice_of_8_4.png-42066933d75902da478173dab34e7cdb.ctex"]
 
 [params]
 

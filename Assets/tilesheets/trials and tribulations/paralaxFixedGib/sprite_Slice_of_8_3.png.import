@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bidulwgnpi2be"
-path="res://.godot/imported/blurred light cast level3.png-05ddbf38f08214bbe3d572c25472626f.ctex"
+uid="uid://dfymuhwewvcq6"
+path="res://.godot/imported/sprite_Slice_of_8_3.png-153addb32f62d640fd576ef71bb7497c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tilesheets/blurred light cast level3.png"
-dest_files=["res://.godot/imported/blurred light cast level3.png-05ddbf38f08214bbe3d572c25472626f.ctex"]
+source_file="res://Assets/tilesheets/trials and tribulations/paralaxFixedGib/sprite_Slice_of_8_3.png"
+dest_files=["res://.godot/imported/sprite_Slice_of_8_3.png-153addb32f62d640fd576ef71bb7497c.ctex"]
 
 [params]
 
