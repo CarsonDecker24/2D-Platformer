@@ -19,6 +19,8 @@ var dyingTime=1
 var dying = false
 var hideNextFrame = false
 var remainingBounces
+var damage
+var level
 
 func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node):
 	id = aID
@@ -39,18 +41,30 @@ func _ready():
 		particle.initial_velocity_max=5
 		particle.tangential_accel_max=0
 		particle.radial_accel_max=0
+		particle.angular_velocity_max=0
 	elif type=="Ice":
 		get_node("AnimatedSprite2D").play("ice arrow")
 		particle.color=Color(0, 0.686, 0.984, 0.8)
 		particle.radial_accel_max=40
+		particle.angular_velocity_max=0
+		damage=10
 	elif type=="Fire":
 		get_node("AnimatedSprite2D").play("fire arrow")
 		particle.gravity.y=-60
 		particle.color=Color(1, 0.145, 0, 0.655)
 		particle.initial_velocity_max=5
 		particle.radial_accel_max=0
+		particle.angular_velocity_max=0
+		damage = 10
 	elif type == "Bounce":
 		remainingBounces = 2
+	elif type=="Electricity":
+		get_node("AnimatedSprite2D").play("electric arrow")
+		particle.angular_velocity_min=800
+		particle.color=Color(1, 1, 0.161, 0.792)
+		particle.radial_accel_max=0
+		pass
+		damage = 8
 	else:
 		get_node("AnimatedSprite2D").play("default")
 		particle.color=Color(0.408, 0.408, 0.408, 0.8)
@@ -58,6 +72,7 @@ func _ready():
 		particle.initial_velocity_max=5
 		particle.tangential_accel_max=0
 		particle.radial_accel_max=0
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if moving:
@@ -125,7 +140,7 @@ func _on_body_entered(body):
 		
 	if body.is_in_group("Enemy"):
 		print("Hit Enemy")
-		body._damage(type, 1)
+		body._damage(type, damage)
 		current_attached_body = body
 		on_enemy = true
 		moving = false

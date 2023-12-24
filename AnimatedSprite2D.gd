@@ -54,6 +54,9 @@ func _process(delta):
 	if current == "turnLeftSkid":
 		_turn_around_skid()
 	
+	if current == "sliding":
+		_sliding_low()
+	
 	fallTest = global_position.y
 
 
@@ -113,7 +116,7 @@ func _on_falling():
 	if current == "jumpIdleRight":
 		current = "fallslowRight" 
 		play("slowFallRight")
-	elif current=="walkRightJump":
+	elif (current=="walkRightJump") or (current =="walkingRight" and not get_parent().is_on_floor()):
 		current = "fallRight"
 		play("walkRightFall")
 
@@ -210,6 +213,10 @@ func _walking():
 		if Input.is_action_just_pressed("jump"):
 			current="walkRightJump"
 			play("jumpWalkRightUp")
+		
+		if Input.is_action_pressed("move_down") and get_parent().sliding==true:
+			current = "sliding"
+			play("slide")
 	else:
 		if Input.is_action_just_pressed("move_right"):
 			current = "skidRight"
@@ -220,6 +227,19 @@ func _walking():
 		if Input.is_action_just_pressed("jump"):
 			current="walkRightJump"
 			play("jumpWalkRightUp")
+		if Input.is_action_pressed("move_down") and get_parent().sliding==true:
+			current = "sliding"
+			play("slide")
+
+func _sliding_low():
+	if is_playing()==false:
+		play("slide_done")
+	if not Input.is_action_pressed("move_down"):
+		play_backwards("slide")
+		set_frame_and_progress(10,0.00)
+		current="windupRightWalk"
+		print("what")
+
 
 func _skid_ThenIdle():
 	if facing == "right":
@@ -348,7 +368,4 @@ func _on_frame_changed():
 			elif frame==3:
 				parent._pivPos(-2,2)
 				parent._armPos(-7,4)
-		
-	
-		
 	pass # Replace with function body.

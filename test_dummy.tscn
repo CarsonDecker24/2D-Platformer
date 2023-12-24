@@ -1,13 +1,21 @@
-[gd_scene load_steps=34 format=3 uid="uid://d2kvnctkapc7y"]
+[gd_scene load_steps=52 format=3 uid="uid://d2kvnctkapc7y"]
 
 [ext_resource type="Script" path="res://test_dummy.gd" id="1_1c4ne"]
 [ext_resource type="Texture2D" uid="uid://clyg48xtd3ssi" path="res://Assets/enemy sprites/basic/enemy walk and aim.png" id="2_814ig"]
+[ext_resource type="Texture2D" uid="uid://ckjbr1cnl6n3o" path="res://Assets/enemy sprites/enemy deathFrame.png" id="2_di0wo"]
+[ext_resource type="Texture2D" uid="uid://ce30gxdor2y5s" path="res://Assets/enemy sprites/basic/enemyhurtingFrames.png" id="2_vhucm"]
 [ext_resource type="Texture2D" uid="uid://b02dkwqbkk4jm" path="res://Assets/enemy sprites/wands/WAND-1.png" id="3_gjtvj"]
+[ext_resource type="Texture2D" uid="uid://bgetsl7n5djlg" path="res://Assets/enemy sprites/basic/enemy jump and fall.png" id="3_k0q6p"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="3_y0yrd"]
+[ext_resource type="Texture2D" uid="uid://bpn3xa6vxykc1" path="res://Assets/enemy sprites/sprite_12.png" id="8_sl75h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n2n5x"]
 radius = 6.0
 height = 34.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukavy"]
+atlas = ExtResource("2_vhucm")
+region = Rect2(0, 0, 23, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8yt3"]
 atlas = ExtResource("2_814ig")
@@ -28,6 +36,30 @@ region = Rect2(46, 68, 23, 34)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7sfam"]
 atlas = ExtResource("2_814ig")
 region = Rect2(23, 102, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80pgn"]
+atlas = ExtResource("3_k0q6p")
+region = Rect2(0, 0, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8hde"]
+atlas = ExtResource("3_k0q6p")
+region = Rect2(23, 0, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4ywp"]
+atlas = ExtResource("3_k0q6p")
+region = Rect2(46, 0, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cenix"]
+atlas = ExtResource("2_vhucm")
+region = Rect2(23, 0, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u785"]
+atlas = ExtResource("2_vhucm")
+region = Rect2(0, 34, 23, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkdo4"]
+atlas = ExtResource("2_vhucm")
+region = Rect2(23, 34, 23, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgmbh"]
 atlas = ExtResource("2_814ig")
@@ -113,6 +145,27 @@ region = Rect2(92, 102, 23, 34)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_di0wo")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukavy")
+}],
+"loop": false,
+"name": &"downHurt",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_n8yt3")
 }],
 "loop": true,
@@ -123,15 +176,15 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jlvlc")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle holster",
-"speed": 0.0
+"speed": 60.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jypvh")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle level",
 "speed": 0.0
 }, {
@@ -139,7 +192,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jdicb")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle up",
 "speed": 0.0
 }, {
@@ -147,9 +200,47 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7sfam")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle upward",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80pgn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8hde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4ywp")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cenix")
+}],
+"loop": false,
+"name": &"levelHurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u785")
+}],
+"loop": false,
+"name": &"upHurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkdo4")
+}],
+"loop": false,
+"name": &"upwardsHurt",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -164,7 +255,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3q3he")
 }],
-"loop": true,
+"loop": false,
 "name": &"walking down",
 "speed": 20.0
 }, {
@@ -181,7 +272,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_miw1k")
 }],
-"loop": true,
+"loop": false,
 "name": &"walking holster",
 "speed": 20.0
 }, {
@@ -198,7 +289,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_iuptt")
 }],
-"loop": true,
+"loop": false,
 "name": &"walking level",
 "speed": 20.0
 }, {
@@ -215,7 +306,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5alye")
 }],
-"loop": true,
+"loop": false,
 "name": &"walking up",
 "speed": 20.0
 }, {
@@ -232,18 +323,56 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kxpwh")
 }],
-"loop": true,
+"loop": false,
 "name": &"walking upward",
 "speed": 20.0
 }]
 
 [sub_resource type="Curve" id="Curve_ahohc"]
-_data = [Vector2(0, 0.831579), 0.0, 0.0, 0, 0, Vector2(0.444853, 0.4), 0.0, 0.0, 0, 0, Vector2(0.977941, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.831579), 0.0, 0.0, 0, 0, Vector2(0.813084, 0.673684), 0.0, 0.0, 0, 0, Vector2(0.977941, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_3ovvd"]
 offsets = PackedFloat32Array(0, 0.302905, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.887967, 0.887967, 0.887967, 1, 1, 1, 1, 1)
+
+[sub_resource type="Curve" id="Curve_aafsx"]
+_data = [Vector2(0, 0.652632), 0.0, 0.0, 0, 0, Vector2(1, 0.0526316), -1.42895, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_b4num"]
+offsets = PackedFloat32Array(0.0133333, 0.986667)
+colors = PackedColorArray(1, 0.945098, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_j6742"]
+offsets = PackedFloat32Array(0, 0.731903, 1)
+colors = PackedColorArray(1, 0, 0.615686, 1, 0.0187668, 0, 0.992788, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hdek5"]
+gradient = SubResource("Gradient_j6742")
+
+[sub_resource type="Curve" id="Curve_x3ivp"]
+_data = [Vector2(0, 0.0210526), 0.0, 0.0, 0, 0, Vector2(0.35396, 0.389474), 0.0, 0.0, 0, 0, Vector2(0.972772, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nhyyi"]
+curve = SubResource("Curve_x3ivp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i5mac"]
+emission_shape = 2
+emission_sphere_radius = 5.38
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_nhyyi")
+color_ramp = SubResource("GradientTexture1D_hdek5")
+turbulence_enabled = true
+turbulence_noise_speed = Vector3(0, 1, 0)
 
 [node name="TestDummy" type="CharacterBody2D" groups=["Enemy"]]
 scale = Vector2(0.8, 0.8)
@@ -264,9 +393,9 @@ shape = SubResource("CapsuleShape2D_n2n5x")
 texture_filter = 1
 position = Vector2(4.76837e-07, -11.25)
 sprite_frames = SubResource("SpriteFrames_r0jwq")
-animation = &"walking upward"
+animation = &"upwardsHurt"
+autoplay = "walking level"
 offset = Vector2(-4.76837e-07, 10.9)
-flip_h = true
 
 [node name="RayMid" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
@@ -290,29 +419,79 @@ position = Vector2(0, -11.25)
 target_position = Vector2(182.5, -70)
 
 [node name="TargetRay" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(0, -11.25)
 enabled = false
 target_position = Vector2(0, -9.53674e-07)
 
 [node name="ice_particles" type="CPUParticles2D" parent="."]
+emitting = false
 amount = 5
 emission_shape = 3
 emission_rect_extents = Vector2(6, 15)
 gravity = Vector2(0, 1)
+scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_ahohc")
 color = Color(0.231373, 1, 1, 1)
 color_initial_ramp = SubResource("Gradient_3ovvd")
 
+[node name="fire_particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+emission_shape = 3
+emission_rect_extents = Vector2(3.5, 15)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, -20)
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_aafsx")
+color_ramp = SubResource("Gradient_b4num")
+
 [node name="Wand" type="Sprite2D" parent="."]
 self_modulate = Color(75.74, 1, 1, 0)
-texture_filter = 1
+texture_filter = 2
 position = Vector2(-5, -8.75)
 texture = ExtResource("3_gjtvj")
 offset = Vector2(-2.50047, -2.16984)
 
+[node name="shooting particles" type="GPUParticles2D" parent="Wand"]
+position = Vector2(-4.49644, -4.10205)
+amount = 3
+sub_emitter = NodePath(".")
+process_material = SubResource("ParticleProcessMaterial_i5mac")
+texture = ExtResource("3_y0yrd")
+trail_enabled = true
+trail_lifetime = 0.15
+
 [node name="point" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, 0)
 texture = ExtResource("3_y0yrd")
 
 [node name="floorPositionNode" type="Node2D" parent="."]
 position = Vector2(0, 18.75)
+
+[node name="BaseRedHealthBar" type="TextureRect" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(1, 3)
+offset_left = -9.0
+offset_top = 18.0
+offset_right = 9.0
+offset_bottom = 21.0
+texture = ExtResource("3_y0yrd")
+
+[node name="greenHealthBar" type="TextureRect" parent="."]
+self_modulate = Color(0, 1, 0, 1)
+offset_left = -9.0
+offset_top = 18.0
+offset_right = 9.0
+offset_bottom = 21.0
+texture = ExtResource("3_y0yrd")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="suprised" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0.0453572, -25.0767)
+texture = ExtResource("8_sl75h")

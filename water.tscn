@@ -7,7 +7,6 @@
 size = Vector2(5.25, 456.5)
 
 [node name="Water" type="Node2D"]
-z_index = -1
 position = Vector2(1, -98)
 script = ExtResource("1_4tyur")
 

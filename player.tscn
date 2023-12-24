@@ -1,4 +1,4 @@
-[gd_scene load_steps=173 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=195 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -48,6 +48,7 @@
 [ext_resource type="Texture2D" uid="uid://cyqqq3jswkm4t" path="res://Assets/player sprites/turnIdle/flipped again6.png" id="18_pfne1"]
 [ext_resource type="Texture2D" uid="uid://b6b2fio31mkqn" path="res://Assets/player sprites/windupRightWalk/windupRightW08.png" id="19_j50x8"]
 [ext_resource type="Texture2D" uid="uid://bqa2syt7wbrlr" path="res://Assets/player sprites/windupRightWalk/windupRightW09.png" id="20_obmkk"]
+[ext_resource type="Texture2D" uid="uid://ccrgvhm52kujl" path="res://Assets/player sprites/slideLow/slide spritesheet.png" id="21_ohfmj"]
 [ext_resource type="Texture2D" uid="uid://bwcjmrues24bs" path="res://Assets/player sprites/walkJumpRight/sprite_3.png" id="34_kdvhe"]
 [ext_resource type="Texture2D" uid="uid://clw38g7pxyjnc" path="res://Assets/player sprites/walkJumpRight/sprite_4.png" id="35_6718t"]
 [ext_resource type="Texture2D" uid="uid://im4t16flfiwc" path="res://Assets/player sprites/walkJumpRight/sprite_5.png" id="36_85fnf"]
@@ -71,12 +72,61 @@
 [ext_resource type="Texture2D" uid="uid://c66xwjtbdrbt8" path="res://Assets/hud sprites/arrowHudSprites.png" id="62_xsr1f"]
 [ext_resource type="Texture2D" uid="uid://brqp776b50hg6" path="res://Assets/hud sprites/arrowVarientListForHud.png" id="63_b1f75"]
 [ext_resource type="Texture2D" uid="uid://cdo10nvawypkl" path="res://Assets/hud sprites/sprite_0.png" id="63_p4yf2"]
+[ext_resource type="Texture2D" uid="uid://88cpeecfg50t" path="res://Assets/hud sprites/electric hud art.png" id="66_lxol0"]
 [ext_resource type="Texture2D" uid="uid://bh5roubjvtl08" path="res://Assets/hud sprites/shift refill.png" id="70_sc2ib"]
 [ext_resource type="Texture2D" uid="uid://tnlv8gmtl6lj" path="res://Assets/hud sprites/e refill.png" id="71_ry127"]
 [ext_resource type="Texture2D" uid="uid://didmnkaud58a0" path="res://Assets/New Piskel-1.png (1).png" id="71_sfaxs"]
 [ext_resource type="Texture2D" uid="uid://boq2cwpnrxv21" path="res://Assets/player sprites/arms n bows/1bow varients/5ParryBow/parry bow.png" id="72_m5wss"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="74_qvcdd"]
 [ext_resource type="Script" path="res://armPosition.gd" id="74_xk2jf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2kmp"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(0, 0, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1yb4"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(441, 0, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63xbw"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(882, 0, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q1vh"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(1323, 0, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dk2x"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(441, 500, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bg237"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(882, 500, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lc2g2"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(1323, 500, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ksp8"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(441, 1000, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljc3d"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(882, 1000, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4krhm"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(1323, 1000, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2p2g"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(0, 1500, 441, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnxgl"]
+atlas = ExtResource("21_ohfmj")
+region = Rect2(0, 1500, 441, 500)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u6u7g"]
 animations = [{
@@ -177,6 +227,52 @@ animations = [{
 "loop": true,
 "name": &"skidingRight",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2kmp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1yb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63xbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q1vh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dk2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bg237")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lc2g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ksp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljc3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4krhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2p2g")
+}],
+"loop": false,
+"name": &"slide",
+"speed": 80.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnxgl")
+}],
+"loop": false,
+"name": &"slide_done",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -357,7 +453,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_upuir"]
-radius = 6.0
+radius = 5.0
 height = 24.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8y0kl"]
@@ -448,6 +544,14 @@ animations = [{
 "loop": true,
 "name": &"Bounce",
 "speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("66_lxol0")
+}],
+"loop": true,
+"name": &"Electric",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1119,8 +1223,54 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_afl6x"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -360), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_omsrd"]
+curve = SubResource("Curve_afl6x")
+
+[sub_resource type="Gradient" id="Gradient_ltnd8"]
+colors = PackedColorArray(0, 0.941176, 0.815686, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a76jn"]
+gradient = SubResource("Gradient_ltnd8")
+
+[sub_resource type="Curve" id="Curve_8qeb2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.65099, 0.715789), -3.18947, -3.18947, 0, 0, Vector2(1, 0), 1.509, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_g0ube"]
+width = 32
+curve = SubResource("Curve_8qeb2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a3ffd"]
+emission_shape = 1
+emission_sphere_radius = 4.2
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 345.79
+initial_velocity_max = 345.79
+angular_velocity_curve = SubResource("CurveTexture_omsrd")
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_g0ube")
+color_ramp = SubResource("GradientTexture1D_a76jn")
+hue_variation_min = 0.01
+hue_variation_max = 0.01
+turbulence_enabled = true
+turbulence_noise_strength = 11.09
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3xnx"]
 size = Vector2(19, 39)
+
+[sub_resource type="Curve" id="Curve_pw6d0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.105263), -2.73759, 0.0, 0, 0]
+point_count = 2
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = -1
@@ -1135,68 +1285,73 @@ texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"wallJump"
+animation = &"idle"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-6, 5)
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(-4, 5)
 shape = SubResource("CapsuleShape2D_upuir")
 
 [node name="Camera" type="Camera2D" parent="."]
-visible = false
 position = Vector2(-3, 1)
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
+position_smoothing_speed = 150.0
 
 [node name="SelectedArrowHud" type="AnimatedSprite2D" parent="Camera"]
+light_mask = 0
 z_index = 2
 texture_filter = 1
-position = Vector2(207, -113)
+position = Vector2(263, -153)
 sprite_frames = SubResource("SpriteFrames_jymnt")
 animation = &"slot_1"
 
 [node name="Slot_1" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
-visible = false
+light_mask = 0
 position = Vector2(-15.4691, -1.47194)
+sprite_frames = SubResource("SpriteFrames_c1u5q")
+animation = &"Electric"
+autoplay = "Fire"
+
+[node name="Slot_2" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
+light_mask = 0
+position = Vector2(1.51198, -1.48824)
+sprite_frames = SubResource("SpriteFrames_c1u5q")
+animation = &"Electric"
+
+[node name="Slot_3" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
+light_mask = 0
+position = Vector2(18.4977, -1.50632)
 sprite_frames = SubResource("SpriteFrames_c1u5q")
 animation = &"Bounce"
 
-[node name="Slot_2" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
-visible = false
-position = Vector2(1.51198, -1.48824)
-sprite_frames = SubResource("SpriteFrames_c1u5q")
-animation = &"Multi"
-
-[node name="Slot_3" type="AnimatedSprite2D" parent="Camera/SelectedArrowHud"]
-visible = false
-position = Vector2(18.4977, -1.50632)
-sprite_frames = SubResource("SpriteFrames_c1u5q")
-animation = &"Fire"
-
 [node name="healthBar" type="AnimatedSprite2D" parent="Camera"]
-visible = false
+visibility_layer = 0
 z_index = 2
 texture_filter = 1
-position = Vector2(-192, -110)
+position = Vector2(-257, -152)
 sprite_frames = SubResource("SpriteFrames_k3vi4")
 animation = &"full"
 
 [node name="shiftBar" type="AnimatedSprite2D" parent="Camera"]
-visible = false
+light_mask = 0
 z_index = 2
 texture_filter = 1
-position = Vector2(-194, -72)
+position = Vector2(-257, -110)
 sprite_frames = SubResource("SpriteFrames_pcq48")
 animation = &"full"
 
 [node name="eBar" type="AnimatedSprite2D" parent="Camera"]
-visible = false
+light_mask = 0
 z_index = 2
 texture_filter = 1
-position = Vector2(-193, -89)
+position = Vector2(-257, -131)
 sprite_frames = SubResource("SpriteFrames_u0ohg")
 animation = &"full"
 
 [node name="Menu" type="AnimatedSprite2D" parent="Camera"]
+visible = false
+light_mask = 0
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lduir")
 
@@ -1208,10 +1363,11 @@ light_mask = 0
 visibility_layer = 2
 z_index = 1
 z_as_relative = false
-texture_filter = 5
+texture_filter = 1
+texture_repeat = 1
 position = Vector2(7.5, 1)
 sprite_frames = SubResource("SpriteFrames_8ko50")
-animation = &"bow_quickfire"
+animation = &"4air_quickfire"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
@@ -1220,6 +1376,22 @@ position = Vector2(2.5, 1)
 
 [node name="pullArmPosition" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(-1.5, -3)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="PivotHoldingArm/HoldingArmAnimation"]
+use_parent_material = true
+position = Vector2(-2.5, 0)
+emitting = false
+amount = 10
+sub_emitter = NodePath(".")
+process_material = SubResource("ParticleProcessMaterial_a3ffd")
+texture = ExtResource("74_qvcdd")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.07
+fixed_fps = 60
+trail_enabled = true
+trail_lifetime = 0.01
+trail_sections = 23
 
 [node name="parryBox" type="Area2D" parent="." groups=["Bow"]]
 show_behind_parent = true
@@ -1247,6 +1419,22 @@ self_modulate = Color(0.996078, 0.901961, 0, 1)
 position = Vector2(0.491562, -0.510139)
 scale = Vector2(1.98312, 2.02028)
 texture = ExtResource("74_qvcdd")
+
+[node name="slide particles" type="CPUParticles2D" parent="."]
+position = Vector2(-4, 16)
+emitting = false
+amount = 60
+speed_scale = 2.11
+emission_shape = 3
+emission_rect_extents = Vector2(8, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 6.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_pw6d0")
+color = Color(1, 1, 1, 0.337255)
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]

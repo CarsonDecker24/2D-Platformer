@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://ocq3cyqkeinj"]
+[gd_scene load_steps=16 format=3 uid="uid://ocq3cyqkeinj"]
 
 [ext_resource type="Script" path="res://new_arrow.gd" id="1_8jrvn"]
 [ext_resource type="Texture2D" uid="uid://c745411t2welh" path="res://Assets/player sprites/arms n bows/1bow varients/3fireBow/fireArrow.png" id="2_jkv8u"]
 [ext_resource type="Texture2D" uid="uid://bywku1sq1ghd8" path="res://Assets/player sprites/arrow.png" id="2_qs3i3"]
+[ext_resource type="Texture2D" uid="uid://7fjtcwhuel6d" path="res://Assets/player sprites/arms n bows/1bow varients/6ElecticBow/Electric Arrow.png" id="3_6ryml"]
 [ext_resource type="Texture2D" uid="uid://cv8icixll6hu0" path="res://Assets/player sprites/arms n bows/1bow varients/2IceBow/ice arrow.png" id="3_vcmhk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xik2l"]
@@ -32,6 +33,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6ryml")
+}],
+"loop": true,
+"name": &"electric arrow",
 "speed": 5.0
 }, {
 "frames": [{
@@ -93,7 +102,7 @@ shape = SubResource("RectangleShape2D_xik2l")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_013u8")
-animation = &"ice arrow"
+animation = &"electric arrow"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(5.78271, 0.0104284)
@@ -107,11 +116,15 @@ fixed_fps = 60
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
+angular_velocity_min = 100.0
+angular_velocity_max = 100.0
 radial_accel_max = 100.0
 radial_accel_curve = SubResource("Curve_65j07")
 damping_max = 8.108
+scale_amount_min = 3.0
+scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_xlley")
-color = Color(0, 0.686275, 0.984314, 0.8)
+color = Color(1, 1, 0.160784, 0.792157)
 
 [node name="diePart" type="CPUParticles2D" parent="."]
 emitting = false

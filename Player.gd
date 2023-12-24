@@ -12,13 +12,8 @@ var FRICTION = 25.0
 var AIR_FRICTION = 25.0
 var direction
 var pivot
-var pivot2
 var weapon_sprite
-var weapon_sprite2
-var weapon_sprite3
 var weapon_flipped = false
-var mousepoint
-var aim_vector
 var wall_sliding = false
 var facing = 1
 var max_fall_speed = -1
@@ -45,6 +40,7 @@ var parryCooldown = 0
 var bowTurning=true
 var invincibilityFrames =0
 var oiled = false
+var sliding = false
 const INVINCIBILITYTIME = .2
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
@@ -94,10 +90,20 @@ func _process(delta):
 	else:
 		$PlayerBodyAnimation.self_modulate=Color(1, 1, 1, 1)
 	#get_node("Node2D/TextureRect").
+	
+	if Input.is_action_pressed("move_down") and is_on_floor() and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")) and $PlayerBodyAnimation.current=="walkingRight":
+		_slide(direction)
+	else:
+		_unSlide()
+	
+	if sliding==true:
+		$"slide particles".emitting=true
+	else:
+		$"slide particles".emitting=false
 
 func _physics_process(delta):
 	#Lateral Movement
-	if direction != 0:
+	if direction != 0 and sliding==false:
 		_accelerate(direction)
 	else:
 		_friction()
@@ -105,6 +111,8 @@ func _physics_process(delta):
 	#Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		_jump()
+	
+	
 	
 	# Add the gravity if not on floor & the player isn't wall sliding
 	if not is_on_floor() and not wall_sliding:
@@ -150,6 +158,23 @@ func _physics_process(delta):
 	
 	move_and_slide()
 
+func _slide(dir):
+	$PlayerHitbox.position = Vector2(-6,10)
+	$PlayerHitbox.rotation=90
+	$PlayerHitbox.scale = Vector2(.4,1)
+	if sliding==false:
+		velocity.x=dir*SPEED*4
+	sliding=true
+	dashTime=.1
+	_refreshArrowHud()
+func _unSlide():
+	if not Input.is_action_pressed("move_down"):
+		$PlayerHitbox.position = Vector2(-4,5)
+		$PlayerHitbox.rotation=0
+		$PlayerHitbox.scale = Vector2(1,1)
+		sliding=false
+
+
 func _accelerate(dir):
 	#Accelerate in whatever direction the player is wanting to move.
 	#velocity = velocity.move_toward(Vector2(SPEED * dir, velocity.y), ACCEL)
@@ -163,7 +188,7 @@ func _accelerate(dir):
 func _friction():
 	#Add friction to the player
 	#velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
-	if is_on_floor():
+	if is_on_floor() and sliding==false:
 		if (velocity.x > 0 and (velocity.x - FRICTION) < 0) or (velocity.x < 0 and (velocity.x + FRICTION) > 0):
 			velocity.x = 0
 		elif velocity.x > 0:
@@ -185,7 +210,8 @@ func _gravity(delta):
 
 func _jump():
 	#Jump
-	velocity.y = JUMP_VELOCITY
+	if sliding==false:
+		velocity.y = JUMP_VELOCITY
 	
 	#CREATE VARIABLE HEIGHT JUMP
 	#print(get_parent().velocity.y)
@@ -198,10 +224,11 @@ func _wallslide(delta):
 
 func _walljump():
 	#Wall jump
-	velocity.y = JUMP_VELOCITY*.85
-	velocity.x += -direction*SPEED*1.2
-	wallJumpNerf=.6 
-	get_node("PlayerBodyAnimation")._quickturn()
+	if sliding==false:
+		velocity.y = JUMP_VELOCITY*.85
+		velocity.x += -direction*SPEED*1.2
+		wallJumpNerf=.6 
+		get_node("PlayerBodyAnimation")._quickturn()
 
 func _aim(delta):
 	
@@ -356,7 +383,7 @@ func _dash(dir: Vector2, power):
 	fire_cooldown=FIRECOOLDOWN
 	fire_state="air-row"
 	animPlayer.play("4air_quickfire")
-	
+	$PivotHoldingArm/HoldingArmAnimation/GPUParticles2D.emitting=true
 
 func _take_damage(hp):
 	if invincibilityFrames<0:
@@ -383,53 +410,55 @@ func _armPos(armX,armY):
 		get_node("armPosition").position.y=armY
 	
 func _refreshArrowHud():
-		if slots[0] == "Accuracy":
-			get_node("Camera/SelectedArrowHud/Slot_1").play("Accuracy")
-		elif slots[0] == "Bounce":
-			get_node("Camera/SelectedArrowHud/Slot_1").play("Bounce")
-		elif slots[0] == "Fire":
-			get_node("Camera/SelectedArrowHud/Slot_1").play("Fire")
-		elif slots[0] == "Ghost":
-			get_node("Camera/SelectedArrowHud/Slot_1").play("Ghost")
-		elif slots[0] == "Ice":
-			get_node("Camera/SelectedArrowHud/Slot_1").play("Ice")
-		elif slots[0] == "Multi":
-			get_node("Camera/SelectedArrowHud/Slot_1").play("Multi")
-		elif slots[0] == "Multi":
-			get_node("Camera/SelectedArrowHud/Slot_1").play("Multi")
-		elif slots[0] == "Pierce":
-			get_node("Camera/SelectedArrowHud/Slot_1").play("Pierce")
-		
-		if slots[1] == "Accuracy":
-			get_node("Camera/SelectedArrowHud/Slot_2").play("Accuracy")
-		elif slots[1] == "Bounce":
-			get_node("Camera/SelectedArrowHud/Slot_2").play("Bounce")
-		elif slots[1] == "Fire":
-			get_node("Camera/SelectedArrowHud/Slot_2").play("Fire")
-		elif slots[1] == "Ghost":
-			get_node("Camera/SelectedArrowHud/Slot_2").play("Ghost")
-		elif slots[1] == "Ice":
-			get_node("Camera/SelectedArrowHud/Slot_2").play("Ice")
-		elif slots[1] == "Multi":
-			get_node("Camera/SelectedArrowHud/Slot_2").play("Multi")
-		elif slots[1] == "Multi":
-			get_node("Camera/SelectedArrowHud/Slot_2").play("Multi")
-		elif slots[1] == "Pierce":
-			get_node("Camera/SelectedArrowHud/Slot_2").play("Pierce")
-			
-		if slots[2] == "Accuracy":
-			get_node("Camera/SelectedArrowHud/Slot_3").play("Accuracy")
-		elif slots[2] == "Bounce":
-			get_node("Camera/SelectedArrowHud/Slot_3").play("Bounce")
-		elif slots[2] == "Fire":
-			get_node("Camera/SelectedArrowHud/Slot_3").play("Fire")
-		elif slots[2] == "Ghost":
-			get_node("Camera/SelectedArrowHud/Slot_3").play("Ghost")
-		elif slots[2] == "Ice":
-			get_node("Camera/SelectedArrowHud/Slot_3").play("Ice")
-		elif slots[2] == "Multi":
-			get_node("Camera/SelectedArrowHud/Slot_3").play("Multi")
-		elif slots[2] == "Multi":
-			get_node("Camera/SelectedArrowHud/Slot_3").play("Multi")
-		elif slots[2] == "Pierce":
-			get_node("Camera/SelectedArrowHud/Slot_3").play("Pierce")
+	if slots[0] == "Accuracy":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Accuracy")
+	elif slots[0] == "Bounce":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Bounce")
+	elif slots[0] == "Fire":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Fire")
+	elif slots[0] == "Ghost":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Ghost")
+	elif slots[0] == "Ice":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Ice")
+	elif slots[0] == "Multi":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Multi")
+	elif slots[0] == "Pierce":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Pierce")
+	elif slots[0] == "Electricity":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Electric")
+	
+	if slots[1] == "Accuracy":
+		get_node("Camera/SelectedArrowHud/Slot_2").play("Accuracy")
+	elif slots[1] == "Bounce":
+		get_node("Camera/SelectedArrowHud/Slot_2").play("Bounce")
+	elif slots[1] == "Fire":
+		get_node("Camera/SelectedArrowHud/Slot_2").play("Fire")
+	elif slots[1] == "Ghost":
+		get_node("Camera/SelectedArrowHud/Slot_2").play("Ghost")
+	elif slots[1] == "Ice":
+		get_node("Camera/SelectedArrowHud/Slot_2").play("Ice")
+	elif slots[1] == "Multi":
+		get_node("Camera/SelectedArrowHud/Slot_2").play("Multi")
+	elif slots[1] == "Pierce":
+		get_node("Camera/SelectedArrowHud/Slot_2").play("Pierce")
+	elif slots[1] == "Electricity":
+		get_node("Camera/SelectedArrowHud/Slot_2").play("Electric")
+	
+	if slots[2] == "Accuracy":
+		get_node("Camera/SelectedArrowHud/Slot_3").play("Accuracy")
+	elif slots[2] == "Bounce":
+		get_node("Camera/SelectedArrowHud/Slot_3").play("Bounce")
+	elif slots[2] == "Fire":
+		get_node("Camera/SelectedArrowHud/Slot_3").play("Fire")
+	elif slots[2] == "Ghost":
+		get_node("Camera/SelectedArrowHud/Slot_3").play("Ghost")
+	elif slots[2] == "Ice":
+		get_node("Camera/SelectedArrowHud/Slot_3").play("Ice")
+	elif slots[2] == "Multi":
+		get_node("Camera/SelectedArrowHud/Slot_3").play("Multi")
+	elif slots[2] == "Multi":
+		get_node("Camera/SelectedArrowHud/Slot_3").play("Multi")
+	elif slots[2] == "Pierce":
+		get_node("Camera/SelectedArrowHud/Slot_3").play("Pierce")
+	elif slots[2] == "Electricity":
+		get_node("Camera/SelectedArrowHud/Slot_1").play("Electric")

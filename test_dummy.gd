@@ -1,6 +1,7 @@
 extends CharacterBody2D
 var player
-var hp = 5
+var hp = 50
+@onready var maxHp= hp
 var is_dead = false
 var state = "neutral"
 var player_spotted = false
@@ -12,11 +13,11 @@ var sees_player = false
 var shoot_cooldown=1
 var debuff_cooldown=1
 var fire_rate_mod=1
-var speed_mod=1
+var speed_mod=2
 var walking = "walking holster"
 var idle = "idle holster"
 const SPEED =130
-const FIRE_RATE=1
+const FIRE_RATE=2
 var from_facing
 var oiled = false
 var wandPos = Vector2(0,0)
@@ -27,23 +28,33 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var wandSpin = .3
 var WANDTIME = .3
 var bouttaShoot = false
-var groundCheck
-var groundDistance
-var ledgeTest=false
-var ledgePosition
+var groundCheck = Vector2(1,1)
+var ledgePosition = Vector2(0,0)
 var distanceToLedge
 var jumpInstance=false
-var ledgeSeen = false
 var FRICTION = 25
 var feetPos
-
+var idleBehaviorTime=4
+var generator=RandomNumberGenerator.new()
+var idleBehaviorState="waiting"
+var turnTest=false
+var pauseWizardAim = false
+var pauseWizardTimer = 0
+var homing = false
+var onFireTime=1
+var onFireTickRate=.5
+var onfireTickClock=0
+var onFireDamage=0
+var onFire = false
+var deathTimer=0
+var deathToss=false
+var supriseTime
 func _ready():
 	get_node("ice_particles").set_deferred("emitting", false)
-
+	get_node("suprised").visible=false
 @warning_ignore("unused_parameter")
 func _physics_process(delta):
 	move_and_slide()
-
 func _spot_player(body):
 	if player_spotted == false:
 		player = body
@@ -52,37 +63,154 @@ func _spot_player(body):
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-	_check_rays()
+	if is_dead==true:
+		player_spotted=false
+		if deathTimer<0:
+			queue_free()
+		if deathToss==false:
+			velocity.y=-300
+			$CollisionShape2D.disabled=true
+			deathToss=true
+		deathTimer-=delta
+		animator.play("dead")
+
+
 	
-	_shoot_orb(delta)
-	#resets general stats when debufs are over
-	if debuff_cooldown<0:
-		speed_mod=1
-		fire_rate_mod=1
-		get_node("ice_particles").set_deferred("emitting", false)
-	shoot_cooldown-=delta
-	debuff_cooldown-=delta
-	
+	if is_dead==false:
+		_check_rays()
+		
+		_shoot_orb(delta)
+		#resets general stats when debufs are over
+		if debuff_cooldown<0:
+			speed_mod=1
+			fire_rate_mod=1
+			get_node("ice_particles").set_deferred("emitting", false)
+		shoot_cooldown-=delta
+		debuff_cooldown-=delta
+		
+		
+		
+		_player_spotted(delta)
+		
+		_idle_state(delta)
+		
+		_wizardAim()
+		
+		_turn_rays()
+		
+		_friction()
+		
+		_idle_state(delta)
+		
+		
+		if pauseWizardTimer<0:
+			pauseWizardAim=false
+		pauseWizardTimer-=delta
+		
+		if onFire==true:
+			if onFireTime<0:
+				onFire=false
+				pass
+			if onfireTickClock<0:
+				_lower_health(onFireDamage)
+				onfireTickClock=onFireTickRate
+			$fire_particles.emitting=true
+		else:
+			$fire_particles.emitting=false
+		
+		onFireTime-=delta
+		onfireTickClock-=delta
 	_gravity(delta)
-	
-	_player_spotted()
-	
-	_idle_state()
-	
-	_wizardAim()
-	
-	_turn_rays()
-	
-	_friction()
 
-func _idle_state():
-	if state=="neutral":
+
+
+func _idle_state(delta):
+	if is_dead ==true:
 		pass
+	if state=="neutral":
+		if get_node("RayDown").get_collider() and not get_node("RayDown").get_collider() == null:
+			if get_node("RayDown").get_collision_point():
+				groundCheck=(get_node("RayDown").get_collision_point())
+				feetPos = get_node("floorPositionNode").global_position
+			#groundCheck stores the point of RayDowns last collision
+			
+			if groundCheck[1]<feetPos.y:
+				ledgePosition=groundCheck
+			#if the collision point of RayDown is lower than the platform TestDummy is standing on, it stores that position as the position of the ledge
+			
+			if ledgePosition!=null:
+				$point.global_position=(get_node("RayDown").get_collision_point())
+			distanceToLedge=abs(global_position.x-ledgePosition.x)
+			
+			if (distanceToLedge<14 and groundCheck[1]-2>feetPos.y and turnTest==false and is_on_floor()):
+					print("turn around at no possible jump")
+					
+					turnTest=true
+					if $dummyPlayer.flip_h==true:
+						$dummyPlayer.flip_h=false
+						
+					else:
+						$dummyPlayer.flip_h=true
+					
+			elif distanceToLedge<14 and groundCheck[1]-2<feetPos.y and turnTest==false:
+				player_distance=170
+				if jumpInstance==false and player_distance>150 and is_on_floor():
+					velocity.y=-300
+					jumpInstance=true
+				if jumpInstance==false and player_distance<150:
+					player_distance=90
+		
+		if jumpInstance==true:
+			if $dummyPlayer.flip_h==false:
+				velocity.x=100
+			else:
+				velocity.x=-100
+		if is_on_floor()==true:
+			jumpInstance=false
+		
+		
+		if get_node("RayDown").get_collision_point().x!=null and get_node("RayUp").get_collision_point().x!=null:
+			if get_node("RayDown").get_collision_point().x==get_node("RayUp").get_collision_point().x and turnTest==false:
+				_turn_around()
+				turnTest=true
+				print("apparently they did, actually")
+			
+		#if the behavior time runs out, switch behavior
+		if turnTest==true and idleBehaviorTime<=0:
+			turnTest=false
+		if idleBehaviorTime<=0 and idleBehaviorState=="walking":
+			idleBehaviorTime=generator.randf_range(1.00,3.00)
+			idleBehaviorState="waiting"
+		if idleBehaviorTime<=0 and idleBehaviorState=="waiting":
+			idleBehaviorTime=generator.randf_range(5.00,6.00)
+			idleBehaviorState="walking"
+		
+		if idleBehaviorState=="walking" and turnTest!=true:
+				if animator.flip_h==true:
+					velocity.x=-SPEED*speed_mod
+				else:
+					velocity.x=SPEED*speed_mod
+				if animator.is_playing()==false and pauseWizardAim==false:
+					animator.play("walking holster")
+					
+		elif (idleBehaviorState=="waiting" or turnTest==true) and pauseWizardAim==false:
+			animator.play("idle holster")
+		idleBehaviorTime-=delta*2
 
 
-func _player_spotted():
+func _player_spotted(delta):
+	if is_dead ==true:
+		pass
 	if player_spotted==true:
 		#this line gets the players distance from the dummy
+		
+		if state == "neutral":
+			supriseTime=.3
+		if supriseTime>0:
+			$suprised.visible=true
+		else:
+			$suprised.visible=false
+		supriseTime-=delta
 		state="sees_player"
 		player_distance=sqrt((player.global_position.y-global_position.y) * (player.global_position.y-global_position.y) + ((player.global_position.x-global_position.x) * (player.global_position.x-global_position.x)))
 		
@@ -111,7 +239,7 @@ func _player_spotted():
 					print("there is no platform")
 					player_distance=90
 			elif distanceToLedge<13 and groundCheck[1]-2<feetPos.y:
-				
+				print("jumptrial")
 				if jumpInstance==false and player_distance>150 and is_on_floor():
 					velocity.y=-300
 					jumpInstance=true
@@ -120,16 +248,15 @@ func _player_spotted():
 					player_distance=90
 					
 			
-			#print(groundCheck[1])
-			#print(feetPos.y)
+		
 		
 		if jumpInstance==true:
 			if $dummyPlayer.flip_h==false:
 				velocity.x=100
-				print("changed")
+				
 			else:
 				velocity.x=-100
-				print("changed")
+				
 		if is_on_floor()==true:
 			jumpInstance=false
 			
@@ -151,6 +278,7 @@ func _player_spotted():
 		if sees_player and shoot_cooldown<0:
 			bouttaShoot=true
 			shoot_cooldown=FIRE_RATE/fire_rate_mod
+			get_node("Wand/shooting particles").set_deferred("emitting", true)
 		
 		#this flips the dummy to face the placer once the player has been spotted 
 		if player.global_position.x>global_position.x:
@@ -162,7 +290,7 @@ func _player_spotted():
 		
 		#this makes the dummy keep optimal distance with the player
 		#minimise this to hide animation related things
-		if player_distance>100 and is_on_floor():
+		if player_distance>100 and is_on_floor() and pauseWizardAim==false:
 			if player_side_right==true:
 				velocity.x=SPEED*speed_mod
 				if animation_state=="walking" and animator.is_playing()==false:
@@ -174,14 +302,14 @@ func _player_spotted():
 			else:
 				velocity.x=-SPEED*speed_mod
 				animator.play(walking)
-				if animation_state=="walking" and animator.is_playing()==false:
+				if animation_state=="walking" and animator.is_playing()==false :
 					animator.play(walking)
 					animation_state="walking"
 				else:
 					animator.play(walking)
 					animation_state="walking"
 		
-		elif player_distance<40 and is_on_floor():
+		elif player_distance<40 and is_on_floor() and pauseWizardAim==false:
 			if player_side_right==true:
 				velocity.x=-SPEED*speed_mod
 				if animation_state=="walkingBack" and animator.is_playing()==false:
@@ -199,19 +327,22 @@ func _player_spotted():
 					animator.play_backwards(walking)
 					animation_state="walkingBack"
 		#and if they are in the optimal distance obviously they dont need to move
-		else:
+		elif pauseWizardAim==false:
 			animator.play(idle)
-	else:
-		animator.play(idle)
+	
+	
 
 
 
 func _wizardAim():
+	if is_dead ==true:
+		pass
 	if player!=null and sees_player==true:
 		get_node("Wand").self_modulate=Color(1, 1, 1, 1)
 		if player_side_right==true:
 			get_node("Wand").flip_h=true
 			$Wand.offset= Vector2(2.5,-2.17)
+			$"Wand/shooting particles".position=Vector2(2.5,-2.17)
 			if abs(rad_to_deg(_get_angle_to_player()))>270 and abs(rad_to_deg(_get_angle_to_player()))<330:
 				walking = "walking down"
 				idle = "idle down"
@@ -231,6 +362,7 @@ func _wizardAim():
 				wandPos= Vector2(5,-8.75)
 		else:
 			$Wand.offset= Vector2(-2.5,-2.17)
+			$"Wand/shooting particles".position=Vector2(-2.5,-2.17)
 			get_node("Wand").flip_h=false
 			if abs(rad_to_deg(_get_angle_to_player()))<270 and abs(rad_to_deg(_get_angle_to_player()))>210:
 				walking = "walking down"
@@ -248,7 +380,7 @@ func _wizardAim():
 				walking = "walking upward"
 				idle = "idle upward"
 				wandPos= Vector2(-5,-8.75)
-	else:
+	elif pauseWizardAim==false:
 		idle = "idle holster"
 		walking = "walking holster"
 		get_node("Wand").self_modulate=Color(1, 1, 1, 0)
@@ -265,8 +397,10 @@ func _lower_health(hp_reduction: int):
 	if (hp <= 0):
 		print("Died!")
 		is_dead = true
-		queue_free()
-	player_spotted=true
+	_hit_animation()
+	_update_healthbar()
+	print("it is ", onFire==true, " that i am on fire.")
+
 
 #Deal damage, requires arrow type
 func _damage(type: String, damage: int):
@@ -277,15 +411,53 @@ func _damage(type: String, damage: int):
 		fire_rate_mod=.7
 		get_node("ice_particles").set_deferred("emitting", true)
 	elif type == "Fire":
-		hp -= damage * 3
+		hp -= damage 
+		if oiled==true:
+			hp-=300
 		oiled = false
+		onFire=true
+		onFireTime=4
+		onfireTickClock=onFireTickRate
+		onFireDamage=2
 	else:
 		hp -= damage
 	print("Remaining HP: " + str(hp))
 	if (hp <= 0):
 		print("Died!")
 		is_dead = true
-		queue_free()
+		deathTimer=.7
+		
+	if player_spotted==false:
+		_turn_around()
+	_hit_animation()
+	_update_healthbar()
+
+func _update_healthbar():
+	$BaseRedHealthBar.visible=true
+	$greenHealthBar.visible=true
+	$greenHealthBar.size.x=18* hp/maxHp
+
+func _hit_animation():
+	if walking=="walking down":
+		pauseWizardAim=true
+		animator.stop()
+		animator.play("downHurt")
+		pauseWizardTimer=.1
+	elif walking=="walking up":
+		pauseWizardAim=true
+		animator.stop()
+		animator.play("upHurt")
+		pauseWizardTimer=.1
+	elif walking=="walking level":
+		pauseWizardAim=true
+		animator.stop()
+		animator.play("levelHurt")
+		pauseWizardTimer=.1
+	elif walking=="walking upwards":
+		pauseWizardAim=true
+		animator.stop()
+		animator.play("upwardsHurt")
+		pauseWizardTimer=.1
 
 
 func _is_dead():
@@ -338,6 +510,28 @@ func _turn_rays():
 		get_node("RayMidUp").target_position.x=-205
 		get_node("RayDown").target_position.x=-200
 		get_node("RayUp").target_position.x=-182.5
+
+func _turn_around():
+	if $dummyPlayer.flip_h==true:
+		$dummyPlayer.flip_h=false
+		print("this should run second")
+	else:
+		$dummyPlayer.flip_h=true
+		print("this should run first")
+	#print("player side right:",player_side_right)
+	if $dummyPlayer.flip_h==false:
+		get_node("RayMid").target_position.x=210
+		get_node("RayMidDown").target_position.x=205
+		get_node("RayMidUp").target_position.x=205
+		get_node("RayDown").target_position.x=200
+		get_node("RayUp").target_position.x=182.5
+	else:
+		get_node("RayMid").target_position.x=-210
+		get_node("RayMidDown").target_position.x=-205
+		get_node("RayMidUp").target_position.x=-205
+		get_node("RayDown").target_position.x=-200
+		get_node("RayUp").target_position.x=-182.5
+
 
 func _friction():
 	if is_on_floor():

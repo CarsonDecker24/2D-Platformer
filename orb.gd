@@ -12,7 +12,8 @@ var marked_for_disappear=false
 func _setup(s: Vector2, p: Node, isHoming,turned):
 	speed = s
 	player = p
-	homing = isHoming
+	#homing = isHoming
+	homing = false
 	fixTurn=turned
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +22,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if homing:
+	if homing==true:
 		if fixTurn==true:
 			vel.x = move_toward(vel.x, speed.rotated(_get_angle_to_player()).x, 3 * delta)
 			vel.y = move_toward(vel.y, speed.rotated(_get_angle_to_player()).y, 3 * delta)
