@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccuud2grpg1lw"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_qaivq"]
+[ext_resource type="Texture2D" uid="uid://di0tf0naqk6or" path="res://Assets/enemy sprites/thingy.png" id="2_0almi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cxc3v"]
+radius = 1.97172
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7vdu"]
+radius = 8.42467
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Thingy"]]
+collision_layer = 2
+script = ExtResource("1_qaivq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Thingy"]]
+shape = SubResource("CircleShape2D_cxc3v")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Thingy"]]
+collision_layer = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Thingy"]]
+shape = SubResource("CircleShape2D_h7vdu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_0almi")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

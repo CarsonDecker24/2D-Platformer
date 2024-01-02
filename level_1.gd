@@ -2,10 +2,10 @@ extends Node2D
 var transitionSpeed=0
 var transitionTotalMoved=0
 @onready var player_start_pos = $Player.position
-var bg_move_speed1 = .8
+var bg_move_speed1 = .7
 @onready var bg_start_x1= $bg_1.position.x
 @onready var bg_start_y1= $bg_1.position.y
-var bg_move_speed2=.7
+var bg_move_speed2=.9
 @onready var bg_start_x2 = $bg_2.position.x
 @onready var bg_start_y2 = $bg_2.position.y
 var playerPosChangeX
@@ -45,7 +45,6 @@ func _process(delta):
 			sceneLightingDirection=true
 		$bg_2/Sprite2D.self_modulate= Color(1,1,1,sceneLightingValue*1.00)
 		sceneLightingValue-=.002
-	print(sceneLightingValue)
 	pass
 	
 

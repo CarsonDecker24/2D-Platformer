@@ -16,7 +16,7 @@ var fire_rate_mod=1
 var speed_mod=2
 var walking = "walking holster"
 var idle = "idle holster"
-const SPEED =130
+const SPEED =120
 const FIRE_RATE=2
 var from_facing
 var oiled = false
@@ -49,6 +49,8 @@ var onFire = false
 var deathTimer=0
 var deathToss=false
 var supriseTime
+const ThingyPath = preload("res://thingyFixed.tscn")
+
 func _ready():
 	get_node("ice_particles").set_deferred("emitting", false)
 	get_node("suprised").visible=false
@@ -71,6 +73,9 @@ func _process(delta):
 			velocity.y=-300
 			$CollisionShape2D.disabled=true
 			deathToss=true
+			var thingy = ThingyPath.instantiate()
+			add_sibling(thingy)
+			thingy.position=$thingySpawnPosition.global_position
 		deathTimer-=delta
 		animator.play("dead")
 

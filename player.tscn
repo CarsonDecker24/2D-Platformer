@@ -1,4 +1,4 @@
-[gd_scene load_steps=195 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=221 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -79,6 +79,22 @@
 [ext_resource type="Texture2D" uid="uid://boq2cwpnrxv21" path="res://Assets/player sprites/arms n bows/1bow varients/5ParryBow/parry bow.png" id="72_m5wss"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="74_qvcdd"]
 [ext_resource type="Script" path="res://armPosition.gd" id="74_xk2jf"]
+[ext_resource type="AudioStream" uid="uid://db1ctomot0j2u" path="res://Assets/player sprites/playerSounds/step1.wav" id="80_aegqw"]
+[ext_resource type="AudioStream" uid="uid://b8evbmd55rhyy" path="res://Assets/player sprites/playerSounds/step2.wav" id="81_8bgbt"]
+[ext_resource type="AudioStream" uid="uid://dgdjwsbarkbca" path="res://Assets/player sprites/playerSounds/step3.wav" id="82_wgukj"]
+[ext_resource type="AudioStream" uid="uid://q5fk7ayi6itg" path="res://Assets/player sprites/playerSounds/jump.wav" id="83_u72g1"]
+[ext_resource type="AudioStream" uid="uid://u37kpvegp6um" path="res://Assets/player sprites/playerSounds/land.wav" id="84_a2s25"]
+[ext_resource type="AudioStream" uid="uid://cyysqy3f3mkte" path="res://Assets/player sprites/playerSounds/sound.wav" id="85_u8f6x"]
+[ext_resource type="Script" path="res://InvintoryUI.gd" id="86_clwp2"]
+[ext_resource type="AudioStream" uid="uid://bsfafve1tx6kd" path="res://Assets/player sprites/playerSounds/coinCollect.wav" id="86_qgfee"]
+[ext_resource type="AudioStream" uid="uid://djafweuqmxj66" path="res://Assets/player sprites/playerSounds/draw slow.wav" id="87_ncmou"]
+[ext_resource type="Texture2D" uid="uid://d4ftqy1fdo7db" path="res://Assets/hud sprites/arrowVarientListForHud/slots_0.png" id="88_db7mj"]
+[ext_resource type="AudioStream" uid="uid://tga508qvunlu" path="res://Assets/player sprites/playerSounds/draw quick.wav" id="88_dktab"]
+[ext_resource type="Texture2D" uid="uid://bhkpiox57380h" path="res://Assets/hud sprites/ui-1.png" id="88_wvrxf"]
+[ext_resource type="AudioStream" uid="uid://bc2r6wfruvd6e" path="res://Assets/player sprites/playerSounds/bowFIre.wav" id="89_0yixi"]
+[ext_resource type="Texture2D" uid="uid://dbs8hqmrbutj3" path="res://Assets/hud sprites/arrowVarientListForHud/slots_1.png" id="89_3qq5q"]
+[ext_resource type="Texture2D" uid="uid://csqk1siiu3d4n" path="res://Assets/hud sprites/amulet.png" id="90_n0tsh"]
+[ext_resource type="Texture2D" uid="uid://dnbdpwpvv4tt8" path="res://Assets/hud sprites/SHIFT air.png" id="91_8m1kc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w2kmp"]
 atlas = ExtResource("21_ohfmj")
@@ -455,6 +471,9 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_upuir"]
 radius = 5.0
 height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_81ske"]
+radius = 6.83082
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8y0kl"]
 atlas = ExtResource("62_xsr1f")
@@ -1189,7 +1208,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bow_idle",
-"speed": 30.0
+"speed": 60.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1204,7 +1223,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uayqg")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_0f1tk")
 }, {
 "duration": 1.0,
@@ -1233,18 +1252,26 @@ point_count = 2
 curve = SubResource("Curve_afl6x")
 
 [sub_resource type="Gradient" id="Gradient_ltnd8"]
-colors = PackedColorArray(0, 0.941176, 0.815686, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.646552, 0.997845)
+colors = PackedColorArray(0, 0.941176, 0.815686, 1, 0.980392, 1, 0.996078, 0, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_a76jn"]
 gradient = SubResource("Gradient_ltnd8")
 
 [sub_resource type="Curve" id="Curve_8qeb2"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.65099, 0.715789), -3.18947, -3.18947, 0, 0, Vector2(1, 0), 1.509, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.640404, 0.863158), -1.60324, -1.60324, 0, 0, Vector2(1, 0.452632), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_g0ube"]
 width = 32
 curve = SubResource("Curve_8qeb2")
+
+[sub_resource type="Curve" id="Curve_d7016"]
+_data = [Vector2(0, 0.336842), 0.0, 0.663158, 0, 1, Vector2(1, 1), -1.95395, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oaox8"]
+curve = SubResource("Curve_d7016")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a3ffd"]
 emission_shape = 1
@@ -1263,7 +1290,12 @@ color_ramp = SubResource("GradientTexture1D_a76jn")
 hue_variation_min = 0.01
 hue_variation_max = 0.01
 turbulence_enabled = true
-turbulence_noise_strength = 11.09
+turbulence_noise_strength = 6.35
+turbulence_noise_scale = 5.64
+turbulence_noise_speed_random = 0.14
+turbulence_influence_min = 0.06
+turbulence_influence_max = 0.19
+turbulence_influence_over_life = SubResource("CurveTexture_oaox8")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3xnx"]
 size = Vector2(19, 39)
@@ -1272,26 +1304,61 @@ size = Vector2(19, 39)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.105263), -2.73759, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_67vfl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("88_wvrxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_wvrxf")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_4euhs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldc4d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2usl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xl8wv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0er11"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_si5sb"]
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = -1
 position = Vector2(81, 62)
 script = ExtResource("1_fhlp4")
 
 [node name="PlayerBodyAnimation" type="AnimatedSprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0.603922)
-visibility_layer = 2
 z_index = 2
 texture_filter = 1
 position = Vector2(-4, 4)
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_u6u7g")
-animation = &"idle"
+animation = &"windupRightWalk"
 script = ExtResource("3_14dt8")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
 position = Vector2(-4, 5)
 shape = SubResource("CapsuleShape2D_upuir")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-4, 5)
+collision_layer = 257
+collision_mask = 257
+priority = 1
+
+[node name="AreaBox" type="CollisionShape2D" parent="Area2D"]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(1, 5.3125)
+shape = SubResource("CircleShape2D_81ske")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(-3, 1)
@@ -1367,7 +1434,7 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(7.5, 1)
 sprite_frames = SubResource("SpriteFrames_8ko50")
-animation = &"4air_quickfire"
+animation = &"bow_quickfire"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
@@ -1385,13 +1452,15 @@ amount = 10
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_a3ffd")
 texture = ExtResource("74_qvcdd")
+lifetime = 1.2
 one_shot = true
 explosiveness = 1.0
 randomness = 0.07
 fixed_fps = 60
 trail_enabled = true
 trail_lifetime = 0.01
-trail_sections = 23
+trail_sections = 15
+trail_section_subdivisions = 7
 
 [node name="parryBox" type="Area2D" parent="." groups=["Bow"]]
 show_behind_parent = true
@@ -1436,10 +1505,140 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_pw6d0")
 color = Color(1, 1, 1, 0.337255)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-4, 5)
-texture_scale = 36.54
+[node name="audioPlayers" type="Node" parent="."]
+
+[node name="step1" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("80_aegqw")
+volume_db = -10.0
+max_polyphony = 2
+
+[node name="step2" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("81_8bgbt")
+volume_db = -10.0
+max_polyphony = 2
+
+[node name="step3" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("82_wgukj")
+volume_db = -4.0
+pitch_scale = 0.87
+max_polyphony = 2
+
+[node name="jump" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("83_u72g1")
+volume_db = -14.0
+pitch_scale = 1.29
+max_polyphony = 2
+
+[node name="land" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("84_a2s25")
+volume_db = -13.0
+pitch_scale = 0.94
+max_polyphony = 2
+
+[node name="slide" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("85_u8f6x")
+volume_db = -13.0
+pitch_scale = 0.94
+max_polyphony = 2
+
+[node name="thingyCollect" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("86_qgfee")
+volume_db = -10.0
+pitch_scale = 0.94
+max_polyphony = 4
+
+[node name="bowCharge" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("87_ncmou")
+volume_db = -10.0
+max_polyphony = 2
+
+[node name="bowChargeQuick" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("88_dktab")
+volume_db = -10.0
+max_polyphony = 2
+
+[node name="bowShot" type="AudioStreamPlayer" parent="audioPlayers"]
+stream = ExtResource("89_0yixi")
+volume_db = -10.0
+pitch_scale = 2.64
+max_polyphony = 2
+
+[node name="InvintoryUI" type="Node2D" parent="."]
+light_mask = 0
+position = Vector2(-33.4299, -384.723)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("86_clwp2")
+
+[node name="InvintoryBackDrop" type="AnimatedSprite2D" parent="InvintoryUI"]
+light_mask = 0
+z_index = 100
+texture_filter = 1
+position = Vector2(24.8693, 0.529129)
+sprite_frames = SubResource("SpriteFrames_67vfl")
+animation = &"new_animation"
+
+[node name="thingyCountLabel" type="Label" parent="InvintoryUI/InvintoryBackDrop"]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 28.5291
+offset_top = -59.4709
+offset_right = 253.529
+offset_bottom = -33.4709
+scale = Vector2(0.4, 0.4)
+text = "1"
+
+[node name="ItemList" type="ItemList" parent="InvintoryUI/InvintoryBackDrop"]
+offset_left = -139.721
+offset_top = -25.3863
+offset_right = 147.279
+offset_bottom = 73.6137
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_4euhs")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ldc4d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p2usl")
+theme_override_styles/hovered = SubResource("StyleBoxEmpty_xl8wv")
+theme_override_styles/selected = SubResource("StyleBoxEmpty_0er11")
+theme_override_styles/selected_focus = SubResource("StyleBoxEmpty_si5sb")
+allow_reselect = true
+item_count = 5
+max_columns = 8
+fixed_column_width = 28
+item_0/text = ""
+item_0/icon = ExtResource("88_db7mj")
+item_1/text = ""
+item_1/icon = ExtResource("66_lxol0")
+item_2/text = ""
+item_2/icon = ExtResource("89_3qq5q")
+item_3/text = ""
+item_3/icon = ExtResource("90_n0tsh")
+item_4/text = ""
+item_4/icon = ExtResource("91_8m1kc")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InvintoryUI/InvintoryBackDrop"]
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 2
+texture_repeat = 1
+layout_direction = 2
+offset_left = -156.0
+offset_top = 68.0
+offset_right = 625.0
+offset_bottom = 147.0
+scale = Vector2(0.4, 0.4)
+text = "
+ABCD
+"
+
+[node name="equip slots are soon to come" type="Label" parent="InvintoryUI/InvintoryBackDrop"]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = -123.577
+offset_top = -61.3798
+offset_right = 259.423
+offset_bottom = 316.62
+scale = Vector2(0.4, 0.4)
+text = "equip slots are soon to come."
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
+[connection signal="area_entered" from="Area2D" to="InvintoryUI" method="_on_area_2d_area_entered"]
 [connection signal="frame_changed" from="PivotHoldingArm/HoldingArmAnimation" to="PivotHoldingArm/HoldingArmAnimation" method="_on_frame_changed"]
+[connection signal="finished" from="audioPlayers/slide" to="PlayerBodyAnimation" method="_on_slide_finished"]
+[connection signal="item_selected" from="InvintoryUI/InvintoryBackDrop/ItemList" to="InvintoryUI" method="_on_item_list_item_selected"]

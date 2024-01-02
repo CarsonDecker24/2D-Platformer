@@ -37,6 +37,9 @@ func _process(delta):
 
 	if on:
 		open = true
+	else:
+		open=false
+
 	
 	if open == true and levelTrigger==false:
 		get_node("CollisionShape2D").disabled = true
@@ -47,6 +50,7 @@ func _process(delta):
 func _on_door_controller_body_entered(body):
 	if body.is_in_group("Player"):
 		levelTrigger=true
+		get_node(get_meta("source")).on=false
 	pass # Replace with function body.
 
 

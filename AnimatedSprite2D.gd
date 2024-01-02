@@ -10,6 +10,10 @@ var walkingLoop=false
 var walkframe=0
 var offSet = 0
 var wallSlideCheck = false
+var randonNumber = RandomNumberGenerator.new()
+var randomStep
+var slideVolume = -25
+var shotCheck=0
 
 @onready var parent = get_parent()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,6 +38,8 @@ func _process(delta):
 	#if the player is WALL SLIDING
 	if get_parent().wall_sliding==true and not (Input.is_action_pressed("move_right") and Input.is_action_pressed("move_left")):
 		_on_wallslide()
+	elif slideVolume>-30:
+		slideVolume-=1
 	
 	if current == "windupRightWalk":
 		_windup_walk()
@@ -57,6 +63,7 @@ func _process(delta):
 	if current == "sliding":
 		_sliding_low()
 	
+	_bowSounds()
 	fallTest = global_position.y
 
 
@@ -124,10 +131,12 @@ func _on_landing_while_idle():
 	#if the PLAYER IS ON THE FLOOR, go back to the IDLE STATE
 	current = "idle"
 	play("idle")
+	$"../audioPlayers/land".play()
 
 func _on_landing_while_walking():
 	current="walkingRight"
 	play("walkingRight")
+	$"../audioPlayers/land".play()
 
 func _on_wallslide():
 	#this TURNS THE PLAYER AROUND so they FACE against THE WALl=================================
@@ -135,12 +144,16 @@ func _on_wallslide():
 			if wallSlideCheck == false:
 				play("wallJump")
 				wallSlideCheck=true
+				$"../audioPlayers/jump".play()
 		elif ((Input.is_action_pressed("move_left") and facing == "right") or (Input.is_action_pressed("move_right") and facing == "left")) and wallSlideCheck==true:
 			_quickturn()
 		else:
 			play("wallDrag")
 			wallSlideCheck=false
-		
+			_on_slide_finished()
+			if slideVolume<-12:
+				slideVolume+=1
+			$"../audioPlayers/slide".volume_db=slideVolume
 		#WALL JUMP CHECK============================================================================
 		
 
@@ -239,6 +252,7 @@ func _sliding_low():
 		set_frame_and_progress(10,0.00)
 		current="windupRightWalk"
 		print("what")
+	_on_slide_finished()
 
 
 func _skid_ThenIdle():
@@ -324,6 +338,7 @@ func _on_frame_changed():
 			elif frame ==1:
 				parent._pivPos(-4,0)
 				parent._armPos(-4,4)
+				_stepSound()
 			elif frame == 2:
 				parent._pivPos(-5,1)
 				parent._armPos(-3,5)
@@ -336,6 +351,7 @@ func _on_frame_changed():
 			elif frame==5:
 				parent._pivPos(-6,1)
 				parent._armPos(-2,4)
+				_stepSound()
 			elif frame==6:
 				parent._pivPos(-5,1)
 				parent._armPos(-3,4)
@@ -350,6 +366,7 @@ func _on_frame_changed():
 			elif frame ==5:
 				parent._pivPos(-2,2)
 				parent._armPos(-7,4)
+				_stepSound()
 			elif frame==6:
 				parent._pivPos(-3,2)
 				parent._armPos(-6,5)
@@ -362,6 +379,7 @@ func _on_frame_changed():
 			elif frame==1:
 				parent._pivPos(-4,1)
 				parent._armPos(-5,4)
+				_stepSound()
 			elif frame==2:
 				parent._pivPos(-3,2)
 				parent._armPos(-6,4)
@@ -369,3 +387,37 @@ func _on_frame_changed():
 				parent._pivPos(-2,2)
 				parent._armPos(-7,4)
 	pass # Replace with function body.
+
+func _stepSound():
+	randomStep=randonNumber.randi_range(1,3)
+	if randomStep==1:
+		$"../audioPlayers/step1".play()
+	elif randomStep==2:
+		$"../audioPlayers/step2".play()
+	else:
+		$"../audioPlayers/step3".play()
+	
+	randomStep=randonNumber.randf_range(0.7,0.9)
+	$"../audioPlayers/step1".pitch_scale=randomStep
+	$"../audioPlayers/step2".pitch_scale=randomStep
+	$"../audioPlayers/step3".pitch_scale=randomStep
+	print("step")
+	pass
+
+
+func _on_slide_finished():
+	if (get_parent().wall_sliding==true or current=="sliding") and $"../audioPlayers/slide".playing==false:
+		$"../audioPlayers/slide".play()
+	pass # Replace with function body.
+
+func _bowSounds():
+		if (Input.is_action_just_pressed("right_click")) or (Input.is_action_just_pressed("left_click") and Input.is_action_pressed("right_click") and $"..".arrow_count>shotCheck):
+			$"../audioPlayers/bowCharge".play()
+		if Input.is_action_just_pressed("left_click") and not Input.is_action_pressed("right_click") and $"../PivotHoldingArm/HoldingArmAnimation".fire_state == "not":
+			$"../audioPlayers/bowChargeQuick".play()
+		if $"..".arrow_count>shotCheck:
+			$"../audioPlayers/bowShot".pitch_scale=randomStep+.4
+			$"../audioPlayers/bowShot".play()
+		shotCheck=$"..".arrow_count
+		
+

@@ -42,9 +42,15 @@ var invincibilityFrames =0
 var oiled = false
 var sliding = false
 const INVINCIBILITYTIME = .2
+var hudPosition
+var hudSpeed = 0
+var hudUp = "isUp"
+var hudSlow = false
+var collect = false
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
+var thingyCount=0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -100,7 +106,13 @@ func _process(delta):
 		$"slide particles".emitting=true
 	else:
 		$"slide particles".emitting=false
-
+	
+	if Input.is_action_just_pressed("i") and hudUp == "isDown":
+		hudUp = "up"
+	elif Input.is_action_just_pressed("i") and hudUp == "isUp":
+		hudUp = "down"
+	_hudUp()
+	
 func _physics_process(delta):
 	#Lateral Movement
 	if direction != 0 and sliding==false:
@@ -212,6 +224,7 @@ func _jump():
 	#Jump
 	if sliding==false:
 		velocity.y = JUMP_VELOCITY
+		$audioPlayers/jump.play()
 	
 	#CREATE VARIABLE HEIGHT JUMP
 	#print(get_parent().velocity.y)
@@ -295,6 +308,7 @@ func _shoot_check(delta):
 	#if the bow isnt being drawn and you press fire, then quick fire. (if the or condition is met you dont have to keep pressing fire)
 	animPlayer._shootAnim(fire_state)
 	#print(fire_state)
+
 	if (fire_cooldown == FIRECOOLDOWN and Input.is_action_just_pressed("left_click")) or fire_state == "quick" and not shift_use_time>0:
 		fire_state= "quick"
 		
@@ -462,3 +476,34 @@ func _refreshArrowHud():
 		get_node("Camera/SelectedArrowHud/Slot_3").play("Pierce")
 	elif slots[2] == "Electricity":
 		get_node("Camera/SelectedArrowHud/Slot_1").play("Electric")
+
+func _hudUp():
+	if hudUp == "down":
+		if hudSpeed<19 and hudSlow == false:
+			hudSpeed+=1
+		else:
+			hudSlow=true
+		if hudSlow==true and hudSpeed>0:
+			hudSpeed-=1
+		elif hudSlow == true and hudSpeed == 0:
+			hudUp = "isDown"
+			hudSlow = false
+		$InvintoryUI.position.y+=hudSpeed
+	if hudUp == "up":
+		if hudSpeed>-19 and hudSlow == false:
+			hudSpeed-=1
+		else:
+			hudSlow=true
+		if hudSlow==true and hudSpeed<0:
+			hudSpeed+=1
+		elif hudSlow == true and hudSpeed == 0:
+			hudUp = "isUp"
+			hudSlow = false
+		$InvintoryUI.position.y+=hudSpeed
+	pass
+
+func _collector():
+	collect=true
+
+func _on_item_list_empty_clicked(at_position, mouse_button_index):
+	pass # Replace with function body.

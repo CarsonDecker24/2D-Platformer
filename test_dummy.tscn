@@ -495,3 +495,6 @@ stretch_mode = 1
 texture_filter = 1
 position = Vector2(0.0453572, -25.0767)
 texture = ExtResource("8_sl75h")
+
+[node name="thingySpawnPosition" type="Node2D" parent="."]
+position = Vector2(0.15625, -12.0312)
