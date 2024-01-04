@@ -11,7 +11,7 @@ var walkframe=0
 var offSet = 0
 var wallSlideCheck = false
 var randonNumber = RandomNumberGenerator.new()
-var randomStep
+var randomStep=1
 var slideVolume = -25
 var shotCheck=0
 

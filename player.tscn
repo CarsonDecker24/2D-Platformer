@@ -1509,57 +1509,51 @@ color = Color(1, 1, 1, 0.337255)
 
 [node name="step1" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("80_aegqw")
-volume_db = -10.0
 max_polyphony = 2
 
 [node name="step2" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("81_8bgbt")
-volume_db = -10.0
 max_polyphony = 2
 
 [node name="step3" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("82_wgukj")
-volume_db = -4.0
+volume_db = 4.0
 pitch_scale = 0.87
 max_polyphony = 2
 
 [node name="jump" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("83_u72g1")
-volume_db = -14.0
 pitch_scale = 1.29
 max_polyphony = 2
 
 [node name="land" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("84_a2s25")
-volume_db = -13.0
 pitch_scale = 0.94
 max_polyphony = 2
 
 [node name="slide" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("85_u8f6x")
-volume_db = -13.0
+volume_db = 10.0
 pitch_scale = 0.94
 max_polyphony = 2
 
 [node name="thingyCollect" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("86_qgfee")
-volume_db = -10.0
 pitch_scale = 0.94
 max_polyphony = 4
 
 [node name="bowCharge" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("87_ncmou")
-volume_db = -10.0
+volume_db = 17.0
 max_polyphony = 2
 
 [node name="bowChargeQuick" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("88_dktab")
-volume_db = -10.0
+volume_db = 20.0
 max_polyphony = 2
 
 [node name="bowShot" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("89_0yixi")
-volume_db = -10.0
 pitch_scale = 2.64
 max_polyphony = 2
 
