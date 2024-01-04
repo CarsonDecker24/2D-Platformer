@@ -2046,7 +2046,6 @@ shape = SubResource("RectangleShape2D_w7op6")
 
 [node name="ElectricDoor2" parent="." instance=ExtResource("11_3qvqc")]
 position = Vector2(1772.58, 170.507)
-collision_layer = 3
 metadata/source = NodePath("../ElectricSource")
 
 [node name="door opener" type="Area2D" parent="."]
