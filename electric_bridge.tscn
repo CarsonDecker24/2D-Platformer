@@ -51,7 +51,6 @@ position = Vector2(142.638, 5.57163)
 shape = SubResource("RectangleShape2D_resgh")
 
 [node name="TextureRect" type="TextureRect" parent="StaticBody2D"]
-z_index = -1
 z_as_relative = false
 texture_filter = 1
 offset_left = 16.0

@@ -55,6 +55,10 @@ func _on_door_controller_body_entered(body):
 
 
 func _on_door_opener_body_entered(body):
+	#this is me throwing code at it till it's collision turns off
 	levelTrigger=false
 	on = false
+	open=true
+	get_node(get_meta("source")).on=false
+	get_node("CollisionShape2D").disabled = true
 	pass # Replace with function body.

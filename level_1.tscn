@@ -1828,6 +1828,7 @@ sources/0 = SubResource("TileSetAtlasSource_vdj2w")
 sources/6 = SubResource("TileSetAtlasSource_6qlyf")
 
 [node name="Level1" type="Node2D"]
+position = Vector2(-4, 1)
 script = ExtResource("1_cj6ue")
 metadata/_edit_horizontal_guides_ = []
 
@@ -1883,7 +1884,7 @@ metadata/Frozen = false
 
 [node name="Player" parent="." instance=ExtResource("3_410nd")]
 texture_filter = 1
-position = Vector2(-11.1458, -87.4446)
+position = Vector2(-15, -117)
 
 [node name="transition" type="Sprite2D" parent="Player"]
 self_modulate = Color(0, 0, 0, 1)
@@ -2045,11 +2046,14 @@ position = Vector2(-2.92419, 8.70156)
 shape = SubResource("RectangleShape2D_w7op6")
 
 [node name="ElectricDoor2" parent="." instance=ExtResource("11_3qvqc")]
+z_as_relative = false
 position = Vector2(1772.58, 170.507)
 metadata/source = NodePath("../ElectricSource")
 
 [node name="door opener" type="Area2D" parent="."]
 position = Vector2(981.938, 88.9234)
+collision_layer = 259
+collision_mask = 259
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door opener"]
 position = Vector2(1181.77, 103.341)
