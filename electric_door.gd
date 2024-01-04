@@ -51,14 +51,13 @@ func _on_door_controller_body_entered(body):
 	if body.is_in_group("Player"):
 		levelTrigger=true
 		get_node(get_meta("source")).on=false
-	pass # Replace with function body.
+
 
 
 func _on_door_opener_body_entered(body):
-	#this is me throwing code at it till it's collision turns off
-	levelTrigger=false
-	on = false
-	open=true
-	get_node(get_meta("source")).on=false
-	get_node("CollisionShape2D").disabled = true
+	if body.is_in_group("Player"):
+		levelTrigger=false
+		on = false
+		$"../door opener".queue_free()
+		$"../ElectricDoor2".queue_free()
 	pass # Replace with function body.
