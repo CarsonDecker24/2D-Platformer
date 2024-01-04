@@ -2046,7 +2046,6 @@ shape = SubResource("RectangleShape2D_w7op6")
 
 [node name="ElectricDoor2" parent="." instance=ExtResource("11_3qvqc")]
 position = Vector2(1772.58, 170.507)
-collision_layer = 3
 metadata/source = NodePath("../ElectricSource")
 
 [node name="door opener" type="Area2D" parent="."]
@@ -2067,6 +2066,7 @@ position = Vector2(62.8059, -25.3165)
 shape = SubResource("RectangleShape2D_ejg6c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SteamDetector"]
+z_index = 1
 texture_filter = 1
 position = Vector2(62.7914, -31.1506)
 scale = Vector2(1.00739, 1)
@@ -2077,6 +2077,7 @@ animation = &"on"
 position = Vector2(1972.97, -387.847)
 
 [node name="electricBridge" parent="." instance=ExtResource("18_smkcr")]
+z_index = 1
 position = Vector2(2165.96, -88.0058)
 metadata/source = NodePath("../SteamDetector")
 

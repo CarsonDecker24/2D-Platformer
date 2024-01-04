@@ -110,7 +110,6 @@ animation = &"lit"
 autoplay = "lit"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-z_index = -1
 z_as_relative = false
 position = Vector2(-0.0992126, -6.84567)
 lifetime = 2.0
@@ -127,7 +126,7 @@ scale_amount_curve = SubResource("Curve_xana3")
 color = Color(0.741176, 0.8, 1, 0.67451)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-0.0992126, -6.84567)
+position = Vector2(0, -9)
 target_position = Vector2(-0.111008, -151.277)
 collision_mask = 257
 collide_with_areas = true
