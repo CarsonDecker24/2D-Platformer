@@ -49,6 +49,8 @@ var onFire = false
 var deathTimer=0
 var deathToss=false
 var supriseTime
+var meleRecieveComboTime=0
+var meleComboIteration=0
 const ThingyPath = preload("res://thingyFixed.tscn")
 
 func _ready():
@@ -126,6 +128,10 @@ func _process(delta):
 		onFireTime-=delta
 		onfireTickClock-=delta
 	_gravity(delta)
+	if meleRecieveComboTime>0:
+		meleRecieveComboTime-=delta
+	else:
+		meleComboIteration=0
 
 
 
@@ -244,7 +250,6 @@ func _player_spotted(delta):
 					print("there is no platform")
 					player_distance=90
 			elif distanceToLedge<13 and groundCheck[1]-2<feetPos.y:
-				print("jumptrial")
 				if jumpInstance==false and player_distance>150 and is_on_floor():
 					velocity.y=-300
 					jumpInstance=true
@@ -334,11 +339,6 @@ func _player_spotted(delta):
 		#and if they are in the optimal distance obviously they dont need to move
 		elif pauseWizardAim==false:
 			animator.play(idle)
-	
-	
-
-
-
 func _wizardAim():
 	if is_dead ==true:
 		pass
@@ -551,3 +551,18 @@ func _gravity(delta):
 	#Apply gravity
 	velocity.y += gravity * delta
 	pass
+
+func _meleHit():
+	if meleRecieveComboTime>0:
+		meleComboIteration+=1
+	meleRecieveComboTime=.2
+	velocity.y=-120
+	if player_side_right==true:
+		velocity.x=-80
+	else:
+		velocity.x=80
+	bouttaShoot=false
+	_lower_health(15)
+	if player_spotted==false:
+		_turn_around()
+	

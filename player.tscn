@@ -1298,7 +1298,7 @@ turbulence_influence_max = 0.19
 turbulence_influence_over_life = SubResource("CurveTexture_oaox8")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f3xnx"]
-size = Vector2(19, 39)
+size = Vector2(19, 36)
 
 [sub_resource type="Curve" id="Curve_pw6d0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.105263), -2.73759, 0.0, 0, 0]
@@ -1351,8 +1351,8 @@ shape = SubResource("CapsuleShape2D_upuir")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-4, 5)
-collision_layer = 257
-collision_mask = 257
+collision_layer = 256
+collision_mask = 256
 priority = 1
 
 [node name="AreaBox" type="CollisionShape2D" parent="Area2D"]
@@ -1466,9 +1466,11 @@ trail_section_subdivisions = 7
 show_behind_parent = true
 texture_filter = 1
 position = Vector2(-3, 1)
+collision_layer = 520
+collision_mask = 520
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="parryBox"]
-position = Vector2(7.5, 1.5)
+position = Vector2(7.5, 3)
 shape = SubResource("RectangleShape2D_f3xnx")
 
 [node name="Sprite2D" type="Sprite2D" parent="parryBox"]

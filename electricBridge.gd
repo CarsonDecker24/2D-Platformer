@@ -15,4 +15,4 @@ func _process(delta):
 		$StaticBody2D/TextureRect.visible=true
 		get_node("StaticBody2D/CollisionShape2D").disabled = false
 		$AnimatedSprite2D.play("on")
-		print("wh")
+		

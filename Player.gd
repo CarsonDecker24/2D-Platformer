@@ -47,6 +47,7 @@ var hudSpeed = 0
 var hudUp = "isUp"
 var hudSlow = false
 var collect = false
+var meleCollideArray
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -160,6 +161,13 @@ func _physics_process(delta):
 			else:
 				get_node("parryBox").position.x = 2
 			get_node("Camera/eBar").play("refill")
+			#make the parry act as a mele
+			if $parryBox.has_overlapping_bodies():
+				meleCollideArray=$parryBox.get_overlapping_bodies()
+				for x in meleCollideArray:
+					if x.is_in_group("Enemy"):
+						x._meleHit()
+						$Camera/eBar.play("full")
 			
 	if parrying==true:
 		animPlayer._parry()

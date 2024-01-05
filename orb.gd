@@ -88,7 +88,6 @@ func _on_parry():
 	else:
 		vel = -speed.rotated(global_position.angle_to_point(Vector2(get_global_mouse_position().x,get_global_mouse_position().y)))
 	
-	print(fixTurn)
 	
 	parried = true
 
