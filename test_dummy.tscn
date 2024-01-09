@@ -360,15 +360,17 @@ curve = SubResource("Curve_x3ivp")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i5mac"]
 emission_shape = 2
-emission_sphere_radius = 5.38
+emission_sphere_radius = 7.52
 particle_flag_disable_z = true
-spread = 180.0
+spread = 0.0
 gravity = Vector3(0, 0, 0)
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 radial_accel_min = -100.0
-radial_accel_max = -100.0
-scale_max = 3.0
+radial_accel_max = -84.41
+tangential_accel_max = 34.86
+scale_min = 20.0
+scale_max = 20.0
 scale_curve = SubResource("CurveTexture_nhyyi")
 color_ramp = SubResource("GradientTexture1D_hdek5")
 turbulence_enabled = true
@@ -376,8 +378,8 @@ turbulence_noise_speed = Vector3(0, 1, 0)
 
 [node name="TestDummy" type="CharacterBody2D" groups=["Enemy"]]
 scale = Vector2(0.8, 0.8)
-collision_layer = 515
-collision_mask = 515
+collision_layer = 514
+collision_mask = 514
 safe_margin = 4.0
 script = ExtResource("1_1c4ne")
 metadata/homing = false
@@ -451,7 +453,7 @@ scale_amount_curve = SubResource("Curve_aafsx")
 color_ramp = SubResource("Gradient_b4num")
 
 [node name="Wand" type="Sprite2D" parent="."]
-self_modulate = Color(75.74, 1, 1, 0)
+self_modulate = Color(0.917647, 0.945098, 1, 0)
 texture_filter = 2
 position = Vector2(-5, -8.75)
 texture = ExtResource("3_gjtvj")
@@ -459,10 +461,13 @@ offset = Vector2(-2.50047, -2.16984)
 
 [node name="shooting particles" type="GPUParticles2D" parent="Wand"]
 position = Vector2(-4.49644, -4.10205)
-amount = 3
+amount = 5
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_i5mac")
 texture = ExtResource("3_y0yrd")
+speed_scale = 1.4
+local_coords = true
+draw_order = 0
 trail_enabled = true
 trail_lifetime = 0.15
 
@@ -483,13 +488,24 @@ offset_right = 9.0
 offset_bottom = 21.0
 texture = ExtResource("3_y0yrd")
 
+[node name="chargeHealthBar" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 0, 1)
+z_index = 1
+offset_left = -8.80269
+offset_top = 17.9996
+offset_right = 9.19731
+offset_bottom = 20.9996
+texture = ExtResource("3_y0yrd")
+expand_mode = 2
+stretch_mode = 1
+
 [node name="greenHealthBar" type="TextureRect" parent="."]
 self_modulate = Color(0, 1, 0, 1)
 z_index = 1
-offset_left = -9.0
-offset_top = 18.0
-offset_right = 9.0
-offset_bottom = 21.0
+offset_left = -9.13139
+offset_top = 17.8686
+offset_right = 8.86861
+offset_bottom = 20.8686
 texture = ExtResource("3_y0yrd")
 expand_mode = 2
 stretch_mode = 1

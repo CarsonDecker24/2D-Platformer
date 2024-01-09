@@ -1,6 +1,6 @@
 extends CharacterBody2D
 var player
-var hp = 50
+var hp = 60
 @onready var maxHp= hp
 var is_dead = false
 var state = "neutral"
@@ -51,6 +51,8 @@ var deathToss=false
 var supriseTime
 var meleRecieveComboTime=0
 var meleComboIteration=0
+var meleCrit=0.00
+var meleconvert=0.00
 const ThingyPath = preload("res://thingyFixed.tscn")
 
 func _ready():
@@ -67,6 +69,7 @@ func _spot_player(body):
 
 @warning_ignore("unused_parameter")
 func _process(delta):
+	
 	if is_dead==true:
 		player_spotted=false
 		if deathTimer<0:
@@ -402,6 +405,7 @@ func _lower_health(hp_reduction: int):
 	if (hp <= 0):
 		print("Died!")
 		is_dead = true
+		deathTimer=.7
 	_hit_animation()
 	_update_healthbar()
 	print("it is ", onFire==true, " that i am on fire.")
@@ -409,14 +413,19 @@ func _lower_health(hp_reduction: int):
 
 #Deal damage, requires arrow type
 func _damage(type: String, damage: int):
+	meleconvert=0.00
 	if type == "Ice":
 		hp -= damage
+		meleconvert=damage
+		meleCrit+=meleconvert*.4
 		debuff_cooldown=3
 		speed_mod=.5
 		fire_rate_mod=.7
 		get_node("ice_particles").set_deferred("emitting", true)
 	elif type == "Fire":
 		hp -= damage 
+		meleconvert=damage
+		meleCrit+=meleconvert*.4
 		if oiled==true:
 			hp-=300
 		oiled = false
@@ -440,8 +449,15 @@ func _damage(type: String, damage: int):
 func _update_healthbar():
 	$BaseRedHealthBar.visible=true
 	$greenHealthBar.visible=true
-	$greenHealthBar.size.x=18* hp/maxHp
-
+	if meleCrit==0:
+		$greenHealthBar.size.x=18*hp/maxHp
+		$chargeHealthBar.size.x=0
+	elif 18*(((hp-meleCrit)/maxHp)):
+		$greenHealthBar.size.x=18*(((hp-meleCrit)/maxHp))
+		$chargeHealthBar.size.x=18*hp/maxHp
+	else:
+		$greenHealthBar.visible=false
+		$chargeHealthBar.size.x=18*hp/maxHp
 func _hit_animation():
 	if walking=="walking down":
 		pauseWizardAim=true
@@ -555,14 +571,23 @@ func _gravity(delta):
 func _meleHit():
 	if meleRecieveComboTime>0:
 		meleComboIteration+=1
-	meleRecieveComboTime=.2
-	velocity.y=-120
-	if player_side_right==true:
+	meleRecieveComboTime=1
+	if player_side_right==true and meleComboIteration==0:
 		velocity.x=-80
-	else:
+		velocity.y=-120
+	elif meleComboIteration==0:
 		velocity.x=80
+		velocity.y=-120
+	elif player_side_right==true and meleComboIteration==1:
+		velocity.x=-160
+		velocity.y=-180
+	elif meleComboIteration==1:
+		velocity.x=160
+		velocity.y=-180
 	bouttaShoot=false
-	_lower_health(15)
+	_lower_health(5)
+	_lower_health(meleCrit)
+	meleCrit=0
 	if player_spotted==false:
 		_turn_around()
 	
