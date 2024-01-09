@@ -433,6 +433,10 @@ func _damage(type: String, damage: int):
 		onFireTime=4
 		onfireTickClock=onFireTickRate
 		onFireDamage=2
+	elif type == "Electricity":
+		hp -= damage
+		meleconvert=damage
+		meleCrit+=meleconvert*.6
 	else:
 		hp -= damage
 	print("Remaining HP: " + str(hp))
