@@ -1393,7 +1393,6 @@ sprite_frames = SubResource("SpriteFrames_c1u5q")
 animation = &"Bounce"
 
 [node name="healthBar" type="AnimatedSprite2D" parent="Camera"]
-visibility_layer = 0
 z_index = 2
 texture_filter = 1
 position = Vector2(-257, -152)
@@ -1561,6 +1560,7 @@ pitch_scale = 2.64
 max_polyphony = 2
 
 [node name="InvintoryUI" type="Node2D" parent="."]
+visible = false
 light_mask = 0
 position = Vector2(-33.4299, -384.723)
 scale = Vector2(1.5, 1.5)
