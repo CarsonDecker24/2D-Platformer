@@ -16,7 +16,7 @@ var fire_rate_mod=1
 var speed_mod=2
 var walking = "walking holster"
 var idle = "idle holster"
-const SPEED =120
+var SPEED =120
 const FIRE_RATE=2
 var from_facing
 var oiled = false
@@ -136,6 +136,7 @@ func _process(delta):
 		meleRecieveComboTime-=delta
 	else:
 		meleComboIteration=0
+	
 
 
 
@@ -438,6 +439,7 @@ func _damage(type: String, damage: int):
 		hp -= damage
 		meleconvert=damage
 		meleCrit+=meleconvert*.6
+		print("pass")
 	else:
 		hp -= damage
 	print("Remaining HP: " + str(hp))
@@ -576,7 +578,7 @@ func _gravity(delta):
 func _meleHit():
 	if meleRecieveComboTime>0:
 		meleComboIteration+=1
-	meleRecieveComboTime=1
+	meleRecieveComboTime=.5
 	if player_side_right==true and meleComboIteration==0:
 		velocity.x=-80
 		velocity.y=-120
