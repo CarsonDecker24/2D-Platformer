@@ -69,7 +69,7 @@ func _spot_player(body):
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-	
+	_update_healthbar()
 	if is_dead==true:
 		player_spotted=false
 		if deathTimer<0:
@@ -83,8 +83,9 @@ func _process(delta):
 			thingy.position=$thingySpawnPosition.global_position
 		deathTimer-=delta
 		animator.play("dead")
-
-
+		$BaseRedHealthBar.visible=false
+		$chargeHealthBar.visible=false
+		$greenHealthBar.visible=false
 	
 	if is_dead==false:
 		_check_rays()
