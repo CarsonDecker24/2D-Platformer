@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://devjw467k3t6v" path="res://Assets/waterfall/sprite_08.png" id="2_o87df"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ttgx"]
-size = Vector2(5.25, 456.5)
+size = Vector2(5.25, 574.25)
 
 [node name="Water" type="Node2D"]
 position = Vector2(1, -98)
@@ -15,7 +15,7 @@ collision_layer = 5
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(3, 96)
+position = Vector2(3, 154.875)
 shape = SubResource("RectangleShape2D_6ttgx")
 
 [node name="Area2D" type="Area2D" parent="."]
