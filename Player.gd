@@ -42,6 +42,7 @@ var invincibilityFrames =0
 var oiled = false
 var sliding = false
 const INVINCIBILITYTIME = .2
+var wallJumpCoyote = 0
 var hudPosition
 var hudSpeed = 0
 var hudUp = "isUp"
@@ -135,9 +136,14 @@ func _physics_process(delta):
 		_wallslide(delta)
 	else:
 		max_fall_speed = 1000
-		wall_sliding = false
+		if wall_sliding:
+			wall_sliding = false
+			wallJumpCoyote = .1
 	
-	if wall_sliding and Input.is_action_just_pressed("jump"):
+	if not wall_sliding:
+		wallJumpCoyote -= delta
+	
+	if (wall_sliding or wallJumpCoyote > 0) and Input.is_action_just_pressed("jump"):
 		_walljump()
 	
 	if velocity.y > max_fall_speed: velocity.y = max_fall_speed
