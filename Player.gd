@@ -138,7 +138,7 @@ func _physics_process(delta):
 		max_fall_speed = 1000
 		if wall_sliding:
 			wall_sliding = false
-			wallJumpCoyote = .1
+			wallJumpCoyote = .15
 	
 	if not wall_sliding:
 		wallJumpCoyote -= delta
@@ -252,10 +252,16 @@ func _wallslide(delta):
 func _walljump():
 	#Wall jump
 	if sliding==false:
-		velocity.y = JUMP_VELOCITY*.85
-		velocity.x += -direction*SPEED*1.2
-		wallJumpNerf=.6 
-		get_node("PlayerBodyAnimation")._quickturn()
+		if wall_sliding:
+			velocity.y = JUMP_VELOCITY*.85
+			velocity.x += -direction*SPEED*1.2
+			wallJumpNerf=.6 
+			get_node("PlayerBodyAnimation")._quickturn()
+		else:
+			velocity.y = JUMP_VELOCITY*.85
+			velocity.x += direction*SPEED*1.2
+			wallJumpNerf=.6 
+			get_node("PlayerBodyAnimation")._quickturn()
 
 func _aim(delta):
 	
