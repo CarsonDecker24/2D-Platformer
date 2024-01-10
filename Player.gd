@@ -9,7 +9,7 @@ const arrowPath = preload("res://new_arrow.tscn")
 const FIRECOOLDOWN = .4
 
 var FRICTION = 25.0
-var AIR_FRICTION = 25.0
+var AIR_FRICTION = 15.0
 var direction
 var pivot
 var weapon_sprite
