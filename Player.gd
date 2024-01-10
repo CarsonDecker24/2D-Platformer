@@ -132,7 +132,7 @@ func _physics_process(delta):
 	if not is_on_floor() and not wall_sliding:
 		_gravity(delta)
 		
-	if is_on_wall_only() and direction != 0:
+	if is_on_wall_only():
 		_wallslide(delta)
 	else:
 		max_fall_speed = 1000
@@ -254,12 +254,12 @@ func _walljump():
 	if sliding==false:
 		if wall_sliding:
 			velocity.y = JUMP_VELOCITY*.85
-			velocity.x += -direction*SPEED*1.2
+			velocity.x += -facing*SPEED*1.2
 			wallJumpNerf=.6 
 			get_node("PlayerBodyAnimation")._quickturn()
 		else:
 			velocity.y = JUMP_VELOCITY*.85
-			velocity.x += direction*SPEED*1.2
+			velocity.x += facing*SPEED*1.2
 			wallJumpNerf=.6 
 			get_node("PlayerBodyAnimation")._quickturn()
 
