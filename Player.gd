@@ -410,7 +410,7 @@ func _arrow_hud():
 		arrowHud.play("slot_3")
 
 func _dash(dir: Vector2, power):
-	velocity += dir * power
+	velocity = dir * power
 	dashTime =.2
 	shift_use_time=.2
 	shift_cooldown=1
