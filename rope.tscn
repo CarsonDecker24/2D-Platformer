@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ctxl3i7luicfc" path="res://Assets/player sprites/grapple/grapple arrow-2.png.png" id="2_ge4sc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rg7ns"]
-size = Vector2(3.59139, 24.506)
+size = Vector2(3.79569, 337.253)
 
 [node name="rope" type="Node2D" groups=["Rope"]]
 script = ExtResource("1_5t8fe")
@@ -12,13 +12,18 @@ script = ExtResource("1_5t8fe")
 [node name="area" type="Area2D" parent="."]
 
 [node name="hitbox" type="CollisionShape2D" parent="area"]
+position = Vector2(0.102153, 156.374)
 shape = SubResource("RectangleShape2D_rg7ns")
 
-[node name="GrappleArrow-2_png" type="Sprite2D" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
-position = Vector2(-9.53674e-07, -2.38419e-07)
-rotation = 1.5708
-scale = Vector2(0.937118, 0.876522)
+offset_left = 3.0
+offset_top = -12.0
+offset_right = 340.0
+offset_bottom = -7.0
+rotation = 1.57092
 texture = ExtResource("2_ge4sc")
+expand_mode = 3
+stretch_mode = 1
 
 [connection signal="area_entered" from="area" to="." method="_on_area_2d_area_entered"]

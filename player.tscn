@@ -1395,7 +1395,7 @@ animation = &"Bounce"
 [node name="healthBar" type="AnimatedSprite2D" parent="Camera"]
 z_index = 2
 texture_filter = 1
-position = Vector2(-257, -152)
+position = Vector2(-253, -146)
 sprite_frames = SubResource("SpriteFrames_k3vi4")
 animation = &"full"
 
@@ -1403,7 +1403,7 @@ animation = &"full"
 light_mask = 0
 z_index = 2
 texture_filter = 1
-position = Vector2(-257, -110)
+position = Vector2(-253, -104)
 sprite_frames = SubResource("SpriteFrames_pcq48")
 animation = &"full"
 
@@ -1411,7 +1411,7 @@ animation = &"full"
 light_mask = 0
 z_index = 2
 texture_filter = 1
-position = Vector2(-257, -131)
+position = Vector2(-253, -125)
 sprite_frames = SubResource("SpriteFrames_u0ohg")
 animation = &"full"
 

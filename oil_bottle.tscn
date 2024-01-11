@@ -19,7 +19,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6v51n"]
 radius = 2.0
-height = 42.0
+height = 100.0
 
 [node name="oilBottle" type="Node2D"]
 script = ExtResource("1_v4q1n")
