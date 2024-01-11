@@ -48,6 +48,7 @@ var hudSpeed = 0
 var hudUp = "isUp"
 var hudSlow = false
 var collect = false
+var shift_used = false
 var meleCollideArray
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
@@ -153,10 +154,9 @@ func _physics_process(delta):
 		wallJumpNerf-=delta
 	
 	if Input.is_action_just_pressed("shift"):
-		if shiftSlot=="Air" and shift_cooldown<=0 and get_node("Camera/shiftBar").is_playing()==false :
+		if shiftSlot=="Air" and shift_cooldown<=0 and get_node("Camera/shiftBar").is_playing()==false:
 			_dash(get_local_mouse_position().normalized(),-500)
 			get_node("Camera/shiftBar").play("refill")
-			
 	
 	if Input.is_action_just_pressed("e"):
 		if !parrying and get_node("Camera/eBar").is_playing()==false:
@@ -410,10 +410,10 @@ func _arrow_hud():
 		arrowHud.play("slot_3")
 
 func _dash(dir: Vector2, power):
-	velocity += dir * power
+	velocity = dir * power
 	dashTime =.2
 	shift_use_time=.2
-	shift_cooldown=1
+	shift_cooldown = 1
 	fire_cooldown=FIRECOOLDOWN
 	fire_state="air-row"
 	animPlayer.play("4air_quickfire")
