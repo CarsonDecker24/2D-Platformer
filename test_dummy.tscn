@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://d2kvnctkapc7y"]
+[gd_scene load_steps=53 format=3 uid="uid://d2kvnctkapc7y"]
 
 [ext_resource type="Script" path="res://test_dummy.gd" id="1_1c4ne"]
 [ext_resource type="Texture2D" uid="uid://clyg48xtd3ssi" path="res://Assets/enemy sprites/basic/enemy walk and aim.png" id="2_814ig"]
@@ -329,8 +329,12 @@ animations = [{
 }]
 
 [sub_resource type="Curve" id="Curve_ahohc"]
-_data = [Vector2(0, 0.831579), 0.0, 0.0, 0, 0, Vector2(0.813084, 0.673684), 0.0, 0.0, 0, 0, Vector2(0.977941, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.831579), 0.0, 0.0, 0, 0, Vector2(0.535135, 0.663158), -1.0386, -1.0386, 0, 0, Vector2(0.977941, 0), 0.0, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_dm8ca"]
+offsets = PackedFloat32Array(0.25974, 1)
+colors = PackedColorArray(0.466667, 0.466667, 0.466667, 0.815686, 1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_3ovvd"]
 offsets = PackedFloat32Array(0, 0.302905, 1)
@@ -425,6 +429,20 @@ target_position = Vector2(182.5, -70)
 position = Vector2(0, -11.25)
 enabled = false
 target_position = Vector2(0, -9.53674e-07)
+
+[node name="oilParticles2" type="CPUParticles2D" parent="."]
+scale = Vector2(1, 1)
+emitting = false
+amount = 5
+emission_shape = 3
+emission_rect_extents = Vector2(5, 15)
+gravity = Vector2(0, 10)
+angular_velocity_min = 273.6
+angular_velocity_max = 345.6
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_ahohc")
+color = Color(0.317647, 0.156863, 0.0196078, 1)
+color_initial_ramp = SubResource("Gradient_dm8ca")
 
 [node name="ice_particles" type="CPUParticles2D" parent="."]
 emitting = false

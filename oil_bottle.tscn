@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8rakefmtqf3i"]
+[gd_scene load_steps=7 format=3 uid="uid://b8rakefmtqf3i"]
 
 [ext_resource type="Script" path="res://oil_bottle.gd" id="1_v4q1n"]
 [ext_resource type="Texture2D" uid="uid://c33swicjr5glb" path="res://Assets/environmental stuff/oilLamp Smaller.png" id="2_cejbc"]
@@ -18,14 +18,20 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6v51n"]
-radius = 2.0
-height = 100.0
+radius = 5.0
+height = 154.0
+
+[sub_resource type="Curve" id="Curve_3f34t"]
+_data = [Vector2(0, 0.263158), 0.0, 7.14035, 0, 0, Vector2(0.918919, 0), -3.07479, 0.0, 0, 0]
+point_count = 2
 
 [node name="oilBottle" type="Node2D"]
 script = ExtResource("1_v4q1n")
 metadata/attachment = NodePath("")
 
 [node name="bottleArea" type="Area2D" parent="."]
+collision_layer = 6
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bottleArea"]
 shape = SubResource("CircleShape2D_pajsg")
@@ -39,12 +45,30 @@ animation = &"lamp"
 autoplay = "lamp"
 
 [node name="explosionHitbox" type="Area2D" parent="."]
+disable_mode = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="explosionHitbox"]
 position = Vector2(0, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_6v51n")
 disabled = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 15
+one_shot = true
+speed_scale = 0.8
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 4.84
+direction = Vector2(0, -1)
+spread = 63.0
+initial_velocity_min = 140.0
+initial_velocity_max = 240.0
+angular_velocity_min = -446.4
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_3f34t")
+color = Color(0.27451, 0.101961, 0.0745098, 0.713726)
 
 [connection signal="body_entered" from="bottleArea" to="." method="_on_bottle_area_body_entered"]
 [connection signal="body_entered" from="explosionHitbox" to="." method="_on_explosion_hitbox_body_entered"]

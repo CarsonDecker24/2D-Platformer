@@ -129,6 +129,9 @@ func _process(delta):
 		else:
 			$fire_particles.emitting=false
 		
+		if oiled == true:
+			$oilParticles2.emitting=true
+		
 		onFireTime-=delta
 		onfireTickClock-=delta
 	_gravity(delta)

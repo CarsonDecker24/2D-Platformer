@@ -10,6 +10,8 @@ size = Vector2(3.79569, 337.253)
 script = ExtResource("1_5t8fe")
 
 [node name="area" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 5
 
 [node name="hitbox" type="CollisionShape2D" parent="area"]
 position = Vector2(0.102153, 156.374)

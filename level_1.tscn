@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dmatwath7f8sm"]
+[gd_scene load_steps=56 format=3 uid="uid://dmatwath7f8sm"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_cj6ue"]
 [ext_resource type="Texture2D" uid="uid://boqrayk806e7d" path="res://Assets/tilesheets/paralax gib-ver.png" id="2_a2tse"]
@@ -1955,6 +1955,12 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_obwsc"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21tfg"]
+size = Vector2(50, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adxck"]
+size = Vector2(28, 47)
+
 [node name="Level1" type="Node2D"]
 position = Vector2(-4, 1)
 script = ExtResource("1_cj6ue")
@@ -2014,10 +2020,9 @@ metadata/Frozen = false
 
 [node name="Player" parent="." instance=ExtResource("3_410nd")]
 texture_filter = 1
-position = Vector2(-214, -68)
+position = Vector2(3048, -350)
 
 [node name="transition" type="Sprite2D" parent="Player"]
-visible = false
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 z_as_relative = false
@@ -2223,20 +2228,21 @@ position = Vector2(2723, -445)
 metadata/homing = true
 
 [node name="TestDummy7" parent="." instance=ExtResource("4_kqark")]
-position = Vector2(2563, -185)
+position = Vector2(2563, -175)
 metadata/homing = true
 
-[node name="Node2D2" type="Node2D" parent="."]
+[node name="portalEnter" type="Node2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.764706)
 position = Vector2(-203, -68)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="portalEnter"]
 z_index = 1
 position = Vector2(3, 1)
 sprite_frames = SubResource("SpriteFrames_a1jby")
 autoplay = "default"
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Node2D2"]
-position = Vector2(1, 1)
+[node name="CPUParticles2D" type="CPUParticles2D" parent="portalEnter/AnimatedSprite2D"]
+position = Vector2(-2, 0)
 emission_shape = 3
 emission_rect_extents = Vector2(1, 20)
 spread = 6.96
@@ -2281,4 +2287,21 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_afblg")
 color_ramp = SubResource("Gradient_obwsc")
 
+[node name="SceneStartCollision" type="StaticBody2D" parent="."]
+disable_mode = 2
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneStartCollision"]
+position = Vector2(-196, -79)
+shape = SubResource("RectangleShape2D_21tfg")
+disabled = true
+
+[node name="SceneExitTrigger" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneExitTrigger"]
+position = Vector2(3465, -374)
+shape = SubResource("RectangleShape2D_adxck")
+
 [connection signal="body_entered" from="doorController" to="ElectricDoor" method="_on_door_controller_body_entered"]
+[connection signal="area_entered" from="SceneExitTrigger" to="." method="_on_scene_exit_trigger_area_entered"]
