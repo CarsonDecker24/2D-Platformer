@@ -2020,9 +2020,10 @@ metadata/Frozen = false
 
 [node name="Player" parent="." instance=ExtResource("3_410nd")]
 texture_filter = 1
-position = Vector2(3048, -350)
+position = Vector2(-210.836, -69.4364)
 
 [node name="transition" type="Sprite2D" parent="Player"]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 z_as_relative = false
@@ -2304,4 +2305,3 @@ position = Vector2(3465, -374)
 shape = SubResource("RectangleShape2D_adxck")
 
 [connection signal="body_entered" from="doorController" to="ElectricDoor" method="_on_door_controller_body_entered"]
-[connection signal="area_entered" from="SceneExitTrigger" to="." method="_on_scene_exit_trigger_area_entered"]

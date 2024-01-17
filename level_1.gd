@@ -71,7 +71,7 @@ func _process(delta):
 		transitionSpeed=0
 		transitionTotalMoved=0
 		transitState="hidden"
-	
+	print("hey its",transitState)
 	
 	
 	
@@ -105,7 +105,4 @@ func _input(event):
 
 
 
-func _on_scene_exit_trigger_area_entered(area):
-		if area.is_in_group("Player"):
-			transitState="closing"
-		pass # Replace with function body.
+
