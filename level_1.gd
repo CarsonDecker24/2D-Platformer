@@ -21,6 +21,7 @@ var sceneStartWaitTime=-999
 var closingPortal="not"
 var portalColor=1
 var exitingLevel=false
+var stopit=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.action_press("move_right")
@@ -45,33 +46,32 @@ func _process(delta):
 	
 	
 	
-	if transitionTotalMoved<200 and transitState=="opening":
+	if transitionTotalMoved<200 and transitState=="opening" and not transitState=="closing":
+		$Player/transition.position.y+=transitionSpeed*1.0
+		transitionTotalMoved+=transitionSpeed
+		if transitionSpeed <5:
+			transitionSpeed+=2
+		if transitionSpeed>0:
+			transitionSpeed-=1
+	elif (transitState !="closing" and transitState!="hidden" ):
+		$Player/transition.visible=false
+		transitionSpeed=0
+		transitState="hidden"
+		print("bad")
+	
+	if transitionTotalMoved>0 and transitState=="closing":
+		$Player/transition.visible=true
 		$Player/transition.position.y-=transitionSpeed*1.0
 		transitionTotalMoved-=transitionSpeed
 		if transitionSpeed <5:
 			transitionSpeed+=2
 		if transitionSpeed>0:
 			transitionSpeed-=1
-	elif transitState !="closing" or transitState!="hidden":
-		$Player/transition.visible=false
+	elif transitState != "opening" and transitState!="hidden":
 		transitionSpeed=0
 		transitionTotalMoved=0
 		transitState="hidden"
-		print("bad")
-	
-	if transitionTotalMoved<200 and transitState=="closing":
-		$Player/transition.visible=true
-		$Player/transition.position.y+=transitionSpeed*1.0
-		transitionTotalMoved-=transitionSpeed
-		if transitionSpeed <5:
-			transitionSpeed+=2
-		if transitionSpeed>0:
-			transitionSpeed-=1
-	elif transitState != "opening" or transitState!="hidden":
-		transitionSpeed=0
-		transitionTotalMoved=0
-		transitState="hidden"
-	print("hey its",transitState)
+	print("hey its",transitState," and moved",transitionTotalMoved)
 	
 	
 	
@@ -100,16 +100,9 @@ func _input(event):
 		get_tree().change_scene_to_file("res://main_menu.tscn")
 
 
-
-
-
-
-
-
-
-
 func _on_scene_exit_trigger_body_entered(body):
 	if body.is_in_group("Player"):
 		transitState="closing"
+		print("fucg")
 		
 	pass # Replace with function body.

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b02dkwqbkk4jm" path="res://Assets/enemy sprites/wands/WAND-1.png" id="3_gjtvj"]
 [ext_resource type="Texture2D" uid="uid://bgetsl7n5djlg" path="res://Assets/enemy sprites/basic/enemy jump and fall.png" id="3_k0q6p"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="3_y0yrd"]
-[ext_resource type="Texture2D" uid="uid://bpn3xa6vxykc1" path="res://Assets/enemy sprites/sprite_12.png" id="8_sl75h"]
+[ext_resource type="Texture2D" uid="uid://ddl0coxscgv2x" path="res://Assets/enemy sprites/sprite_12 - Copy.png" id="8_j2go2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n2n5x"]
 radius = 6.0
@@ -530,7 +530,7 @@ stretch_mode = 1
 [node name="suprised" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0.0453572, -25.0767)
-texture = ExtResource("8_sl75h")
+texture = ExtResource("8_j2go2")
 
 [node name="thingySpawnPosition" type="Node2D" parent="."]
 position = Vector2(0.15625, -12.0312)
