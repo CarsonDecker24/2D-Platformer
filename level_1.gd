@@ -106,3 +106,10 @@ func _input(event):
 
 
 
+
+
+func _on_scene_exit_trigger_body_entered(body):
+	if body.is_in_group("Player"):
+		transitState="closing"
+		
+	pass # Replace with function body.
