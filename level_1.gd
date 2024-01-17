@@ -57,7 +57,7 @@ func _process(delta):
 		$Player/transition.visible=false
 		transitionSpeed=0
 		transitState="hidden"
-		print("bad")
+	
 	
 	if transitionTotalMoved>0 and transitState=="closing":
 		$Player/transition.visible=true
@@ -71,7 +71,7 @@ func _process(delta):
 		transitionSpeed=0
 		transitionTotalMoved=0
 		transitState="hidden"
-	print("hey its",transitState," and moved",transitionTotalMoved)
+	
 	
 	
 	
