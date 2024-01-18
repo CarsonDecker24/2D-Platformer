@@ -477,6 +477,7 @@ texture = ExtResource("3_gjtvj")
 offset = Vector2(-2.50047, -2.16984)
 
 [node name="shooting particles" type="GPUParticles2D" parent="Wand"]
+visible = false
 position = Vector2(-4.49644, -4.10205)
 amount = 5
 sub_emitter = NodePath(".")

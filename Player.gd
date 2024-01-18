@@ -107,6 +107,7 @@ func _process(delta):
 	
 	if sliding==true:
 		$"slide particles".emitting=true
+		
 	else:
 		$"slide particles".emitting=false
 	
@@ -157,6 +158,7 @@ func _physics_process(delta):
 		if shiftSlot=="Air" and shift_cooldown<=0 and get_node("Camera/shiftBar").is_playing()==false:
 			_dash(get_local_mouse_position().normalized(),-500)
 			get_node("Camera/shiftBar").play("refill")
+			$audioPlayers/bowShot.play()
 	
 	if Input.is_action_just_pressed("e"):
 		if !parrying and get_node("Camera/eBar").is_playing()==false:
@@ -429,7 +431,8 @@ func _take_damage(hp):
 			$Camera/healthBar.play("1")
 		if health==0:
 			$Camera/healthBar.play("dead")
-	
+		if health==0:
+			get_tree().change_scene_to_file("res://MainMenu.tscn")
 
 func has_group(test):
 	return
@@ -527,3 +530,6 @@ func _collector():
 
 func _on_item_list_empty_clicked(at_position, mouse_button_index):
 	pass # Replace with function body.
+	
+#func _transfer_data_between_scenes():
+#	get_node("/root/PlayerVariablesGlobal") = {get_node()}

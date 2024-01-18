@@ -1437,13 +1437,13 @@ animation = &"bow_quickfire"
 script = ExtResource("56_nsjpx")
 
 [node name="ArrowSpawn" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
-visible = false
 position = Vector2(2.5, 1)
 
 [node name="pullArmPosition" type="Node2D" parent="PivotHoldingArm/HoldingArmAnimation"]
 position = Vector2(-1.5, -3)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="PivotHoldingArm/HoldingArmAnimation"]
+visible = false
 use_parent_material = true
 position = Vector2(-2.5, 0)
 emitting = false
@@ -1491,9 +1491,11 @@ scale = Vector2(1.98312, 2.02028)
 texture = ExtResource("74_qvcdd")
 
 [node name="slide particles" type="CPUParticles2D" parent="."]
+z_index = 1
+z_as_relative = false
 position = Vector2(-4, 16)
 emitting = false
-amount = 60
+amount = 30
 speed_scale = 2.11
 emission_shape = 3
 emission_rect_extents = Vector2(8, 1)

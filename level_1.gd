@@ -22,6 +22,8 @@ var closingPortal="not"
 var portalColor=1
 var exitingLevel=false
 var stopit=false
+var newScene
+var oldScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.action_press("move_right")
@@ -71,6 +73,7 @@ func _process(delta):
 		transitionSpeed=0
 		transitionTotalMoved=0
 		transitState="hidden"
+		
 	
 	
 	
@@ -106,3 +109,6 @@ func _on_scene_exit_trigger_body_entered(body):
 		print("fucg")
 		
 	pass # Replace with function body.
+
+
+	
