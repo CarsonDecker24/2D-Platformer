@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_joiqn"]
 [ext_resource type="Texture2D" uid="uid://csjhkx656y10o" path="res://Assets/gradient-1.png.png" id="2_1vywh"]
+[ext_resource type="AudioStream" uid="uid://cjriwahek3wb6" path="res://Assets/music/lights.mp3" id="2_rhati"]
 [ext_resource type="Texture2D" uid="uid://yxq4fbqdg282" path="res://Assets/chrono quiver title v1.png" id="2_v8pw7"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="4_k1t8h"]
-[ext_resource type="AudioStream" uid="uid://c7jfermoumpd5" path="res://Assets/music/lights.mp3" id="5_qklua"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dyp73"]
 atlas = ExtResource("2_v8pw7")
@@ -80,7 +80,7 @@ scale = Vector2(14.5208, 15.1296)
 
 [node name="music" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(559, 315)
-stream = ExtResource("5_qklua")
+stream = ExtResource("2_rhati")
 panning_strength = 1.5
 
 [node name="background" type="Sprite2D" parent="."]

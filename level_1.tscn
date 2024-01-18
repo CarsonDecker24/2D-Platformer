@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="6_un1t3"]
 [ext_resource type="PackedScene" uid="uid://do03vpsse5s6p" path="res://rope.tscn" id="7_3j4qc"]
 [ext_resource type="PackedScene" uid="uid://b8rakefmtqf3i" path="res://oil_bottle.tscn" id="7_4jpy3"]
+[ext_resource type="AudioStream" uid="uid://c7ip3mn50mu7o" path="res://Assets/music/hums.mp3" id="8_mhfut"]
 [ext_resource type="PackedScene" uid="uid://crjpcup1yustk" path="res://electric_source.tscn" id="9_ce8k3"]
 [ext_resource type="Script" path="res://Wire.gd" id="11_2jwnh"]
 [ext_resource type="PackedScene" uid="uid://bp17jxrcnna4b" path="res://electric_door.tscn" id="11_3qvqc"]
@@ -25,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://qhpplw2kgui0" path="res://Assets/tilesheets/backgroundwall tile.png" id="22_byxc5"]
 [ext_resource type="Texture2D" uid="uid://datc0judvo7ot" path="res://Assets/tilesheets/backgroundwall tile-2.png" id="23_e3l8x"]
 [ext_resource type="Texture2D" uid="uid://cygfy0tqdmsff" path="res://Assets/environmental stuff/portal line.png" id="25_w8bxm"]
-[ext_resource type="AudioStream" uid="uid://c6r6n1btgp6nl" path="res://Assets/music/hums.mp3" id="26_ab2r0"]
 
 [sub_resource type="Gradient" id="Gradient_i8vud"]
 offsets = PackedFloat32Array(0, 0.357759, 0.760776, 1)
@@ -2022,7 +2022,7 @@ collision_mask = 2049
 
 [node name="music" type="AudioStreamPlayer2D" parent="Player"]
 position = Vector2(1.403, -2.31)
-stream = ExtResource("26_ab2r0")
+stream = ExtResource("8_mhfut")
 volume_db = 2.622
 autoplay = true
 attenuation = 1.2831e-05
