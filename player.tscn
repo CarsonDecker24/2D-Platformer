@@ -473,7 +473,7 @@ radius = 5.0
 height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_81ske"]
-radius = 6.83082
+radius = 4.42995
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8y0kl"]
 atlas = ExtResource("62_xsr1f")
@@ -1350,14 +1350,14 @@ position = Vector2(-4, 5)
 shape = SubResource("CapsuleShape2D_upuir")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-4, 5)
+position = Vector2(-2.94205, 5.05568)
 collision_layer = 256
 collision_mask = 256
 priority = 1
 
 [node name="AreaBox" type="CollisionShape2D" parent="Area2D"]
 self_modulate = Color(1, 0, 0, 1)
-position = Vector2(1, 5.3125)
+position = Vector2(-0.948837, 7.53974)
 shape = SubResource("CircleShape2D_81ske")
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -1536,7 +1536,7 @@ max_polyphony = 2
 
 [node name="slide" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("85_u8f6x")
-volume_db = 10.0
+volume_db = 6.672
 pitch_scale = 0.94
 max_polyphony = 2
 
@@ -1548,12 +1548,12 @@ max_polyphony = 4
 
 [node name="bowCharge" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("87_ncmou")
-volume_db = 17.0
+volume_db = 5.382
 max_polyphony = 2
 
 [node name="bowChargeQuick" type="AudioStreamPlayer" parent="audioPlayers"]
 stream = ExtResource("88_dktab")
-volume_db = 20.0
+volume_db = 5.024
 max_polyphony = 2
 
 [node name="bowShot" type="AudioStreamPlayer" parent="audioPlayers"]
@@ -1562,7 +1562,6 @@ pitch_scale = 2.64
 max_polyphony = 2
 
 [node name="InvintoryUI" type="Node2D" parent="."]
-visible = false
 light_mask = 0
 position = Vector2(-33.4299, -384.723)
 scale = Vector2(1.5, 1.5)

@@ -189,7 +189,7 @@ func _physics_process(delta):
 func _slide(dir):
 	$PlayerHitbox.position = Vector2(-6,10)
 	$PlayerHitbox.rotation=90
-	$PlayerHitbox.scale = Vector2(.4,1)
+	$PlayerHitbox.scale = Vector2(.2,1)
 	if sliding==false:
 		velocity.x=dir*SPEED*4
 	sliding=true

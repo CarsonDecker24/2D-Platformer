@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dmatwath7f8sm"]
+[gd_scene load_steps=56 format=3 uid="uid://dmatwath7f8sm"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_cj6ue"]
 [ext_resource type="Texture2D" uid="uid://boqrayk806e7d" path="res://Assets/tilesheets/paralax gib-ver.png" id="2_a2tse"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://qhpplw2kgui0" path="res://Assets/tilesheets/backgroundwall tile.png" id="22_byxc5"]
 [ext_resource type="Texture2D" uid="uid://datc0judvo7ot" path="res://Assets/tilesheets/backgroundwall tile-2.png" id="23_e3l8x"]
 [ext_resource type="Texture2D" uid="uid://cygfy0tqdmsff" path="res://Assets/environmental stuff/portal line.png" id="25_w8bxm"]
+[ext_resource type="AudioStream" uid="uid://c6r6n1btgp6nl" path="res://Assets/music/hums.mp3" id="26_ab2r0"]
 
 [sub_resource type="Gradient" id="Gradient_i8vud"]
 offsets = PackedFloat32Array(0, 0.357759, 0.760776, 1)
@@ -2019,8 +2020,15 @@ position = Vector2(-207.028, -64.315)
 collision_layer = 2049
 collision_mask = 2049
 
+[node name="music" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(1.403, -2.31)
+stream = ExtResource("26_ab2r0")
+volume_db = 2.622
+autoplay = true
+attenuation = 1.2831e-05
+panning_strength = 3.0
+
 [node name="transition" type="Sprite2D" parent="Player"]
-visible = false
 self_modulate = Color(0, 0, 0, 1)
 z_index = 5
 z_as_relative = false
@@ -2304,5 +2312,6 @@ collision_mask = 2049
 position = Vector2(-16.938, 10.0766)
 shape = SubResource("RectangleShape2D_w7op6")
 
+[connection signal="finished" from="Player/music" to="." method="_on_music_finished"]
 [connection signal="body_entered" from="doorController" to="ElectricDoor" method="_on_door_controller_body_entered"]
 [connection signal="body_entered" from="SceneExitTrigger" to="." method="_on_scene_exit_trigger_body_entered"]

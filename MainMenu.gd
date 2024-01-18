@@ -4,6 +4,7 @@ var started = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$music.play()
 	pass # Replace with function body.
 
 
@@ -20,3 +21,8 @@ func _process(delta):
 func _on_start_button_pressed():
 	#change scene when putton pressed
 	started=true
+
+
+func _on_music_finished():
+	$music.play()
+	pass # Replace with function body.

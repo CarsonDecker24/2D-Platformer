@@ -27,6 +27,7 @@ var oldScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.action_press("move_right")
+	
 	pass # Replace with function body.
 
 
@@ -95,6 +96,8 @@ func _process(delta):
 			sceneLightingDirection=true
 		$bg_2/Sprite2D.self_modulate= Color(1,1,1,sceneLightingValue*1.00)
 		sceneLightingValue-=.002
+		
+		
 	pass
 	
 
@@ -112,3 +115,8 @@ func _on_scene_exit_trigger_body_entered(body):
 
 
 	
+
+
+func _on_music_finished():
+	$Node/music.play()
+	pass # Replace with function body.
