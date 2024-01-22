@@ -1,10 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0vg51wva6j5f"]
+[gd_scene load_steps=29 format=3 uid="uid://d0vg51wva6j5f"]
 
 [ext_resource type="PackedScene" uid="uid://dblot7f26i2w" path="res://player.tscn" id="1_0msxo"]
 [ext_resource type="Script" path="res://shopkeep.gd" id="1_rlx3e"]
 [ext_resource type="PackedScene" uid="uid://503jkqgjxdem" path="res://tile_map_cave.tscn" id="2_ule1w"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="3_nqdyx"]
 [ext_resource type="Texture2D" uid="uid://cygfy0tqdmsff" path="res://Assets/environmental stuff/portal line.png" id="3_ue8pd"]
+[ext_resource type="Script" path="res://shopkeeper.gd" id="6_2gcj3"]
+[ext_resource type="Texture2D" uid="uid://cwrhpd2b5eurs" path="res://Assets/tilesheets/cave tilesheet v1_1-1.png" id="7_haoku"]
 
 [sub_resource type="Gradient" id="Gradient_c8cec"]
 offsets = PackedFloat32Array(0, 0.518595, 1)
@@ -136,6 +138,26 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ws04m"]
 size = Vector2(41, 96)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_jt2v3"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_haoku")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_prhv0"]
+radius = 22.0
+height = 94.0
+
 [node name="shopkeep" type="Node2D"]
 script = ExtResource("1_rlx3e")
 
@@ -247,3 +269,20 @@ collision_mask = 3
 position = Vector2(-204, -96)
 shape = SubResource("RectangleShape2D_ws04m")
 disabled = true
+
+[node name="shopkeeper" type="Node2D" parent="."]
+script = ExtResource("6_2gcj3")
+
+[node name="8bitKeep" type="AnimatedSprite2D" parent="shopkeeper"]
+texture_filter = 1
+position = Vector2(45.5, -2.5)
+scale = Vector2(1.23438, 1.21875)
+sprite_frames = SubResource("SpriteFrames_jt2v3")
+animation = &"new_animation"
+
+[node name="player detect" type="Area2D" parent="shopkeeper"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shopkeeper/player detect"]
+position = Vector2(41, -5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_prhv0")
