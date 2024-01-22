@@ -74,7 +74,8 @@ func _process(delta):
 		transitionSpeed=0
 		transitionTotalMoved=0
 		transitState="hidden"
-		
+		Global.PlayerVariables=[get_node("Player").thingyCount,get_node("Player/InvintoryUI").equipped,get_node("Player/InvintoryUI").Invintory]
+		get_tree().change_scene_to_file("res://shopkeep.tscn")
 	
 	
 	
