@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d0vg51wva6j5f"]
+[gd_scene load_steps=31 format=3 uid="uid://d0vg51wva6j5f"]
 
 [ext_resource type="PackedScene" uid="uid://dblot7f26i2w" path="res://player.tscn" id="1_0msxo"]
 [ext_resource type="Script" path="res://shopkeep.gd" id="1_rlx3e"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cygfy0tqdmsff" path="res://Assets/environmental stuff/portal line.png" id="3_ue8pd"]
 [ext_resource type="Script" path="res://shopkeeper.gd" id="6_2gcj3"]
 [ext_resource type="Texture2D" uid="uid://cwrhpd2b5eurs" path="res://Assets/tilesheets/cave tilesheet v1_1-1.png" id="7_haoku"]
+[ext_resource type="Texture2D" uid="uid://bjcnwuxsou5ch" path="res://Assets/tilesheets/shopkeep.png" id="7_yyc0c"]
 
 [sub_resource type="Gradient" id="Gradient_c8cec"]
 offsets = PackedFloat32Array(0, 0.518595, 1)
@@ -138,6 +139,17 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ws04m"]
 size = Vector2(41, 96)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ec16s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_yyc0c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_jt2v3"]
 animations = [{
 "frames": [],
@@ -168,7 +180,6 @@ collision_layer = 2049
 collision_mask = 2049
 
 [node name="transition" type="Sprite2D" parent="Player"]
-visible = false
 self_modulate = Color(0, 0, 0, 1)
 z_index = 5
 z_as_relative = false
@@ -273,6 +284,13 @@ disabled = true
 [node name="shopkeeper" type="Node2D" parent="."]
 script = ExtResource("6_2gcj3")
 
+[node name="hiBitKeep" type="AnimatedSprite2D" parent="shopkeeper"]
+z_index = 4
+position = Vector2(35, 287)
+scale = Vector2(0.511553, 0.503198)
+sprite_frames = SubResource("SpriteFrames_ec16s")
+autoplay = "default"
+
 [node name="8bitKeep" type="AnimatedSprite2D" parent="shopkeeper"]
 texture_filter = 1
 position = Vector2(45.5, -2.5)
@@ -286,3 +304,6 @@ animation = &"new_animation"
 position = Vector2(41, -5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_prhv0")
+
+[connection signal="body_entered" from="shopkeeper/player detect" to="shopkeeper" method="_on_player_detect_body_entered"]
+[connection signal="body_exited" from="shopkeeper/player detect" to="shopkeeper" method="_on_player_detect_body_exited"]

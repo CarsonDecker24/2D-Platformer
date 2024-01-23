@@ -81,6 +81,7 @@ scale = Vector2(14.5208, 15.1296)
 [node name="music" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(559, 315)
 stream = ExtResource("2_rhati")
+volume_db = 9.286
 panning_strength = 1.5
 
 [node name="background" type="Sprite2D" parent="."]
