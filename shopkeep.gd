@@ -11,13 +11,14 @@ var transitionSpeed = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.action_press("move_right")
+	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if sceneStart==true and sceneStartWalkTime>0:
+	
+	if sceneStart==true and sceneStartWalkTime>0 and transitState=="hidden":
 		Input.action_press("move_right")
 		sceneStartWalkTime-=delta
 	elif sceneStart==true and sceneStartWalkTime<=0 and sceneStartWaitTime==-999:
@@ -44,6 +45,7 @@ func _process(delta):
 		transitionSpeed=0
 		transitState="hidden"
 	
+
 	
 	pass
 

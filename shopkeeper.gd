@@ -15,21 +15,23 @@ func _process(delta):
 	if playerInside==true and not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")) and menuSpeed==0:
 		playerIn=true
 		changing=false
+	
 	elif playerInside==true and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")) and menuSpeed==0:
 		playerIn=false
 		changing=false
 		print("no")
+		
 	
 	if playerIn==true:
 		if menuSpeed<14 and changing == false:
 			menuSpeed+=1
 		
-		if menuTotalMove>200:
+		if menuTotalMove>255:
 			changing=true
 		if changing == true and menuSpeed>0:
 			menuSpeed-=1
 		menuTotalMove+=menuSpeed
-		$hiBitKeep.position.y-=menuSpeed
+		$shopInterface.position.y-=menuSpeed
 
 	if playerIn==false:
 		if menuSpeed<14 and changing == false:
@@ -39,7 +41,7 @@ func _process(delta):
 		if changing == true and menuSpeed>0:
 			menuSpeed-=1
 		menuTotalMove-=menuSpeed
-		$hiBitKeep.position.y+=menuSpeed
+		$shopInterface.position.y+=menuSpeed
 	
 	pass
 
