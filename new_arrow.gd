@@ -7,7 +7,7 @@ var type: String
 var player: Node
 var id
 var moving = true
-const GRAVITY = 5
+const GRAVITY = .1
 var arrowPath = preload("res://new_arrow.tscn")
 @onready var ray = get_node("RayCast2D")
 var on_enemy = false
@@ -92,7 +92,7 @@ func _process(delta):
 	
 func _update_pos(delta):
 	position += vel
-	vel.y += GRAVITY * delta
+	vel.y += GRAVITY
 	ray.target_position = vel
 	if not hideNextFrame:
 		_check_ray()
