@@ -162,7 +162,6 @@ func _idle_state(delta):
 			distanceToLedge=abs(global_position.x-ledgePosition.x)
 			
 			if (distanceToLedge<14 and groundCheck[1]-2>feetPos.y and turnTest==false and is_on_floor()):
-					print("turn around at no possible jump")
 					
 					turnTest=true
 					if $dummyPlayer.flip_h==true:
@@ -192,7 +191,6 @@ func _idle_state(delta):
 			if get_node("RayDown").get_collision_point().x==get_node("RayUp").get_collision_point().x and turnTest==false:
 				_turn_around()
 				turnTest=true
-				print("apparently they did, actually")
 			
 		#if the behavior time runs out, switch behavior
 		if turnTest==true and idleBehaviorTime<=0:
@@ -235,7 +233,6 @@ func _player_spotted(delta):
 		
 		#loose track of player
 		if player_distance>300:
-			print("over 300")
 			player_spotted=false
 			state="neutral"
 		
@@ -255,7 +252,6 @@ func _player_spotted(delta):
 			distanceToLedge=abs(global_position.x-ledgePosition.x)
 			
 			if distanceToLedge<13 and groundCheck[1]-2>feetPos.y:
-					print("there is no platform")
 					player_distance=90
 			elif distanceToLedge<13 and groundCheck[1]-2<feetPos.y:
 				if jumpInstance==false and player_distance>150 and is_on_floor():
@@ -406,14 +402,11 @@ func _wizardAim():
 
 func _lower_health(hp_reduction: int):
 	hp -= hp_reduction
-	print("Remaining HP: " + str(hp))
 	if (hp <= 0):
-		print("Died!")
 		is_dead = true
 		deathTimer=.7
 	_hit_animation()
 	_update_healthbar()
-	print("it is ", onFire==true, " that i am on fire.")
 
 
 #Deal damage, requires arrow type
@@ -442,12 +435,9 @@ func _damage(type: String, damage: int):
 		hp -= damage
 		meleconvert=damage
 		meleCrit+=meleconvert*.8
-		print("pass")
 	else:
 		hp -= damage
-	print("Remaining HP: " + str(hp))
 	if (hp <= 0):
-		print("Died!")
 		is_dead = true
 		deathTimer=.7
 		
@@ -545,10 +535,8 @@ func _turn_rays():
 func _turn_around():
 	if $dummyPlayer.flip_h==true:
 		$dummyPlayer.flip_h=false
-		print("this should run second")
 	else:
 		$dummyPlayer.flip_h=true
-		print("this should run first")
 	#print("player side right:",player_side_right)
 	if $dummyPlayer.flip_h==false:
 		get_node("RayMid").target_position.x=210

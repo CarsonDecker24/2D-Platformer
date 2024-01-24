@@ -38,11 +38,9 @@ func _on_body_entered(body):
 	if body.is_in_group("Arrow"):
 		if body.type == "Ice":
 			get_node("StaticBody2D/CollisionShape2D").set_deferred("disabled", false)
-			print("did that")
 			_freeze()
 		if body.type=="Fire":
 			get_node("StaticBody2D/CollisionShape2D").set_deferred("disabled", true)
-			print("did that")
 			_thaw()
 
 func _freeze():
@@ -68,7 +66,6 @@ func _on_area_2d_area_entered(area):
 	if area.is_in_group("Arrow"):
 		if area.type == "Ice":
 			get_node("StaticBody2D/CollisionShape2D").set_deferred("disabled", false)
-			print("did that")
 			_freeze()
 			area.moving = false
 			area.hideNextFrame = true
@@ -77,7 +74,6 @@ func _on_area_2d_area_entered(area):
 			area.particle.emitting=false
 		if area.type=="Fire":
 			get_node("StaticBody2D/CollisionShape2D").set_deferred("disabled", true)
-			print("did that")
 			_thaw()
 			area.moving = false
 			area.hideNextFrame = true

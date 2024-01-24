@@ -9,7 +9,7 @@ const arrowPath = preload("res://new_arrow.tscn")
 const FIRECOOLDOWN = .15#.4
 
 var FRICTION = 25.0
-var AIR_FRICTION = 15.0
+var AIR_FRICTION = 10.0
 var direction
 var pivot
 var weapon_sprite
@@ -276,7 +276,7 @@ func _walljump():
 		if wall_sliding:
 			velocity.y = JUMP_VELOCITY*.85
 			velocity.x += -facing*SPEED*1.2
-			wallJumpNerf=.6 
+			wallJumpNerf=.6
 			get_node("PlayerBodyAnimation")._quickturn()
 		else:
 			velocity.y = JUMP_VELOCITY*.85
@@ -354,7 +354,7 @@ func _shoot_check(delta):
 		fire_state= "quick"
 		
 		#run the timer down
-		fire_cooldown-=delta*1.6
+		fire_cooldown-=delta*.7
 		
 		#fire
 		if fire_cooldown <=0:

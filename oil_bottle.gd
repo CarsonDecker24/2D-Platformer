@@ -15,7 +15,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if get_node(get_meta("attachment")) == null:
-		print("poof")
 		falling = true
 
 	if falling:
@@ -39,9 +38,7 @@ func _explode():
 func _on_bottle_area_body_entered(body):
 	if falling:
 		exploding=true
-		print("sploded")
 
 func _on_explosion_hitbox_body_entered(body):
 	if body.is_in_group("Enemy") or body.is_in_group("Player"):
 		body.oiled = true
-	print("OILED")

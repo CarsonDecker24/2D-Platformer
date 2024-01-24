@@ -251,7 +251,6 @@ func _sliding_low():
 		play_backwards("slide")
 		set_frame_and_progress(10,0.00)
 		current="windupRightWalk"
-		print("what")
 	_on_slide_finished()
 
 
@@ -401,7 +400,6 @@ func _stepSound():
 	$"../audioPlayers/step1".pitch_scale=randomStep
 	$"../audioPlayers/step2".pitch_scale=randomStep
 	$"../audioPlayers/step3".pitch_scale=randomStep
-	print("step")
 	pass
 
 

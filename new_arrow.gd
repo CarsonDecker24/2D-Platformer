@@ -141,7 +141,6 @@ func _on_body_entered(body):
 		particle.emitting=false
 		
 	if body.is_in_group("Enemy"):
-		print("Hit Enemy")
 		body._damage(type, damage)
 		current_attached_body = body
 		on_enemy = true
