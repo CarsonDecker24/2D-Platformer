@@ -21,13 +21,15 @@ var hideNextFrame = false
 var remainingBounces
 var damage
 var level
+var bulletTime
 
-func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node):
+func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node, bT):
 	id = aID
 	type = aType
 	vel = aVel
 	angle = aAngle
 	player = aPlayer
+	bulletTime = bT
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

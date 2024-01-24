@@ -6,7 +6,7 @@ const ACCEL = 25.0
 
 const DEFAULTARROWSPEED = 1.1
 const arrowPath = preload("res://new_arrow.tscn")
-const FIRECOOLDOWN = .4
+const FIRECOOLDOWN = .15#.4
 
 var FRICTION = 25.0
 var AIR_FRICTION = 15.0
@@ -50,6 +50,8 @@ var hudSlow = false
 var collect = false
 var shift_used = false
 var meleCollideArray
+var inBulletTime = false
+var bulletTimeLeft = .5
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -63,6 +65,8 @@ func _ready():
 	#GrapplePivot = get_node("PivotHoldingArm/HoldingArmAnimation/GrappleRope")
 	weapon_sprite = get_node("PivotHoldingArm/HoldingArmAnimation")
 	direction = 0
+	Engine.time_scale = 1
+	inBulletTime = false
 	_refreshArrowHud()
 
 func _process(delta):
@@ -110,6 +114,21 @@ func _process(delta):
 		
 	else:
 		$"slide particles".emitting=false
+	
+	if not inBulletTime:
+		bulletTimeLeft += delta * .5
+	else:
+		bulletTimeLeft -= delta
+		if bulletTimeLeft <= 0:
+			bulletTimeLeft = -1
+	
+	if Input.is_action_just_pressed("space") and not bulletTimeLeft <= 0:
+		Engine.time_scale = .3
+		inBulletTime = true
+	
+	if Input.is_action_just_released("space") or bulletTimeLeft <= 0:
+		Engine.time_scale = 1
+		inBulletTime = false
 	
 	if Input.is_action_just_pressed("i") and hudUp == "isDown":
 		hudUp = "up"
@@ -371,7 +390,7 @@ func _shoot(delta):
 	#Creates an instance of the arrow scene, sets inital rotation, and sets velocity to shoot at mouse
 	var arrow = arrowPath.instantiate()
 	#arrow._initialize_arrow(slots[arrow_hud_slot - 1], arrow_count, charge_amount, pivot.rotation_degrees, self)
-	arrow._initialize_arrow(arrow_count, slots[arrow_hud_slot - 1], Vector2(500*charge_amount*delta,0).rotated(pivot.rotation), pivot.rotation, self)
+	arrow._initialize_arrow(arrow_count, slots[arrow_hud_slot - 1], Vector2(500*charge_amount*delta,0).rotated(pivot.rotation), pivot.rotation, self, inBulletTime)
 	arrow_count += 1
 	add_sibling(arrow)
 	arrow.position = get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
