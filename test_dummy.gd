@@ -441,7 +441,7 @@ func _damage(type: String, damage: int):
 	elif type == "Electricity":
 		hp -= damage
 		meleconvert=damage
-		meleCrit+=meleconvert*.6
+		meleCrit+=meleconvert*.8
 		print("pass")
 	else:
 		hp -= damage

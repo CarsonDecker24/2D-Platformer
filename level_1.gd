@@ -119,5 +119,4 @@ func _on_scene_exit_trigger_body_entered(body):
 
 
 func _on_music_finished():
-	$Node/music.play()
 	pass # Replace with function body.
