@@ -391,6 +391,7 @@ func _shoot(delta):
 	var arrow = arrowPath.instantiate()
 	#arrow._initialize_arrow(slots[arrow_hud_slot - 1], arrow_count, charge_amount, pivot.rotation_degrees, self)
 	arrow._initialize_arrow(arrow_count, slots[arrow_hud_slot - 1], Vector2(500*charge_amount*delta,0).rotated(pivot.rotation), pivot.rotation, self, inBulletTime)
+	print(delta)
 	arrow_count += 1
 	add_sibling(arrow)
 	arrow.position = get_node("PivotHoldingArm/HoldingArmAnimation/ArrowSpawn").global_position
