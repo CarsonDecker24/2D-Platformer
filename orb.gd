@@ -29,7 +29,7 @@ func _process(delta):
 		else:
 			vel.x = move_toward(vel.x, -speed.rotated(_get_angle_to_player()).x, 3 * delta)
 			vel.y = move_toward(vel.y, -speed.rotated(_get_angle_to_player()).y, 3 * delta)
-	position += vel
+	position += vel * delta
 	
 	if marked_for_disappear==true:
 		disappear_timer-=delta

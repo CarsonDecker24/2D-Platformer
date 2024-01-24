@@ -499,7 +499,7 @@ func _shoot_orb(delta):
 	
 	if wandSpin<=0 and bouttaShoot==true:
 		var orb = orbPath.instantiate()
-		orb._setup(Vector2(200*delta,0).rotated(_get_angle_to_player()), player, get_meta("homing"),player_side_right)
+		orb._setup(Vector2(200,0).rotated(_get_angle_to_player()), player, get_meta("homing"),player_side_right)
 		add_sibling(orb)
 		orb.position = $Wand.global_position
 		bouttaShoot=false

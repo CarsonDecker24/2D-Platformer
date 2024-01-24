@@ -7,7 +7,7 @@ var type: String
 var player: Node
 var id
 var moving = true
-const GRAVITY = .1
+const GRAVITY = 250
 var arrowPath = preload("res://new_arrow.tscn")
 @onready var ray = get_node("RayCast2D")
 var on_enemy = false
@@ -91,9 +91,9 @@ func _process(delta):
 			get_node("AnimatedSprite2D").set_modulate(Color(1, 1, 1, 0))
 	
 func _update_pos(delta):
-	position += vel
-	vel.y += GRAVITY
-	ray.target_position = vel
+	position += vel * delta
+	vel.y += GRAVITY * delta
+	ray.target_position = vel * delta
 	if not hideNextFrame:
 		_check_ray()
 	rotation = atan2(vel.y,vel.x)
