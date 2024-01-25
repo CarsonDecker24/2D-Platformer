@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 150
+const SPEED = 200
 const JUMP_VELOCITY = -300.0
 const ACCEL = 25.0
 
@@ -210,7 +210,7 @@ func _slide(dir):
 	$PlayerHitbox.rotation=90
 	$PlayerHitbox.scale = Vector2(.2,1)
 	if sliding==false:
-		velocity.x=dir*SPEED*4
+		velocity.x=dir*SPEED*2
 	sliding=true
 	dashTime=.1
 	_refreshArrowHud()
