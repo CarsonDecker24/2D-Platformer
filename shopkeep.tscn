@@ -300,7 +300,6 @@ texture = ExtResource("7_x6rgq")
 z_index = 7
 z_as_relative = false
 position = Vector2(-1.95483, 0)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_ec16s")
 autoplay = "default"
 
