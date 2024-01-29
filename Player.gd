@@ -159,7 +159,7 @@ func _physics_process(delta):
 		max_fall_speed = 1000
 		if wall_sliding:
 			wall_sliding = false
-			wallJumpCoyote = .15
+			wallJumpCoyote = .2
 	
 	if not wall_sliding:
 		wallJumpCoyote -= delta
@@ -273,19 +273,24 @@ func _wallslide(delta):
 func _walljump():
 	#Wall jump
 	if sliding==false:
-		if wall_sliding:
+		if wall_sliding or direction == 0:
 			velocity.y = JUMP_VELOCITY*.85
 			velocity.x += -facing*SPEED*1.2
-			wallJumpNerf=.6
+			facing *= -1
+			wallJumpNerf=.25
 			get_node("PlayerBodyAnimation")._quickturn()
+			wall_sliding = false
+			wallJumpCoyote = 0
 		else:
 			velocity.y = JUMP_VELOCITY*.85
 			velocity.x += facing*SPEED*1.2
-			wallJumpNerf=.6 
+			facing *= -1
+			wallJumpNerf=.25
 			get_node("PlayerBodyAnimation")._quickturn()
+			wall_sliding = false
+			wallJumpCoyote = 0
 
 func _aim(delta):
-	
 	if parryTime>0:
 			pivot.rotation = get_angle_to(get_global_mouse_position())-parryTime*15+1
 	#If the player is aiming.
