@@ -10,3 +10,10 @@ func _ready():
 func _process(delta):
 	
 	pass
+
+
+func _on_support_snap_area_area_entered(area):
+	if area.is_in_group("Arrow"):
+		$stickSupport.queue_free()
+	pass # Replace with function body.
+
