@@ -23,6 +23,8 @@ var bulletTime
 var EnemyList=[]
 var enemyListCounter=0
 var searchHolder
+var chainAngle
+var chainLength
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,7 +42,7 @@ func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node,
 func _process(delta):
 	#if moving:
 		#_update_pos(delta)
-		
+	_chain()
 	
 	print(EnemyList)
 	
@@ -77,4 +79,12 @@ func _on_big_area_body_exited(body):
 		EnemyList.remove_at(searchHolder)
 		enemyListCounter-=1
 
+func _chain():
+	if EnemyList.size() >=1:
+		$chain1.size.x= sqrt((EnemyList[0].global_position.x-global_position.x)**2 + (EnemyList[0].global_position.y-global_position.y)**2)
+		$chain1.rotation=get_angle_to(EnemyList[0].global_position)
+	if EnemyList.size()>=2:
+		$chain2.set_global_position(EnemyList[0].global_position)
+		$chain2.size.x= sqrt((EnemyList[1].global_position.x-EnemyList[0].global_position.x)**2 + (EnemyList[1].global_position.y-EnemyList[0].global_position.y)**2)
+		$chain2.rotation=atan2(EnemyList[1].global_position.y - EnemyList[0].global_position.y, EnemyList[1].global_position.x - EnemyList[0].global_position.x)
 	pass # Replace with function body.
