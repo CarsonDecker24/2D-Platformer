@@ -174,8 +174,8 @@ func _physics_process(delta):
 		wallJumpNerf-=delta
 	
 	if Input.is_action_just_pressed("shift"):
-		if shiftSlot=="Air" and shift_cooldown<=0 and get_node("Camera/shiftBar").is_playing()==false:
-			_dash(get_local_mouse_position().normalized(),-500)
+		if shiftSlot=="Air" and shift_cooldown<=0 and get_node("Camera/shiftBar").is_playing()==false and not sliding:
+			_dash(get_local_mouse_position().normalized(),500)
 			get_node("Camera/shiftBar").play("refill")
 			$audioPlayers/bowShot.play()
 	
@@ -311,17 +311,16 @@ func _aim(delta):
 		#Flip sprite to always be facing upward
 		if (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and not weapon_flipped and bowTurning==true:
 			weapon_sprite.scale.y *= -1
-			weapon_flipped = true
+			weapon_flipped = false
 			
 		elif not (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and weapon_flipped and bowTurning==true:
 			weapon_sprite.scale.y *= -1
-			weapon_flipped = false
+			weapon_flipped = true
 	elif shiftSlot == "Air" and shift_use_time >= 0:
-		pivot.rotation = get_angle_to(get_global_mouse_position())
+		pivot.rotation = get_angle_to(get_global_mouse_position()) - PI
 		if (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and not weapon_flipped and bowTurning==true:
 			weapon_sprite.scale.y *= -1
 			weapon_flipped = true
-			
 		elif not (pivot.rotation_degrees > 90 or pivot.rotation_degrees < -90) and weapon_flipped and bowTurning==true:
 			weapon_sprite.scale.y *= -1
 			weapon_flipped = false
