@@ -525,6 +525,9 @@ shape = SubResource("RectangleShape2D_w7op6")
 [node name="battery" parent="." instance=ExtResource("24_c7w0o")]
 position = Vector2(543, 76)
 
+[node name="TestDummy" parent="." instance=ExtResource("4_kqark")]
+position = Vector2(617, 76)
+
 [connection signal="finished" from="Player/music" to="." method="_on_music_finished"]
 [connection signal="body_entered" from="doorController" to="ElectricDoor" method="_on_door_controller_body_entered"]
 [connection signal="body_entered" from="SceneExitTrigger" to="." method="_on_scene_exit_trigger_body_entered"]
