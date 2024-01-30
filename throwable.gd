@@ -43,7 +43,7 @@ func _process(delta):
 	#if moving:
 		#_update_pos(delta)
 	_chain()
-	
+	EnemyList.sort_custom(_sort_by_distance)
 	print(EnemyList)
 	
 	pass
@@ -91,6 +91,6 @@ func _chain():
 		$chain2.rotation=atan2(EnemyList[1].global_position.y - EnemyList[0].global_position.y, EnemyList[1].global_position.x - EnemyList[0].global_position.x)
 	if EnemyList.size()>=3:
 		$chain3.set_global_position(EnemyList[1].global_position)
-		$chain2.size.x= sqrt((EnemyList[2].global_position.x-EnemyList[1].global_position.x)**2 + (EnemyList[2].global_position.y-EnemyList[1].global_position.y)**2)
-		$chain2.rotation=atan2(EnemyList[2].global_position.y - EnemyList[1].global_position.y, EnemyList[2].global_position.x - EnemyList[1].global_position.x)
+		$chain3.size.x= sqrt((EnemyList[2].global_position.x-EnemyList[1].global_position.x)**2 + (EnemyList[2].global_position.y-EnemyList[1].global_position.y)**2)
+		$chain3.rotation=atan2(EnemyList[2].global_position.y - EnemyList[1].global_position.y, EnemyList[2].global_position.x - EnemyList[1].global_position.x)
 	pass # Replace with function body.
