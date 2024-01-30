@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcsgvtq605ovn"]
+
+[ext_resource type="Texture2D" uid="uid://do3m018h26vf7" path="res://Assets/player sprites/arms n bows/projectileConsumables/battery.png" id="1_4bixv"]
+[ext_resource type="Script" path="res://battery.gd" id="1_xjc2u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5kcn0"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vpur6"]
+radius = 47.0
+
+[node name="battery" type="Area2D"]
+script = ExtResource("1_xjc2u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5kcn0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_4bixv")
+
+[node name="bigArea" type="Area2D" parent="."]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bigArea"]
+shape = SubResource("CircleShape2D_vpur6")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[connection signal="body_entered" from="bigArea" to="." method="_on_big_area_body_entered"]
+[connection signal="body_exited" from="bigArea" to="." method="_on_big_area_body_exited"]
