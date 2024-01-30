@@ -49,9 +49,9 @@ var hudUp = "isUp"
 var hudSlow = false
 var collect = false
 var shift_used = false
-var meleCollideArray
+var meleeCollideArray
 var inBulletTime = false
-var bulletTimeLeft = .5
+var bulletTimeleft = .5
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -116,17 +116,17 @@ func _process(delta):
 		$"slide particles".emitting=false
 	
 	if not inBulletTime:
-		bulletTimeLeft += delta * .5
+		bulletTimeleft += delta * .5
 	else:
-		bulletTimeLeft -= delta
-		if bulletTimeLeft <= 0:
-			bulletTimeLeft = -1
+		bulletTimeleft -= delta
+		if bulletTimeleft <= 0:
+			bulletTimeleft = -1
 	
-	if Input.is_action_just_pressed("space") and not bulletTimeLeft <= 0:
+	if Input.is_action_just_pressed("space") and not bulletTimeleft <= 0:
 		Engine.time_scale = .3
 		inBulletTime = true
 	
-	if Input.is_action_just_released("space") or bulletTimeLeft <= 0:
+	if Input.is_action_just_released("space") or bulletTimeleft <= 0:
 		Engine.time_scale = 1
 		inBulletTime = false
 	
@@ -159,7 +159,7 @@ func _physics_process(delta):
 		max_fall_speed = 1000
 		if wall_sliding:
 			wall_sliding = false
-			wallJumpCoyote = .2
+			wallJumpCoyote = .1
 	
 	if not wall_sliding:
 		wallJumpCoyote -= delta
@@ -188,12 +188,12 @@ func _physics_process(delta):
 			else:
 				get_node("parryBox").position.x = 2
 			get_node("Camera/eBar").play("refill")
-			#make the parry act as a mele
+			#make the parry act as a melee
 			if $parryBox.has_overlapping_bodies():
-				meleCollideArray=$parryBox.get_overlapping_bodies()
-				for x in meleCollideArray:
+				meleeCollideArray=$parryBox.get_overlapping_bodies()
+				for x in meleeCollideArray:
 					if x.is_in_group("Enemy"):
-						x._meleHit()
+						x._meleeHit()
 						$Camera/eBar.play("full")
 			
 	if parrying==true:
