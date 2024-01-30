@@ -70,8 +70,10 @@ func _on_big_area_body_entered(body):
 	if body.is_in_group("Enemy"):
 		EnemyList.append(body)
 		enemyListCounter+=1
-	pass # Replace with function body.
+	EnemyList.sort_custom(_sort_by_distance)
 
+func _sort_by_distance(a, b):
+	return abs(a.global_position - global_position) < abs(b.global_position - global_position)
 
 func _on_big_area_body_exited(body):
 	if body.is_in_group("Enemy"):

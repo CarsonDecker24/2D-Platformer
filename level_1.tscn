@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dpnul7ws48lev" path="res://fire.tscn" id="16_jta8k"]
 [ext_resource type="PackedScene" uid="uid://6oqatpaamjm4" path="res://electric_bridge.tscn" id="18_smkcr"]
 [ext_resource type="PackedScene" uid="uid://503jkqgjxdem" path="res://tile_map_cave.tscn" id="22_k5fwx"]
-[ext_resource type="PackedScene" uid="uid://bcsgvtq605ovn" path="res://battery.tscn" id="24_c7w0o"]
+[ext_resource type="PackedScene" path="res://battery.tscn" id="24_c7w0o"]
 [ext_resource type="Texture2D" uid="uid://cygfy0tqdmsff" path="res://Assets/environmental stuff/portal line.png" id="25_w8bxm"]
 
 [sub_resource type="Gradient" id="Gradient_i8vud"]
