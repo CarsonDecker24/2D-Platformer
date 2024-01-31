@@ -55,19 +55,23 @@ script = ExtResource("1_ncn2h")
 shape = SubResource("CircleShape2D_5kcn0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.921569)
 sprite_frames = SubResource("SpriteFrames_a5j2n")
-animation = &"waterBaloon"
+animation = &"battery"
+autoplay = "battery"
 
 [node name="bigArea" type="Area2D" parent="."]
-collision_layer = 513
-collision_mask = 513
+collision_layer = 512
+collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bigArea"]
 shape = SubResource("CircleShape2D_vpur6")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(6, 0)
 
 [node name="chain1" type="TextureRect" parent="."]
+visible = false
 texture_filter = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -81,6 +85,7 @@ expand_mode = 2
 stretch_mode = 1
 
 [node name="chain2" type="TextureRect" parent="."]
+visible = false
 texture_filter = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -94,6 +99,7 @@ expand_mode = 2
 stretch_mode = 1
 
 [node name="chain3" type="TextureRect" parent="."]
+visible = false
 texture_filter = 1
 anchors_preset = 4
 anchor_top = 0.5
