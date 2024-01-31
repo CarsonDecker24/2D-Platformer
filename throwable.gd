@@ -84,6 +84,7 @@ func _on_big_area_body_entered(body):
 	if body.is_in_group("Enemy"):
 		EnemyList.append(body)
 		enemyListCounter+=1
+		body.inBatteryList=true
 		EnemyList.sort_custom(_sort_by_distance)
 
 func _sort_by_distance(a, b):

@@ -226,7 +226,7 @@ position = Vector2(1184, -239)
 metadata/Frozen = false
 
 [node name="Water" parent="." instance=ExtResource("5_tlohi")]
-position = Vector2(849.672, -135.354)
+position = Vector2(888, 1148)
 metadata/Frozen = false
 
 [node name="Player" parent="." instance=ExtResource("3_410nd")]
