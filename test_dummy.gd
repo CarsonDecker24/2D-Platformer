@@ -1,6 +1,6 @@
 extends CharacterBody2D
 var player
-var hp = 60
+var hp = 2
 @onready var maxHp= hp
 var is_dead = false
 var state = "neutral"
@@ -53,6 +53,8 @@ var meleRecieveComboTime=0
 var meleComboIteration=0
 var meleCrit=0.00
 var meleconvert=0.00
+var inBatteryList=false
+var dieInFive=false
 const ThingyPath = preload("res://thingyFixed.tscn")
 
 func _ready():
@@ -73,7 +75,11 @@ func _process(delta):
 	if is_dead==true:
 		player_spotted=false
 		if deathTimer<0:
-			queue_free()
+			if inBatteryList==false:
+				queue_free()
+			else:
+				position.y=-400
+				deathTimer=2
 		if deathToss==false:
 			velocity.y=-300
 			$CollisionShape2D.disabled=true
@@ -139,6 +145,8 @@ func _process(delta):
 		meleRecieveComboTime-=delta
 	else:
 		meleComboIteration=0
+	
+	
 	
 
 
@@ -413,30 +421,28 @@ func _lower_health(hp_reduction: int):
 func _damage(type: String, damage: int):
 	meleconvert=0.00
 	if type == "Ice":
-		hp -= damage
-		meleconvert=damage
-		meleCrit+=meleconvert*.4
+		hp -= 1
+		
+		
 		debuff_cooldown=3
 		speed_mod=.5
 		fire_rate_mod=.7
 		get_node("ice_particles").set_deferred("emitting", true)
 	elif type == "Fire":
-		hp -= damage 
-		meleconvert=damage
-		meleCrit+=meleconvert*.4
+		hp -= 1
+		
+		
 		if oiled==true:
 			hp-=300
 		oiled = false
 		onFire=true
 		onFireTime=4
 		onfireTickClock=onFireTickRate
-		onFireDamage=2
+		onFireDamage=0
 	elif type == "Electricity":
-		hp -= damage
-		meleconvert=damage
-		meleCrit+=meleconvert*.8
+		hp -= 1
 	else:
-		hp -= damage
+		hp -= 1
 	if (hp <= 0):
 		is_dead = true
 		deathTimer=.7
@@ -566,7 +572,7 @@ func _gravity(delta):
 	velocity.y += gravity * delta
 	pass
 
-func _meleHit():
+func _meleeHit():
 	if meleRecieveComboTime>0:
 		meleComboIteration+=1
 	meleRecieveComboTime=.5
@@ -583,8 +589,8 @@ func _meleHit():
 		velocity.x=160
 		velocity.y=-180
 	bouttaShoot=false
-	_lower_health(5)
-	_lower_health(meleCrit)
+	_lower_health(1)
+
 	meleCrit=0
 	if player_spotted==false:
 		_turn_around()
