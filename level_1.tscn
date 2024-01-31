@@ -231,12 +231,12 @@ metadata/Frozen = false
 
 [node name="Player" parent="." instance=ExtResource("3_410nd")]
 texture_filter = 1
-position = Vector2(-207.028, -64.315)
+position = Vector2(460, -73)
 collision_layer = 2049
 collision_mask = 2049
 
 [node name="music" type="AudioStreamPlayer2D" parent="Player"]
-position = Vector2(1.403, -2.31)
+position = Vector2(2.02802, -4.685)
 stream = ExtResource("8_mhfut")
 volume_db = 2.622
 autoplay = true
