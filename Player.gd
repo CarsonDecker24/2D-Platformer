@@ -5,7 +5,8 @@ const JUMP_VELOCITY = -300.0
 const ACCEL = 25.0
 
 const DEFAULTARROWSPEED = 1.1
-const arrowPath = preload("res://new_arrow.tscn")
+var arrowPath = load("res://new_arrow.tscn")
+var throwablePath = load("res://throwable.tscn")
 const FIRECOOLDOWN = .15#.4
 
 var FRICTION = 25.0
@@ -26,6 +27,7 @@ var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
 var slots = ["Fire", "Electricity", "Ice"]
+var throwable = ""
 var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot
@@ -410,6 +412,10 @@ func _shoot(delta):
 		fire_state = "aim"
 		animPlayer._justShot()
 	#Resets the firestate and the cooldown timer
+
+func _throw():
+	var throwable = throwablePath.instantiate()
+	throwable._initialize_arrow(arrow_count, slots[arrow_hud_slot - 1], Vector2(500*charge_amount,0).rotated(pivot.rotation), pivot.rotation, self, inBulletTime)
 
 func _arrow_hud():
 	if Input.is_action_just_pressed("mouse_wheel_up"):
