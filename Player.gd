@@ -124,6 +124,11 @@ func _process(delta):
 		if bulletTimeleft <= 0:
 			bulletTimeleft = -1
 	
+	if Input.is_action_just_pressed("q") and throwable == "":
+		_pick_up_throwable()
+	elif Input.is_action_just_pressed("q"):
+		_throw()
+	
 	if Input.is_action_just_pressed("space") and not bulletTimeleft <= 0:
 		Engine.time_scale = .3
 		inBulletTime = true
@@ -137,7 +142,7 @@ func _process(delta):
 	elif Input.is_action_just_pressed("i") and hudUp == "isUp":
 		hudUp = "down"
 	_hudUp()
-	
+
 func _physics_process(delta):
 	#Lateral Movement
 	if direction != 0 and sliding==false:
@@ -414,8 +419,9 @@ func _shoot(delta):
 	#Resets the firestate and the cooldown timer
 
 func _throw():
-	var throwable = throwablePath.instantiate()
-	throwable._initialize_arrow(arrow_count, slots[arrow_hud_slot - 1], Vector2(500*charge_amount,0).rotated(pivot.rotation), pivot.rotation, self, inBulletTime)
+	var throwableInstance = throwablePath.instantiate()
+	throwableInstance._initialize_arrow(throwable, Vector2(10,0).rotated(pivot.get_angle_to(get_global_mouse_position().normalized())), pivot.get_angle_to(get_global_mouse_position().normalized()), self, inBulletTime)
+	throwable = ""
 
 func _arrow_hud():
 	if Input.is_action_just_pressed("mouse_wheel_up"):
@@ -475,7 +481,10 @@ func _armPos(armX,armY):
 	if fire_state != "aim" and fire_state != "quick":
 		get_node("armPosition").position.x=armX
 		get_node("armPosition").position.y=armY
-	
+
+func _pick_up_throwable():
+	Global.pick_up.emit()
+
 func _refreshArrowHud():
 	if slots[0] == "Accuracy":
 		get_node("Camera/SelectedArrowHud/Slot_1").play("Accuracy")

@@ -30,13 +30,13 @@ var batterySpin=0
 var fading=false
 var opacity=1
 var thrown=false
+var near_player = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	pass # Replace with function body.
-func _initialize_arrow(aID, aType: String, aVel: Vector2, aAngle, aPlayer: Node, bT):
-	id = aID
+	Global.pick_up.connect(_on_pick_up)
+
+func _initialize_arrow(aType: String, aVel: Vector2, aAngle, aPlayer: Node, bT):
 	type = aType
 	vel = aVel
 	angle = aAngle
@@ -128,7 +128,6 @@ func _battery(delta):
 	if batteryEventCount==5:
 		$chain3.visible=false
 	pass # Replace with function body.
-	
 
 func _fading(delta):
 	$AnimatedSprite2D.self_modulate=Color(1, 1, 1, opacity)
@@ -136,3 +135,17 @@ func _fading(delta):
 		opacity-=delta*.3
 	else:
 		opacity=0
+
+func _on_pick_up():
+	if near_player:
+		player.throwable = type
+		queue_free()
+
+func _on_pick_up_area_area_entered(area):
+	if area.is_in_group("Player"):
+		near_player = true
+		player = area.get_parent()
+
+func _on_pick_up_area_area_exited(area):
+	if area.is_in_group("Player"):
+		near_player = false

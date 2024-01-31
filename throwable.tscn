@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwt452am6gsao"]
+[gd_scene load_steps=11 format=3 uid="uid://dwt452am6gsao"]
 
 [ext_resource type="Script" path="res://throwable.gd" id="1_ncn2h"]
 [ext_resource type="Texture2D" uid="uid://do3m018h26vf7" path="res://Assets/player sprites/arms n bows/projectileConsumables/battery.png" id="2_h8r3n"]
@@ -45,8 +45,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_24t2s"]
+radius = 35.3553
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpur6"]
-radius = 703.481
+radius = 168.576
 
 [node name="throwable" type="Area2D"]
 script = ExtResource("1_ncn2h")
@@ -59,6 +62,11 @@ self_modulate = Color(1, 1, 1, 0.921569)
 sprite_frames = SubResource("SpriteFrames_a5j2n")
 animation = &"battery"
 autoplay = "battery"
+
+[node name="PickUpArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea"]
+shape = SubResource("CircleShape2D_24t2s")
 
 [node name="bigArea" type="Area2D" parent="."]
 collision_layer = 512
@@ -112,5 +120,7 @@ texture = ExtResource("6_euujd")
 expand_mode = 2
 stretch_mode = 1
 
+[connection signal="area_entered" from="PickUpArea" to="." method="_on_pick_up_area_area_entered"]
+[connection signal="area_exited" from="PickUpArea" to="." method="_on_pick_up_area_area_exited"]
 [connection signal="body_entered" from="bigArea" to="." method="_on_big_area_body_entered"]
 [connection signal="body_exited" from="bigArea" to="." method="_on_big_area_body_exited"]

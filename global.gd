@@ -1,4 +1,7 @@
 extends Node
+
+signal pick_up
+
 var thingyCount
 var equipped
 var Invintory
