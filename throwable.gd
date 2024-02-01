@@ -116,6 +116,7 @@ func _battery(delta):
 		$chain1.size.x= sqrt((EnemyList[0].global_position.x-global_position.x)**2 + (EnemyList[0].global_position.y-global_position.y)**2)
 		$chain1.rotation=get_angle_to(EnemyList[0].global_position)
 		fading=true
+		EnemyList[0].is_dead=true
 	elif batteryEventCount==2: 
 		fading=true
 	
@@ -125,6 +126,7 @@ func _battery(delta):
 		$chain2.set_global_position(EnemyList[0].global_position)
 		$chain2.size.x= sqrt((EnemyList[1].global_position.x-EnemyList[0].global_position.x)**2 + (EnemyList[1].global_position.y-EnemyList[0].global_position.y)**2)
 		$chain2.rotation=atan2(EnemyList[1].global_position.y - EnemyList[0].global_position.y, EnemyList[1].global_position.x - EnemyList[0].global_position.x)
+		EnemyList[1].is_dead=true
 	elif batteryEventCount==3:
 		fading=true
 		$chain1.visible=false
@@ -135,6 +137,7 @@ func _battery(delta):
 		$chain3.set_global_position(EnemyList[1].global_position)
 		$chain3.size.x= sqrt((EnemyList[2].global_position.x-EnemyList[1].global_position.x)**2 + (EnemyList[2].global_position.y-EnemyList[1].global_position.y)**2)
 		$chain3.rotation=atan2(EnemyList[2].global_position.y - EnemyList[1].global_position.y, EnemyList[2].global_position.x - EnemyList[1].global_position.x)
+		EnemyList[2].is_dead=true
 	elif batteryEventCount==4: 
 		fading=true
 		$chain2.visible=false
