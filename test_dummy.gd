@@ -46,7 +46,7 @@ var onFireTickRate=.5
 var onfireTickClock=0
 var onFireDamage=0
 var onFire = false
-var deathTimer=0
+var deathTimer=.7
 var deathToss=false
 var supriseTime
 var meleRecieveComboTime=0
@@ -78,8 +78,10 @@ func _process(delta):
 			if inBatteryList==false:
 				queue_free()
 			else:
+				gravity=0
+				visible=false
 				position.y=-400
-				deathTimer=2
+				deathTimer=.4
 		if deathToss==false:
 			velocity.y=-300
 			$CollisionShape2D.disabled=true

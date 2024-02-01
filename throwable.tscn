@@ -49,7 +49,7 @@ animations = [{
 radius = 35.3553
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpur6"]
-radius = 168.576
+radius = 88.0511
 
 [node name="throwable" type="Area2D"]
 collision_layer = 3

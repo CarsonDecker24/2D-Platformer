@@ -24,7 +24,7 @@ var enemyListCounter=0
 var searchHolder
 var batteryShockTimer=0
 const BATTERYSHOCKSPEED=.2
-var collisionEvent="Battery"
+var collisionEvent=""
 var batteryEventCount=0
 var batterySpin=0
 var fading=false
@@ -104,7 +104,7 @@ func _battery(delta):
 	
 	if batteryEventCount>=1 and batterySpin<1.5:
 		batterySpin+=delta
-	$AnimatedSprite2D.rotation+=batterySpin*.1
+	$AnimatedSprite2D.rotation+=batterySpin*.3
 	
 	if EnemyList.size() >=1 and batteryEventCount==2:
 		$chain1.visible=true
@@ -150,8 +150,8 @@ func _battery(delta):
 
 func _fading(delta):
 	$AnimatedSprite2D.self_modulate=Color(1, 1, 1, opacity)
-	if opacity-delta*.3>0:
-		opacity-=delta*.3
+	if opacity-delta>0:
+		opacity-=delta
 	else:
 		opacity=0
 
