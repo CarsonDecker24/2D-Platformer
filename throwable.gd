@@ -42,6 +42,8 @@ func _initialize_arrow(aType: String, aVel: Vector2, aAngle, aPlayer: Node, bT):
 	angle = aAngle
 	player = aPlayer
 	bulletTime = bT
+	print(angle)
+	print(vel)
 	thrown = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -70,7 +72,6 @@ func _update_pos(delta):
 	ray.target_position = vel * delta
 	if not hideNextFrame:
 		_check_ray()
-	rotation = atan2(vel.y,vel.x)
 
 func _check_ray():
 	if ray.get_collider() != null:
