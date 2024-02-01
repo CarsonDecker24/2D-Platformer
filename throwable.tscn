@@ -16,8 +16,8 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_h8r3n")
 }],
-"loop": true,
-"name": &"battery",
+"loop": false,
+"name": &"Battery",
 "speed": 5.0
 }, {
 "frames": [{
@@ -60,8 +60,8 @@ shape = SubResource("CircleShape2D_5kcn0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.921569)
 sprite_frames = SubResource("SpriteFrames_a5j2n")
-animation = &"battery"
-autoplay = "battery"
+animation = &"Battery"
+autoplay = "Battery"
 
 [node name="PickUpArea" type="Area2D" parent="."]
 

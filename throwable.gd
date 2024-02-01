@@ -42,17 +42,19 @@ func _initialize_arrow(aType: String, aVel: Vector2, aAngle, aPlayer: Node, bT):
 	angle = aAngle
 	player = aPlayer
 	bulletTime = bT
+	thrown = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#if moving:
-	#	_update_pos(delta)
+	if thrown:
+		_update_pos(delta)
+	if type == "Battery":
+		$AnimatedSprite2D.play("Battery")
 	
 	_check_ray()
 	
 	_battery(delta)
 	EnemyList.sort_custom(_sort_by_distance)
-	print(EnemyList)
 	
 	if collisionEvent=="Battery":
 		_battery(delta)
@@ -78,7 +80,7 @@ func _check_ray():
 
 
 func _on_big_area_body_entered(body):
-	if body.is_in_group("Enemy") or body.is_in_group("Ground"):
+	if body.is_in_group("Enemy"):
 		if type == "Battery":
 			collisionEvent="Battery"
 	if body.is_in_group("Enemy"):
@@ -95,11 +97,11 @@ func _on_big_area_body_exited(body):
 		searchHolder = EnemyList.bsearch(body)
 		EnemyList.remove_at(searchHolder)
 		enemyListCounter-=1
+		body.inBatteryList=true
 
 func _battery(delta):
 	collisionEvent="Battery"
-	moving=false
-	
+	#moving=false
 	if batteryShockTimer<=0:
 		batteryEventCount+=1
 		batteryShockTimer=BATTERYSHOCKSPEED
