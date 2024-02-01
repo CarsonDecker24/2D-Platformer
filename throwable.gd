@@ -112,7 +112,7 @@ func _battery(delta):
 		$chain1.rotation=get_angle_to(EnemyList[0].global_position)
 		fading=true
 		var temp = EnemyList[0]
-		EnemyList[0].remove()
+		EnemyList.remove_at(0)
 		temp.is_dead=true
 	elif batteryEventCount==2: 
 		fading=true
