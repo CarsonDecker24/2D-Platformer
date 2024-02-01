@@ -105,7 +105,7 @@ func _battery(delta):
 	if batteryShockTimer<=0:
 		batteryEventCount+=1
 		batteryShockTimer=BATTERYSHOCKSPEED
-	batteryShockTimer-=delta*.25
+	batteryShockTimer-=delta*.8
 	
 	if batteryEventCount>=1 and batterySpin<1.5:
 		batterySpin+=delta
