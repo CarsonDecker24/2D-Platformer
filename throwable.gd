@@ -54,12 +54,10 @@ func _process(delta):
 		$AnimatedSprite2D.play("Battery")
 	
 	_check_ray()
-	
-	_battery(delta)
-	EnemyList.sort_custom(_sort_by_distance)
-	
+
 	if collisionEvent=="Battery":
 		_battery(delta)
+		EnemyList.sort_custom(_sort_by_distance)
 	
 	if fading==true:
 		_fading(delta)
@@ -76,9 +74,6 @@ func _update_pos(delta):
 func _check_ray():
 	if ray.get_collider() != null:
 		collision_point = ray.get_collision_point()
-		
-
-
 
 func _on_big_area_body_entered(body):
 	if body.is_in_group("Enemy"):
@@ -117,6 +112,7 @@ func _battery(delta):
 		$chain1.rotation=get_angle_to(EnemyList[0].global_position)
 		fading=true
 		EnemyList[0].is_dead=true
+		EnemyList[0].remove()
 	elif batteryEventCount==2: 
 		fading=true
 	
@@ -126,7 +122,8 @@ func _battery(delta):
 		$chain2.set_global_position(EnemyList[0].global_position)
 		$chain2.size.x= sqrt((EnemyList[1].global_position.x-EnemyList[0].global_position.x)**2 + (EnemyList[1].global_position.y-EnemyList[0].global_position.y)**2)
 		$chain2.rotation=atan2(EnemyList[1].global_position.y - EnemyList[0].global_position.y, EnemyList[1].global_position.x - EnemyList[0].global_position.x)
-		EnemyList[1].is_dead=true
+		EnemyList[0].is_dead=true
+		EnemyList[0].remove()
 	elif batteryEventCount==3:
 		fading=true
 		$chain1.visible=false
@@ -137,7 +134,8 @@ func _battery(delta):
 		$chain3.set_global_position(EnemyList[1].global_position)
 		$chain3.size.x= sqrt((EnemyList[2].global_position.x-EnemyList[1].global_position.x)**2 + (EnemyList[2].global_position.y-EnemyList[1].global_position.y)**2)
 		$chain3.rotation=atan2(EnemyList[2].global_position.y - EnemyList[1].global_position.y, EnemyList[2].global_position.x - EnemyList[1].global_position.x)
-		EnemyList[2].is_dead=true
+		EnemyList[0].is_dead=true
+		EnemyList[0].remove()
 	elif batteryEventCount==4: 
 		fading=true
 		$chain2.visible=false
