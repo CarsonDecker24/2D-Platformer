@@ -48,7 +48,7 @@ func _initialize_arrow(aType: String, aVel: Vector2, aAngle, aPlayer: Node, bT):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if thrown:
+	if thrown and moving==true:
 		_update_pos(delta)
 	if type == "Battery":
 		$AnimatedSprite2D.play("Battery")
@@ -102,11 +102,10 @@ func _on_big_area_body_exited(body):
 
 func _battery(delta):
 	collisionEvent="Battery"
-	#moving=false
 	if batteryShockTimer<=0:
 		batteryEventCount+=1
 		batteryShockTimer=BATTERYSHOCKSPEED
-	batteryShockTimer-=delta*.2
+	batteryShockTimer-=delta*.25
 	
 	if batteryEventCount>=1 and batterySpin<1.5:
 		batterySpin+=delta
@@ -117,20 +116,32 @@ func _battery(delta):
 		$chain1.size.x= sqrt((EnemyList[0].global_position.x-global_position.x)**2 + (EnemyList[0].global_position.y-global_position.y)**2)
 		$chain1.rotation=get_angle_to(EnemyList[0].global_position)
 		fading=true
+	elif batteryEventCount==2: 
+		fading=true
+	
 	if EnemyList.size()>=2 and batteryEventCount==3:
 		$chain2.visible=true
 		$chain1.visible=false
 		$chain2.set_global_position(EnemyList[0].global_position)
 		$chain2.size.x= sqrt((EnemyList[1].global_position.x-EnemyList[0].global_position.x)**2 + (EnemyList[1].global_position.y-EnemyList[0].global_position.y)**2)
 		$chain2.rotation=atan2(EnemyList[1].global_position.y - EnemyList[0].global_position.y, EnemyList[1].global_position.x - EnemyList[0].global_position.x)
+	elif batteryEventCount==3:
+		fading=true
+		$chain1.visible=false
+	
 	if EnemyList.size()>=3 and batteryEventCount==4:
 		$chain3.visible=true
 		$chain2.visible=false
 		$chain3.set_global_position(EnemyList[1].global_position)
 		$chain3.size.x= sqrt((EnemyList[2].global_position.x-EnemyList[1].global_position.x)**2 + (EnemyList[2].global_position.y-EnemyList[1].global_position.y)**2)
 		$chain3.rotation=atan2(EnemyList[2].global_position.y - EnemyList[1].global_position.y, EnemyList[2].global_position.x - EnemyList[1].global_position.x)
+	elif batteryEventCount==4: 
+		fading=true
+		$chain2.visible=false
 	if batteryEventCount==5:
 		$chain3.visible=false
+	if batteryEventCount==9:
+		queue_free()
 	pass # Replace with function body.
 
 func _fading(delta):
@@ -153,3 +164,17 @@ func _on_pick_up_area_area_entered(area):
 func _on_pick_up_area_area_exited(area):
 	if area.is_in_group("Player"):
 		near_player = false
+
+
+func _on_body_entered(body):
+	if body.is_in_group("Enemy") or body.is_in_group("Ground"):
+		moving=false
+		collisionEvent="Battery"
+	pass # Replace with function body
+
+
+func _on_area_entered(area):
+	if area.is_in_group("Enemy") or area.is_in_group("Ground"):
+		moving=false
+		collisionEvent="Battery"
+	pass # Replace with function body.
