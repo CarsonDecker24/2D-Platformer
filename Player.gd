@@ -420,7 +420,7 @@ func _shoot(delta):
 
 func _throw():
 	var throwableInstance = throwablePath.instantiate()
-	throwableInstance._initialize_arrow(throwable, Vector2(200,0).rotated(get_angle_to(get_global_mouse_position())), get_angle_to(get_global_mouse_position()), self, inBulletTime)
+	throwableInstance._initialize_arrow(throwable, Vector2(280,0).rotated(get_angle_to(get_global_mouse_position())), get_angle_to(get_global_mouse_position()), self, inBulletTime)
 	throwable = "Battery"
 	add_sibling(throwableInstance)
 	throwableInstance.position=$".".global_position

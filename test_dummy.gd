@@ -64,7 +64,7 @@ func _ready():
 func _physics_process(delta):
 	move_and_slide()
 func _spot_player(body):
-	if player_spotted == false:
+	if player_spotted == false and body.is_in_group("Player"):
 		player = body
 		player_spotted = true
 		target_ray.enabled = true

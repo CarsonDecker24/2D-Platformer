@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bve1io4y21q4j" path="res://Assets/player sprites/arms n bows/projectileConsumables/elecChain.png" id="6_euujd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5kcn0"]
-radius = 5.0
+radius = 8.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a5j2n"]
 animations = [{
@@ -49,11 +49,11 @@ animations = [{
 radius = 35.3553
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpur6"]
-radius = 88.0511
+radius = 71.007
 
 [node name="throwable" type="Area2D"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_ncn2h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -62,7 +62,7 @@ shape = SubResource("CircleShape2D_5kcn0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.921569)
 sprite_frames = SubResource("SpriteFrames_a5j2n")
-animation = &"Battery"
+animation = &"fireBottle"
 autoplay = "Battery"
 
 [node name="PickUpArea" type="Area2D" parent="."]

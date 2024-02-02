@@ -19,14 +19,14 @@ var hideNextFrame = false
 var remainingBounces
 var damage
 var bulletTime
-var EnemyList=[]
+var enemyList=[]
 var enemyListCounter=0
 var searchHolder
 var batteryShockTimer=0
-const BATTERYSHOCKSPEED=.2
+const BATTERYSHOCKSPEED=.1
 var collisionEvent=""
-var batteryEventCount=0
-var batterySpin=0
+var eventCount=0
+var spin=0
 var fading=false
 var opacity=1
 var thrown=false
@@ -53,11 +53,17 @@ func _process(delta):
 	if type == "Battery":
 		$AnimatedSprite2D.play("Battery")
 	
+	if type == "fireBottle":
+		$AnimatedSprite2D.play("fireBottle")
+	
 	_check_ray()
 
 	if collisionEvent=="Battery":
 		_battery(delta)
-		EnemyList.sort_custom(_sort_by_distance)
+		enemyList.sort_custom(_sort_by_distance)
+	
+	if collisionEvent=="fireBottle":
+		_fireBottle(delta)
 	
 	if fading==true:
 		_fading(delta)
@@ -80,78 +86,77 @@ func _on_big_area_body_entered(body):
 		if type == "Battery":
 			collisionEvent="Battery"
 	if body.is_in_group("Enemy"):
-		EnemyList.append(body)
+		enemyList.append(body)
 		enemyListCounter+=1
 		body.inBatteryList=true
-		EnemyList.sort_custom(_sort_by_distance)
+		enemyList.sort_custom(_sort_by_distance)
 
 func _sort_by_distance(a, b):
 	return abs(a.global_position - global_position) < abs(b.global_position - global_position)
 
 func _on_big_area_body_exited(body):
 	if body.is_in_group("Enemy"):
-		searchHolder = EnemyList.bsearch(body)
-		EnemyList.remove_at(searchHolder)
+		searchHolder = enemyList.bsearch(body)
+		enemyList.remove_at(searchHolder)
 		enemyListCounter-=1
 		body.inBatteryList=true
 
 func _battery(delta):
 	collisionEvent="Battery"
 	if batteryShockTimer<=0:
-		batteryEventCount+=1
+		eventCount+=1
 		batteryShockTimer=BATTERYSHOCKSPEED
-	batteryShockTimer-=delta*.8
+	batteryShockTimer-=delta
 	
-	if batteryEventCount>=1 and batterySpin<1.5:
-		batterySpin+=delta
-	$AnimatedSprite2D.rotation+=batterySpin*.3
+	if eventCount>=1 and spin<1.5:
+		spin+=delta
+	$AnimatedSprite2D.rotation+=spin*.3
 	
-	if EnemyList.size() >=1 and batteryEventCount==2:
+	if enemyList.size() >=1 and eventCount==2:
 		$chain1.visible=true
-		$chain1.size.x= sqrt((EnemyList[0].global_position.x-global_position.x)**2 + (EnemyList[0].global_position.y-global_position.y)**2)
-		$chain1.rotation=get_angle_to(EnemyList[0].global_position)
-		fading=true
-		var temp = EnemyList[0]
-		EnemyList.remove_at(0)
-		temp.is_dead=true
-	elif batteryEventCount==2: 
-		fading=true
-	
-	if EnemyList.size()>=2 and batteryEventCount==3:
+		$chain1.size.x= sqrt((enemyList[0].global_position.x-global_position.x)**2 + (enemyList[0].global_position.y-global_position.y)**2)
+		$chain1.rotation=get_angle_to(enemyList[0].global_position)
+
+	if enemyList.size()>=2 and eventCount==2:
 		$chain2.visible=true
-		$chain1.visible=false
-		$chain2.set_global_position(EnemyList[0].global_position)
-		$chain2.size.x= sqrt((EnemyList[1].global_position.x-EnemyList[0].global_position.x)**2 + (EnemyList[1].global_position.y-EnemyList[0].global_position.y)**2)
-		$chain2.rotation=atan2(EnemyList[1].global_position.y - EnemyList[0].global_position.y, EnemyList[1].global_position.x - EnemyList[0].global_position.x)
-		var temp = EnemyList[0]
-		EnemyList[0].remove()
-		temp.is_dead=true
-	elif batteryEventCount==3:
-		fading=true
-		$chain1.visible=false
-	
-	if EnemyList.size()>=3 and batteryEventCount==4:
+		$chain2.set_global_position(enemyList[0].global_position)
+		$chain2.size.x= sqrt((enemyList[1].global_position.x-enemyList[0].global_position.x)**2 + (enemyList[1].global_position.y-enemyList[0].global_position.y)**2)
+		$chain2.rotation=atan2(enemyList[1].global_position.y - enemyList[0].global_position.y, enemyList[1].global_position.x - enemyList[0].global_position.x)
+
+	if enemyList.size()>=3 and eventCount==2:
 		$chain3.visible=true
-		$chain2.visible=false
-		$chain3.set_global_position(EnemyList[1].global_position)
-		$chain3.size.x= sqrt((EnemyList[2].global_position.x-EnemyList[1].global_position.x)**2 + (EnemyList[2].global_position.y-EnemyList[1].global_position.y)**2)
-		$chain3.rotation=atan2(EnemyList[2].global_position.y - EnemyList[1].global_position.y, EnemyList[2].global_position.x - EnemyList[1].global_position.x)
-		var temp = EnemyList[0]
-		EnemyList[0].remove()
-		temp.is_dead=true
-	elif batteryEventCount==4: 
+		$chain3.set_global_position(enemyList[1].global_position)
+		$chain3.size.x= sqrt((enemyList[2].global_position.x-enemyList[1].global_position.x)**2 + (enemyList[2].global_position.y-enemyList[1].global_position.y)**2)
+		$chain3.rotation=atan2(enemyList[2].global_position.y - enemyList[1].global_position.y, enemyList[2].global_position.x - enemyList[1].global_position.x)
+		
+	elif eventCount>=3: 
 		fading=true
+		$chain1.visible=false
 		$chain2.visible=false
-	if batteryEventCount==5:
 		$chain3.visible=false
-	if batteryEventCount==9:
+		
+		var temp
+		while enemyList.size()>0:
+			temp = enemyList[0]
+			temp.is_dead=true
+			enemyList.remove_at(0)
+	
+	if eventCount>5:
 		queue_free()
-	pass # Replace with function body.
+
+func _fireBottle(delta):
+	
+	
+	
+	
+	
+	pass
+
 
 func _fading(delta):
 	$AnimatedSprite2D.self_modulate=Color(1, 1, 1, opacity)
-	if opacity-delta>0:
-		opacity-=delta
+	if opacity-delta*2.3>0:
+		opacity-=delta*2.3
 	else:
 		opacity=0
 
@@ -181,4 +186,7 @@ func _on_area_entered(area):
 	if area.is_in_group("Enemy") or area.is_in_group("Ground"):
 		moving=false
 		collisionEvent="Battery"
+		if enemyList.size()==0:
+			fading=true
+	
 	pass # Replace with function body.
