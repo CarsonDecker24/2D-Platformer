@@ -61,6 +61,7 @@ shape = SubResource("CircleShape2D_5kcn0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.921569)
+texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_a5j2n")
 animation = &"fireBottle"
 autoplay = "Battery"

@@ -145,7 +145,11 @@ func _battery(delta):
 		queue_free()
 
 func _fireBottle(delta):
-	
+	var temp
+	while enemyList.size()>0:
+			temp = enemyList[0]
+			temp.is_dead=true
+			enemyList.remove_at(0)
 	
 	
 	
@@ -178,14 +182,14 @@ func _on_pick_up_area_area_exited(area):
 func _on_body_entered(body):
 	if body.is_in_group("Enemy") or body.is_in_group("Ground"):
 		moving=false
-		collisionEvent="Battery"
+		collisionEvent=type
 	pass # Replace with function body
 
 
 func _on_area_entered(area):
 	if area.is_in_group("Enemy") or area.is_in_group("Ground"):
 		moving=false
-		collisionEvent="Battery"
+		collisionEvent=type
 		if enemyList.size()==0:
 			fading=true
 	
