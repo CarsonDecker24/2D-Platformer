@@ -1,11 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwt452am6gsao"]
+[gd_scene load_steps=18 format=3 uid="uid://dwt452am6gsao"]
 
 [ext_resource type="Script" path="res://throwable.gd" id="1_ncn2h"]
 [ext_resource type="Texture2D" uid="uid://do3m018h26vf7" path="res://Assets/player sprites/arms n bows/projectileConsumables/battery.png" id="2_h8r3n"]
 [ext_resource type="Texture2D" uid="uid://xqvc8bn2thiq" path="res://Assets/player sprites/arms n bows/projectileConsumables/Brick.png" id="3_u63yg"]
 [ext_resource type="Texture2D" uid="uid://bswtlfaok1ch4" path="res://Assets/player sprites/arms n bows/projectileConsumables/fireThrowable GrapeJuice.png" id="4_vgnwc"]
+[ext_resource type="Texture2D" uid="uid://cjkx5jddknf0q" path="res://transparent.png" id="5_8iumn"]
 [ext_resource type="Texture2D" uid="uid://cxg4ntvke8rim" path="res://Assets/player sprites/arms n bows/projectileConsumables/waterbaloon.png" id="5_ae3uh"]
 [ext_resource type="Texture2D" uid="uid://bve1io4y21q4j" path="res://Assets/player sprites/arms n bows/projectileConsumables/elecChain.png" id="6_euujd"]
+[ext_resource type="Texture2D" uid="uid://q3mjg78ks74v" path="res://Assets/player sprites/arms n bows/projectileConsumables/bottleShards/sprite_0.png" id="6_ojngg"]
+[ext_resource type="Texture2D" uid="uid://bcrchwexbkkqc" path="res://Assets/player sprites/arms n bows/projectileConsumables/bottleShards/sprite_1.png" id="7_vmq1o"]
+[ext_resource type="Texture2D" uid="uid://66u5l26tpy10" path="res://Assets/player sprites/arms n bows/projectileConsumables/bottleShards/sprite_2.png" id="8_jpggb"]
+[ext_resource type="Texture2D" uid="uid://dm33ome7dgf1h" path="res://Assets/player sprites/arms n bows/projectileConsumables/bottleShards/sprite_3.png" id="9_id6xq"]
+[ext_resource type="Texture2D" uid="uid://c81t575vktgog" path="res://Assets/player sprites/arms n bows/projectileConsumables/bottleShards/sprite_4.png" id="10_mqlpa"]
+[ext_resource type="Texture2D" uid="uid://b8ug8b75j7673" path="res://Assets/player sprites/arms n bows/projectileConsumables/bottleShards/sprite_5.png" id="11_aw7ri"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5kcn0"]
 radius = 8.0
@@ -37,6 +44,14 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.4,
+"texture": ExtResource("5_8iumn")
+}],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_ae3uh")
 }],
@@ -52,26 +67,109 @@ radius = 35.3553
 radius = 71.007
 
 [node name="throwable" type="Area2D"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_ncn2h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_5kcn0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.921569)
-texture_filter = 2
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_a5j2n")
-animation = &"fireBottle"
+animation = &"none"
 autoplay = "Battery"
 
+[node name="bottleShard1" type="CPUParticles2D" parent="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(1, -6)
+emitting = false
+amount = 1
+one_shot = true
+texture = ExtResource("6_ojngg")
+spread = 180.0
+initial_velocity_min = 37.97
+initial_velocity_max = 37.97
+angular_velocity_min = -127.59
+angular_velocity_max = 127.59
+
+[node name="bottleShard2" type="CPUParticles2D" parent="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(1, -4)
+emitting = false
+amount = 1
+one_shot = true
+texture = ExtResource("7_vmq1o")
+spread = 180.0
+initial_velocity_min = 37.97
+initial_velocity_max = 75.94
+angular_velocity_min = -164.05
+angular_velocity_max = 72.91
+
+[node name="bottleShard3" type="CPUParticles2D" parent="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(-1, -1)
+emitting = false
+amount = 1
+one_shot = true
+texture = ExtResource("8_jpggb")
+spread = 180.0
+initial_velocity_min = 25.32
+initial_velocity_max = 63.29
+angular_velocity_min = -164.05
+angular_velocity_max = 127.59
+
+[node name="bottleShard4" type="CPUParticles2D" parent="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(2, 1)
+emitting = false
+amount = 1
+one_shot = true
+texture = ExtResource("9_id6xq")
+spread = 180.0
+initial_velocity_min = 37.97
+initial_velocity_max = 88.61
+angular_velocity_min = -145.82
+angular_velocity_max = 127.59
+
+[node name="bottleShard5" type="CPUParticles2D" parent="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(26, 10)
+emitting = false
+amount = 1
+one_shot = true
+texture = ExtResource("10_mqlpa")
+spread = 180.0
+initial_velocity_min = 29.07
+initial_velocity_max = 130.33
+angular_velocity_min = -81.4
+angular_velocity_max = 109.37
+
+[node name="bottleShard6" type="CPUParticles2D" parent="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(1, 6)
+emitting = false
+amount = 1
+one_shot = true
+texture = ExtResource("11_aw7ri")
+spread = 180.0
+initial_velocity_min = 25.32
+initial_velocity_max = 63.29
+angular_velocity_min = -91.14
+angular_velocity_max = 92.49
+damping_min = 0.1
+damping_max = 0.11
+
 [node name="PickUpArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea"]
 shape = SubResource("CircleShape2D_24t2s")
 
 [node name="bigArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 512
 collision_mask = 512
 
@@ -79,6 +177,7 @@ collision_mask = 512
 shape = SubResource("CircleShape2D_vpur6")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(6, 0)
 
 [node name="chain1" type="TextureRect" parent="."]

@@ -230,7 +230,7 @@ metadata/Frozen = false
 
 [node name="Player" parent="." instance=ExtResource("3_410nd")]
 texture_filter = 1
-position = Vector2(460, -73)
+position = Vector2(-207, -64)
 collision_layer = 2049
 collision_mask = 2049
 
@@ -520,12 +520,6 @@ collision_mask = 2049
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneExitTrigger"]
 position = Vector2(-16.938, 10.0766)
 shape = SubResource("RectangleShape2D_w7op6")
-
-[node name="TestDummy" parent="." instance=ExtResource("4_kqark")]
-position = Vector2(617, 76)
-
-[node name="TestDummy8" parent="." instance=ExtResource("4_kqark")]
-position = Vector2(573, 16)
 
 [connection signal="finished" from="Player/music" to="." method="_on_music_finished"]
 [connection signal="body_entered" from="doorController" to="ElectricDoor" method="_on_door_controller_body_entered"]

@@ -26,11 +26,12 @@ var batteryShockTimer=0
 const BATTERYSHOCKSPEED=.1
 var collisionEvent=""
 var eventCount=0
-var spin=0
+var spin=.3
 var fading=false
 var opacity=1
 var thrown=false
 var near_player = false
+var sploded=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -68,6 +69,7 @@ func _process(delta):
 	if fading==true:
 		_fading(delta)
 	
+	$AnimatedSprite2D.rotation+=spin*.3
 	pass
 
 func _update_pos(delta):
@@ -145,15 +147,34 @@ func _battery(delta):
 		queue_free()
 
 func _fireBottle(delta):
+	
+	if eventCount>=1 and spin<1.5:
+		spin+=delta
+	
+	if batteryShockTimer<=0:
+		eventCount+=1
+		batteryShockTimer=BATTERYSHOCKSPEED
+	batteryShockTimer-=delta
+	
+	
 	var temp
 	while enemyList.size()>0:
 			temp = enemyList[0]
 			temp.is_dead=true
 			enemyList.remove_at(0)
 	
-	
-	
-	
+	if eventCount==6:
+		queue_free()
+	$AnimatedSprite2D.play("none")
+	if sploded==false:
+		sploded=true
+		$AnimatedSprite2D/bottleShard1.emitting=true
+		$AnimatedSprite2D/bottleShard2.emitting=true
+		$AnimatedSprite2D/bottleShard3.emitting=true
+		$AnimatedSprite2D/bottleShard4.emitting=true
+		$AnimatedSprite2D/bottleShard5.emitting=true
+		$AnimatedSprite2D/bottleShard6.emitting=true
+		$AnimatedSprite2D.play("none")
 	pass
 
 

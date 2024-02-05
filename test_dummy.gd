@@ -592,7 +592,6 @@ func _meleeHit():
 		velocity.y=-180
 	bouttaShoot=false
 	_lower_health(1)
-
 	meleCrit=0
 	if player_spotted==false:
 		_turn_around()
