@@ -1562,7 +1562,6 @@ pitch_scale = 2.64
 max_polyphony = 2
 
 [node name="InvintoryUI" type="Node2D" parent="."]
-visible = false
 light_mask = 0
 position = Vector2(-33.4299, -384.723)
 scale = Vector2(1.5, 1.5)

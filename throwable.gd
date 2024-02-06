@@ -69,7 +69,7 @@ func _process(delta):
 	if fading==true:
 		_fading(delta)
 	
-	#$AnimatedSprite2D.rotation+=spin*.3
+	$AnimatedSprite2D.rotation+=spin*.3
 	pass
 
 func _update_pos(delta):
@@ -112,7 +112,7 @@ func _battery(delta):
 	
 	if eventCount>=1 and spin<1.5:
 		spin+=delta
-	#$AnimatedSprite2D.rotation+=spin*.3
+	$AnimatedSprite2D.rotation+=spin*.3
 	
 	if enemyList.size() >=1 and eventCount==2:
 		$chain1.visible=true
@@ -155,7 +155,7 @@ func _fireBottle(delta):
 		eventCount+=1
 		batteryShockTimer=BATTERYSHOCKSPEED
 	batteryShockTimer-=delta
-	spin=0
+	
 	
 	var temp
 	while enemyList.size()>0:
