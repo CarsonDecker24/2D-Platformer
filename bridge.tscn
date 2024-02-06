@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqhbveacc0et5"]
+
+[ext_resource type="Script" path="res://bridge.gd" id="1_l5haq"]
+[ext_resource type="Texture2D" uid="uid://c4k4vqitxp0i7" path="res://Assets/environmental stuff/brideStuff/cornerAncher.png" id="2_a7k4h"]
+[ext_resource type="Texture2D" uid="uid://xm3x12kxvrpf" path="res://Assets/environmental stuff/brideStuff/bridgePost.png" id="3_55ghb"]
+[ext_resource type="Texture2D" uid="uid://y7w0knnsr18m" path="res://Assets/environmental stuff/brideStuff/stickSupport.png" id="4_21o8j"]
+[ext_resource type="Texture2D" uid="uid://ovru2guxl0ad" path="res://Assets/environmental stuff/brideStuff/bridgewall.png" id="5_cynf1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_677gp"]
+radius = 5.58285
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yb40v"]
+radius = 16.7418
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u63fg"]
+size = Vector2(62.6731, 2.22302)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j52jm"]
+radius = 1.56741
+height = 270.997
+
+[node name="bridge" type="Node2D"]
+position = Vector2(148, -394)
+script = ExtResource("1_l5haq")
+
+[node name="pin" type="StaticBody2D" parent="."]
+position = Vector2(26.5527, -3.05139)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pin"]
+position = Vector2(-15.3506, 5.6731)
+shape = SubResource("CircleShape2D_677gp")
+
+[node name="landCorner" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(19.0813, 11.0301)
+texture = ExtResource("2_a7k4h")
+
+[node name="bridgePost" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(20, -10)
+texture = ExtResource("3_55ghb")
+
+[node name="stickSupport" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-253.847, 18.8251)
+texture = ExtResource("4_21o8j")
+
+[node name="supportSnapArea" type="Area2D" parent="stickSupport"]
+position = Vector2(-11.4383, -4.64352)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stickSupport/supportSnapArea"]
+position = Vector2(-4.9483, -4.68854)
+shape = SubResource("CircleShape2D_yb40v")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="stickSupport"]
+position = Vector2(-1.43828, 2.85648)
+
+[node name="bridgeSupportBox" type="CollisionShape2D" parent="stickSupport/StaticBody2D"]
+position = Vector2(15.5302, -18.4436)
+shape = SubResource("RectangleShape2D_u63fg")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 2.0
+can_sleep = false
+freeze_mode = 1
+angular_damp_mode = 1
+angular_damp = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="RigidBody2D"]
+texture_filter = 1
+offset_left = -272.0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = 4.0
+texture = ExtResource("5_cynf1")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="PinJoint2D" type="PinJoint2D" parent="RigidBody2D"]
+position = Vector2(8.7395, 1.95139)
+node_a = NodePath("..")
+node_b = NodePath("../../pin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-132.362, 0.276245)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_j52jm")
+
+[connection signal="area_entered" from="stickSupport/supportSnapArea" to="." method="_on_support_snap_area_area_entered"]
