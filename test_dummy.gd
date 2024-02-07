@@ -18,7 +18,6 @@ var walking = "walking holster"
 var idle = "idle holster"
 var SPEED =120
 const FIRE_RATE=2
-var from_facing
 var oiled = false
 var wandPos = Vector2(0,0)
 const orbPath = preload("res://orb.tscn")

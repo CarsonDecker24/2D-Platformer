@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dmatwath7f8sm"]
+[gd_scene load_steps=48 format=3 uid="uid://dmatwath7f8sm"]
 
 [ext_resource type="Script" path="res://level_1.gd" id="1_cj6ue"]
 [ext_resource type="Texture2D" uid="uid://boqrayk806e7d" path="res://Assets/tilesheets/paralax gib-ver.png" id="2_a2tse"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dpnul7ws48lev" path="res://fire.tscn" id="16_jta8k"]
 [ext_resource type="PackedScene" uid="uid://6oqatpaamjm4" path="res://electric_bridge.tscn" id="18_smkcr"]
 [ext_resource type="PackedScene" uid="uid://503jkqgjxdem" path="res://tile_map_cave.tscn" id="22_k5fwx"]
+[ext_resource type="PackedScene" uid="uid://cl4owjddkmqsx" path="res://bodyOfWater.tscn" id="24_cjf8u"]
 [ext_resource type="Texture2D" uid="uid://cygfy0tqdmsff" path="res://Assets/environmental stuff/portal line.png" id="25_w8bxm"]
 
 [sub_resource type="Gradient" id="Gradient_i8vud"]
@@ -53,12 +54,12 @@ turbulence_noise_strength = 1.23
 turbulence_noise_scale = 7.53
 collision_mode = 2
 
-[sub_resource type="Gradient" id="Gradient_vhnen"]
+[sub_resource type="Gradient" id="Gradient_80ceh"]
 offsets = PackedFloat32Array(0, 0.518595, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.6, 0.6, 0.6, 0, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dgyla"]
-gradient = SubResource("Gradient_vhnen")
+gradient = SubResource("Gradient_80ceh")
 fill = 1
 fill_from = Vector2(0.487179, 0.508547)
 
@@ -520,6 +521,9 @@ collision_mask = 2049
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SceneExitTrigger"]
 position = Vector2(-16.938, 10.0766)
 shape = SubResource("RectangleShape2D_w7op6")
+
+[node name="Node2D2" parent="." instance=ExtResource("24_cjf8u")]
+position = Vector2(73, -63)
 
 [connection signal="finished" from="Player/music" to="." method="_on_music_finished"]
 [connection signal="body_entered" from="doorController" to="ElectricDoor" method="_on_door_controller_body_entered"]

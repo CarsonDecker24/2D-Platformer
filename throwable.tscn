@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dwt452am6gsao"]
+[gd_scene load_steps=24 format=3 uid="uid://bqvkv3bnnfoqb"]
 
 [ext_resource type="Script" path="res://throwable.gd" id="1_ncn2h"]
 [ext_resource type="Texture2D" uid="uid://do3m018h26vf7" path="res://Assets/player sprites/arms n bows/projectileConsumables/battery.png" id="2_h8r3n"]
@@ -60,6 +60,30 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_c44dd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_7lj8k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xk0fq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4375, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_w0u1w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.492188, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8rn7c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.507813, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3hlij"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.46875, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_24t2s"]
 radius = 35.3553
 
@@ -72,7 +96,6 @@ collision_mask = 2
 script = ExtResource("1_ncn2h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_5kcn0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -94,6 +117,7 @@ initial_velocity_min = 37.97
 initial_velocity_max = 37.97
 angular_velocity_min = -127.59
 angular_velocity_max = 127.59
+scale_amount_curve = SubResource("Curve_c44dd")
 
 [node name="bottleShard2" type="CPUParticles2D" parent="AnimatedSprite2D"]
 texture_filter = 1
@@ -107,6 +131,7 @@ initial_velocity_min = 37.97
 initial_velocity_max = 75.94
 angular_velocity_min = -164.05
 angular_velocity_max = 72.91
+scale_amount_curve = SubResource("Curve_7lj8k")
 
 [node name="bottleShard3" type="CPUParticles2D" parent="AnimatedSprite2D"]
 texture_filter = 1
@@ -120,6 +145,7 @@ initial_velocity_min = 25.32
 initial_velocity_max = 63.29
 angular_velocity_min = -164.05
 angular_velocity_max = 127.59
+scale_amount_curve = SubResource("Curve_xk0fq")
 
 [node name="bottleShard4" type="CPUParticles2D" parent="AnimatedSprite2D"]
 texture_filter = 1
@@ -133,6 +159,7 @@ initial_velocity_min = 37.97
 initial_velocity_max = 88.61
 angular_velocity_min = -145.82
 angular_velocity_max = 127.59
+scale_amount_curve = SubResource("Curve_w0u1w")
 
 [node name="bottleShard5" type="CPUParticles2D" parent="AnimatedSprite2D"]
 texture_filter = 1
@@ -146,6 +173,7 @@ initial_velocity_min = 29.07
 initial_velocity_max = 130.33
 angular_velocity_min = -81.4
 angular_velocity_max = 109.37
+scale_amount_curve = SubResource("Curve_8rn7c")
 
 [node name="bottleShard6" type="CPUParticles2D" parent="AnimatedSprite2D"]
 texture_filter = 1
@@ -161,11 +189,13 @@ angular_velocity_min = -91.14
 angular_velocity_max = 92.49
 damping_min = 0.1
 damping_max = 0.11
+scale_amount_curve = SubResource("Curve_3hlij")
 
 [node name="PickUpArea" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea"]
+visible = false
 shape = SubResource("CircleShape2D_24t2s")
 
 [node name="bigArea" type="Area2D" parent="."]
@@ -174,6 +204,7 @@ collision_layer = 512
 collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bigArea"]
+visible = false
 shape = SubResource("CircleShape2D_vpur6")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
