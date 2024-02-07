@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bqvkv3bnnfoqb"]
+[gd_scene load_steps=24 format=3 uid="uid://dwt452am6gsao"]
 
 [ext_resource type="Script" path="res://throwable.gd" id="1_ncn2h"]
 [ext_resource type="Texture2D" uid="uid://do3m018h26vf7" path="res://Assets/player sprites/arms n bows/projectileConsumables/battery.png" id="2_h8r3n"]
@@ -192,7 +192,6 @@ damping_max = 0.11
 scale_amount_curve = SubResource("Curve_3hlij")
 
 [node name="PickUpArea" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea"]
 visible = false
@@ -257,5 +256,7 @@ stretch_mode = 1
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="area_entered" from="PickUpArea" to="." method="_on_pick_up_area_area_entered"]
 [connection signal="area_exited" from="PickUpArea" to="." method="_on_pick_up_area_area_exited"]
+[connection signal="body_entered" from="PickUpArea" to="." method="_on_pick_up_area_body_entered"]
+[connection signal="body_exited" from="PickUpArea" to="." method="_on_pick_up_area_body_exited"]
 [connection signal="body_entered" from="bigArea" to="." method="_on_big_area_body_entered"]
 [connection signal="body_exited" from="bigArea" to="." method="_on_big_area_body_exited"]
