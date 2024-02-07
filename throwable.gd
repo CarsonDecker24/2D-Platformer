@@ -72,8 +72,8 @@ func _process(delta):
 	if fading==true:
 		_fading(delta)
 	
-	$AnimatedSprite2D.rotation+=spin*.3
-	pass
+	if thrown:
+		$AnimatedSprite2D.rotation+=spin*.3
 
 func _update_pos(delta):
 	position += vel * delta
