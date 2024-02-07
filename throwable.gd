@@ -61,19 +61,19 @@ func _process(delta):
 		$AnimatedSprite2D.play("fireBottle")
 	
 	_check_ray()
-
-	if collisionEvent=="Battery":
-		_battery(delta)
-		enemyList.sort_custom(_sort_by_distance)
 	
-	if collisionEvent=="fireBottle":
-		_fireBottle(delta)
+	if thrown:
+		if collisionEvent=="Battery":
+			_battery(delta)
+			enemyList.sort_custom(_sort_by_distance)
+		if collisionEvent=="fireBottle":
+			_fireBottle(delta)
+		$AnimatedSprite2D.rotation+=spin*.3
 	
 	if fading==true:
 		_fading(delta)
 	
-	if thrown:
-		$AnimatedSprite2D.rotation+=spin*.3
+	
 
 func _update_pos(delta):
 	position += vel * delta

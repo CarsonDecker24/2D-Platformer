@@ -27,7 +27,7 @@ var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
 var slots = ["Fire", "Electricity", "Ice"]
-var throwable = "fireBottle"
+var throwable = ""
 var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot
@@ -426,8 +426,7 @@ func _shoot(delta):
 func _throw():
 	var throwableInstance = throwablePath.instantiate()
 	throwableInstance._initialize_arrow(throwable, Vector2(280,0).rotated(get_angle_to(get_global_mouse_position())), get_angle_to(get_global_mouse_position()), self, inBulletTime)
-	throwable = "fireBottle"
-	#throwable = "fireBottle"
+	throwable = ""
 	add_sibling(throwableInstance)
 	throwableInstance.position=$".".global_position
 	
