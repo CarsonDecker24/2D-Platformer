@@ -27,7 +27,7 @@ var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
 var slots = ["Fire", "Electricity", "Ice"]
-var throwable = "Battery"
+var throwable = "fireBottle"
 var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot
@@ -54,6 +54,8 @@ var shift_used = false
 var meleeCollideArray
 var inBulletTime = false
 var bulletTimeleft = .5
+var wet = false
+var wetTimer=0
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -142,6 +144,9 @@ func _process(delta):
 	elif Input.is_action_just_pressed("i") and hudUp == "isUp":
 		hudUp = "down"
 	_hudUp()
+	
+	if wet==true:
+		_wet(delta)
 
 func _physics_process(delta):
 	#Lateral Movement
@@ -421,7 +426,7 @@ func _shoot(delta):
 func _throw():
 	var throwableInstance = throwablePath.instantiate()
 	throwableInstance._initialize_arrow(throwable, Vector2(280,0).rotated(get_angle_to(get_global_mouse_position())), get_angle_to(get_global_mouse_position()), self, inBulletTime)
-	throwable = ""
+	throwable = "fireBottle"
 	#throwable = "fireBottle"
 	add_sibling(throwableInstance)
 	throwableInstance.position=$".".global_position
@@ -575,3 +580,14 @@ func _on_item_list_empty_clicked(at_position, mouse_button_index):
 	
 #func _transfer_data_between_scenes():
 #	get_node("/root/PlayerVariablesGlobal") = {get_node()}
+
+func _wet(delta):
+	if wetTimer<=-999:
+		wetTimer=1
+		$wetParticles.emitting=true
+	if wetTimer<=0:
+		wetTimer=-999
+		wet=false
+		$wetParticles.emitting=false
+	wetTimer-=delta
+	print(wetTimer)

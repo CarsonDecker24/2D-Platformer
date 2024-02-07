@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl4owjddkmqsx"]
+
+[ext_resource type="Script" path="res://bodyOfWater.gd" id="1_45ne8"]
+[ext_resource type="Texture2D" uid="uid://bqcf8vetdk7q6" path="res://Assets/tilesheets/cave_puddle.png" id="2_4fwhe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8use"]
+size = Vector2(83, 3)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_45ne8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_4fwhe")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-64, -16, -64, 16, 64, 16, 64, -16, 55, -16, 39, -13, -35, -13, -53, -16)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -14.5)
+shape = SubResource("RectangleShape2D_c8use")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

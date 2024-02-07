@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://d2kvnctkapc7y"]
+[gd_scene load_steps=55 format=3 uid="uid://d2kvnctkapc7y"]
 
 [ext_resource type="Script" path="res://test_dummy.gd" id="1_1c4ne"]
 [ext_resource type="Texture2D" uid="uid://clyg48xtd3ssi" path="res://Assets/enemy sprites/basic/enemy walk and aim.png" id="2_814ig"]
@@ -380,6 +380,15 @@ color_ramp = SubResource("GradientTexture1D_hdek5")
 turbulence_enabled = true
 turbulence_noise_speed = Vector3(0, 1, 0)
 
+[sub_resource type="Gradient" id="Gradient_vhnen"]
+offsets = PackedFloat32Array(0, 0.518595, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.6, 0.6, 0.6, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l04cv"]
+gradient = SubResource("Gradient_vhnen")
+fill = 1
+fill_from = Vector2(0.487179, 0.508547)
+
 [node name="TestDummy" type="CharacterBody2D" groups=["Enemy"]]
 scale = Vector2(0.8, 0.8)
 collision_layer = 523
@@ -535,3 +544,12 @@ texture = ExtResource("8_j2go2")
 
 [node name="thingySpawnPosition" type="Node2D" parent="."]
 position = Vector2(0.15625, -12.0312)
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.756863)
+light_mask = 4
+position = Vector2(-1, 0.999996)
+scale = Vector2(1.4, 1.4)
+energy = 1.89
+blend_mode = 2
+texture = SubResource("GradientTexture2D_l04cv")

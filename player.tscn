@@ -1,4 +1,4 @@
-[gd_scene load_steps=221 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=223 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -1330,6 +1330,14 @@ animations = [{
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_si5sb"]
 
+[sub_resource type="Curve" id="Curve_bebh5"]
+_data = [Vector2(0, 0.652632), 0.0, 0.0, 0, 0, Vector2(1, 0.0526316), -1.42895, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_asex2"]
+offsets = PackedFloat32Array(0.0103093, 0.742268, 1)
+colors = PackedColorArray(0.286275, 0.388235, 0.878431, 1, 0.338317, 0.432843, 0.887296, 0.927083, 1, 1, 1, 0)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = -1
 position = Vector2(81, 62)
@@ -1562,7 +1570,6 @@ pitch_scale = 2.64
 max_polyphony = 2
 
 [node name="InvintoryUI" type="Node2D" parent="."]
-visible = false
 light_mask = 0
 position = Vector2(-33.4299, -384.723)
 scale = Vector2(1.5, 1.5)
@@ -1634,6 +1641,24 @@ offset_right = 259.423
 offset_bottom = 316.62
 scale = Vector2(0.4, 0.4)
 text = "equip slots are soon to come."
+
+[node name="wetParticles" type="CPUParticles2D" parent="."]
+z_index = 6
+position = Vector2(-3, 5)
+scale = Vector2(1.5, 1.5)
+amount = 10
+emission_shape = 3
+emission_rect_extents = Vector2(3.5, 8)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 20)
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_bebh5")
+color = Color(0.219608, 0.341176, 0.831373, 0.878431)
+color_ramp = SubResource("Gradient_asex2")
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
