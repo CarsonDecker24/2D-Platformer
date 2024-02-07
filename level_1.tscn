@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dpnul7ws48lev" path="res://fire.tscn" id="16_jta8k"]
 [ext_resource type="PackedScene" uid="uid://6oqatpaamjm4" path="res://electric_bridge.tscn" id="18_smkcr"]
 [ext_resource type="PackedScene" uid="uid://503jkqgjxdem" path="res://tile_map_cave.tscn" id="22_k5fwx"]
-[ext_resource type="PackedScene" uid="uid://dwt452am6gsao" path="res://throwable.tscn" id="24_dx2g8"]
+[ext_resource type="PackedScene" uid="uid://bqvkv3bnnfoqb" path="res://throwable.tscn" id="24_dx2g8"]
 [ext_resource type="Texture2D" uid="uid://cygfy0tqdmsff" path="res://Assets/environmental stuff/portal line.png" id="25_w8bxm"]
 
 [sub_resource type="Gradient" id="Gradient_i8vud"]
@@ -433,7 +433,7 @@ texture = ExtResource("2_eivfx")
 [node name="TileMap" parent="." instance=ExtResource("22_k5fwx")]
 
 [node name="TestDummy" parent="." instance=ExtResource("4_kqark")]
-position = Vector2(55, -111)
+position = Vector2(64, 95)
 scale = Vector2(0.64, 0.64)
 
 [node name="TestDummy3" parent="." instance=ExtResource("4_kqark")]
@@ -519,7 +519,7 @@ shape = SubResource("RectangleShape2D_21tfg")
 disabled = true
 
 [node name="SceneExitTrigger" type="Area2D" parent="."]
-position = Vector2(3480.93, -377.536)
+position = Vector2(3626, -376)
 collision_layer = 2049
 collision_mask = 2049
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dwt452am6gsao"]
+[gd_scene load_steps=24 format=3 uid="uid://bqvkv3bnnfoqb"]
 
 [ext_resource type="Script" path="res://throwable.gd" id="1_ncn2h"]
 [ext_resource type="Texture2D" uid="uid://do3m018h26vf7" path="res://Assets/player sprites/arms n bows/projectileConsumables/battery.png" id="2_h8r3n"]
