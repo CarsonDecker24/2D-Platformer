@@ -432,10 +432,15 @@ texture = ExtResource("2_eivfx")
 
 [node name="TileMap" parent="." instance=ExtResource("22_k5fwx")]
 
+[node name="TestDummy" parent="." instance=ExtResource("4_kqark")]
+position = Vector2(55, -111)
+scale = Vector2(0.64, 0.64)
+
 [node name="TestDummy3" parent="." instance=ExtResource("4_kqark")]
 position = Vector2(1847, 114)
 
 [node name="TestDummy5" parent="." instance=ExtResource("4_kqark")]
+visible = false
 position = Vector2(2905, -179)
 metadata/homing = true
 

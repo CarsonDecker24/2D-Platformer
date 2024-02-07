@@ -1646,6 +1646,7 @@ text = "equip slots are soon to come."
 z_index = 6
 position = Vector2(-3, 5)
 scale = Vector2(1.5, 1.5)
+emitting = false
 amount = 10
 emission_shape = 3
 emission_rect_extents = Vector2(3.5, 8)

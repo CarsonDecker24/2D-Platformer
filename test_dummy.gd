@@ -54,6 +54,8 @@ var meleCrit=0.00
 var meleconvert=0.00
 var inBatteryList=false
 var dieInFive=false
+var wetTimer
+var wet
 const ThingyPath = preload("res://thingyFixed.tscn")
 
 func _ready():
@@ -594,4 +596,14 @@ func _meleeHit():
 	meleCrit=0
 	if player_spotted==false:
 		_turn_around()
-	
+
+func _wet(delta):
+	if wetTimer<=-999:
+		wetTimer=1
+		$wetParticles.emitting=true
+	if wetTimer<=0:
+		wetTimer=-999
+		wet=false
+		$wetParticles.emitting=false
+	wetTimer-=delta
+	print(wetTimer)
