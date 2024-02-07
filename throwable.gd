@@ -1,7 +1,7 @@
 extends Area2D
 var vel: Vector2
 var angle
-var type: String
+var type = ""
 var player: Node
 var id
 var moving = true
@@ -35,6 +35,9 @@ var sploded=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if type == "":
+		type = get_meta("type")
+		print(type)
 	Global.pick_up.connect(_on_pick_up)
 
 func _initialize_arrow(aType: String, aVel: Vector2, aAngle, aPlayer: Node, bT):
@@ -187,18 +190,9 @@ func _fading(delta):
 
 func _on_pick_up():
 	if near_player:
+		print(type)
 		player.throwable = type
 		queue_free()
-
-func _on_pick_up_area_area_entered(area):
-	if area.is_in_group("Player"):
-		near_player = true
-		player = area.get_parent()
-
-func _on_pick_up_area_area_exited(area):
-	if area.is_in_group("Player"):
-		near_player = false
-
 
 func _on_body_entered(body):
 	if body.is_in_group("Enemy") or body.is_in_group("Ground"):
@@ -215,3 +209,15 @@ func _on_area_entered(area):
 			fading=true
 	
 	pass # Replace with function body.
+
+
+func _on_pick_up_area_body_entered(body):
+	print(body.name)
+	if body.is_in_group("Player"):
+		near_player = true
+		player = body
+
+
+func _on_pick_up_area_body_exited(body):
+	if body.is_in_group("Player"):
+		near_player = false
