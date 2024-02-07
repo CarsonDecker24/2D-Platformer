@@ -254,8 +254,6 @@ stretch_mode = 1
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="area_entered" from="PickUpArea" to="." method="_on_pick_up_area_area_entered"]
-[connection signal="area_exited" from="PickUpArea" to="." method="_on_pick_up_area_area_exited"]
 [connection signal="body_entered" from="PickUpArea" to="." method="_on_pick_up_area_body_entered"]
 [connection signal="body_exited" from="PickUpArea" to="." method="_on_pick_up_area_body_exited"]
 [connection signal="body_entered" from="bigArea" to="." method="_on_big_area_body_entered"]
