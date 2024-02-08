@@ -1470,6 +1470,7 @@ trail_sections = 15
 trail_section_subdivisions = 7
 
 [node name="parryBox" type="Area2D" parent="." groups=["Bow"]]
+visible = false
 show_behind_parent = true
 texture_filter = 1
 position = Vector2(-3, 1)

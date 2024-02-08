@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bqvkv3bnnfoqb"]
+[gd_scene load_steps=28 format=3 uid="uid://bqvkv3bnnfoqb"]
 
 [ext_resource type="Script" path="res://throwable.gd" id="1_ncn2h"]
 [ext_resource type="Texture2D" uid="uid://do3m018h26vf7" path="res://Assets/player sprites/arms n bows/projectileConsumables/battery.png" id="2_h8r3n"]
@@ -84,6 +84,26 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.46875, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_aaa21"]
+_data = [Vector2(0, 0.115789), 0.0, 1.0386, 0, 0, Vector2(0.225275, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.61684, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_vng0e"]
+offsets = PackedFloat32Array(0.108738, 0.345631, 0.714563, 1)
+colors = PackedColorArray(1, 0.945098, 0, 1, 1, 0.407843, 0.105882, 1, 0.670588, 0.329412, 0, 0.756863, 0.450648, 0.450648, 0.450648, 0.235294)
+
+[sub_resource type="Curve" id="Curve_htacv"]
+min_value = -1.0
+max_value = 360.0
+_data = [Vector2(0, 333.4), 0.0, 44.4599, 0, 0, Vector2(1, 128.2), -537.912, 488.188, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_y7rei"]
+min_value = 0.99
+max_value = 30.57
+_data = [Vector2(0, 24.9654), 0.0, 0.0, 0, 0, Vector2(0.3, -5), 189.937, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_24t2s"]
 radius = 35.3553
 
@@ -102,7 +122,7 @@ shape = SubResource("CircleShape2D_5kcn0")
 self_modulate = Color(1, 1, 1, 0.921569)
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_a5j2n")
-animation = &"none"
+animation = &"fireBottle"
 autoplay = "Battery"
 
 [node name="bottleShard1" type="CPUParticles2D" parent="AnimatedSprite2D"]
@@ -191,10 +211,47 @@ damping_min = 0.1
 damping_max = 0.11
 scale_amount_curve = SubResource("Curve_3hlij")
 
+[node name="fire_particles" type="CPUParticles2D" parent="AnimatedSprite2D"]
+show_behind_parent = true
+position = Vector2(0, -8)
+emitting = false
+amount = 30
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, -30)
+initial_velocity_max = 24.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_aaa21")
+color_ramp = SubResource("Gradient_vng0e")
+
+[node name="fireExplosion" type="CPUParticles2D" parent="AnimatedSprite2D"]
+show_behind_parent = true
+position = Vector2(0, 2)
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 1.0
+angular_velocity_max = 5.13
+angular_velocity_curve = SubResource("Curve_htacv")
+linear_accel_min = -4.26
+linear_accel_max = 57.66
+linear_accel_curve = SubResource("Curve_y7rei")
+scale_amount_min = 5.0
+scale_amount_max = 15.68
+scale_amount_curve = SubResource("Curve_aaa21")
+color_ramp = SubResource("Gradient_vng0e")
+
 [node name="PickUpArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea"]
-visible = false
 shape = SubResource("CircleShape2D_24t2s")
 
 [node name="bigArea" type="Area2D" parent="."]

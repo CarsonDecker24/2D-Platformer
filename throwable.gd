@@ -73,7 +73,10 @@ func _process(delta):
 	if fading==true:
 		_fading(delta)
 	
-	
+	if type=="fireBottle" and collisionEvent == "" and thrown==true: 
+		$AnimatedSprite2D/fire_particles.emitting=true
+	else:
+		$AnimatedSprite2D/fire_particles.emitting=false
 
 func _update_pos(delta):
 	position += vel * delta
@@ -153,20 +156,26 @@ func _fireBottle(delta):
 	
 	if eventCount>=1 and spin<1.5:
 		spin+=delta
-	
+		
+	if batteryShockTimer==0:
+		$AnimatedSprite2D/fireExplosion.emitting=true
+		
 	if batteryShockTimer<=0:
 		eventCount+=1
 		batteryShockTimer=BATTERYSHOCKSPEED
 	batteryShockTimer-=delta
 	
+	if batteryShockTimer==0:
+		$AnimatedSprite2D/fireExplosion.emitting=true
 	
 	var temp
+	
 	while enemyList.size()>0:
 			temp = enemyList[0]
 			temp.is_dead=true
 			enemyList.remove_at(0)
 	
-	if eventCount==6:
+	if eventCount==9:
 		queue_free()
 	$AnimatedSprite2D.play("none")
 	if sploded==false:
