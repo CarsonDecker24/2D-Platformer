@@ -69,6 +69,13 @@ func _process(delta):
 		if collisionEvent=="fireBottle":
 			_fireBottle(delta)
 		$AnimatedSprite2D.rotation+=spin*.3
+		if collisionEvent=="waterBaloon":
+			_waterBaloon(delta)
+		if collisionEvent=="brick":
+			_brick(delta)
+	
+	if type=="waterBaloon":
+		$AnimatedSprite2D.play("waterBaloon")
 	
 	if fading==true:
 		_fading(delta)
@@ -77,6 +84,9 @@ func _process(delta):
 		$AnimatedSprite2D/fire_particles.emitting=true
 	else:
 		$AnimatedSprite2D/fire_particles.emitting=false
+	
+	
+	
 
 func _update_pos(delta):
 	position += vel * delta
@@ -84,6 +94,8 @@ func _update_pos(delta):
 	ray.target_position = vel * delta
 	if not hideNextFrame:
 		_check_ray()
+	
+	
 
 func _check_ray():
 	if ray.get_collider() != null:
@@ -189,6 +201,24 @@ func _fireBottle(delta):
 		$AnimatedSprite2D.play("none")
 	pass
 
+func _brick(delta):
+	pass
+	
+
+func _waterBaloon(delta):
+	if eventCount==0:
+		$AnimatedSprite2D/wetParticles.emitting=true
+	if batteryShockTimer<=0:
+		eventCount+=1
+		batteryShockTimer=BATTERYSHOCKSPEED
+	batteryShockTimer-=delta
+	$AnimatedSprite2D.self_modulate=Color(1, 1, 1,0)
+	if eventCount==9:
+		queue_free()
+	
+	
+	
+	
 
 func _fading(delta):
 	$AnimatedSprite2D.self_modulate=Color(1, 1, 1, opacity)
