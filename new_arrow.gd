@@ -15,6 +15,7 @@ var current_attached_body
 var collision_point
 @onready var particle = get_node("particles")
 @onready var diePart = get_node("diePart")
+@onready var shockSphere = load("res://shock_sphere.tscn")
 var dyingTime=1
 var dying = false
 var hideNextFrame = false
@@ -148,7 +149,8 @@ func _on_body_entered(body):
 		if type == "Electric":
 			diePart.color = Color(1, 1, 1, 0.545)
 			if body.wet:
-				pass
+				var shock = shockSphere.instantiate()
+				shock.global_position = global_position
 		if type=="Fire":
 			diePart.color=Color(1, 0.145, 0, 0.655)
 		if type=="Ice":
