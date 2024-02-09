@@ -1,6 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbr0r2qs3vmfj"]
+[gd_scene load_steps=7 format=3 uid="uid://kb1ktn0422t3"]
 
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="1_awqtx"]
+
+[sub_resource type="GDScript" id="GDScript_7bb3h"]
+script/source = "extends Area2D
+
+func _on_body_entered(body):
+	if body.has_group(\"Enemy\"):
+		body.is_dead = true
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwfkf"]
 radius = 132.095
@@ -24,6 +32,7 @@ orbit_velocity_max = 0.5
 orbit_velocity_curve = SubResource("CurveTexture_t1y48")
 
 [node name="Area2D" type="Area2D"]
+script = SubResource("GDScript_7bb3h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dwfkf")
@@ -32,3 +41,5 @@ shape = SubResource("CircleShape2D_dwfkf")
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_dq8ix")
 texture = ExtResource("1_awqtx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
