@@ -147,6 +147,8 @@ func _on_body_entered(body):
 		moving = false
 		if type == "Electric":
 			diePart.color = Color(1, 1, 1, 0.545)
+			if body.wet:
+				pass
 		if type=="Fire":
 			diePart.color=Color(1, 0.145, 0, 0.655)
 		if type=="Ice":
