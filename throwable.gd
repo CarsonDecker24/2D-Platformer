@@ -217,7 +217,11 @@ func _waterBaloon(delta):
 		queue_free()
 	
 	
-	
+	var temp
+	while enemyList.size()>0:
+			temp = enemyList[0]
+			temp.wet=true
+			enemyList.remove_at(0)
 	
 
 func _fading(delta):

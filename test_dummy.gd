@@ -54,7 +54,7 @@ var meleCrit=0.00
 var meleconvert=0.00
 var inBatteryList=false
 var dieInFive=false
-var wetTimer
+var wetTimer=-999
 var wet
 const ThingyPath = preload("res://thingyFixed.tscn")
 
@@ -122,6 +122,8 @@ func _process(delta):
 		
 		_idle_state(delta)
 		
+		if wet:
+			_wet(delta)
 		
 		if pauseWizardTimer<0:
 			pauseWizardAim=false
@@ -598,8 +600,8 @@ func _meleeHit():
 		_turn_around()
 
 func _wet(delta):
-	if wetTimer<=-999:
-		wetTimer=1
+	if wetTimer<=-900:
+		wetTimer=8
 		$wetParticles.emitting=true
 	if wetTimer<=0:
 		wetTimer=-999

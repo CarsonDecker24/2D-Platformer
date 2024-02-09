@@ -582,7 +582,7 @@ func _on_item_list_empty_clicked(at_position, mouse_button_index):
 
 func _wet(delta):
 	if wetTimer<=-999:
-		wetTimer=1
+		wetTimer=3
 		$wetParticles.emitting=true
 	if wetTimer<=0:
 		wetTimer=-999
