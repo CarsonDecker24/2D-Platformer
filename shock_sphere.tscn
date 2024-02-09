@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbr0r2qs3vmfj"]
+[gd_scene load_steps=8 format=3 uid="uid://dbr0r2qs3vmfj"]
 
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="1_awqtx"]
 
@@ -6,22 +6,35 @@
 radius = 132.095
 
 [sub_resource type="Curve" id="Curve_qkt06"]
-min_value = -500.0
-max_value = 500.0
-_data = [Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 1
+min_value = -0.5
+max_value = 0.5
+_data = [Vector2(0, -0.00526315), 0.0, 0.0, 0, 0, Vector2(0.137931, -0.110526), 0.0, 0.0, 0, 0, Vector2(0.246305, 0.110526), 0.0, 0.0, 0, 0, Vector2(0.492611, -0.289474), 0.0, 0.0, 0, 0, Vector2(0.605911, 0.163158), 0.0, 0.0, 0, 0, Vector2(0.753695, -0.363158), 0.0, 0.0, 0, 0, Vector2(0.871921, 0.194737), 0.0, 0.0, 0, 0, Vector2(0.955665, -0.5), 0.0, 0.0, 0, 0]
+point_count = 8
 
 [sub_resource type="CurveTexture" id="CurveTexture_t1y48"]
 curve = SubResource("Curve_qkt06")
 
+[sub_resource type="Curve" id="Curve_0amma"]
+_data = [Vector2(0, 0.536842), 0.0, 0.0, 0, 0, Vector2(0.246305, 1), 0.0, 0.0, 0, 0, Vector2(0.512315, 0.494737), 0.0, 0.0, 0, 0, Vector2(0.758621, 1), 0.0, 0.0, 0, 0, Vector2(0.965517, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_p2eg5"]
+curve = SubResource("Curve_0amma")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dq8ix"]
 emission_shape = 2
 emission_sphere_radius = 128.0
+particle_flag_align_y = true
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
+initial_velocity_min = 26.55
+initial_velocity_max = 26.55
 orbit_velocity_min = -0.5
-orbit_velocity_max = 0.5
+orbit_velocity_max = 3.0
 orbit_velocity_curve = SubResource("CurveTexture_t1y48")
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_p2eg5")
+color = Color(1, 1, 0, 1)
 
 [node name="Area2D" type="Area2D"]
 
@@ -29,6 +42,12 @@ orbit_velocity_curve = SubResource("CurveTexture_t1y48")
 shape = SubResource("CircleShape2D_dwfkf")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_dq8ix")
 texture = ExtResource("1_awqtx")
+lifetime = 1.4
+one_shot = true
+speed_scale = 1.55
+trail_enabled = true
