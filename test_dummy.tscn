@@ -432,7 +432,6 @@ target_position = Vector2(205, 38.75)
 [node name="RayDown" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
 target_position = Vector2(182.5, 80)
-collision_mask = 3
 
 [node name="RayMidUp" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)

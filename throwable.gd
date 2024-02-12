@@ -132,36 +132,42 @@ func _battery(delta):
 		spin+=delta
 	$AnimatedSprite2D.rotation+=spin*.3
 	
-	if enemyList.size() >=1 and eventCount==2:
-		$chain1.visible=true
-		$chain1.size.x= sqrt((enemyList[0].global_position.x-global_position.x)**2 + (enemyList[0].global_position.y-global_position.y)**2)
-		$chain1.rotation=get_angle_to(enemyList[0].global_position)
+	if $Area2D.lethal==true:
+		if enemyList.size() >=1 and eventCount==2:
+			$chain1.visible=true
+			$chain1.size.x= sqrt((enemyList[0].global_position.x-global_position.x)**2 + (enemyList[0].global_position.y-global_position.y)**2)
+			$chain1.rotation=get_angle_to(enemyList[0].global_position)
 
-	if enemyList.size()>=2 and eventCount==2:
-		$chain2.visible=true
-		$chain2.set_global_position(enemyList[0].global_position)
-		$chain2.size.x= sqrt((enemyList[1].global_position.x-enemyList[0].global_position.x)**2 + (enemyList[1].global_position.y-enemyList[0].global_position.y)**2)
-		$chain2.rotation=atan2(enemyList[1].global_position.y - enemyList[0].global_position.y, enemyList[1].global_position.x - enemyList[0].global_position.x)
-
-	if enemyList.size()>=3 and eventCount==2:
-		$chain3.visible=true
-		$chain3.set_global_position(enemyList[1].global_position)
-		$chain3.size.x= sqrt((enemyList[2].global_position.x-enemyList[1].global_position.x)**2 + (enemyList[2].global_position.y-enemyList[1].global_position.y)**2)
-		$chain3.rotation=atan2(enemyList[2].global_position.y - enemyList[1].global_position.y, enemyList[2].global_position.x - enemyList[1].global_position.x)
+		if enemyList.size()>=2 and eventCount==2:
+			$chain2.visible=true
+			$chain2.set_global_position(enemyList[0].global_position)
+			$chain2.size.x= sqrt((enemyList[1].global_position.x-enemyList[0].global_position.x)**2 + (enemyList[1].global_position.y-enemyList[0].global_position.y)**2)
+			$chain2.rotation=atan2(enemyList[1].global_position.y - enemyList[0].global_position.y, enemyList[1].global_position.x - enemyList[0].global_position.x)
+			
+		if enemyList.size()>=3 and eventCount==2:
+			$chain3.visible=true
+			$chain3.set_global_position(enemyList[1].global_position)
+			$chain3.size.x= sqrt((enemyList[2].global_position.x-enemyList[1].global_position.x)**2 + (enemyList[2].global_position.y-enemyList[1].global_position.y)**2)
+			$chain3.rotation=atan2(enemyList[2].global_position.y - enemyList[1].global_position.y, enemyList[2].global_position.x - enemyList[1].global_position.x)
 		
-	elif eventCount>=3: 
+		if eventCount>=3:
+			var temp
+			while enemyList.size()>0:
+				temp = enemyList[0]
+				temp.is_dead=true
+				enemyList.remove_at(0)
+		
+		
+		
+	if eventCount>=3: 
 		fading=true
 		$chain1.visible=false
 		$chain2.visible=false
 		$chain3.visible=false
 		
-		var temp
-		while enemyList.size()>0:
-			temp = enemyList[0]
-			temp.is_dead=true
-			enemyList.remove_at(0)
+		
 	
-	if eventCount>5:
+	if eventCount>9:
 		queue_free()
 
 func _fireBottle(delta):
@@ -238,6 +244,11 @@ func _on_pick_up():
 		queue_free()
 
 func _on_body_entered(body):
+	if body.is_in_group("Enemy"):
+		if body.wet==true:
+			$Area2D.lethal=true
+	
+	
 	if body.is_in_group("Enemy") or body.is_in_group("Ground"):
 		moving=false
 		collisionEvent=type
@@ -245,6 +256,7 @@ func _on_body_entered(body):
 
 
 func _on_area_entered(area):
+	
 	if area.is_in_group("Enemy") or area.is_in_group("Ground"):
 		moving=false
 		collisionEvent=type

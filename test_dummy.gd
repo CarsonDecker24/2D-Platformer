@@ -427,7 +427,8 @@ func _damage(type: String, damage: int):
 	meleconvert=0.00
 	if type == "Ice":
 		hp -= 1
-		
+		if wet==true:
+			hp-=1
 		
 		debuff_cooldown=3
 		speed_mod=.5

@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbr0r2qs3vmfj"]
+[gd_scene load_steps=11 format=3 uid="uid://dbr0r2qs3vmfj"]
 
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="1_awqtx"]
+[ext_resource type="Script" path="res://shock_sphere.gd" id="1_hmc7j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwfkf"]
 radius = 132.095
@@ -24,50 +25,75 @@ point_count = 11
 curve = SubResource("Curve_qkt06")
 
 [sub_resource type="Curve" id="Curve_df06a"]
-_data = [Vector2(0, 0), 0.0, 5.69825, 0, 0, Vector2(0.650246, 0.842105), 6.28483, 6.28483, 0, 0, Vector2(0.921182, 0), -6.41052, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 5.69825, 0, 0, Vector2(0.650246, 0.842105), 5.41332, 5.41332, 0, 0, Vector2(0.955665, 0.0105263), -4.84351, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_rdju4"]
 curve = SubResource("Curve_df06a")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dq8ix"]
-lifetime_randomness = 0.22
+lifetime_randomness = 0.19
 emission_shape = 2
-emission_sphere_radius = 128.0
+emission_sphere_radius = 112.14
 particle_flag_align_y = true
-particle_flag_rotate_y = true
 particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
 spread = 180.0
 flatness = 1.0
 gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
 orbit_velocity_min = -0.5
 orbit_velocity_max = 3.0
 orbit_velocity_curve = SubResource("CurveTexture_t1y48")
 linear_accel_min = -1.0
 linear_accel_max = 3.0
 linear_accel_curve = SubResource("CurveTexture_giqmb")
-scale_min = 4.0
-scale_max = 10.0
+radial_accel_min = 3.54
+radial_accel_max = 3.54
+damping_min = 2.0
+damping_max = 8.0
+scale_min = 8.0
+scale_max = 12.85
 scale_curve = SubResource("CurveTexture_rdju4")
 color = Color(1, 1, 0, 1)
 turbulence_noise_strength = 9.06
 turbulence_noise_speed_random = 1.12
 turbulence_influence_max = 0.23
 turbulence_initial_displacement_max = 5.3
+collision_mode = 2
+collision_use_scale = true
 
 [node name="Area2D" type="Area2D"]
+z_index = 5
+z_as_relative = false
+scale = Vector2(0.7, 0.7)
+collision_layer = 512
+collision_mask = 512
+script = ExtResource("1_hmc7j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dwfkf")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(0, 1)
+emitting = false
 amount = 25
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_dq8ix")
 texture = ExtResource("1_awqtx")
-lifetime = 1.4
-speed_scale = 1.6
+lifetime = 1.8
+one_shot = true
+speed_scale = 2.5
 explosiveness = 1.0
+randomness = 0.34
+fixed_fps = 0
+local_coords = true
+draw_order = 2
 trail_enabled = true
-trail_lifetime = 1.0
+trail_lifetime = 0.2
+trail_sections = 10
+trail_section_subdivisions = 8
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
