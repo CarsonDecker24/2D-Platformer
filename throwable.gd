@@ -60,6 +60,9 @@ func _process(delta):
 	if type == "fireBottle":
 		$AnimatedSprite2D.play("fireBottle")
 	
+	if type == "Brick":
+		$AnimatedSprite2D.play("brick")
+	
 	_check_ray()
 	
 	if thrown:
@@ -71,8 +74,9 @@ func _process(delta):
 		$AnimatedSprite2D.rotation+=spin*.3
 		if collisionEvent=="waterBaloon":
 			_waterBaloon(delta)
-		if collisionEvent=="brick":
+		if collisionEvent=="Brick":
 			_brick(delta)
+		
 	
 	if type=="waterBaloon":
 		$AnimatedSprite2D.play("waterBaloon")
@@ -208,6 +212,15 @@ func _fireBottle(delta):
 	pass
 
 func _brick(delta):
+	if batteryShockTimer<=0:
+		eventCount+=1
+		batteryShockTimer=BATTERYSHOCKSPEED
+	batteryShockTimer-=delta
+	
+	
+	if eventCount>=2:
+		queue_free()
+	
 	pass
 	
 
@@ -245,8 +258,10 @@ func _on_pick_up():
 
 func _on_body_entered(body):
 	if body.is_in_group("Enemy"):
-		if body.wet==true:
+		if body.wet==true and type=="Battery":
 			$Area2D.lethal=true
+		if type=="Brick":
+			body.is_dead=true
 	
 	
 	if body.is_in_group("Enemy") or body.is_in_group("Ground"):
