@@ -1,4 +1,4 @@
-[gd_scene load_steps=223 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=224 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -75,9 +75,11 @@
 [ext_resource type="Texture2D" uid="uid://88cpeecfg50t" path="res://Assets/hud sprites/electric hud art.png" id="66_lxol0"]
 [ext_resource type="Texture2D" uid="uid://bh5roubjvtl08" path="res://Assets/hud sprites/shift refill.png" id="70_sc2ib"]
 [ext_resource type="Texture2D" uid="uid://tnlv8gmtl6lj" path="res://Assets/hud sprites/e refill.png" id="71_ry127"]
-[ext_resource type="Texture2D" uid="uid://didmnkaud58a0" path="res://Assets/New Piskel-1.png (1).png" id="71_sfaxs"]
 [ext_resource type="Texture2D" uid="uid://boq2cwpnrxv21" path="res://Assets/player sprites/arms n bows/1bow varients/5ParryBow/parry bow.png" id="72_m5wss"]
+[ext_resource type="Texture2D" uid="uid://2v6pp18vpd5u" path="res://Assets/hud sprites/hourglass/hourglass0.png" id="73_vc8k6"]
+[ext_resource type="Texture2D" uid="uid://bmicv7dcojqfj" path="res://Assets/hud sprites/hourglass/filter (2).png" id="74_hawyh"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="74_qvcdd"]
+[ext_resource type="Texture2D" uid="uid://c6k1dkkx2u7hx" path="res://Assets/hud sprites/hourglass/hourglass2.png" id="74_un73g"]
 [ext_resource type="Script" path="res://armPosition.gd" id="74_xk2jf"]
 [ext_resource type="AudioStream" uid="uid://db1ctomot0j2u" path="res://Assets/player sprites/playerSounds/step1.wav" id="80_aegqw"]
 [ext_resource type="AudioStream" uid="uid://b8evbmd55rhyy" path="res://Assets/player sprites/playerSounds/step2.wav" id="81_8bgbt"]
@@ -1074,17 +1076,6 @@ animations = [{
 "speed": 60.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lduir"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("71_sfaxs")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_al3jv"]
 atlas = ExtResource("60_hp32n")
 region = Rect2(0, 0, 13, 12)
@@ -1423,11 +1414,38 @@ position = Vector2(-253, -125)
 sprite_frames = SubResource("SpriteFrames_u0ohg")
 animation = &"full"
 
-[node name="Menu" type="AnimatedSprite2D" parent="Camera"]
-visible = false
-light_mask = 0
+[node name="hourGlass" type="Node2D" parent="Camera"]
+z_index = 3
+position = Vector2(-192, -77)
+rotation = 4.71239
+scale = Vector2(0.2, 0.7)
+
+[node name="frame" type="Sprite2D" parent="Camera/hourGlass"]
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_lduir")
+position = Vector2(253, -19)
+texture = ExtResource("73_vc8k6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera/hourGlass"]
+clip_children = 1
+texture_filter = 1
+position = Vector2(253, -19)
+texture = ExtResource("74_hawyh")
+
+[node name="sandRight" type="Sprite2D" parent="Camera/hourGlass/Sprite2D"]
+texture_filter = 1
+texture = ExtResource("74_un73g")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Camera/hourGlass"]
+clip_children = 1
+texture_filter = 1
+position = Vector2(253, -19)
+rotation = 3.14159
+texture = ExtResource("74_hawyh")
+
+[node name="sandleft" type="Sprite2D" parent="Camera/hourGlass/Sprite2D2"]
+texture_filter = 1
+position = Vector2(142, -1.52588e-05)
+texture = ExtResource("74_un73g")
 
 [node name="PivotHoldingArm" type="Node2D" parent="."]
 position = Vector2(-6, 0)

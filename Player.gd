@@ -56,6 +56,8 @@ var inBulletTime = false
 var bulletTimeleft = .5
 var wet = false
 var wetTimer=0
+var hourGlass=142
+var doHourGlass = true
 @onready var animPlayer = get_node("PivotHoldingArm/HoldingArmAnimation")
 @onready var arrowHud = get_node("Camera/SelectedArrowHud")
 @onready var piv = get_node("PivotHoldingArm")
@@ -145,6 +147,11 @@ func _process(delta):
 		hudUp = "down"
 	_hudUp()
 	
+	if doHourGlass==true:
+		_hourGlass(delta)
+	else:
+		$Camera/hourGlass.visible=false
+		
 	if wet==true:
 		_wet(delta)
 
@@ -590,3 +597,9 @@ func _wet(delta):
 		$wetParticles.emitting=false
 	wetTimer-=delta
 	print(wetTimer)
+
+func _hourGlass(delta):
+	if hourGlass-delta*10>0:
+		hourGlass-=delta*10
+	$Camera/hourGlass/Sprite2D2/sandleft.position.x=hourGlass
+	$Camera/hourGlass/Sprite2D/sandRight.position.x=-(142-hourGlass)
