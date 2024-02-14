@@ -420,6 +420,7 @@ sprite_frames = SubResource("SpriteFrames_r0jwq")
 animation = &"upwardsHurt"
 autoplay = "walking level"
 offset = Vector2(-4.76837e-07, 10.9)
+flip_h = true
 
 [node name="RayMid" type="RayCast2D" parent="."]
 position = Vector2(0, -11.25)
