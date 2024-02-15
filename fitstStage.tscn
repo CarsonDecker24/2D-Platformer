@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ovru2guxl0ad" path="res://Assets/environmental stuff/brideStuff/bridgewall.png" id="6_b3ndd"]
 [ext_resource type="Texture2D" uid="uid://y7w0knnsr18m" path="res://Assets/environmental stuff/brideStuff/stickSupport.png" id="8_lajbc"]
 [ext_resource type="PackedScene" uid="uid://d2kvnctkapc7y" path="res://test_dummy.tscn" id="9_qppe1"]
-[ext_resource type="PackedScene" uid="uid://1uhcfuu5wofx" path="res://barrel.tscn" id="10_61hcj"]
+[ext_resource type="PackedScene" uid="uid://7cd38ochgsag" path="res://fire_barrel.tscn" id="10_npbmm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_677gp"]
 radius = 5.58285
@@ -114,7 +114,7 @@ position = Vector2(-229, -416)
 [node name="TestDummy4" parent="." instance=ExtResource("9_qppe1")]
 position = Vector2(472, -421)
 
-[node name="Barrel" parent="." instance=ExtResource("10_61hcj")]
-position = Vector2(150, 60)
+[node name="fireBarrel" parent="." instance=ExtResource("10_npbmm")]
+position = Vector2(465, 21)
 
 [connection signal="area_entered" from="bridge/stickSupport/supportSnapArea" to="bridge" method="_on_support_snap_area_area_entered"]

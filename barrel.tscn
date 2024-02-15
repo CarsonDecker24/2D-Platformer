@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://1uhcfuu5wofx"]
+[gd_scene load_steps=6 format=3 uid="uid://1uhcfuu5wofx"]
 
 [ext_resource type="Script" path="res://Barrel.gd" id="1_cdri6"]
-[ext_resource type="Texture2D" path="res://Assets/environmental stuff/barrel.png" id="2_3nwqg"]
 [ext_resource type="Texture2D" uid="uid://25kjhwry00dq" path="res://Assets/environmental stuff/barrelParts/barrelPart_1.png" id="3_ks5lx"]
 [ext_resource type="Texture2D" uid="uid://djbihsu736dns" path="res://Assets/environmental stuff/barrelParts/barrelPart_0.png" id="4_0nguq"]
 [ext_resource type="Texture2D" uid="uid://cr3ovmep2pgmb" path="res://Assets/environmental stuff/barrelParts/barrelPart_2.png" id="5_ohjeh"]
@@ -12,7 +11,6 @@ script = ExtResource("1_cdri6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_3nwqg")
 
 [node name="Node2D" type="Node2D" parent="."]
 
