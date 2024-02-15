@@ -112,7 +112,7 @@ position = Vector2(518, -221)
 position = Vector2(-229, -416)
 
 [node name="TestDummy4" parent="." instance=ExtResource("9_qppe1")]
-position = Vector2(472, -421)
+position = Vector2(400, -426)
 
 [node name="fireBarrel" parent="." instance=ExtResource("10_npbmm")]
 position = Vector2(465, 21)
