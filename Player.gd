@@ -158,7 +158,7 @@ func _process(delta):
 func _physics_process(delta):
 	#Lateral Movement
 	if direction != 0 and sliding==false:
-		_accelerate(direction)
+		_accelerate(direction, delta)
 	else:
 		_friction()
 	
@@ -241,13 +241,13 @@ func _unSlide():
 		sliding=false
 
 
-func _accelerate(dir):
+func _accelerate(dir, delta):
 	#Accelerate in whatever direction the player is wanting to move.
 	#velocity = velocity.move_toward(Vector2(SPEED * dir, velocity.y), ACCEL)
 	if ((velocity.x + ACCEL * dir) < -SPEED or (velocity.x + ACCEL * dir) > SPEED) and dashTime <= 0:
 		velocity.x = SPEED * dir
 	elif wallJumpNerf>0:
-		velocity.x += (ACCEL-15) * dir
+		velocity.x += (ACCEL-15) * dir * delta * 40
 	else:
 		velocity.x += ACCEL * dir
 
