@@ -101,6 +101,7 @@ func _process(delta):
 	if shift_use_time<0 and fire_state=="air-row":
 		fire_state="not"
 	if dashTime<=0:
+		
 		FRICTION=25
 	else:
 		FRICTION=3
@@ -112,8 +113,12 @@ func _process(delta):
 	
 	if Input.is_action_pressed("move_down") and is_on_floor() and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")) and $PlayerBodyAnimation.current=="walkingRight":
 		_slide(direction)
-	else:
+	elif $slideCheckCast.get_collider()==null:
 		_unSlide()
+	if $slideCheckCast.get_collider()!=null:
+		_slide(direction)
+	
+	print("slide",$slideCheckCast.get_collider())
 	
 	if sliding==true:
 		$"slide particles".emitting=true
@@ -228,8 +233,9 @@ func _slide(dir):
 	$PlayerHitbox.position = Vector2(-6,10)
 	$PlayerHitbox.rotation=90
 	$PlayerHitbox.scale = Vector2(.2,1)
-	if sliding==false:
-		velocity.x=dir*SPEED*2
+	#if sliding==false:
+	velocity.x=dir*SPEED*2
+	
 	sliding=true
 	dashTime=.1
 	_refreshArrowHud()

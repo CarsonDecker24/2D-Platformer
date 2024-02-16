@@ -1,4 +1,4 @@
-[gd_scene load_steps=224 format=3 uid="uid://dblot7f26i2w"]
+[gd_scene load_steps=223 format=3 uid="uid://dblot7f26i2w"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_fhlp4"]
 [ext_resource type="Texture2D" uid="uid://bt4yolitq4cdo" path="res://Assets/player sprites/unwindRightWalk/unwindRightWalk6.png" id="2_md6y6"]
@@ -76,7 +76,6 @@
 [ext_resource type="Texture2D" uid="uid://bh5roubjvtl08" path="res://Assets/hud sprites/shift refill.png" id="70_sc2ib"]
 [ext_resource type="Texture2D" uid="uid://tnlv8gmtl6lj" path="res://Assets/hud sprites/e refill.png" id="71_ry127"]
 [ext_resource type="Texture2D" uid="uid://boq2cwpnrxv21" path="res://Assets/player sprites/arms n bows/1bow varients/5ParryBow/parry bow.png" id="72_m5wss"]
-[ext_resource type="Texture2D" uid="uid://2v6pp18vpd5u" path="res://Assets/hud sprites/hourglass/hourglass0.png" id="73_vc8k6"]
 [ext_resource type="Texture2D" uid="uid://bmicv7dcojqfj" path="res://Assets/hud sprites/hourglass/filter (2).png" id="74_hawyh"]
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="74_qvcdd"]
 [ext_resource type="Texture2D" uid="uid://c6k1dkkx2u7hx" path="res://Assets/hud sprites/hourglass/hourglass2.png" id="74_un73g"]
@@ -1423,7 +1422,6 @@ scale = Vector2(0.2, 0.7)
 [node name="frame" type="Sprite2D" parent="Camera/hourGlass"]
 texture_filter = 1
 position = Vector2(253, -19)
-texture = ExtResource("73_vc8k6")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera/hourGlass"]
 clip_children = 1
@@ -1679,6 +1677,14 @@ scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_bebh5")
 color = Color(0.219608, 0.341176, 0.831373, 0.878431)
 color_ramp = SubResource("Gradient_asex2")
+
+[node name="slideCheckCast" type="RayCast2D" parent="."]
+self_modulate = Color(0.980392, 0, 0.980392, 1)
+show_behind_parent = true
+position = Vector2(-5, 8)
+target_position = Vector2(0, -15)
+collision_mask = 2
+hit_from_inside = true
 
 [connection signal="animation_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_animation_changed"]
 [connection signal="frame_changed" from="PlayerBodyAnimation" to="PlayerBodyAnimation" method="_on_frame_changed"]
