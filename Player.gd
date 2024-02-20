@@ -27,7 +27,7 @@ var drawing = false
 var arrow_hud_slot = 1
 var arrow_hud_scroll_direction =1
 var slots = ["Fire", "Electricity", "Ice"]
-var throwable = "Brick"
+var throwable = "waterBaloon"
 var arrow_count=0
 var wallJumpNerf = 0
 var GrapplePivot
@@ -604,7 +604,7 @@ func _wet(delta):
 	print(wetTimer)
 
 func _hourGlass(delta):
-	if hourGlass-delta*10>0:
-		hourGlass-=delta*10
+	if hourGlass-delta>0:
+		hourGlass-=delta
 	$Camera/hourGlass/Sprite2D2/sandleft.position.x=hourGlass
 	$Camera/hourGlass/Sprite2D/sandRight.position.x=-(142-hourGlass)

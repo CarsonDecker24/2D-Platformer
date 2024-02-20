@@ -28,7 +28,6 @@ height = 270.997
 script = ExtResource("1_ahcgs")
 
 [node name="Player" parent="." instance=ExtResource("1_i500o")]
-visible = false
 position = Vector2(61, 55)
 
 [node name="TileMap" parent="." instance=ExtResource("2_gl6x3")]
