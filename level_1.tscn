@@ -55,12 +55,12 @@ turbulence_noise_strength = 1.23
 turbulence_noise_scale = 7.53
 collision_mode = 2
 
-[sub_resource type="Gradient" id="Gradient_vhnen"]
+[sub_resource type="Gradient" id="Gradient_p2hxi"]
 offsets = PackedFloat32Array(0, 0.518595, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.6, 0.6, 0.6, 0, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dgyla"]
-gradient = SubResource("Gradient_vhnen")
+gradient = SubResource("Gradient_p2hxi")
 fill = 1
 fill_from = Vector2(0.487179, 0.508547)
 

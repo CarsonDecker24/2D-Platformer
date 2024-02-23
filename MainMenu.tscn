@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ct1vurjuw453e"]
+[gd_scene load_steps=21 format=3 uid="uid://ct1vurjuw453e"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_joiqn"]
 [ext_resource type="AudioStream" uid="uid://cjriwahek3wb6" path="res://Assets/music/lights.mp3" id="2_rhati"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bx2e5nywmo3gm" path="res://Assets/bullet.png" id="4_k1t8h"]
 [ext_resource type="Texture2D" uid="uid://boqrayk806e7d" path="res://Assets/tilesheets/paralax gib-ver.png" id="5_mfdih"]
 [ext_resource type="Texture2D" uid="uid://ch3pv3dub8s1w" path="res://Assets/player sprites/jump sprites/jumping1.png" id="6_gum0v"]
-[ext_resource type="Texture2D" uid="uid://dgoqq4ia8ap18" path="res://Assets/tilesheets/trials and tribulations/blurred light.png" id="7_qq7pi"]
 [ext_resource type="Texture2D" uid="uid://gcfocjpevpoh" path="res://Assets/hud sprites/chrono quiver just the title.png" id="8_ermom"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3g7w"]
@@ -23,6 +22,15 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_1alkq"]
+offsets = PackedFloat32Array(0, 0.518595, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.6, 0.6, 0.6, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cl5ks"]
+gradient = SubResource("Gradient_1alkq")
+fill = 1
+fill_from = Vector2(0.487179, 0.508547)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wdpn5"]
 atlas = ExtResource("8_ermom")
@@ -92,22 +100,11 @@ animations = [{
 position = Vector2(0, 8)
 script = ExtResource("1_joiqn")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(560, 314.5)
-scale = Vector2(14.5208, 15.1296)
-
 [node name="music" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(559, 315)
 stream = ExtResource("2_rhati")
 volume_db = 9.286
 panning_strength = 1.5
-
-[node name="Button" type="Button" parent="."]
-offset_left = 871.0
-offset_top = 509.0
-offset_right = 1037.0
-offset_bottom = 540.0
-text = "Start"
 
 [node name="transition" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0, 0, 0.898039)
@@ -124,6 +121,10 @@ scale = Vector2(4, 4)
 texture = ExtResource("4_flccs")
 
 [node name="back2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(530, 1349)
+scale = Vector2(4, 4)
+texture = ExtResource("4_flccs")
 
 [node name="background1" type="Sprite2D" parent="."]
 self_modulate = Color(0.690196, 0.690196, 0.690196, 1)
@@ -133,6 +134,11 @@ scale = Vector2(4, 4)
 texture = ExtResource("5_mfdih")
 
 [node name="background2" type="Sprite2D" parent="."]
+self_modulate = Color(0.690196, 0.690196, 0.690196, 1)
+texture_filter = 1
+position = Vector2(535, 1345)
+scale = Vector2(4, 4)
+texture = ExtResource("5_mfdih")
 
 [node name="player" type="AnimatedSprite2D" parent="."]
 position = Vector2(422, 342)
@@ -144,11 +150,15 @@ position = Vector2(-10.0005, -30.0002)
 scale = Vector2(1.40323, 1.24194)
 zoom = Vector2(2, 2)
 
-[node name="PointLight2D" type="PointLight2D" parent="player"]
-position = Vector2(6.25, 3.75)
-scale = Vector2(1.40323, 1.24194)
-texture = ExtResource("7_qq7pi")
-texture_scale = 50.0
+[node name="PointLight2D2" type="PointLight2D" parent="player"]
+self_modulate = Color(1, 1, 1, 0.756863)
+light_mask = 4
+position = Vector2(-9.99951, 0)
+scale = Vector2(14, 14)
+energy = 3.25
+blend_mode = 2
+texture = SubResource("GradientTexture2D_cl5ks")
+texture_scale = 1.91
 
 [node name="title" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -157,11 +167,21 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_2obfg")
 autoplay = "default"
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(415, 209)
-scale = Vector2(3, 0.7)
-texture = ExtResource("7_qq7pi")
-texture_scale = 4.38
+[node name="PointLight2D2" type="PointLight2D" parent="title"]
+self_modulate = Color(1, 1, 1, 0.756863)
+light_mask = 4
+position = Vector2(2.5, -0.25)
+scale = Vector2(2.5, 0.35)
+energy = 3.25
+blend_mode = 2
+texture = SubResource("GradientTexture2D_cl5ks")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 339.0
+offset_top = 438.0
+offset_right = 505.0
+offset_bottom = 469.0
+text = "Start"
 
 [connection signal="finished" from="music" to="." method="_on_music_finished"]
 [connection signal="pressed" from="Button" to="." method="_on_start_button_pressed"]
