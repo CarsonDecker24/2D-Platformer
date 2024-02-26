@@ -6,6 +6,11 @@ var playerRange=0
 var playerdirection=0
 var playerSpeed
 
+var backPos = 0
+var backPos2 = 0
+var infrontPos1=0
+var infrontPos2=0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +26,27 @@ func _process(delta):
 		$transition.z_index=2
 		if startDelay<=0:
 			get_tree().change_scene_to_file("res://level_1.tscn")
+	
+	backPos=$back1.position.y
+	backPos2=$back2.position.y 
+	infrontPos1=$background1.position.y
+	infrontPos2=$background2.position.y
+	
+	$back1.position.y+=3
+	$back2.position.y+=3
+	$background1.position.y+=1
+	$background2.position.y+=1
+	
+	if $back1.position.y>1300:
+		$back1.position.y=-1205
+	if  $back2.position.y>1300:
+		$back2.position.y=-1205
+	if $background1.position.y>1300:
+		$background1.position.y=-1205
+	if $background2.position.y>1300:
+		$background2.position.y=-1205
+	
+	
 	
 	
 	pass
