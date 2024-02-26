@@ -580,11 +580,3 @@ scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_1fw72")
 color = Color(0.219608, 0.341176, 0.831373, 0.878431)
 color_ramp = SubResource("Gradient_ks5d0")
-
-[node name="LaserRayBottom" type="RayCast2D" parent="."]
-scale = Vector2(1, 1)
-target_position = Vector2(83.75, 0)
-
-[node name="LaserRayTop" type="RayCast2D" parent="."]
-position = Vector2(0, -5)
-target_position = Vector2(83.75, 0)
