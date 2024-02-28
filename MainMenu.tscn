@@ -117,12 +117,14 @@ texture = ExtResource("4_k1t8h")
 [node name="back1" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(531, 70)
+rotation = 3.14159
 scale = Vector2(4, 4)
 texture = ExtResource("4_flccs")
 
 [node name="back2" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(530, 1349)
+rotation = 3.14159
 scale = Vector2(4, 4)
 texture = ExtResource("4_flccs")
 
@@ -130,6 +132,7 @@ texture = ExtResource("4_flccs")
 self_modulate = Color(0.690196, 0.690196, 0.690196, 1)
 texture_filter = 1
 position = Vector2(535, 68)
+rotation = 3.14159
 scale = Vector2(4, 4)
 texture = ExtResource("5_mfdih")
 
@@ -137,30 +140,32 @@ texture = ExtResource("5_mfdih")
 self_modulate = Color(0.690196, 0.690196, 0.690196, 1)
 texture_filter = 1
 position = Vector2(535, 1345)
+rotation = 3.14159
 scale = Vector2(4, 4)
 texture = ExtResource("5_mfdih")
+
+[node name="Camera2D2" type="Camera2D" parent="."]
+position = Vector2(421, 339)
+scale = Vector2(0.140323, 0.124194)
+zoom = Vector2(2, 2)
 
 [node name="player" type="AnimatedSprite2D" parent="."]
 position = Vector2(422, 342)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_qxr7t")
 
-[node name="Camera2D2" type="Camera2D" parent="player"]
-position = Vector2(-10.0005, -30.0002)
-scale = Vector2(1.40323, 1.24194)
-zoom = Vector2(2, 2)
-
 [node name="PointLight2D2" type="PointLight2D" parent="player"]
 self_modulate = Color(1, 1, 1, 0.756863)
 light_mask = 4
-position = Vector2(-9.99951, 0)
-scale = Vector2(14, 14)
+position = Vector2(-10, 200)
+scale = Vector2(14, 11.9902)
 energy = 3.25
 blend_mode = 2
 texture = SubResource("GradientTexture2D_cl5ks")
 texture_scale = 1.91
 
 [node name="title" type="AnimatedSprite2D" parent="."]
+top_level = true
 texture_filter = 1
 position = Vector2(410, 206)
 scale = Vector2(4, 4)
@@ -170,9 +175,9 @@ autoplay = "default"
 [node name="PointLight2D2" type="PointLight2D" parent="title"]
 self_modulate = Color(1, 1, 1, 0.756863)
 light_mask = 4
-position = Vector2(2.5, -0.25)
+position = Vector2(2.75, 0.25)
 scale = Vector2(2.5, 0.35)
-energy = 3.25
+energy = 4.45
 blend_mode = 2
 texture = SubResource("GradientTexture2D_cl5ks")
 

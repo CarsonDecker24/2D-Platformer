@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bqvkv3bnnfoqb"]
+[gd_scene load_steps=33 format=3 uid="uid://bqvkv3bnnfoqb"]
 
 [ext_resource type="Script" path="res://throwable.gd" id="1_ncn2h"]
 [ext_resource type="Texture2D" uid="uid://do3m018h26vf7" path="res://Assets/player sprites/arms n bows/projectileConsumables/battery.png" id="2_h8r3n"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c81t575vktgog" path="res://Assets/player sprites/arms n bows/projectileConsumables/bottleShards/sprite_4.png" id="10_mqlpa"]
 [ext_resource type="Texture2D" uid="uid://b8ug8b75j7673" path="res://Assets/player sprites/arms n bows/projectileConsumables/bottleShards/sprite_5.png" id="11_aw7ri"]
 [ext_resource type="PackedScene" uid="uid://dbr0r2qs3vmfj" path="res://shock_sphere.tscn" id="14_x8c2f"]
+[ext_resource type="Texture2D" uid="uid://t47ph3edovg4" path="res://Assets/player sprites/arms n bows/projectileConsumables/notif.png" id="15_w3ip8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5kcn0"]
 radius = 8.0
@@ -346,6 +347,11 @@ expand_mode = 2
 stretch_mode = 1
 
 [node name="Area2D" parent="." instance=ExtResource("14_x8c2f")]
+
+[node name="notifSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -16)
+texture = ExtResource("15_w3ip8")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

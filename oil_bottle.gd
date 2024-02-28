@@ -3,7 +3,7 @@ extends Node2D
 var falling = false
 var gravity = .1#ProjectSettings.get_setting("physics/2d/default_gravity")
 var vel = 0
-var explodeTimer=.3
+var explodeTimer=.4
 var exploding=false
 var particled = false
 
