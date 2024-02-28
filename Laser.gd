@@ -1,13 +1,31 @@
-extends TextureRect
+extends Node2D
 
-var realTargetPos
+var targetPos
 var currentPos
+var targetAngle
+var currentAngle
+var player
 
-# Called when the node enters the scene tree for the first time.
+var life = 7
+
 func _ready():
-	pass # Replace with function body.
+	$TargetRay.target_position = Vector2(10000,0)
 
+func _initialize(startAngle, playerNode):
+	currentPos = startAngle
+	player = playerNode
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	life -= delta
+	
+	targetPos = player.global_position
+	
+	targetAngle = position.angle_to(targetPos)
+	
+	currentAngle.move_toward(targetAngle, .1 * delta)
+	
+	$TargetRay.rotation = currentAngle
+
+func _set_length():
 	pass
