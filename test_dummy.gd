@@ -516,7 +516,9 @@ func _shoot_orb(delta):
 		orb.position = $Wand.global_position
 		bouttaShoot=false
 		wandSpin=WANDTIME
-	
+
+func _shoot_laser(delta):
+	pass
 
 func _check_rays():
 	if get_node("RayMid").get_collider() and not get_node("RayMid").get_collider() == null and get_node("RayMid").get_collider().is_in_group("Player"):
