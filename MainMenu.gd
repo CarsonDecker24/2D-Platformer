@@ -2,10 +2,11 @@ extends Node2D
 var startDelay=.2
 var started = false
 @onready var playerPos=$player.global_position
-var playerRange=0
-var playerdirection=0
-var playerSpeed
-
+var player
+var playerSpeed=1
+var playerUpSpeed=.5
+var playerDirectionRight=false
+var playerDirectionUp=true
 var backPos = 0
 var backPos2 = 0
 var infrontPos1=0
@@ -32,19 +33,40 @@ func _process(delta):
 	infrontPos1=$background1.position.y
 	infrontPos2=$background2.position.y
 	
-	$back1.position.y+=3
-	$back2.position.y+=3
-	$background1.position.y+=1
-	$background2.position.y+=1
+	$back1.position.y-=.8
+	$back2.position.y-=.8
+	$background1.position.y-=.5
+	$background2.position.y-=.5
 	
-	if $back1.position.y>1300:
-		$back1.position.y=-1205
-	if  $back2.position.y>1300:
-		$back2.position.y=-1205
-	if $background1.position.y>1300:
-		$background1.position.y=-1205
-	if $background2.position.y>1300:
-		$background2.position.y=-1205
+	if $back1.position.y<-1205:
+		$back1.position.y=1300
+	if  $back2.position.y<-1205:
+		$back2.position.y=1300
+	if $background1.position.y<-1205:
+		$background1.position.y=1300
+	if $background2.position.y<-1205:
+		$background2.position.y=1300
+	
+	if playerSpeed>1 and playerDirectionRight==true:
+		playerDirectionRight=false
+	if playerSpeed<-1 and playerDirectionRight==false:
+		playerDirectionRight=true
+	if playerDirectionRight==true:
+		playerSpeed+=delta
+	if playerDirectionRight==false:
+		playerSpeed-=delta
+	$player.position.x+=playerSpeed
+	
+	if playerUpSpeed>.3 and playerDirectionUp==true:
+		playerDirectionUp=false
+	if playerUpSpeed<-.3 and playerDirectionUp==false:
+		playerDirectionUp=true
+	if playerDirectionUp==true:
+		playerUpSpeed+=delta
+	if playerDirectionUp==false:
+		playerUpSpeed-=delta
+	$player.position.y+=playerUpSpeed
+	
 	
 	
 	

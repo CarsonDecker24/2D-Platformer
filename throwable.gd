@@ -52,6 +52,13 @@ func _initialize_arrow(aType: String, aVel: Vector2, aAngle, aPlayer: Node, bT):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	if near_player==true:
+		$notifSprite.visible=true
+	else:
+		$notifSprite.visible=false
+	
+	
 	if thrown and moving==true:
 		_update_pos(delta)
 	if type == "Battery":
