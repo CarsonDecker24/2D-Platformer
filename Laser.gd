@@ -5,27 +5,45 @@ var currentPos
 var targetAngle
 var currentAngle
 var player
+var direction
+var length = 110
 
-var life = 7
+var currentAngleVector
+var targetAngleVector
+
+#var life = 7
 
 func _ready():
-	$TargetRay.target_position = Vector2(10000,0)
+	$TargetRay.target_position = Vector2(-10000,0)
 
 func _initialize(startAngle, playerNode):
-	currentPos = startAngle
+	currentAngle = startAngle
 	player = playerNode
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	life -= delta
+	#life -= delta
 	
 	targetPos = player.global_position
 	
-	targetAngle = position.angle_to(targetPos)
+	targetAngle = global_position.angle_to(targetPos)
 	
-	currentAngle.move_toward(targetAngle, .1 * delta)
+	currentAngleVector = Vector2(cos(currentAngle), sin(currentAngle))
+	targetAngleVector = Vector2(cos(targetAngle), sin(targetAngle)).normalized()
 	
-	$TargetRay.rotation = currentAngle
-
-func _set_length():
-	pass
+	currentAngleVector = currentAngleVector.move_toward(targetAngleVector, delta * .01)
+	
+	currentAngle = atan2(currentAngleVector.y , currentAngleVector.x)
+	
+	if $TargetRay.get_collider() != null:
+		length = position.distance_to($TargetRay.get_collision_point())
+	
+	$TargetRay.target_position = Vector2(cos(currentAngle), sin(currentAngle))
+	$TextureRect.size.x = length
+	$TextureRect.rotation = rad_to_deg( currentAngle)
+	
+	print("Angle to player:")
+	print(targetAngle)
+	print('Current Angle:')
+	print(currentAngle)
+	print($TextureRect.rotation)

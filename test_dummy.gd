@@ -154,9 +154,10 @@ func _process(delta):
 	else:
 		meleComboIteration=0
 	
-	if player and canShootLaser:
+	if player != null and canShootLaser:
 		_shoot_laser(delta)
 		canShootLaser = false
+		print("Shot")
 
 
 
@@ -523,8 +524,10 @@ func _shoot_orb(delta):
 
 func _shoot_laser(delta):
 	var laser = laserPath.instantiate()
-	laser._initialize(position.angle_to(player.global_position), player)
-	add_sibling(laser)
+	laser.global_position = global_position
+	laser._initialize(global_position.angle_to(player.global_position), player)
+	add_child(laser)
+	laser.global_position = global_position
 
 func _check_rays():
 	if get_node("RayMid").get_collider() and not get_node("RayMid").get_collider() == null and get_node("RayMid").get_collider().is_in_group("Player"):
