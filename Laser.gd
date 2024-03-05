@@ -26,12 +26,12 @@ func _process(delta):
 	
 	targetPos = player.global_position
 	
-	targetAngle = global_position.angle_to(targetPos)
+	targetAngle = global_position.angle_to_point(targetPos)
 	
 	currentAngleVector = Vector2(cos(currentAngle), sin(currentAngle))
 	targetAngleVector = Vector2(cos(targetAngle), sin(targetAngle)).normalized()
 	
-	currentAngleVector = currentAngleVector.move_toward(targetAngleVector, delta * .01)
+	currentAngleVector = currentAngleVector.move_toward(targetAngleVector, delta * .3)
 	
 	currentAngle = atan2(currentAngleVector.y , currentAngleVector.x)
 	
@@ -40,10 +40,10 @@ func _process(delta):
 	
 	$TargetRay.target_position = Vector2(cos(currentAngle), sin(currentAngle))
 	$TextureRect.size.x = length
-	$TextureRect.rotation = rad_to_deg( currentAngle)
+	$TextureRect.rotation = currentAngle
 	
 	print("Angle to player:")
-	print(targetAngle)
+	print(rad_to_deg(targetAngle))
 	print('Current Angle:')
-	print(currentAngle)
+	print(rad_to_deg(currentAngle))
 	print($TextureRect.rotation)
