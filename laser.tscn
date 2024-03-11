@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvf0gskl1gs7r"]
+[gd_scene load_steps=4 format=3 uid="uid://bvf0gskl1gs7r"]
 
 [ext_resource type="Script" path="res://laser.gd" id="1_g72vn"]
 [ext_resource type="Texture2D" uid="uid://c1yrioqmytjkr" path="res://Assets/enemy sprites/wands/beam0.png" id="2_62jn3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ao1i"]
+size = Vector2(0.986061, 1.17984)
 
 [node name="Laser" type="Node2D"]
 z_index = 2
@@ -9,14 +12,20 @@ script = ExtResource("1_g72vn")
 
 [node name="TargetRay" type="RayCast2D" parent="."]
 z_index = 2
-enabled = false
-target_position = Vector2(0, -9.53674e-07)
+target_position = Vector2(0, 0)
 collision_mask = 3
+collide_with_areas = true
+
+[node name="Area2D" type="Area2D" parent="TargetRay"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetRay/Area2D"]
+position = Vector2(0.000642776, 0.0301375)
+shape = SubResource("RectangleShape2D_5ao1i")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_as_relative = false
-offset_top = -3.0
-offset_right = 1.0
-offset_bottom = 3.0
+offset_left = -0.476563
+offset_top = -2.99219
+offset_right = 0.523438
+offset_bottom = 3.00781
 texture = ExtResource("2_62jn3")
-stretch_mode = 1

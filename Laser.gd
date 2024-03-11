@@ -35,10 +35,13 @@ func _process(delta):
 	
 	currentAngle = atan2(currentAngleVector.y , currentAngleVector.x)
 	
-	if $TargetRay.get_collider() != null:
-		length = position.distance_to($TargetRay.get_collision_point())
+	$TargetRay.target_position = Vector2(cos(currentAngle) * 10000, sin(currentAngle) * 10000)
 	
-	$TargetRay.target_position = Vector2(cos(currentAngle), sin(currentAngle))
+	if $TargetRay.is_colliding():
+		length = global_position.distance_to($TargetRay.get_collision_point())
+		print("Length:")
+		print(length)
+	
 	$TextureRect.size.x = length
 	$TextureRect.rotation = currentAngle
 	
