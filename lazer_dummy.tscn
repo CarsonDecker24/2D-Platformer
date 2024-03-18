@@ -57,9 +57,9 @@ states/idle/position = Vector2(244, -58)
 states/passiveWalk1/node = SubResource("AnimationNodeAnimation_x7ngq")
 states/passiveWalk1/position = Vector2(244, -162)
 states/passiveWalk2/node = SubResource("AnimationNodeAnimation_1rdrm")
-states/passiveWalk2/position = Vector2(424, -162)
+states/passiveWalk2/position = Vector2(423, -162)
 transitions = ["Start", "End", SubResource("AnimationNodeStateMachineTransition_ht4dj"), "Start", "passiveWalk1", SubResource("AnimationNodeStateMachineTransition_8v6on"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_s1bl8"), "idle", "passiveWalk1", SubResource("AnimationNodeStateMachineTransition_6dkop"), "passiveWalk1", "idle", SubResource("AnimationNodeStateMachineTransition_aeiq7"), "passiveWalk1", "passiveWalk2", SubResource("AnimationNodeStateMachineTransition_bvg8h"), "passiveWalk2", "idle", SubResource("AnimationNodeStateMachineTransition_lxg0p")]
-graph_offset = Vector2(-115.317, -197.605)
+graph_offset = Vector2(-174.266, -186.605)
 
 [sub_resource type="Animation" id="Animation_dgwv5"]
 resource_name = "idle"
@@ -92,6 +92,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_patdj"]
 resource_name = "passiveWalk1"
+length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -104,22 +105,47 @@ tracks/0/keys = {
 "update": 1,
 "values": [&"passiveWalk"]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
 
 [sub_resource type="Animation" id="Animation_2iafv"]
 resource_name = "passiveWalk2"
-length = 0.9
+length = 0.8
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 2,
 "values": [&"passiveWalk2"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(10.9283, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5l86u"]
@@ -264,7 +290,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kjy3c")
 }],
-"loop": false,
+"loop": true,
 "name": &"passiveWalk2",
 "speed": 10.0
 }]
@@ -283,11 +309,14 @@ parameters/conditions/idle = false
 parameters/conditions/passiveWalking = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_5l86u")
 }
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(3, -4)
 sprite_frames = SubResource("SpriteFrames_wfmsh")
-animation = &"passiveWalk2"
+animation = &"passiveWalk"
+frame = 2
