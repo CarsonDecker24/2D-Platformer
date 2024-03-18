@@ -56,7 +56,7 @@ var inBatteryList=false
 var dieInFive=false
 var wetTimer=-999
 var wet
-var canShootLaser = true
+var canShootLaser = false
 
 const ThingyPath = preload("res://thingyFixed.tscn")
 var laserPath = load("res://laser.tscn")

@@ -1,7 +1,7 @@
 extends Area2D
 var vel: Vector2
 var angle
-var type = ""
+var type = "brick"
 var player: Node
 var id
 var moving = true
@@ -53,7 +53,7 @@ func _initialize_arrow(aType: String, aVel: Vector2, aAngle, aPlayer: Node, bT):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if near_player==true:
+	if near_player==true and thrown==false:
 		$notifSprite.visible=true
 	else:
 		$notifSprite.visible=false

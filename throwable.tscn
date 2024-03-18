@@ -349,6 +349,7 @@ stretch_mode = 1
 [node name="Area2D" parent="." instance=ExtResource("14_x8c2f")]
 
 [node name="notifSprite" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(0, -16)
 texture = ExtResource("15_w3ip8")
