@@ -33,10 +33,10 @@ func _process(delta):
 	infrontPos1=$background1.position.y
 	infrontPos2=$background2.position.y
 	
-	$back1.position.y-=.8
-	$back2.position.y-=.8
-	$background1.position.y-=.5
-	$background2.position.y-=.5
+	$back1.position.y-=.5
+	$back2.position.y-=.5
+	$background1.position.y-=.8
+	$background2.position.y-=.8
 	
 	if $back1.position.y<-1205:
 		$back1.position.y=1300

@@ -1,7 +1,7 @@
 extends Area2D
 var vel: Vector2
 var angle
-var type = "brick"
+var type = "fireBottle"
 var player: Node
 var id
 var moving = true
